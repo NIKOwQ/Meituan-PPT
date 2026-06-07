@@ -1,0 +1,26 @@
+.DS_Store
+Thumbs.db
+
+# Python local environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node/build caches
+node_modules/
+dist/
+build/
+.cache/
+
+# Local runtime output
+.env
+*.env
+*.log
+*.tmp
+*.bak
+
+# OS/editor noise
+.idea/
+.vscode/

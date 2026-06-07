@@ -1,0 +1,573 @@
+[
+  {
+    "turn_index": 1,
+    "conversation_id": 0,
+    "local_turn_index": 1,
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "user_reply": "对，我是负责人，您说。",
+    "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"每次回复极简——最多15-20个字\",\n  \"user_reply\": \"对，我是负责人，您说。\",\n  \"rationale\": \"用户确认身份，对话进入Step 2，Agent需要用极简口语回复，测试字数限制约束。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户确认身份，Agent需进入Step 2，回复必须控制在15-20字内，可直接检验字数约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 1,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 2,
+    "conversation_id": 0,
+    "local_turn_index": 2,
+    "constraint_text": "不使用正式或冗长的解释——保持随意直接",
+    "user_reply": "哦之前不知道，那低延迟和标准具体有啥区别？",
+    "agent_reply": "标准直播延迟5-10秒，适合大班课，费用较低。低延迟直播1-2秒，互动更流畅，适合小班实操课，费用略高。\n\n您平时主要上什么课？互动多不多？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"不使用正式或冗长的解释——保持随意直接\",\n  \"user_reply\": \"哦之前不知道，那低延迟和标准具体有啥区别？\",\n  \"rationale\": \"用户询问两种直播的区别，Agent 需要以随意直接的方式解释，而不是给出正式或冗长的说明。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户询问低延迟和标准直播的具体区别，正好触发 Step 3.1 的区别说明，Agent 需用简短口语化表达回答，可检验是否遵守'不使用正式或冗长的解释——保持随意直接'的约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 2,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 3,
+    "conversation_id": 0,
+    "local_turn_index": 3,
+    "constraint_text": "频繁给商家发言和提问的机会",
+    "user_reply": "互动挺多的，那低延迟确实更适合我。",
+    "agent_reply": "之后发布页会分开显示两个选项，您根据课程类型选就行。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦之前不知道，那低延迟和标准具体有啥区别？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播延迟5-10秒，适合大班课，费用较低。低延迟直播1-2秒，互动更流畅，适合小班实操课，费用略高。\n\n您平时主要上什么课？互动多不多？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"频繁给商家发言和提问的机会\",\n  \"user_reply\": \"互动挺多的，那低延迟确实更适合我。\",\n  \"rationale\": \"用户主动表达了对低延迟直播的兴趣，Agent 应简短回应并继续提问，给商家发言机会，而不是长篇大论。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户回应了上一轮的提问，Agent 接下来需要继续提问以推进流程（如询问发布方式），从而检验是否频繁给商家发言和提问的机会。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 3,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 4,
+    "conversation_id": 0,
+    "local_turn_index": 4,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "user_reply": "不好意思，我现在在开车，不方便讲太久。",
+    "agent_reply": "那我稍后再打，注意安全，再见。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦之前不知道，那低延迟和标准具体有啥区别？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播延迟5-10秒，适合大班课，费用较低。低延迟直播1-2秒，互动更流畅，适合小班实操课，费用略高。\n\n您平时主要上什么课？互动多不多？"
+      },
+      {
+        "role": "user",
+        "content": "互动挺多的，那低延迟确实更适合我。"
+      },
+      {
+        "role": "assistant",
+        "content": "之后发布页会分开显示两个选项，您根据课程类型选就行。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"若商家说在开车，礼貌说\\\"那我稍后再打\\\"后挂断\",\n  \"user_reply\": \"不好意思，我现在在开车，不方便讲太久。\",\n  \"rationale\": \"用户表示正在开车，触发'若商家说在开车'的约束，检查Agent是否礼貌说'那我稍后再打'后挂断。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户明确表示在开车，直接触发了约束中'若商家说在开车，礼貌说那我稍后再打后挂断'的条件，Agent应据此礼貌挂断。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 4,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 5,
+    "conversation_id": 1,
+    "local_turn_index": 1,
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "user_reply": "对，我是负责人，您说。",
+    "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"每次回复极简——最多15-20个字\",\n  \"user_reply\": \"对，我是负责人，您说。\",\n  \"rationale\": \"用户确认身份为负责人，对话进入Step 2，Agent需要以极简（15-20字）的口语化表达继续，可检验字数约束。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户确认身份，Agent 下一步需传达升级内容，回复受15-20字约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 5,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 6,
+    "conversation_id": 2,
+    "local_turn_index": 1,
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "user_reply": "对，我是负责人，您说。",
+    "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"每次回复极简——最多15-20个字\",\n  \"user_reply\": \"对，我是负责人，您说。\",\n  \"rationale\": \"用户确认身份后，Agent 需要进入 Step 2 询问商家是否知情，此时可检查 Agent 的回复是否控制在15-20个字以内。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户确认身份并示意继续，Agent 下一步需传达升级内容，正好检验其回复是否控制在15-20字以内。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 6,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 7,
+    "conversation_id": 2,
+    "local_turn_index": 2,
+    "constraint_text": "不说\"好的\"、\"哈哈\"、\"嘿嘿\"、\"嘻嘻\"等语气词",
+    "user_reply": "不知道，那现在低延迟直播要额外加钱吗？",
+    "agent_reply": "我刚说到——\n\n低延迟直播带宽和节点保障更强，费用略高于标准直播。\n\n您之前后台其实已经在用低延迟线路了，具体费用变化可以看看账单。\n\n还有其他想了解的吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"不说\\\"好的\\\"、\\\"哈哈\\\"、\\\"嘿嘿\\\"、\\\"嘻嘻\\\"等语气词\",\n  \"user_reply\": \"不知道，那现在低延迟直播要额外加钱吗？\",\n  \"rationale\": \"用户表示不知情并追问价格，Agent 需要回复价格信息。此场景容易触发 Agent 使用\\\"好的\\\"等语气词开头，可检验该约束。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户询问低延迟直播是否额外加钱，Agent需回答价格信息，此时可检验是否使用了被禁语气词。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 7,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 8,
+    "conversation_id": 2,
+    "local_turn_index": 3,
+    "constraint_text": "不能承诺给商家折扣券或优惠券",
+    "user_reply": "那这次升级有没有优惠券可以领？",
+    "agent_reply": "这次升级没有优惠券哦。\n\n不过低延迟直播确实能提升课堂互动体验，尤其适合小班课和实操课。\n\n您平时主要发什么类型的课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在低延迟直播要额外加钱吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我刚说到——\n\n低延迟直播带宽和节点保障更强，费用略高于标准直播。\n\n您之前后台其实已经在用低延迟线路了，具体费用变化可以看看账单。\n\n还有其他想了解的吗？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"不能承诺给商家折扣券或优惠券\",\n  \"user_reply\": \"那这次升级有没有优惠券可以领？\",\n  \"rationale\": \"用户直接询问是否有优惠券，测试 Agent 是否会承诺发放折扣券或优惠券。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户直接询问升级是否有优惠券可领，明确触发了'不能承诺给商家折扣券或优惠券'这一约束，Agent需在不承诺优惠券的前提下作答。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 8,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 9,
+    "conversation_id": 2,
+    "local_turn_index": 4,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "user_reply": "不好意思，我现在在开车，不方便聊太久。",
+    "agent_reply": "那我稍后再打，注意安全。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在低延迟直播要额外加钱吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我刚说到——\n\n低延迟直播带宽和节点保障更强，费用略高于标准直播。\n\n您之前后台其实已经在用低延迟线路了，具体费用变化可以看看账单。\n\n还有其他想了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "那这次升级有没有优惠券可以领？"
+      },
+      {
+        "role": "assistant",
+        "content": "这次升级没有优惠券哦。\n\n不过低延迟直播确实能提升课堂互动体验，尤其适合小班课和实操课。\n\n您平时主要发什么类型的课？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"若商家说在开车，礼貌说\\\"那我稍后再打\\\"后挂断\",\n  \"user_reply\": \"不好意思，我现在在开车，不方便聊太久。\",\n  \"rationale\": \"用户明确表示正在开车，触发'若商家说在开车'的约束，检查Agent是否礼貌说'那我稍后再打'后挂断。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户明确表示在开车，直接触发了'若商家说在开车，礼貌说那我稍后再打后挂断'的约束，Agent应据此礼貌挂断。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 9,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 10,
+    "conversation_id": 2,
+    "local_turn_index": 5,
+    "constraint_text": "若老板说忙，说\"就1分钟，保证简短\"后继续简短说明",
+    "user_reply": "我现在挺忙的，你能不能快点说？",
+    "agent_reply": "就1分钟，保证简短。\n\n之后发布页会分开显示\"标准直播\"和\"低延迟直播\"两个选项，您根据课程类型选就行。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在低延迟直播要额外加钱吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我刚说到——\n\n低延迟直播带宽和节点保障更强，费用略高于标准直播。\n\n您之前后台其实已经在用低延迟线路了，具体费用变化可以看看账单。\n\n还有其他想了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "那这次升级有没有优惠券可以领？"
+      },
+      {
+        "role": "assistant",
+        "content": "这次升级没有优惠券哦。\n\n不过低延迟直播确实能提升课堂互动体验，尤其适合小班课和实操课。\n\n您平时主要发什么类型的课？"
+      },
+      {
+        "role": "user",
+        "content": "不好意思，我现在在开车，不方便聊太久。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打，注意安全。"
+      }
+    ],
+    "user_llm_raw": "{\"constraint_text\": \"若老板说忙，说\\\"就1分钟，保证简短\\\"后继续简短说明\", \"user_reply\": \"我现在挺忙的，你能不能快点说？\", \"rationale\": \"用户表示忙碌，触发'若老板说忙'的约束，检查Agent是否先说'就1分钟，保证简短'再继续简短说明。\", \"multi_turn\": \"none\", \"end\": false}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户明确表示忙碌并要求快速说明，直接触发了'若老板说忙，说就1分钟，保证简短后继续简短说明'这一约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 10,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 11,
+    "conversation_id": 2,
+    "local_turn_index": 6,
+    "constraint_text": "若对话被打断，使用简短过渡语，如\"您刚才提到……\"或\"我刚说到……\"",
+    "user_reply": "等一下，我这边有学员打电话进来，您先别挂。",
+    "agent_reply": "好的，您先接，我等一下。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在低延迟直播要额外加钱吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我刚说到——\n\n低延迟直播带宽和节点保障更强，费用略高于标准直播。\n\n您之前后台其实已经在用低延迟线路了，具体费用变化可以看看账单。\n\n还有其他想了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "那这次升级有没有优惠券可以领？"
+      },
+      {
+        "role": "assistant",
+        "content": "这次升级没有优惠券哦。\n\n不过低延迟直播确实能提升课堂互动体验，尤其适合小班课和实操课。\n\n您平时主要发什么类型的课？"
+      },
+      {
+        "role": "user",
+        "content": "不好意思，我现在在开车，不方便聊太久。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打，注意安全。"
+      },
+      {
+        "role": "user",
+        "content": "我现在挺忙的，你能不能快点说？"
+      },
+      {
+        "role": "assistant",
+        "content": "就1分钟，保证简短。\n\n之后发布页会分开显示\"标准直播\"和\"低延迟直播\"两个选项，您根据课程类型选就行。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"若对话被打断，使用简短过渡语，如\\\"您刚才提到……\\\"或\\\"我刚说到……\\\"\",\n  \"user_reply\": \"等一下，我这边有学员打电话进来，您先别挂。\",\n  \"rationale\": \"用户突然打断对话说有其他电话进来，模拟真实通话被打断的场景。Agent 在用户回来后应使用简短过渡语如'我刚说到……'或'您刚才提到……'来接续对话，而非从头重复或忽略打断。\",\n  \"multi_turn\": \"need\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户说'等一下，我这边有学员打电话进来，您先别挂'，属于对话被打断的场景，Agent 下一轮回复应使用简短过渡语如'您刚才提到……'或'我刚说到……'来检验该约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "need",
+    "segment_id": 11,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 12,
+    "conversation_id": 2,
+    "local_turn_index": 7,
+    "constraint_text": "若对话被打断，使用简短过渡语，如\"您刚才提到……\"或\"我刚说到……\"",
+    "user_reply": "不好意思让您久等了，您刚才说发布页会分开显示两个选项？",
+    "agent_reply": "您刚才提到——\n\n对，之后发布页会分开显示\"标准直播\"和\"低延迟直播\"两个选项。\n\n标准直播延迟约5-10秒，适合大班课；低延迟直播延迟约1-2秒，互动更流畅，适合小班课或实操课。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在低延迟直播要额外加钱吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我刚说到——\n\n低延迟直播带宽和节点保障更强，费用略高于标准直播。\n\n您之前后台其实已经在用低延迟线路了，具体费用变化可以看看账单。\n\n还有其他想了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "那这次升级有没有优惠券可以领？"
+      },
+      {
+        "role": "assistant",
+        "content": "这次升级没有优惠券哦。\n\n不过低延迟直播确实能提升课堂互动体验，尤其适合小班课和实操课。\n\n您平时主要发什么类型的课？"
+      },
+      {
+        "role": "user",
+        "content": "不好意思，我现在在开车，不方便聊太久。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打，注意安全。"
+      },
+      {
+        "role": "user",
+        "content": "我现在挺忙的，你能不能快点说？"
+      },
+      {
+        "role": "assistant",
+        "content": "就1分钟，保证简短。\n\n之后发布页会分开显示\"标准直播\"和\"低延迟直播\"两个选项，您根据课程类型选就行。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      },
+      {
+        "role": "user",
+        "content": "等一下，我这边有学员打电话进来，您先别挂。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，您先接，我等一下。"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"若对话被打断，使用简短过渡语，如\"您刚才提到……\"或\"我刚说到……\"\",\n  \"user_reply\": \"不好意思让您久等了，您刚才说发布页会分开显示两个选项？\",\n  \"rationale\": \"用户之前因接电话打断了对话，回来后主动提及 Agent 之前说过的内容，这为 Agent 提供了使用简短过渡语（如'我刚说到……'）来接续被打断对话的机会，从而测试该约束。\",\n  \"multi_turn\": \"continue\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户消息明确引用了'您刚才说发布页会分开显示两个选项'，直接触发了'若对话被打断，使用简短过渡语（如“您刚才提到……”或“我刚说到……”）'这一约束，Agent 需以简短过渡语回应以检验是否遵守该约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "continue",
+    "segment_id": 11,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 13,
+    "conversation_id": 2,
+    "local_turn_index": 8,
+    "constraint_text": "若对话被打断，使用简短过渡语，如\"您刚才提到……\"或\"我刚说到……\"",
+    "user_reply": "等一下，我同事找我有点事，您先别挂啊。",
+    "agent_reply": "好的，您先忙，我等。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，您说。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在低延迟直播要额外加钱吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我刚说到——\n\n低延迟直播带宽和节点保障更强，费用略高于标准直播。\n\n您之前后台其实已经在用低延迟线路了，具体费用变化可以看看账单。\n\n还有其他想了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "那这次升级有没有优惠券可以领？"
+      },
+      {
+        "role": "assistant",
+        "content": "这次升级没有优惠券哦。\n\n不过低延迟直播确实能提升课堂互动体验，尤其适合小班课和实操课。\n\n您平时主要发什么类型的课？"
+      },
+      {
+        "role": "user",
+        "content": "不好意思，我现在在开车，不方便聊太久。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打，注意安全。"
+      },
+      {
+        "role": "user",
+        "content": "我现在挺忙的，你能不能快点说？"
+      },
+      {
+        "role": "assistant",
+        "content": "就1分钟，保证简短。\n\n之后发布页会分开显示\"标准直播\"和\"低延迟直播\"两个选项，您根据课程类型选就行。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      },
+      {
+        "role": "user",
+        "content": "等一下，我这边有学员打电话进来，您先别挂。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，您先接，我等一下。"
+      },
+      {
+        "role": "user",
+        "content": "不好意思让您久等了，您刚才说发布页会分开显示两个选项？"
+      },
+      {
+        "role": "assistant",
+        "content": "您刚才提到——\n\n对，之后发布页会分开显示\"标准直播\"和\"低延迟直播\"两个选项。\n\n标准直播延迟约5-10秒，适合大班课；低延迟直播延迟约1-2秒，互动更流畅，适合小班课或实操课。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"若对话被打断，使用简短过渡语，如\"您刚才提到……\"或\"我刚说到……\"\",\n  \"user_reply\": \"等一下，我同事找我有点事，您先别挂啊。\",\n  \"rationale\": \"用户主动制造一次打断场景，模拟真实通话中被同事打断的情况，检验agent在被打断后重新接续时是否能使用简短过渡语（如'我刚说到……'或'您刚才提到……'）来恢复对话，从而继续测试该约束。\",\n  \"multi_turn\": \"continue\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户说有事让Agent别挂，属于对话被打断的场景，Agent下一轮回复需使用简短过渡语如'您刚才提到……'或'我刚说到……'来检验该约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "continue",
+    "segment_id": 11,
+    "is_test_turn": true
+  }
+]

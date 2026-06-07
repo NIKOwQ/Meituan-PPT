@@ -1,0 +1,12 @@
+[project]
+name = "meituanv3"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=2.38.0",
+    "python-dotenv>=1.2.2",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "sse-starlette>=2.0",
+]

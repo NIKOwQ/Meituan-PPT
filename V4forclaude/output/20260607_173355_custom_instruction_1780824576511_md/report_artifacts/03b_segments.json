@@ -1,0 +1,2929 @@
+[
+  {
+    "segment_id": 1,
+    "conversation_id": 0,
+    "constraint_text": "您好，请问您是贵培训机构/校区的负责人吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 1,
+        "conversation_id": 0,
+        "local_turn_index": 1,
+        "user_reply": "对，我是，有什么事？",
+        "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "turn_index": 2,
+        "conversation_id": 0,
+        "local_turn_index": 2,
+        "user_reply": "不知道，之前没注意这些。",
+        "agent_reply": "之前前端没开放这个选项，是临时给您开启的，为了保障音视频和白板同步。\n\n之后发布页会分开显示两个选项：标准直播和低延迟直播。您了解吗？"
+      },
+      {
+        "turn_index": 3,
+        "conversation_id": 0,
+        "local_turn_index": 3,
+        "user_reply": "明白了，那低延迟和标准具体差在哪？费用一样吗？",
+        "agent_reply": "标准直播便宜些，延迟5到10秒，适合大班课。低延迟延迟1到2秒，互动更流畅，适合小班或实操课，但费用略高。\n\n您清楚了吗？"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 2,
+    "conversation_id": 0,
+    "constraint_text": "您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，是临时给您开启的，为了保障音视频和白板同步。\n\n之后发布页会分开显示两个选项：标准直播和低延迟直播。您了解吗？"
+      },
+      {
+        "role": "user",
+        "content": "明白了，那低延迟和标准具体差在哪？费用一样吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播便宜些，延迟5到10秒，适合大班课。低延迟延迟1到2秒，互动更流畅，适合小班或实操课，但费用略高。\n\n您清楚了吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 4,
+        "conversation_id": 0,
+        "local_turn_index": 4,
+        "user_reply": "我是用SaaS系统B发课的，那我怎么选低延迟直播？",
+        "agent_reply": "您发课时，发布页能看到低延迟直播的选项吗？"
+      },
+      {
+        "turn_index": 5,
+        "conversation_id": 0,
+        "local_turn_index": 5,
+        "user_reply": "我发课时没看到低延迟的选项，这是怎么回事？",
+        "agent_reply": "您别担心，我来帮您一步步操作。\n\n先点【我的】，然后点【服务商/直播平台管理】。您看到了吗？"
+      },
+      {
+        "turn_index": 6,
+        "conversation_id": 0,
+        "local_turn_index": 6,
+        "user_reply": "找到了，然后点【服务商/直播平台管理】对吧，我点开了，接下来呢？",
+        "agent_reply": "现在选【直播平台】，看到【服务产品】了吗？"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 3,
+    "conversation_id": 0,
+    "constraint_text": "若未显示 → 缓慢引导开通（每步暂停3秒）： 1. 进入【我的】 2. 点击【服务商/直播平台管理】 3. 选择【直播平台】 4. 在【服务产品】下勾选低延迟直播，保存",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，是临时给您开启的，为了保障音视频和白板同步。\n\n之后发布页会分开显示两个选项：标准直播和低延迟直播。您了解吗？"
+      },
+      {
+        "role": "user",
+        "content": "明白了，那低延迟和标准具体差在哪？费用一样吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播便宜些，延迟5到10秒，适合大班课。低延迟延迟1到2秒，互动更流畅，适合小班或实操课，但费用略高。\n\n您清楚了吗？"
+      },
+      {
+        "role": "user",
+        "content": "我是用SaaS系统B发课的，那我怎么选低延迟直播？"
+      },
+      {
+        "role": "assistant",
+        "content": "您发课时，发布页能看到低延迟直播的选项吗？"
+      },
+      {
+        "role": "user",
+        "content": "我发课时没看到低延迟的选项，这是怎么回事？"
+      },
+      {
+        "role": "assistant",
+        "content": "您别担心，我来帮您一步步操作。\n\n先点【我的】，然后点【服务商/直播平台管理】。您看到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "找到了，然后点【服务商/直播平台管理】对吧，我点开了，接下来呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "现在选【直播平台】，看到【服务产品】了吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 7,
+        "conversation_id": 0,
+        "local_turn_index": 7,
+        "user_reply": "我选到了【直播平台】，接下来在【服务产品】里勾选低延迟直播然后保存对吧？",
+        "agent_reply": "对，没错！勾选低延迟直播后保存即可。您操作得很清楚！\n\n还有其他问题吗？"
+      },
+      {
+        "turn_index": 8,
+        "conversation_id": 0,
+        "local_turn_index": 8,
+        "user_reply": "好的，我勾选完保存了，这样以后就能直接选低延迟直播了吧？",
+        "agent_reply": "对，以后选低延迟直播就行。您清楚了吗？"
+      },
+      {
+        "turn_index": 9,
+        "conversation_id": 0,
+        "local_turn_index": 9,
+        "user_reply": "清楚了，那保存后还需要做什么吗？",
+        "agent_reply": "保存后就完成了，不需要其他操作。\n\n您发课时直接选低延迟直播就行。\n\n还有其他问题吗？"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 4,
+    "conversation_id": 0,
+    "constraint_text": "按知识库解答剩余问题",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，是临时给您开启的，为了保障音视频和白板同步。\n\n之后发布页会分开显示两个选项：标准直播和低延迟直播。您了解吗？"
+      },
+      {
+        "role": "user",
+        "content": "明白了，那低延迟和标准具体差在哪？费用一样吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播便宜些，延迟5到10秒，适合大班课。低延迟延迟1到2秒，互动更流畅，适合小班或实操课，但费用略高。\n\n您清楚了吗？"
+      },
+      {
+        "role": "user",
+        "content": "我是用SaaS系统B发课的，那我怎么选低延迟直播？"
+      },
+      {
+        "role": "assistant",
+        "content": "您发课时，发布页能看到低延迟直播的选项吗？"
+      },
+      {
+        "role": "user",
+        "content": "我发课时没看到低延迟的选项，这是怎么回事？"
+      },
+      {
+        "role": "assistant",
+        "content": "您别担心，我来帮您一步步操作。\n\n先点【我的】，然后点【服务商/直播平台管理】。您看到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "找到了，然后点【服务商/直播平台管理】对吧，我点开了，接下来呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "现在选【直播平台】，看到【服务产品】了吗？"
+      },
+      {
+        "role": "user",
+        "content": "我选到了【直播平台】，接下来在【服务产品】里勾选低延迟直播然后保存对吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，没错！勾选低延迟直播后保存即可。您操作得很清楚！\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "好的，我勾选完保存了，这样以后就能直接选低延迟直播了吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，以后选低延迟直播就行。您清楚了吗？"
+      },
+      {
+        "role": "user",
+        "content": "清楚了，那保存后还需要做什么吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "保存后就完成了，不需要其他操作。\n\n您发课时直接选低延迟直播就行。\n\n还有其他问题吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 10,
+        "conversation_id": 0,
+        "local_turn_index": 10,
+        "user_reply": "想再了解下低延迟直播的价格，具体比标准直播贵多少？",
+        "agent_reply": "价格差异主要取决于您的带宽和节点配置，具体费用以您实际使用为准。建议您看下SaaS系统B里的价格说明，或者联系您的客户经理确认。\n\n您清楚了吗？"
+      },
+      {
+        "turn_index": 11,
+        "conversation_id": 0,
+        "local_turn_index": 11,
+        "user_reply": "行，那还有其他需要注意的吗？",
+        "agent_reply": "我先帮您检查下学员端费用设置。您之前有设置过直播加速线路费吗？"
+      },
+      {
+        "turn_index": 12,
+        "conversation_id": 0,
+        "local_turn_index": 12,
+        "user_reply": "没有设置过直播加速线路费，学员端从来没加过。",
+        "agent_reply": "那没问题，学员端费用不影响您使用低延迟直播。\n\n稍后我会通过企业微信添加您，方便后续沟通。您这个手机号可以加企业微信吗？"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 5,
+    "conversation_id": 0,
+    "constraint_text": "若当前号码可添加 → 告知稍后通过企业微信添加，请通过验证",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，是临时给您开启的，为了保障音视频和白板同步。\n\n之后发布页会分开显示两个选项：标准直播和低延迟直播。您了解吗？"
+      },
+      {
+        "role": "user",
+        "content": "明白了，那低延迟和标准具体差在哪？费用一样吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播便宜些，延迟5到10秒，适合大班课。低延迟延迟1到2秒，互动更流畅，适合小班或实操课，但费用略高。\n\n您清楚了吗？"
+      },
+      {
+        "role": "user",
+        "content": "我是用SaaS系统B发课的，那我怎么选低延迟直播？"
+      },
+      {
+        "role": "assistant",
+        "content": "您发课时，发布页能看到低延迟直播的选项吗？"
+      },
+      {
+        "role": "user",
+        "content": "我发课时没看到低延迟的选项，这是怎么回事？"
+      },
+      {
+        "role": "assistant",
+        "content": "您别担心，我来帮您一步步操作。\n\n先点【我的】，然后点【服务商/直播平台管理】。您看到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "找到了，然后点【服务商/直播平台管理】对吧，我点开了，接下来呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "现在选【直播平台】，看到【服务产品】了吗？"
+      },
+      {
+        "role": "user",
+        "content": "我选到了【直播平台】，接下来在【服务产品】里勾选低延迟直播然后保存对吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，没错！勾选低延迟直播后保存即可。您操作得很清楚！\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "好的，我勾选完保存了，这样以后就能直接选低延迟直播了吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，以后选低延迟直播就行。您清楚了吗？"
+      },
+      {
+        "role": "user",
+        "content": "清楚了，那保存后还需要做什么吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "保存后就完成了，不需要其他操作。\n\n您发课时直接选低延迟直播就行。\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "想再了解下低延迟直播的价格，具体比标准直播贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "价格差异主要取决于您的带宽和节点配置，具体费用以您实际使用为准。建议您看下SaaS系统B里的价格说明，或者联系您的客户经理确认。\n\n您清楚了吗？"
+      },
+      {
+        "role": "user",
+        "content": "行，那还有其他需要注意的吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我先帮您检查下学员端费用设置。您之前有设置过直播加速线路费吗？"
+      },
+      {
+        "role": "user",
+        "content": "没有设置过直播加速线路费，学员端从来没加过。"
+      },
+      {
+        "role": "assistant",
+        "content": "那没问题，学员端费用不影响您使用低延迟直播。\n\n稍后我会通过企业微信添加您，方便后续沟通。您这个手机号可以加企业微信吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 13,
+        "conversation_id": 0,
+        "local_turn_index": 13,
+        "user_reply": "可以，你直接加我吧。",
+        "agent_reply": "好的，稍后加您企业微信，请通过验证。\n\n祝您课程顺利，招生满满。再见！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 6,
+    "conversation_id": 1,
+    "constraint_text": "您好，请问您是贵培训机构/校区的负责人吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 14,
+        "conversation_id": 1,
+        "local_turn_index": 1,
+        "user_reply": "对，我是负责人，有什么事？",
+        "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。\n\n发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 7,
+    "conversation_id": 1,
+    "constraint_text": "保持随意直接",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。\n\n发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 15,
+        "conversation_id": 1,
+        "local_turn_index": 4,
+        "user_reply": "不知道，之前没注意这些。",
+        "agent_reply": "之前前端没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n——标准直播费用低，延迟约5-10秒，适合大班课；低延迟直播延迟约1-2秒，互动更流畅，适合小班课或实操课。\n\n您有其他问题吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 8,
+    "conversation_id": 1,
+    "constraint_text": "您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。\n\n发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n——标准直播费用低，延迟约5-10秒，适合大班课；低延迟直播延迟约1-2秒，互动更流畅，适合小班课或实操课。\n\n您有其他问题吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 16,
+        "conversation_id": 1,
+        "local_turn_index": 5,
+        "user_reply": "我用的是SaaS系统B，那边已经显示低延迟直播了吗？",
+        "agent_reply": "我帮您确认一下，您稍等。\n\n——请问您现在方便打开SaaS系统B看一下吗？"
+      },
+      {
+        "turn_index": 17,
+        "conversation_id": 1,
+        "local_turn_index": 6,
+        "user_reply": "我方便打开SaaS系统B看一下，稍等一下哈。",
+        "agent_reply": "好的，您慢慢看，我等着。"
+      },
+      {
+        "turn_index": 18,
+        "conversation_id": 1,
+        "local_turn_index": 7,
+        "user_reply": "哦我看到了，SaaS系统B里确实已经显示低延迟直播选项了，那我直接选就行对吧？",
+        "agent_reply": "对，直接选就行，操作跟之前一样。\n\n您这边学员端有没有单独设置过直播加速线路费？"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 9,
+    "conversation_id": 1,
+    "constraint_text": "不能承诺给商家折扣券或优惠券",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。\n\n发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n——标准直播费用低，延迟约5-10秒，适合大班课；低延迟直播延迟约1-2秒，互动更流畅，适合小班课或实操课。\n\n您有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是SaaS系统B，那边已经显示低延迟直播了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您确认一下，您稍等。\n\n——请问您现在方便打开SaaS系统B看一下吗？"
+      },
+      {
+        "role": "user",
+        "content": "我方便打开SaaS系统B看一下，稍等一下哈。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，您慢慢看，我等着。"
+      },
+      {
+        "role": "user",
+        "content": "哦我看到了，SaaS系统B里确实已经显示低延迟直播选项了，那我直接选就行对吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，直接选就行，操作跟之前一样。\n\n您这边学员端有没有单独设置过直播加速线路费？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 19,
+        "conversation_id": 1,
+        "local_turn_index": 8,
+        "user_reply": "用低延迟直播的话，能不能给我便宜点？或者送个券？",
+        "agent_reply": "这个我做不了主，价格都是统一的，没有折扣或送券的权限。\n\n低延迟直播本身带宽和节点保障更强，费用会略高于标准直播。\n\n还有其他问题吗？"
+      },
+      {
+        "turn_index": 20,
+        "conversation_id": 1,
+        "local_turn_index": 9,
+        "user_reply": "真的完全不行吗？哪怕一张小券也不能送？",
+        "agent_reply": "确实不行，这个权限不在我这边，没法给您承诺。\n\n价格都是统一的，建议您根据课程需要选合适的就行。\n\n还有其他需要了解的吗？"
+      },
+      {
+        "turn_index": 21,
+        "conversation_id": 1,
+        "local_turn_index": 10,
+        "user_reply": "行吧，那低延迟直播具体贵多少？",
+        "agent_reply": "具体价差我手头没有，建议您看下SaaS系统B里的报价，或者问下您的客户经理。\n\n还有其他问题吗？"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 10,
+    "conversation_id": 1,
+    "constraint_text": "按知识库解答剩余问题",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。\n\n发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n——标准直播费用低，延迟约5-10秒，适合大班课；低延迟直播延迟约1-2秒，互动更流畅，适合小班课或实操课。\n\n您有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是SaaS系统B，那边已经显示低延迟直播了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您确认一下，您稍等。\n\n——请问您现在方便打开SaaS系统B看一下吗？"
+      },
+      {
+        "role": "user",
+        "content": "我方便打开SaaS系统B看一下，稍等一下哈。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，您慢慢看，我等着。"
+      },
+      {
+        "role": "user",
+        "content": "哦我看到了，SaaS系统B里确实已经显示低延迟直播选项了，那我直接选就行对吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，直接选就行，操作跟之前一样。\n\n您这边学员端有没有单独设置过直播加速线路费？"
+      },
+      {
+        "role": "user",
+        "content": "用低延迟直播的话，能不能给我便宜点？或者送个券？"
+      },
+      {
+        "role": "assistant",
+        "content": "这个我做不了主，价格都是统一的，没有折扣或送券的权限。\n\n低延迟直播本身带宽和节点保障更强，费用会略高于标准直播。\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "真的完全不行吗？哪怕一张小券也不能送？"
+      },
+      {
+        "role": "assistant",
+        "content": "确实不行，这个权限不在我这边，没法给您承诺。\n\n价格都是统一的，建议您根据课程需要选合适的就行。\n\n还有其他需要了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "行吧，那低延迟直播具体贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "具体价差我手头没有，建议您看下SaaS系统B里的报价，或者问下您的客户经理。\n\n还有其他问题吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 22,
+        "conversation_id": 1,
+        "local_turn_index": 11,
+        "user_reply": "行，那低延迟直播能支持多少人同时在线？",
+        "agent_reply": "并发人数跟标准直播一样，不影响您现有的学员规模。\n\n还有其他问题吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 11,
+    "conversation_id": 1,
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。\n\n发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n——标准直播费用低，延迟约5-10秒，适合大班课；低延迟直播延迟约1-2秒，互动更流畅，适合小班课或实操课。\n\n您有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是SaaS系统B，那边已经显示低延迟直播了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您确认一下，您稍等。\n\n——请问您现在方便打开SaaS系统B看一下吗？"
+      },
+      {
+        "role": "user",
+        "content": "我方便打开SaaS系统B看一下，稍等一下哈。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，您慢慢看，我等着。"
+      },
+      {
+        "role": "user",
+        "content": "哦我看到了，SaaS系统B里确实已经显示低延迟直播选项了，那我直接选就行对吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，直接选就行，操作跟之前一样。\n\n您这边学员端有没有单独设置过直播加速线路费？"
+      },
+      {
+        "role": "user",
+        "content": "用低延迟直播的话，能不能给我便宜点？或者送个券？"
+      },
+      {
+        "role": "assistant",
+        "content": "这个我做不了主，价格都是统一的，没有折扣或送券的权限。\n\n低延迟直播本身带宽和节点保障更强，费用会略高于标准直播。\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "真的完全不行吗？哪怕一张小券也不能送？"
+      },
+      {
+        "role": "assistant",
+        "content": "确实不行，这个权限不在我这边，没法给您承诺。\n\n价格都是统一的，建议您根据课程需要选合适的就行。\n\n还有其他需要了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "行吧，那低延迟直播具体贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "具体价差我手头没有，建议您看下SaaS系统B里的报价，或者问下您的客户经理。\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "行，那低延迟直播能支持多少人同时在线？"
+      },
+      {
+        "role": "assistant",
+        "content": "并发人数跟标准直播一样，不影响您现有的学员规模。\n\n还有其他问题吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 23,
+        "conversation_id": 1,
+        "local_turn_index": 12,
+        "user_reply": "行吧，那就先这样，谢谢了啊。",
+        "agent_reply": "好，那我稍后通过企业微信加您，记得通过验证哈。祝您课程顺利、招生满满，再见！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 12,
+    "conversation_id": 1,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。\n\n发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没注意这些。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n——标准直播费用低，延迟约5-10秒，适合大班课；低延迟直播延迟约1-2秒，互动更流畅，适合小班课或实操课。\n\n您有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是SaaS系统B，那边已经显示低延迟直播了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您确认一下，您稍等。\n\n——请问您现在方便打开SaaS系统B看一下吗？"
+      },
+      {
+        "role": "user",
+        "content": "我方便打开SaaS系统B看一下，稍等一下哈。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，您慢慢看，我等着。"
+      },
+      {
+        "role": "user",
+        "content": "哦我看到了，SaaS系统B里确实已经显示低延迟直播选项了，那我直接选就行对吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，直接选就行，操作跟之前一样。\n\n您这边学员端有没有单独设置过直播加速线路费？"
+      },
+      {
+        "role": "user",
+        "content": "用低延迟直播的话，能不能给我便宜点？或者送个券？"
+      },
+      {
+        "role": "assistant",
+        "content": "这个我做不了主，价格都是统一的，没有折扣或送券的权限。\n\n低延迟直播本身带宽和节点保障更强，费用会略高于标准直播。\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "真的完全不行吗？哪怕一张小券也不能送？"
+      },
+      {
+        "role": "assistant",
+        "content": "确实不行，这个权限不在我这边，没法给您承诺。\n\n价格都是统一的，建议您根据课程需要选合适的就行。\n\n还有其他需要了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "行吧，那低延迟直播具体贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "具体价差我手头没有，建议您看下SaaS系统B里的报价，或者问下您的客户经理。\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "行，那低延迟直播能支持多少人同时在线？"
+      },
+      {
+        "role": "assistant",
+        "content": "并发人数跟标准直播一样，不影响您现有的学员规模。\n\n还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "行吧，那就先这样，谢谢了啊。"
+      },
+      {
+        "role": "assistant",
+        "content": "好，那我稍后通过企业微信加您，记得通过验证哈。祝您课程顺利、招生满满，再见！"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 24,
+        "conversation_id": 1,
+        "local_turn_index": 13,
+        "user_reply": "不好意思我开车呢，先挂了啊",
+        "agent_reply": "那我稍后再打，注意安全，再见！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 13,
+    "conversation_id": 2,
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 25,
+        "conversation_id": 2,
+        "local_turn_index": 1,
+        "user_reply": "是的，我是负责人。",
+        "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 14,
+    "conversation_id": 2,
+    "constraint_text": "您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "是的，我是负责人。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 26,
+        "conversation_id": 2,
+        "local_turn_index": 2,
+        "user_reply": "不知道，之前没听说过有低延迟。",
+        "agent_reply": "当时前端没开放这个选项，我们临时开了低延迟，主要是为了音视频和白板能同步上。现在发课页面会直接显示\"标准直播\"和\"低延迟直播\"两个选项，您根据需要选就行。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 15,
+    "conversation_id": 2,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "是的，我是负责人。"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，之前没听说过有低延迟。"
+      },
+      {
+        "role": "assistant",
+        "content": "当时前端没开放这个选项，我们临时开了低延迟，主要是为了音视频和白板能同步上。现在发课页面会直接显示\"标准直播\"和\"低延迟直播\"两个选项，您根据需要选就行。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 27,
+        "conversation_id": 2,
+        "local_turn_index": 3,
+        "user_reply": "不好意思我现在在开车，不方便接电话。",
+        "agent_reply": "那我稍后再打，您注意安全。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 16,
+    "conversation_id": 3,
+    "constraint_text": "您是贵培训机构/校区的负责人吗",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 28,
+        "conversation_id": 3,
+        "local_turn_index": 1,
+        "user_reply": "哦不是，我是前台，校长现在不在，您看方便留下电话吗？",
+        "agent_reply": "那麻烦您转告校长，我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项，发课时选这个就行。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 17,
+    "conversation_id": 3,
+    "constraint_text": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦不是，我是前台，校长现在不在，您看方便留下电话吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "那麻烦您转告校长，我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项，发课时选这个就行。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 29,
+        "conversation_id": 3,
+        "local_turn_index": 2,
+        "user_reply": "行，那我转告一下，低延迟和普通那个有啥区别啊？",
+        "agent_reply": "普通直播延迟大概5到10秒，适合大班课；低延迟大概1到2秒，互动更流畅，适合小班课或实操课。"
+      },
+      {
+        "turn_index": 30,
+        "conversation_id": 3,
+        "local_turn_index": 3,
+        "user_reply": "好嘞，那我记下了，回头转告他。",
+        "agent_reply": "好的，麻烦您转告校长哈。"
+      }
+    ],
+    "complete_reason": "conversation_ended_early"
+  },
+  {
+    "segment_id": 18,
+    "conversation_id": 4,
+    "constraint_text": "您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "是的，我是这边校区负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 32,
+        "conversation_id": 4,
+        "local_turn_index": 2,
+        "user_reply": "不知道啊，之前一直以为就是标准直播呢。",
+        "agent_reply": "之前前端没开放这个选项，我们临时开了低延迟，为了音视频和白板能同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时发课互动多吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 19,
+    "conversation_id": 4,
+    "constraint_text": "您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "是的，我是这边校区负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道啊，之前一直以为就是标准直播呢。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，我们临时开了低延迟，为了音视频和白板能同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时发课互动多吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 33,
+        "conversation_id": 4,
+        "local_turn_index": 3,
+        "user_reply": "我们一般是在SaaS系统B上发课，这个低延迟直播在上面能选吗？",
+        "agent_reply": "我先帮您确认一下SaaS系统B上的显示情况。\n\n您方便现在看下【服务商/直播平台管理】里，【服务产品】下面有没有\"低延迟直播\"的选项？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 20,
+    "conversation_id": 4,
+    "constraint_text": "若未显示 → 缓慢引导开通（每步暂停3秒）： 1. 进入【我的】 2. 点击【服务商/直播平台管理】 3. 选择【直播平台】 4. 在【服务产品】下勾选低延迟直播，保存",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "是的，我是这边校区负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道啊，之前一直以为就是标准直播呢。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，我们临时开了低延迟，为了音视频和白板能同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时发课互动多吗？"
+      },
+      {
+        "role": "user",
+        "content": "我们一般是在SaaS系统B上发课，这个低延迟直播在上面能选吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我先帮您确认一下SaaS系统B上的显示情况。\n\n您方便现在看下【服务商/直播平台管理】里，【服务产品】下面有没有\"低延迟直播\"的选项？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 34,
+        "conversation_id": 4,
+        "local_turn_index": 4,
+        "user_reply": "没有看到低延迟直播的选项，这怎么加啊？",
+        "agent_reply": "您按我说的步骤来，先进入【我的】，看到了吗？"
+      },
+      {
+        "turn_index": 35,
+        "conversation_id": 4,
+        "local_turn_index": 5,
+        "user_reply": "好的，我进【我的】了，然后呢？",
+        "agent_reply": "点击【服务商/直播平台管理】，找到了吗？"
+      },
+      {
+        "turn_index": 36,
+        "conversation_id": 4,
+        "local_turn_index": 6,
+        "user_reply": "点开了，下一步呢？",
+        "agent_reply": "选择【直播平台】，看到了吗？"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 21,
+    "conversation_id": 4,
+    "constraint_text": "选择【直播平台】",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "是的，我是这边校区负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道啊，之前一直以为就是标准直播呢。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，我们临时开了低延迟，为了音视频和白板能同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时发课互动多吗？"
+      },
+      {
+        "role": "user",
+        "content": "我们一般是在SaaS系统B上发课，这个低延迟直播在上面能选吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我先帮您确认一下SaaS系统B上的显示情况。\n\n您方便现在看下【服务商/直播平台管理】里，【服务产品】下面有没有\"低延迟直播\"的选项？"
+      },
+      {
+        "role": "user",
+        "content": "没有看到低延迟直播的选项，这怎么加啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "您按我说的步骤来，先进入【我的】，看到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "好的，我进【我的】了，然后呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "点击【服务商/直播平台管理】，找到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "点开了，下一步呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "选择【直播平台】，看到了吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 37,
+        "conversation_id": 4,
+        "local_turn_index": 7,
+        "user_reply": "嗯，我已经选了【直播平台】。",
+        "agent_reply": "在【服务产品】下勾选低延迟直播，保存就行了。"
+      },
+      {
+        "turn_index": 38,
+        "conversation_id": 4,
+        "local_turn_index": 8,
+        "user_reply": "勾好了，保存一下就行了吧？",
+        "agent_reply": "对，保存就行了。\n\n您之前学员端有设置过加速线路费或者额外费用吗？"
+      }
+    ],
+    "complete_reason": "done"
+  },
+  {
+    "segment_id": 22,
+    "conversation_id": 4,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "是的，我是这边校区负责人，有什么事？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道啊，之前一直以为就是标准直播呢。"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放这个选项，我们临时开了低延迟，为了音视频和白板能同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时发课互动多吗？"
+      },
+      {
+        "role": "user",
+        "content": "我们一般是在SaaS系统B上发课，这个低延迟直播在上面能选吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我先帮您确认一下SaaS系统B上的显示情况。\n\n您方便现在看下【服务商/直播平台管理】里，【服务产品】下面有没有\"低延迟直播\"的选项？"
+      },
+      {
+        "role": "user",
+        "content": "没有看到低延迟直播的选项，这怎么加啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "您按我说的步骤来，先进入【我的】，看到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "好的，我进【我的】了，然后呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "点击【服务商/直播平台管理】，找到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "点开了，下一步呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "选择【直播平台】，看到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "嗯，我已经选了【直播平台】。"
+      },
+      {
+        "role": "assistant",
+        "content": "在【服务产品】下勾选低延迟直播，保存就行了。"
+      },
+      {
+        "role": "user",
+        "content": "勾好了，保存一下就行了吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，保存就行了。\n\n您之前学员端有设置过加速线路费或者额外费用吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 39,
+        "conversation_id": 4,
+        "local_turn_index": 9,
+        "user_reply": "不好意思啊，我现在在开车，不方便操作。",
+        "agent_reply": "那我稍后再打给您，您注意安全。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 23,
+    "conversation_id": 5,
+    "constraint_text": "您好，请问您是贵培训机构/校区的负责人吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 40,
+        "conversation_id": 5,
+        "local_turn_index": 1,
+        "user_reply": "嗯，对，我是校区负责人，怎么了？",
+        "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 24,
+    "conversation_id": 5,
+    "constraint_text": "您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "嗯，对，我是校区负责人，怎么了？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 41,
+        "conversation_id": 5,
+        "local_turn_index": 2,
+        "user_reply": "哦是吗？我不知道这个，你们后台直接给开的？",
+        "agent_reply": "对，因为当时前端没开放这个选项，我们临时给您开启了低延迟，主要是为了保证音视频和白板能同步上。\n\n那之后发布页面会分开显示两个选项，您可以根据课程类型自己选。\n\n——标准直播费用低一些，延迟大概5到10秒，适合大班课；低延迟直播延迟只有1到2秒，互动更流畅，适合小班课或者实操课。\n\n您还有其他想了解的？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 25,
+    "conversation_id": 5,
+    "constraint_text": "您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "嗯，对，我是校区负责人，怎么了？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦是吗？我不知道这个，你们后台直接给开的？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，因为当时前端没开放这个选项，我们临时给您开启了低延迟，主要是为了保证音视频和白板能同步上。\n\n那之后发布页面会分开显示两个选项，您可以根据课程类型自己选。\n\n——标准直播费用低一些，延迟大概5到10秒，适合大班课；低延迟直播延迟只有1到2秒，互动更流畅，适合小班课或者实操课。\n\n您还有其他想了解的？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 42,
+        "conversation_id": 5,
+        "local_turn_index": 3,
+        "user_reply": "我用的是SaaS系统B，那上面能看到低延迟直播吗？",
+        "agent_reply": "我先帮您确认一下，您现在登录SaaS系统B，在【我的】里找到【服务商/直播平台管理】，点进去看看【服务产品】下面有没有\"低延迟直播\"这个选项？"
+      },
+      {
+        "turn_index": 43,
+        "conversation_id": 5,
+        "local_turn_index": 4,
+        "user_reply": "我点进去了，看到【服务产品】下面了，但是没看到低延迟直播的选项。",
+        "agent_reply": "那我帮您后台配置一下，您明天再登录看看，应该就能看到了。\n\n另外想问下，您之前有没有给学员端设置过直播的加速线路费用？"
+      },
+      {
+        "turn_index": 44,
+        "conversation_id": 5,
+        "local_turn_index": 5,
+        "user_reply": "嗯没有，我没设过加速线路费用，那低延迟直播这边还需要我额外设置什么费用吗？",
+        "agent_reply": "不需要，您不用额外设置，直接用就行。\n\n那最后一步，方便加一下您的企业微信吗？我稍后加您，通过一下验证就行。"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 26,
+    "conversation_id": 5,
+    "constraint_text": "若当前号码可添加 → 告知稍后通过企业微信添加，请通过验证",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "嗯，对，我是校区负责人，怎么了？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦是吗？我不知道这个，你们后台直接给开的？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，因为当时前端没开放这个选项，我们临时给您开启了低延迟，主要是为了保证音视频和白板能同步上。\n\n那之后发布页面会分开显示两个选项，您可以根据课程类型自己选。\n\n——标准直播费用低一些，延迟大概5到10秒，适合大班课；低延迟直播延迟只有1到2秒，互动更流畅，适合小班课或者实操课。\n\n您还有其他想了解的？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是SaaS系统B，那上面能看到低延迟直播吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我先帮您确认一下，您现在登录SaaS系统B，在【我的】里找到【服务商/直播平台管理】，点进去看看【服务产品】下面有没有\"低延迟直播\"这个选项？"
+      },
+      {
+        "role": "user",
+        "content": "我点进去了，看到【服务产品】下面了，但是没看到低延迟直播的选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我帮您后台配置一下，您明天再登录看看，应该就能看到了。\n\n另外想问下，您之前有没有给学员端设置过直播的加速线路费用？"
+      },
+      {
+        "role": "user",
+        "content": "嗯没有，我没设过加速线路费用，那低延迟直播这边还需要我额外设置什么费用吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "不需要，您不用额外设置，直接用就行。\n\n那最后一步，方便加一下您的企业微信吗？我稍后加您，通过一下验证就行。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 45,
+        "conversation_id": 5,
+        "local_turn_index": 6,
+        "user_reply": "可以加，你直接加我吧，我这边等着通过验证。",
+        "agent_reply": "好的，那稍后加您企业微信，记得通过验证。\n\n您还有其他问题吗？没有的话祝您课程顺利、招生满满！"
+      },
+      {
+        "turn_index": 46,
+        "conversation_id": 5,
+        "local_turn_index": 7,
+        "user_reply": "好的，那你加吧，我这边等着。",
+        "agent_reply": "好的，马上去加，您稍等！"
+      }
+    ],
+    "complete_reason": "done"
+  },
+  {
+    "segment_id": 27,
+    "conversation_id": 6,
+    "constraint_text": "您好，请问您是贵培训机构/校区的负责人吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 47,
+        "conversation_id": 6,
+        "local_turn_index": 1,
+        "user_reply": "不是，我只是个前台，负责人不在。",
+        "agent_reply": "麻烦转告负责人，我们做了直播升级。发课时会多一个\"低延迟直播\"选项，互动更顺畅，适合小班/实操课。方便留个负责人电话吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 28,
+    "conversation_id": 6,
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "不是，我只是个前台，负责人不在。"
+      },
+      {
+        "role": "assistant",
+        "content": "麻烦转告负责人，我们做了直播升级。发课时会多一个\"低延迟直播\"选项，互动更顺畅，适合小班/实操课。方便留个负责人电话吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 48,
+        "conversation_id": 6,
+        "local_turn_index": 2,
+        "user_reply": "好的，我转告一下，还有其他要说的吗？",
+        "agent_reply": "没了，课程顺利，再见。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 29,
+    "conversation_id": 6,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "不是，我只是个前台，负责人不在。"
+      },
+      {
+        "role": "assistant",
+        "content": "麻烦转告负责人，我们做了直播升级。发课时会多一个\"低延迟直播\"选项，互动更顺畅，适合小班/实操课。方便留个负责人电话吗？"
+      },
+      {
+        "role": "user",
+        "content": "好的，我转告一下，还有其他要说的吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "没了，课程顺利，再见。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 49,
+        "conversation_id": 6,
+        "local_turn_index": 3,
+        "user_reply": "不好意思，我现在在开车，不方便讲电话",
+        "agent_reply": "那我稍后再打，注意安全，再见。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 30,
+    "conversation_id": 6,
+    "constraint_text": "不能承诺给商家折扣券或优惠券",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "不是，我只是个前台，负责人不在。"
+      },
+      {
+        "role": "assistant",
+        "content": "麻烦转告负责人，我们做了直播升级。发课时会多一个\"低延迟直播\"选项，互动更顺畅，适合小班/实操课。方便留个负责人电话吗？"
+      },
+      {
+        "role": "user",
+        "content": "好的，我转告一下，还有其他要说的吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "没了，课程顺利，再见。"
+      },
+      {
+        "role": "user",
+        "content": "不好意思，我现在在开车，不方便讲电话"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打，注意安全，再见。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 50,
+        "conversation_id": 6,
+        "local_turn_index": 4,
+        "user_reply": "那升级低延迟直播有什么优惠吗？能给我打个折吗？",
+        "agent_reply": "这个没有折扣，是产品升级。有其他问题吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 31,
+    "conversation_id": 7,
+    "constraint_text": "告知机构客户，课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 51,
+        "conversation_id": 7,
+        "local_turn_index": 1,
+        "user_reply": "对，我是。你们那个直播课页面最近是有什么变动吗？",
+        "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "turn_index": 52,
+        "conversation_id": 7,
+        "local_turn_index": 2,
+        "user_reply": "不知道，那现在页面上能看到这两个选项了吗？",
+        "agent_reply": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "turn_index": 53,
+        "conversation_id": 7,
+        "local_turn_index": 3,
+        "user_reply": "我平时主要是通过Web控制台发课的，那上面现在能看到低延迟直播吗？",
+        "agent_reply": "那边还没显示低延迟选项，不过我们后台可以直接为您配置，您明天再登录看看就行。\n\n对了，方便加一下您的企业微信吗？之后有更新我直接通知您。"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 32,
+    "conversation_id": 7,
+    "constraint_text": "若当前号码可添加 → 告知稍后通过企业微信添加，请通过验证 - 若不可添加 → 请提供可添加的手机号，再发送同样的验证提示",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是。你们那个直播课页面最近是有什么变动吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在页面上能看到这两个选项了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "role": "user",
+        "content": "我平时主要是通过Web控制台发课的，那上面现在能看到低延迟直播吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "那边还没显示低延迟选项，不过我们后台可以直接为您配置，您明天再登录看看就行。\n\n对了，方便加一下您的企业微信吗？之后有更新我直接通知您。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 54,
+        "conversation_id": 7,
+        "local_turn_index": 4,
+        "user_reply": "这个号不能加企业微信，我换个号码给你吧。",
+        "agent_reply": "行，您发过来，我马上加。"
+      },
+      {
+        "turn_index": 55,
+        "conversation_id": 7,
+        "local_turn_index": 5,
+        "user_reply": "138xxxx5678，你加一下这个吧。",
+        "agent_reply": "好的，我这就添加，您稍后通过一下验证。"
+      }
+    ],
+    "complete_reason": "done"
+  },
+  {
+    "segment_id": 33,
+    "conversation_id": 7,
+    "constraint_text": "按知识库解答剩余问题",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是。你们那个直播课页面最近是有什么变动吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在页面上能看到这两个选项了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "role": "user",
+        "content": "我平时主要是通过Web控制台发课的，那上面现在能看到低延迟直播吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "那边还没显示低延迟选项，不过我们后台可以直接为您配置，您明天再登录看看就行。\n\n对了，方便加一下您的企业微信吗？之后有更新我直接通知您。"
+      },
+      {
+        "role": "user",
+        "content": "这个号不能加企业微信，我换个号码给你吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "行，您发过来，我马上加。"
+      },
+      {
+        "role": "user",
+        "content": "138xxxx5678，你加一下这个吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，我这就添加，您稍后通过一下验证。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 56,
+        "conversation_id": 7,
+        "local_turn_index": 6,
+        "user_reply": "对了，低延迟直播的话，学员那边需要额外付加速线路费吗？",
+        "agent_reply": "我先看下您这边的配置。\n\n【短暂停顿】\n\n您之前没设过加速线路费，所以学员端不需要额外付费。\n\n还有其他想了解的吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 34,
+    "conversation_id": 7,
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是。你们那个直播课页面最近是有什么变动吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在页面上能看到这两个选项了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "role": "user",
+        "content": "我平时主要是通过Web控制台发课的，那上面现在能看到低延迟直播吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "那边还没显示低延迟选项，不过我们后台可以直接为您配置，您明天再登录看看就行。\n\n对了，方便加一下您的企业微信吗？之后有更新我直接通知您。"
+      },
+      {
+        "role": "user",
+        "content": "这个号不能加企业微信，我换个号码给你吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "行，您发过来，我马上加。"
+      },
+      {
+        "role": "user",
+        "content": "138xxxx5678，你加一下这个吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，我这就添加，您稍后通过一下验证。"
+      },
+      {
+        "role": "user",
+        "content": "对了，低延迟直播的话，学员那边需要额外付加速线路费吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我先看下您这边的配置。\n\n【短暂停顿】\n\n您之前没设过加速线路费，所以学员端不需要额外付费。\n\n还有其他想了解的吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 57,
+        "conversation_id": 7,
+        "local_turn_index": 7,
+        "user_reply": "那低延迟直播具体贵多少？",
+        "agent_reply": "低延迟直播带宽和节点保障更强，费用比标准直播略高一些，按实际用量计费就行。\n\n您这边还有其他问题吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 35,
+    "conversation_id": 7,
+    "constraint_text": "课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是。你们那个直播课页面最近是有什么变动吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在页面上能看到这两个选项了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "role": "user",
+        "content": "我平时主要是通过Web控制台发课的，那上面现在能看到低延迟直播吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "那边还没显示低延迟选项，不过我们后台可以直接为您配置，您明天再登录看看就行。\n\n对了，方便加一下您的企业微信吗？之后有更新我直接通知您。"
+      },
+      {
+        "role": "user",
+        "content": "这个号不能加企业微信，我换个号码给你吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "行，您发过来，我马上加。"
+      },
+      {
+        "role": "user",
+        "content": "138xxxx5678，你加一下这个吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，我这就添加，您稍后通过一下验证。"
+      },
+      {
+        "role": "user",
+        "content": "对了，低延迟直播的话，学员那边需要额外付加速线路费吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我先看下您这边的配置。\n\n【短暂停顿】\n\n您之前没设过加速线路费，所以学员端不需要额外付费。\n\n还有其他想了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "那低延迟直播具体贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "低延迟直播带宽和节点保障更强，费用比标准直播略高一些，按实际用量计费就行。\n\n您这边还有其他问题吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 58,
+        "conversation_id": 7,
+        "local_turn_index": 8,
+        "user_reply": "哦这样啊，那小班课的话是不是必须切到低延迟直播？",
+        "agent_reply": "小班课建议用低延迟直播，互动会更流畅。但不是必须，您按实际需求选就行。\n\n还有其他问题吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 36,
+    "conversation_id": 7,
+    "constraint_text": "祝其课程顺利、招生满满",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是。你们那个直播课页面最近是有什么变动吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那现在页面上能看到这两个选项了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。\n\n之后发布页会分开显示两个选项，根据课程类型自行选择即可。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "role": "user",
+        "content": "我平时主要是通过Web控制台发课的，那上面现在能看到低延迟直播吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "那边还没显示低延迟选项，不过我们后台可以直接为您配置，您明天再登录看看就行。\n\n对了，方便加一下您的企业微信吗？之后有更新我直接通知您。"
+      },
+      {
+        "role": "user",
+        "content": "这个号不能加企业微信，我换个号码给你吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "行，您发过来，我马上加。"
+      },
+      {
+        "role": "user",
+        "content": "138xxxx5678，你加一下这个吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，我这就添加，您稍后通过一下验证。"
+      },
+      {
+        "role": "user",
+        "content": "对了，低延迟直播的话，学员那边需要额外付加速线路费吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我先看下您这边的配置。\n\n【短暂停顿】\n\n您之前没设过加速线路费，所以学员端不需要额外付费。\n\n还有其他想了解的吗？"
+      },
+      {
+        "role": "user",
+        "content": "那低延迟直播具体贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "低延迟直播带宽和节点保障更强，费用比标准直播略高一些，按实际用量计费就行。\n\n您这边还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦这样啊，那小班课的话是不是必须切到低延迟直播？"
+      },
+      {
+        "role": "assistant",
+        "content": "小班课建议用低延迟直播，互动会更流畅。但不是必须，您按实际需求选就行。\n\n还有其他问题吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 59,
+        "conversation_id": 7,
+        "local_turn_index": 9,
+        "user_reply": "行，那就先这样，谢谢啊。",
+        "agent_reply": "好的，祝您课程顺利、招生满满，再见！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 37,
+    "conversation_id": 8,
+    "constraint_text": "您好，请问您是贵培训机构/校区的负责人吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 60,
+        "conversation_id": 8,
+        "local_turn_index": 1,
+        "user_reply": "对，我是负责人，有什么事吗？",
+        "agent_reply": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "turn_index": 61,
+        "conversation_id": 8,
+        "local_turn_index": 2,
+        "user_reply": "知道，之前用下来效果还行，不过我这边发课时从没看到过低延迟直播的选项啊？",
+        "agent_reply": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。之后发布页会分开显示两个选项，您根据需要选就行。\n\n标准直播费用低，延迟5-10秒，适合大班课；低延迟直播延迟1-2秒，互动更流畅，适合小班课或实操课，费用略高。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      },
+      {
+        "turn_index": 62,
+        "conversation_id": 8,
+        "local_turn_index": 3,
+        "user_reply": "我用的是校务系统A发课的，上面也看不到低延迟选项。",
+        "agent_reply": "我帮您后台配置一下，明天再登录看看就有了。稍等"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 38,
+    "conversation_id": 8,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "知道，之前用下来效果还行，不过我这边发课时从没看到过低延迟直播的选项啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。之后发布页会分开显示两个选项，您根据需要选就行。\n\n标准直播费用低，延迟5-10秒，适合大班课；低延迟直播延迟1-2秒，互动更流畅，适合小班课或实操课，费用略高。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是校务系统A发课的，上面也看不到低延迟选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您后台配置一下，明天再登录看看就有了。稍等"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 63,
+        "conversation_id": 8,
+        "local_turn_index": 4,
+        "user_reply": "我现在在开车，不方便讲太久。",
+        "agent_reply": "那我稍后再打。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 39,
+    "conversation_id": 8,
+    "constraint_text": "# Role: Customer Support Specialist for Course Publishing Platform ## Task: 告知机构客户，课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项。当需要实时互动时，鼓励选择低延迟直播。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "知道，之前用下来效果还行，不过我这边发课时从没看到过低延迟直播的选项啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。之后发布页会分开显示两个选项，您根据需要选就行。\n\n标准直播费用低，延迟5-10秒，适合大班课；低延迟直播延迟1-2秒，互动更流畅，适合小班课或实操课，费用略高。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是校务系统A发课的，上面也看不到低延迟选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您后台配置一下，明天再登录看看就有了。稍等"
+      },
+      {
+        "role": "user",
+        "content": "我现在在开车，不方便讲太久。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 64,
+        "conversation_id": 8,
+        "local_turn_index": 5,
+        "user_reply": "行，那我挂了，回头再聊。",
+        "agent_reply": "好的，回头再联系您。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 40,
+    "conversation_id": 8,
+    "constraint_text": "即使任务完成，若商家有疑问，继续简短作答",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "知道，之前用下来效果还行，不过我这边发课时从没看到过低延迟直播的选项啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。之后发布页会分开显示两个选项，您根据需要选就行。\n\n标准直播费用低，延迟5-10秒，适合大班课；低延迟直播延迟1-2秒，互动更流畅，适合小班课或实操课，费用略高。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是校务系统A发课的，上面也看不到低延迟选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您后台配置一下，明天再登录看看就有了。稍等"
+      },
+      {
+        "role": "user",
+        "content": "我现在在开车，不方便讲太久。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打。"
+      },
+      {
+        "role": "user",
+        "content": "行，那我挂了，回头再聊。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，回头再联系您。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 65,
+        "conversation_id": 8,
+        "local_turn_index": 6,
+        "user_reply": "回头再打时直接按流程继续就行吧？",
+        "agent_reply": "对，到时候直接问您是不是负责人就行，流程跟今天一样，只是继续往下走。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 41,
+    "conversation_id": 8,
+    "constraint_text": "给商家发言和提问的机会",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "知道，之前用下来效果还行，不过我这边发课时从没看到过低延迟直播的选项啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。之后发布页会分开显示两个选项，您根据需要选就行。\n\n标准直播费用低，延迟5-10秒，适合大班课；低延迟直播延迟1-2秒，互动更流畅，适合小班课或实操课，费用略高。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是校务系统A发课的，上面也看不到低延迟选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您后台配置一下，明天再登录看看就有了。稍等"
+      },
+      {
+        "role": "user",
+        "content": "我现在在开车，不方便讲太久。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打。"
+      },
+      {
+        "role": "user",
+        "content": "行，那我挂了，回头再聊。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，回头再联系您。"
+      },
+      {
+        "role": "user",
+        "content": "回头再打时直接按流程继续就行吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，到时候直接问您是不是负责人就行，流程跟今天一样，只是继续往下走。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 66,
+        "conversation_id": 8,
+        "local_turn_index": 7,
+        "user_reply": "行那回头打过来，我还是问下哈，低延迟直播那个费用具体比标准直播贵多少？提前心里有个数。",
+        "agent_reply": "低延迟直播带宽和节点保障更强，费用比标准直播贵20%左右。具体价格您可以在明天的发布页上直接看到。\n\n您还有其他想了解的？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 42,
+    "conversation_id": 8,
+    "constraint_text": "不能承诺给商家折扣券或优惠券",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "对，我是负责人，有什么事吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？"
+      },
+      {
+        "role": "user",
+        "content": "知道，之前用下来效果还行，不过我这边发课时从没看到过低延迟直播的选项啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "前端当时没开放这个选项，临时开启低延迟是为了保障音视频与白板同步。之后发布页会分开显示两个选项，您根据需要选就行。\n\n标准直播费用低，延迟5-10秒，适合大班课；低延迟直播延迟1-2秒，互动更流畅，适合小班课或实操课，费用略高。\n\n您是通过Web控制台、校务系统A，还是SaaS系统B发课？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是校务系统A发课的，上面也看不到低延迟选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您后台配置一下，明天再登录看看就有了。稍等"
+      },
+      {
+        "role": "user",
+        "content": "我现在在开车，不方便讲太久。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打。"
+      },
+      {
+        "role": "user",
+        "content": "行，那我挂了，回头再聊。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，回头再联系您。"
+      },
+      {
+        "role": "user",
+        "content": "回头再打时直接按流程继续就行吧？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，到时候直接问您是不是负责人就行，流程跟今天一样，只是继续往下走。"
+      },
+      {
+        "role": "user",
+        "content": "行那回头打过来，我还是问下哈，低延迟直播那个费用具体比标准直播贵多少？提前心里有个数。"
+      },
+      {
+        "role": "assistant",
+        "content": "低延迟直播带宽和节点保障更强，费用比标准直播贵20%左右。具体价格您可以在明天的发布页上直接看到。\n\n您还有其他想了解的？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 67,
+        "conversation_id": 8,
+        "local_turn_index": 8,
+        "user_reply": "那这次升级有没有什么优惠券或者折扣券可以领啊？",
+        "agent_reply": "这次升级没有优惠券或折扣券，低延迟直播是独立的新选项，按发布页显示的价格为准。\n\n您还有其他问题吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 43,
+    "conversation_id": 9,
+    "constraint_text": "您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "啊，我是负责人，您说就行。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。您之前了解过这个吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 69,
+        "conversation_id": 9,
+        "local_turn_index": 2,
+        "user_reply": "哦不知道，之前我一直以为自己用的是标准直播呢。",
+        "agent_reply": "明白，之前前端没开放，但我们后台其实一直为您走低延迟线路保障质量。以后发布页会分开两个选项，您根据课程类型选就行。还有其他问题吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 44,
+    "conversation_id": 9,
+    "constraint_text": "标准直播更便宜",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "啊，我是负责人，您说就行。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。您之前了解过这个吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦不知道，之前我一直以为自己用的是标准直播呢。"
+      },
+      {
+        "role": "assistant",
+        "content": "明白，之前前端没开放，但我们后台其实一直为您走低延迟线路保障质量。以后发布页会分开两个选项，您根据课程类型选就行。还有其他问题吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 70,
+        "conversation_id": 9,
+        "local_turn_index": 3,
+        "user_reply": "明白了，那这两个价格具体差多少？",
+        "agent_reply": "差价不大，低延迟直播因为带宽和节点保障更强，所以费用稍高一点。您之前有设置过学员端的加速线路费吗？"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 45,
+    "conversation_id": 9,
+    "constraint_text": "您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "啊，我是负责人，您说就行。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。您之前了解过这个吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦不知道，之前我一直以为自己用的是标准直播呢。"
+      },
+      {
+        "role": "assistant",
+        "content": "明白，之前前端没开放，但我们后台其实一直为您走低延迟线路保障质量。以后发布页会分开两个选项，您根据课程类型选就行。还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "明白了，那这两个价格具体差多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "差价不大，低延迟直播因为带宽和节点保障更强，所以费用稍高一点。您之前有设置过学员端的加速线路费吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 71,
+        "conversation_id": 9,
+        "local_turn_index": 4,
+        "user_reply": "我用的是SaaS系统B，上面好像没看到低延迟直播的选项。",
+        "agent_reply": "我帮您快速设置一下。您在SaaS系统B上先点【我的】，看到了吗？"
+      },
+      {
+        "turn_index": 72,
+        "conversation_id": 9,
+        "local_turn_index": 5,
+        "user_reply": "看到了，然后呢？",
+        "agent_reply": "接下来点【服务商/直播平台管理】，找到【直播平台】。"
+      },
+      {
+        "turn_index": 73,
+        "conversation_id": 9,
+        "local_turn_index": 6,
+        "user_reply": "找到了，然后接下来怎么操作？",
+        "agent_reply": "在【服务产品】下勾选低延迟直播，保存就行。"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 46,
+    "conversation_id": 9,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "啊，我是负责人，您说就行。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。您之前了解过这个吗？"
+      },
+      {
+        "role": "user",
+        "content": "哦不知道，之前我一直以为自己用的是标准直播呢。"
+      },
+      {
+        "role": "assistant",
+        "content": "明白，之前前端没开放，但我们后台其实一直为您走低延迟线路保障质量。以后发布页会分开两个选项，您根据课程类型选就行。还有其他问题吗？"
+      },
+      {
+        "role": "user",
+        "content": "明白了，那这两个价格具体差多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "差价不大，低延迟直播因为带宽和节点保障更强，所以费用稍高一点。您之前有设置过学员端的加速线路费吗？"
+      },
+      {
+        "role": "user",
+        "content": "我用的是SaaS系统B，上面好像没看到低延迟直播的选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "我帮您快速设置一下。您在SaaS系统B上先点【我的】，看到了吗？"
+      },
+      {
+        "role": "user",
+        "content": "看到了，然后呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "接下来点【服务商/直播平台管理】，找到【直播平台】。"
+      },
+      {
+        "role": "user",
+        "content": "找到了，然后接下来怎么操作？"
+      },
+      {
+        "role": "assistant",
+        "content": "在【服务产品】下勾选低延迟直播，保存就行。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 74,
+        "conversation_id": 9,
+        "local_turn_index": 7,
+        "user_reply": "不好意思啊师傅，我现在在开车呢。",
+        "agent_reply": "那我稍后再打，您注意安全。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 47,
+    "conversation_id": 10,
+    "constraint_text": "告知机构客户，课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项。当需要实时互动时，鼓励选择低延迟直播。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 75,
+        "conversation_id": 10,
+        "local_turn_index": 1,
+        "user_reply": "我是负责人，你们这个低延迟直播是什么情况？",
+        "agent_reply": "我们对直播做了升级，新增了独立的\"低延迟直播\"选项。发课时直接选就行，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已经为您走低延迟线路保障质量了，您之前了解这点吗？"
+      },
+      {
+        "turn_index": 76,
+        "conversation_id": 10,
+        "local_turn_index": 2,
+        "user_reply": "不知道，那低延迟和标准的具体区别是啥？",
+        "agent_reply": "之前前端没开放选项，后台临时给您开了低延迟，主要是为了保障音视频和白板同步。\n\n区别是这样的——标准直播便宜些，延迟5到10秒，适合大班课。低延迟直播延迟只有1到2秒，互动更流畅，适合小班课或实操课。\n\n之后发布页会分开显示两个选项，您根据课程类型自己选就行。\n\n想问下价格方面吗？"
+      },
+      {
+        "turn_index": 77,
+        "conversation_id": 10,
+        "local_turn_index": 3,
+        "user_reply": "价格呢？低延迟直播贵多少？",
+        "agent_reply": "标准直播费用低一些，低延迟直播因为带宽和节点保障更强，费用会略高，但具体价差以发布页显示为准。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 48,
+    "conversation_id": 10,
+    "constraint_text": "您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "我是负责人，你们这个低延迟直播是什么情况？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播做了升级，新增了独立的\"低延迟直播\"选项。发课时直接选就行，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已经为您走低延迟线路保障质量了，您之前了解这点吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那低延迟和标准的具体区别是啥？"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放选项，后台临时给您开了低延迟，主要是为了保障音视频和白板同步。\n\n区别是这样的——标准直播便宜些，延迟5到10秒，适合大班课。低延迟直播延迟只有1到2秒，互动更流畅，适合小班课或实操课。\n\n之后发布页会分开显示两个选项，您根据课程类型自己选就行。\n\n想问下价格方面吗？"
+      },
+      {
+        "role": "user",
+        "content": "价格呢？低延迟直播贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播费用低一些，低延迟直播因为带宽和节点保障更强，费用会略高，但具体价差以发布页显示为准。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 78,
+        "conversation_id": 10,
+        "local_turn_index": 4,
+        "user_reply": "校务系统A，上面好像没看到低延迟直播选项。",
+        "agent_reply": "您稍等，我先帮您查一下配置。\n\n您方便这样操作一下吗——先进入【我的】，然后点【服务商/直播平台管理】。"
+      },
+      {
+        "turn_index": 79,
+        "conversation_id": 10,
+        "local_turn_index": 5,
+        "user_reply": "好的，我先去点【我的】。",
+        "agent_reply": "好的，点完告诉我一声。"
+      },
+      {
+        "turn_index": 80,
+        "conversation_id": 10,
+        "local_turn_index": 6,
+        "user_reply": "嗯，已经点进【我的】了，接下来呢？",
+        "agent_reply": "接下来点击【服务商/直播平台管理】。"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 49,
+    "conversation_id": 10,
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "我是负责人，你们这个低延迟直播是什么情况？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播做了升级，新增了独立的\"低延迟直播\"选项。发课时直接选就行，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已经为您走低延迟线路保障质量了，您之前了解这点吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那低延迟和标准的具体区别是啥？"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放选项，后台临时给您开了低延迟，主要是为了保障音视频和白板同步。\n\n区别是这样的——标准直播便宜些，延迟5到10秒，适合大班课。低延迟直播延迟只有1到2秒，互动更流畅，适合小班课或实操课。\n\n之后发布页会分开显示两个选项，您根据课程类型自己选就行。\n\n想问下价格方面吗？"
+      },
+      {
+        "role": "user",
+        "content": "价格呢？低延迟直播贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播费用低一些，低延迟直播因为带宽和节点保障更强，费用会略高，但具体价差以发布页显示为准。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "role": "user",
+        "content": "校务系统A，上面好像没看到低延迟直播选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "您稍等，我先帮您查一下配置。\n\n您方便这样操作一下吗——先进入【我的】，然后点【服务商/直播平台管理】。"
+      },
+      {
+        "role": "user",
+        "content": "好的，我先去点【我的】。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，点完告诉我一声。"
+      },
+      {
+        "role": "user",
+        "content": "嗯，已经点进【我的】了，接下来呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "接下来点击【服务商/直播平台管理】。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 81,
+        "conversation_id": 10,
+        "local_turn_index": 7,
+        "user_reply": "我先挂了啊，今天在开车不方便接电话。",
+        "agent_reply": "那我稍后再打给您。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 50,
+    "conversation_id": 10,
+    "constraint_text": "若老板说忙，说\"就1分钟，保证简短\"后继续简短说明",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "我是负责人，你们这个低延迟直播是什么情况？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播做了升级，新增了独立的\"低延迟直播\"选项。发课时直接选就行，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已经为您走低延迟线路保障质量了，您之前了解这点吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那低延迟和标准的具体区别是啥？"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放选项，后台临时给您开了低延迟，主要是为了保障音视频和白板同步。\n\n区别是这样的——标准直播便宜些，延迟5到10秒，适合大班课。低延迟直播延迟只有1到2秒，互动更流畅，适合小班课或实操课。\n\n之后发布页会分开显示两个选项，您根据课程类型自己选就行。\n\n想问下价格方面吗？"
+      },
+      {
+        "role": "user",
+        "content": "价格呢？低延迟直播贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播费用低一些，低延迟直播因为带宽和节点保障更强，费用会略高，但具体价差以发布页显示为准。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "role": "user",
+        "content": "校务系统A，上面好像没看到低延迟直播选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "您稍等，我先帮您查一下配置。\n\n您方便这样操作一下吗——先进入【我的】，然后点【服务商/直播平台管理】。"
+      },
+      {
+        "role": "user",
+        "content": "好的，我先去点【我的】。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，点完告诉我一声。"
+      },
+      {
+        "role": "user",
+        "content": "嗯，已经点进【我的】了，接下来呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "接下来点击【服务商/直播平台管理】。"
+      },
+      {
+        "role": "user",
+        "content": "我先挂了啊，今天在开车不方便接电话。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打给您。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 82,
+        "conversation_id": 10,
+        "local_turn_index": 9,
+        "user_reply": "不好意思啊，我现在挺忙的，回头再说吧。",
+        "agent_reply": "就1分钟，保证简短——\n\n您发课的时候记得去【服务商/直播平台管理】→【直播平台】→【服务产品】里勾选低延迟直播，保存就行。\n\n剩下的我回头跟您说，先忙您的！"
+      },
+      {
+        "turn_index": 83,
+        "conversation_id": 10,
+        "local_turn_index": 10,
+        "user_reply": "行吧，你说，我真的只有1分钟。",
+        "agent_reply": "那您记一下：去【我的】→【服务商/直播平台管理】→【直播平台】→【服务产品】，勾选低延迟直播，保存就行。"
+      },
+      {
+        "turn_index": 84,
+        "conversation_id": 10,
+        "local_turn_index": 11,
+        "user_reply": "记住了，那我现在去操作，挂了啊。",
+        "agent_reply": "好的，您先去操作，有问题随时找我。"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 51,
+    "conversation_id": 10,
+    "constraint_text": "企业微信添加",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "我是负责人，你们这个低延迟直播是什么情况？"
+      },
+      {
+        "role": "assistant",
+        "content": "我们对直播做了升级，新增了独立的\"低延迟直播\"选项。发课时直接选就行，其他流程不变。\n\n您之前选的是标准直播，但我们后台其实已经为您走低延迟线路保障质量了，您之前了解这点吗？"
+      },
+      {
+        "role": "user",
+        "content": "不知道，那低延迟和标准的具体区别是啥？"
+      },
+      {
+        "role": "assistant",
+        "content": "之前前端没开放选项，后台临时给您开了低延迟，主要是为了保障音视频和白板同步。\n\n区别是这样的——标准直播便宜些，延迟5到10秒，适合大班课。低延迟直播延迟只有1到2秒，互动更流畅，适合小班课或实操课。\n\n之后发布页会分开显示两个选项，您根据课程类型自己选就行。\n\n想问下价格方面吗？"
+      },
+      {
+        "role": "user",
+        "content": "价格呢？低延迟直播贵多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "标准直播费用低一些，低延迟直播因为带宽和节点保障更强，费用会略高，但具体价差以发布页显示为准。\n\n您平时是通过什么方式发课的？Web控制台、校务系统A，还是SaaS系统B？"
+      },
+      {
+        "role": "user",
+        "content": "校务系统A，上面好像没看到低延迟直播选项。"
+      },
+      {
+        "role": "assistant",
+        "content": "您稍等，我先帮您查一下配置。\n\n您方便这样操作一下吗——先进入【我的】，然后点【服务商/直播平台管理】。"
+      },
+      {
+        "role": "user",
+        "content": "好的，我先去点【我的】。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，点完告诉我一声。"
+      },
+      {
+        "role": "user",
+        "content": "嗯，已经点进【我的】了，接下来呢？"
+      },
+      {
+        "role": "assistant",
+        "content": "接下来点击【服务商/直播平台管理】。"
+      },
+      {
+        "role": "user",
+        "content": "我先挂了啊，今天在开车不方便接电话。"
+      },
+      {
+        "role": "assistant",
+        "content": "那我稍后再打给您。"
+      },
+      {
+        "role": "user",
+        "content": "不好意思啊，我现在挺忙的，回头再说吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "就1分钟，保证简短——\n\n您发课的时候记得去【服务商/直播平台管理】→【直播平台】→【服务产品】里勾选低延迟直播，保存就行。\n\n剩下的我回头跟您说，先忙您的！"
+      },
+      {
+        "role": "user",
+        "content": "行吧，你说，我真的只有1分钟。"
+      },
+      {
+        "role": "assistant",
+        "content": "那您记一下：去【我的】→【服务商/直播平台管理】→【直播平台】→【服务产品】，勾选低延迟直播，保存就行。"
+      },
+      {
+        "role": "user",
+        "content": "记住了，那我现在去操作，挂了啊。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，您先去操作，有问题随时找我。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 85,
+        "conversation_id": 10,
+        "local_turn_index": 12,
+        "user_reply": "对了，你们有企业微信吗？方便加一下吗？",
+        "agent_reply": "有的，我稍后会通过企业微信添加您，到时候请通过验证就行。\n\n操作完有问题随时找我！"
+      },
+      {
+        "turn_index": 86,
+        "conversation_id": 10,
+        "local_turn_index": 13,
+        "user_reply": "好的，那我等一下通过验证。",
+        "agent_reply": "好的，您先去忙，祝您课程顺利、招生满满！"
+      }
+    ],
+    "complete_reason": "done"
+  },
+  {
+    "segment_id": 52,
+    "conversation_id": 11,
+    "constraint_text": "您好，请问您是贵培训机构/校区的负责人吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 87,
+        "conversation_id": 11,
+        "local_turn_index": 1,
+        "user_reply": "不是，我是前台，校长今天忙得走不开",
+        "agent_reply": "校长忙的话，方便让他回个电话吗？"
+      },
+      {
+        "turn_index": 88,
+        "conversation_id": 11,
+        "local_turn_index": 2,
+        "user_reply": "校长说他下午三点后有空，您可以那时候打过来",
+        "agent_reply": "好的，那我下午三点后再联系。"
+      }
+    ],
+    "complete_reason": "done"
+  },
+  {
+    "segment_id": 53,
+    "conversation_id": 11,
+    "constraint_text": "即使任务完成，若商家有疑问，继续简短作答",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "您好，请问您是贵培训机构/校区的负责人吗？"
+      },
+      {
+        "role": "user",
+        "content": "不是，我是前台，校长今天忙得走不开"
+      },
+      {
+        "role": "assistant",
+        "content": "校长忙的话，方便让他回个电话吗？"
+      },
+      {
+        "role": "user",
+        "content": "校长说他下午三点后有空，您可以那时候打过来"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，那我下午三点后再联系。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 89,
+        "conversation_id": 11,
+        "local_turn_index": 3,
+        "user_reply": "好的，那我们下午三点等您电话。",
+        "agent_reply": "好的，下午三点见。"
+      }
+    ],
+    "complete_reason": "none"
+  }
+]

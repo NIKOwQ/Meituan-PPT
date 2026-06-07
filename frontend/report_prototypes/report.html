@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>评测报告 — Dashboard + Heatmap</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f4f4f4;--surface:#fff;--ink:#1a1a1a;--muted:#888;--border:#e8e8e8;
+      --green:#52c41a;--green-bg:#f6ffed;--green-border:#b7eb8f;
+      --yellow:#faad14;--yellow-bg:#fffbe6;--yellow-border:#ffe58f;
+      --red:#ff4d4f;--red-bg:#fff2f0;--red-border:#ffccc7;
+      --blue:#1890ff;--blue-bg:#e6f7ff;
+      --accent:#6c5ce7;
+      --radius:8px;--shadow:0 1px 3px rgba(0,0,0,.06);
+      --font:Inter,"Microsoft YaHei",system-ui,-apple-system,sans-serif;
+      --mono:"Noto Sans SC","Microsoft YaHei",Georgia,serif;
+    }
+    html{font-size:14px;scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6}
+
+    /* ━━ Header ━━ */
+    .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 32px;position:sticky;top:0;z-index:20}
+    .header-row{display:flex;justify-content:space-between;align-items:center}
+    .header h1{font-size:1.2rem;font-weight:800;letter-spacing:-.02em}
+    .header p{color:var(--muted);font-size:.8rem;margin-top:1px}
+    .header-tags{display:flex;gap:6px;flex-wrap:wrap}
+    .htag{padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:600;border:1px solid var(--border);background:var(--surface)}
+    .htag--warn{background:var(--yellow-bg);color:#ad6800;border-color:var(--yellow-border)}
+    .htag--muted{color:var(--muted)}
+
+    /* ━━ Section headings ━━ */
+    .section-hd{display:flex;align-items:center;gap:8px;padding:24px 32px 12px}
+    .section-hd h2{font-size:1rem;font-weight:800}
+    .section-hd .eyebrow{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+
+    /* ━━ KPI Cards ━━ */
+    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 32px}
+    .kpi{background:var(--surface);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .kpi::after{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+    .kpi:nth-child(1)::after{background:var(--blue)}
+    .kpi:nth-child(2)::after{background:var(--green)}
+    .kpi:nth-child(3)::after{background:var(--yellow)}
+    .kpi:nth-child(4)::after{background:var(--accent)}
+    .kpi-lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+    .kpi-val{font-size:1.9rem;font-weight:900;letter-spacing:-.03em;margin:2px 0;line-height:1.1}
+    .kpi-sub{font-size:.78rem;color:var(--muted)}
+    .kpi-sub strong{color:var(--ink)}
+
+    /* ━━ Charts row ━━ */
+    .charts-row{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;padding:14px 32px}
+    .card{background:var(--surface);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .card h3{font-size:.92rem;font-weight:700;margin-bottom:14px}
+
+    /* Bar chart */
+    .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .bar-row:last-child{margin-bottom:0}
+    .bar-label{width:200px;flex-shrink:0;font-size:.78rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:default}
+    .bar-label[title]:hover::after{content:attr(title);position:absolute;bottom:100%;left:0;background:#333;color:#fff;padding:4px 8px;border-radius:4px;font-size:.68rem;white-space:normal;max-width:300px;z-index:5;pointer-events:none}
+    .bar-track{flex:1;height:20px;background:#f0f0f0;border-radius:4px;overflow:hidden}
+    .bar-fill{height:100%;border-radius:4px;transition:width .6s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:5px}
+    .bar-fill--green{background:linear-gradient(90deg,#95de64,#52c41a)}
+    .bar-fill--yellow{background:linear-gradient(90deg,#ffd666,#faad14)}
+    .bar-fill--red{background:linear-gradient(90deg,#ff7875,#ff4d4f)}
+    .bar-pct{font-size:.68rem;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.15)}
+    .bar-counts{width:70px;flex-shrink:0;font-size:.73rem;color:var(--muted);text-align:right}
+    .bar-counts .cp{color:var(--green);font-weight:600}
+    .bar-counts .cf{color:var(--red);font-weight:600}
+    .bar-rate{width:46px;text-align:right;font-weight:800;font-size:.78rem;flex-shrink:0}
+
+    /* Donut */
+    .donut-area{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .donut-wrap{position:relative;width:140px;height:140px}
+    .donut-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
+    .donut-wrap circle{fill:none;stroke-width:12;stroke-linecap:round}
+    .donut-bg{stroke:#f0f0f0}
+    .donut-fill{stroke:var(--blue);transition:stroke-dashoffset .8s ease}
+    .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .donut-center .dv{font-size:1.6rem;font-weight:900}
+    .donut-center .dl{font-size:.68rem;color:var(--muted)}
+    .donut-stats{width:100%}
+    .donut-stat{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:.82rem}
+    .donut-stat:last-child{border-bottom:none}
+    .donut-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+    .donut-stat .warn{color:var(--red);font-weight:700}
+    .donut-sub{font-size:.78rem;color:var(--red);padding:4px 0;font-weight:500}
+
+    /* ━━ Heatmap section ━━ */
+    .hm-wrap{display:grid;grid-template-columns:1fr 340px;gap:0;padding:0 32px 24px}
+    .hm-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+
+    /* Instruction pane */
+    .inst-pane{padding:20px 24px;overflow-y:auto;max-height:520px}
+    .inst-pane h3{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+    .inst-text{font-family:var(--mono);font-size:.88rem;line-height:2;white-space:pre-wrap;word-break:break-all}
+    .inst-text .sh{font-weight:800;font-size:.95rem;color:var(--ink);display:block;margin-top:18px;margin-bottom:2px}
+    .inst-text .sh:first-child{margin-top:0}
+    .hl{position:relative;cursor:pointer;border-radius:3px;padding:1px 2px;transition:all .15s;border-bottom:2px solid transparent}
+    .hl:hover{filter:brightness(.92);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+    .hl--green{background:rgba(82,196,26,.15);border-bottom-color:var(--green)}
+    .hl--yellow{background:rgba(250,173,20,.15);border-bottom-color:var(--yellow)}
+    .hl--red{background:rgba(255,77,79,.15);border-bottom-color:var(--red)}
+    .hl--active{outline:2px solid var(--accent);outline-offset:1px}
+    .hl-tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:6px 10px;border-radius:5px;font-size:.72rem;font-family:var(--font);white-space:nowrap;z-index:20;pointer-events:none;line-height:1.5}
+    .hl-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:#333}
+    .hl:hover .hl-tip{display:block}
+
+    /* Legend */
+    .hm-legend{padding:10px 24px;border-bottom:1px solid var(--border);font-size:.72rem;display:flex;gap:14px;align-items:center;background:#fafafa}
+    .hm-legend .li{display:flex;align-items:center;gap:3px}
+    .hm-legend .ld{width:9px;height:9px;border-radius:2px}
+
+    /* Detail panel */
+    .detail-pane{border-left:1px solid var(--border);padding:20px;overflow-y:auto;max-height:520px;background:var(--surface)}
+    .detail-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:380px;color:var(--muted);text-align:center;gap:6px}
+    .detail-empty .de-icon{font-size:1.8rem}
+    .detail-empty p{font-size:.82rem}
+    .dc{animation:slideIn .2s ease}
+    @keyframes slideIn{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:none}}
+    .dc-title{font-size:.95rem;font-weight:700;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+    .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px}
+    .dc-box{background:#f7f7f7;border-radius:5px;padding:8px;text-align:center}
+    .dc-box .bv{font-size:1.1rem;font-weight:800;display:block}
+    .dc-box .bl{font-size:.68rem;color:var(--muted)}
+    .dc-segs h4{font-size:.8rem;font-weight:700;margin-bottom:10px;color:var(--muted)}
+    .dc-seg{border:1px solid var(--border);border-radius:5px;padding:10px;margin-bottom:8px;transition:border-color .15s}
+    .dc-seg:hover{border-color:var(--accent)}
+    .dc-seg-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .dc-seg-id{font-size:.72rem;color:var(--muted);font-weight:600}
+    .dc-seg-r{padding:1px 7px;border-radius:999px;font-size:.68rem;font-weight:700}
+    .dc-seg-r--pass{background:var(--green-bg);color:var(--green)}
+    .dc-seg-r--fail{background:var(--red-bg);color:var(--red)}
+    .dc-seg-r--invalid{background:#f5f5f5;color:var(--muted)}
+    .dc-ev{font-size:.78rem;line-height:1.5;padding:6px 8px;background:#fafafa;border-radius:3px;border-left:3px solid var(--accent);margin-bottom:6px}
+    .dc-turn{font-size:.78rem;display:flex;gap:5px;margin-bottom:3px}
+    .dc-turn .r{font-weight:600;min-width:30px}
+    .dc-turn .ru{color:var(--blue)}
+    .dc-turn .ra{color:var(--green)}
+
+    /* ━━ Table section ━━ */
+    .tbl-wrap{padding:0 32px 32px}
+    .tbl-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .tbl-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    .tbl-head h3{font-size:.92rem;font-weight:700}
+    .tbl-filter{display:flex;gap:5px}
+    .fbtn{padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:600;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .12s}
+    .fbtn:hover,.fbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+    table{width:100%;border-collapse:collapse}
+    thead th{padding:9px 14px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);text-align:left;border-bottom:2px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap}
+    thead th:hover{color:var(--ink)}
+    tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+    tbody tr:hover{background:#fafafa}
+    tbody td{padding:9px 14px;font-size:.82rem;vertical-align:middle}
+    .tc{max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+    .tr-rate{font-weight:800;position:relative}
+    .rate-bar{position:absolute;left:0;bottom:0;height:3px;border-radius:2px 2px 0 0}
+    .ts{display:inline-flex;align-items:center;gap:3px;font-size:.72rem;font-weight:600;padding:2px 7px;border-radius:999px}
+    .ts--ok{background:var(--green-bg);color:var(--green)}
+    .ts--low{background:var(--red-bg);color:var(--red)}
+    .te{background:none;border:none;cursor:pointer;color:var(--blue);font-size:.78rem;font-weight:600;padding:2px 6px;border-radius:3px}
+    .te:hover{background:var(--blue-bg)}
+    .erow{display:none}
+    .erow.open{display:table-row}
+    .erow td{padding:0;background:#fafafa}
+    .econtent{padding:14px 20px;border-top:1px dashed var(--border)}
+    .econtent h4{font-size:.82rem;font-weight:700;margin-bottom:10px;color:var(--muted)}
+    .seg-list{display:flex;flex-direction:column;gap:10px}
+    .seg-item{background:var(--surface);border-radius:5px;padding:10px 14px;border:1px solid var(--border)}
+    .seg-head2{display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:.78rem;font-weight:600}
+    .seg-r2{padding:1px 6px;border-radius:999px;font-size:.68rem;font-weight:700}
+    .seg-r2--pass{background:var(--green-bg);color:var(--green)}
+    .seg-r2--fail{background:var(--red-bg);color:var(--red)}
+    .seg-ev2{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:6px;padding-left:10px;border-left:3px solid var(--border)}
+    .seg-turn2{font-size:.78rem;margin-bottom:3px}
+    .seg-turn2 .sr{font-weight:600;min-width:34px;display:inline-block}
+    .seg-turn2 .su{color:var(--blue)}
+    .seg-turn2 .sa{color:var(--green)}
+    .tbl-foot{padding:10px 14px;background:#fafafa;border-top:1px solid var(--border);font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between}
+
+    /* ━━ Responsive ━━ */
+    @media(max-width:980px){
+      .header,.kpi-row,.charts-row,.hm-wrap,.tbl-wrap,.section-hd{padding-left:16px;padding-right:16px}
+      .kpi-row{grid-template-columns:repeat(2,1fr)}
+      .charts-row{grid-template-columns:1fr}
+      .hm-wrap{grid-template-columns:1fr}
+      .detail-pane{max-height:none;border-left:none;border-top:1px solid var(--border)}
+      .inst-pane{max-height:none}
+      .bar-label{width:120px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ━━ HEADER ━━ -->
+<div class="header">
+  <div class="header-row">
+    <div>
+      <h1>AI 指令评测报告</h1>
+      <p>飞毛腿骑手外呼指令 · V4 主动约束测试 · 覆盖热力 + 数据面板</p>
+    </div>
+    <div class="header-tags" id="headerTags"></div>
+  </div>
+</div>
+
+<!-- ━━ KPI ROW ━━ -->
+<div class="section-hd"><span class="eyebrow">Overview</span><h2>总览</h2></div>
+<div class="kpi-row" id="kpiRow"></div>
+
+<!-- ━━ CHARTS ROW ━━ -->
+<div class="charts-row">
+  <div class="card">
+    <h3>各约束通过率</h3>
+    <div id="barChart"></div>
+  </div>
+  <div class="card">
+    <h3>覆盖率概览</h3>
+    <div class="donut-area">
+      <div class="donut-wrap">
+        <svg viewBox="0 0 140 140">
+          <circle class="donut-bg" cx="70" cy="70" r="58"/>
+          <circle class="donut-fill" id="donutFill" cx="70" cy="70" r="58" stroke-dasharray="364.42" stroke-dashoffset="364.42"/>
+        </svg>
+        <div class="donut-center"><span class="dv" id="donutVal">--</span><span class="dl">覆盖率</span></div>
+      </div>
+      <div class="donut-stats" id="donutStats"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━ HEATMAP SECTION ━━ -->
+<div class="section-hd"><span class="eyebrow">Coverage Heatmap</span><h2>约束覆盖热力图</h2></div>
+<div class="hm-wrap">
+  <div class="hm-card">
+    <div class="hm-legend">
+      <span style="font-weight:600">图例：</span>
+      <span class="li"><span class="ld" style="background:var(--green)"></span>≥80% 通过</span>
+      <span class="li"><span class="ld" style="background:var(--yellow)"></span>50-80%</span>
+      <span class="li"><span class="ld" style="background:var(--red)"></span>&lt;50%</span>
+    </div>
+    <div class="inst-pane" id="instPane">
+      <h3>Instruction Text</h3>
+      <div class="inst-text" id="instText"></div>
+    </div>
+  </div>
+  <div class="hm-card" style="border-top-left-radius:0;border-bottom-left-radius:0">
+    <div class="detail-pane" id="detailPane">
+      <div class="detail-empty">
+        <div class="de-icon">👈</div>
+        <p>点击左侧指令中的高亮文本<br>查看约束测试详情</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ━━ TABLE SECTION ━━ -->
+<div class="section-hd"><span class="eyebrow">Evaluation Detail</span><h2>评估详情</h2></div>
+<div class="tbl-wrap">
+  <div class="tbl-card">
+    <div class="tbl-head">
+      <h3>全部约束评估结果</h3>
+      <div class="tbl-filter">
+        <button class="fbtn on" data-f="all">全部</button>
+        <button class="fbtn" data-f="risk">⚠ 风险</button>
+        <button class="fbtn" data-f="ok">✓ 达标</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr>
+          <th>约束</th><th>测试</th><th>通过</th><th>失败</th><th>无效</th><th>通过率</th><th>状态</th><th>详情</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="tbl-foot" id="tfoot"></div>
+  </div>
+</div>
+
+<script src="mock_data.js"></script>
+<script>
+(function(){
+  const R = MOCK_REPORT;
+  const fmt = p => (p*100).toFixed(1)+'%';
+  const fmtTime = s => { const m=Math.round(s/60); return m>=60?(m/60).toFixed(1)+'h':m+'min'; };
+  const short = (t,n=30) => t.length>n?t.slice(0,n)+'…':t;
+  const rc = r => r>=.8?'green':r>=.5?'yellow':'red';
+  const esc = t => t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const S = R.overall_score;
+  const summaries = S.constraint_eval_summaries;
+
+  /* ── Header tags ── */
+  document.getElementById('headerTags').innerHTML =
+    '<span class="htag htag--warn">⏹ 覆盖停滞退出</span>'+
+    '<span class="htag htag--muted">目标覆盖 '+fmt(R.target_coverage)+'</span>'+
+    '<span class="htag htag--muted">最大 '+R.max_turns+' 轮/组</span>'+
+    '<span class="htag htag--muted">'+R.parallel_conversations+' 并行</span>';
+
+  /* ── KPI ── */
+  const passCount = Math.round(S.overall_pass_rate * S.total_evaluations);
+  document.getElementById('kpiRow').innerHTML =
+    '<div class="kpi"><div class="kpi-lbl">覆盖率</div><div class="kpi-val">'+fmt(R.coverage)+'</div><div class="kpi-sub">目标 <strong>'+fmt(R.target_coverage)+'</strong></div></div>'+
+    '<div class="kpi"><div class="kpi-lbl">总通过率</div><div class="kpi-val" style="color:var(--'+rc(S.overall_pass_rate)+')">'+fmt(S.overall_pass_rate)+'</div><div class="kpi-sub"><strong>'+passCount+'</strong> / '+S.total_evaluations+' 通过</div></div>'+
+    '<div class="kpi"><div class="kpi-lbl">约束 / 片段</div><div class="kpi-val">'+S.total_constraints_tested+' / '+S.total_segments+'</div><div class="kpi-sub">'+S.total_evaluations+' 条评估</div></div>'+
+    '<div class="kpi"><div class="kpi-lbl">运行耗时</div><div class="kpi-val">'+fmtTime(R.elapsed_seconds)+'</div><div class="kpi-sub"><strong>'+R.conversation_groups.length+'</strong> 个对话组</div></div>';
+
+  /* ── Bar chart ── */
+  const barDiv = document.getElementById('barChart');
+  summaries.forEach(s => {
+    const c = rc(s.pass_rate);
+    barDiv.insertAdjacentHTML('beforeend',
+      '<div class="bar-row">'+
+        '<span class="bar-label" title="'+esc(s.constraint_text)+'">'+esc(short(s.constraint_text,24))+'</span>'+
+        '<div class="bar-track"><div class="bar-fill bar-fill--'+c+'" style="width:'+Math.max(s.pass_rate*100,4)+'%"></div></div>'+
+        '<span class="bar-counts"><span class="cp">'+s.pass_count+'</span>/<span class="cf">'+s.fail_count+'</span></span>'+
+        '<span class="bar-rate" style="color:var(--'+c+')">'+fmt(s.pass_rate)+'</span>'+
+      '</div>');
+  });
+
+  /* ── Donut ── */
+  const circ = 2 * Math.PI * 58;
+  setTimeout(() => { document.getElementById('donutFill').style.strokeDashoffset = circ * (1 - R.coverage); }, 80);
+  document.getElementById('donutVal').textContent = fmt(R.coverage);
+  const tested = R.constraint_stats.filter(s=>s.sufficiently_tested).length;
+  const untested = R.constraint_stats.length - tested;
+  document.getElementById('donutStats').innerHTML =
+    '<div class="donut-stat"><span><span class="donut-dot" style="background:var(--green)"></span>充分测试</span><strong>'+tested+'</strong></div>'+
+    '<div class="donut-stat"><span><span class="donut-dot" style="background:var(--red)"></span>未充分测试</span><strong class="warn">'+untested+'</strong></div>'+
+    (untested ? R.constraint_stats.filter(s=>!s.sufficiently_tested).map(s =>
+      '<div class="donut-sub">⚠ '+short(s.constraint_text,36)+'</div>'
+    ).join('') : '');
+
+  /* ── Heatmap ── */
+  const instText = R.cleaned_instruction;
+  const highlights = [];
+  summaries.forEach(s => {
+    const pat = s.constraint_text.replace(/\*\*/g,'').replace(/["""]/g,'"');
+    let idx = instText.indexOf(pat);
+    if (idx === -1) { idx = instText.indexOf(pat.slice(0,20)); }
+    if (idx !== -1) {
+      highlights.push({ start:idx, end:Math.min(idx+pat.length,instText.length), text:s.constraint_text, summary:s, color:rc(s.pass_rate) });
+    }
+  });
+  highlights.sort((a,b) => a.start - b.start);
+
+  let html = ''; let last = 0;
+  highlights.forEach((h,i) => {
+    if (h.start < last) return;
+    html += esc(instText.slice(last, h.start));
+    html += '<span class="hl hl--'+h.color+'" data-hi="'+i+'" onclick="openDetail('+i+')">';
+    html += esc(instText.slice(h.start, h.end));
+    html += '<span class="hl-tip">'+esc(short(h.text,35))+'<br>通过率: '+fmt(h.summary.pass_rate)+' ('+h.summary.total_segments+'次)</span>';
+    html += '</span>';
+    last = h.end;
+  });
+  html += esc(instText.slice(last));
+  html = html.replace(/(#\s+\w[\w\s]*)/g,'<span class="sh">$1</span>');
+  document.getElementById('instText').innerHTML = html;
+
+  /* ── Detail panel ── */
+  const dp = document.getElementById('detailPane');
+  let activeHl = null;
+
+  window.openDetail = function(idx) {
+    const h = highlights[idx]; if(!h) return;
+    const s = h.summary;
+    const evals = R.evaluations.filter(e => e.constraint_text === h.text);
+    // highlight active
+    if(activeHl) activeHl.classList.remove('hl--active');
+    const el = document.querySelector('[data-hi="'+idx+'"]');
+    if(el){ el.classList.add('hl--active'); activeHl = el; }
+
+    let dhtml = '<div class="dc">';
+    dhtml += '<div class="dc-title">'+h.text+'</div>';
+    dhtml += '<div class="dc-grid">';
+    dhtml += '<div class="dc-box"><span class="bv">'+s.total_segments+'</span><span class="bl">测试次数</span></div>';
+    dhtml += '<div class="dc-box" style="color:var(--'+rc(s.pass_rate)+')"><span class="bv">'+fmt(s.pass_rate)+'</span><span class="bl">通过率</span></div>';
+    dhtml += '<div class="dc-box"><span class="bv" style="color:var(--green)">'+s.pass_count+'</span><span class="bl">通过</span></div>';
+    dhtml += '<div class="dc-box"><span class="bv" style="color:var(--red)">'+s.fail_count+'</span><span class="bl">失败</span></div>';
+    dhtml += '</div>';
+    dhtml += '<div class="dc-segs"><h4>测试证据 ('+evals.length+' 条)</h4>';
+    evals.forEach(e => {
+      dhtml += '<div class="dc-seg">';
+      dhtml += '<div class="dc-seg-hd"><span class="dc-seg-id">Segment #'+e.segment_id+'</span>';
+      dhtml += '<span class="dc-seg-r dc-seg-r--'+e.result+'">'+(e.result==='pass'?'✓ 通过':'✗ 失败')+'</span></div>';
+      dhtml += '<div class="dc-ev">'+e.evidence+'</div>';
+      e.segment_turns.forEach(t => {
+        dhtml += '<div class="dc-turn"><span class="r ru">用户:</span>'+t.user_reply+'</div>';
+        dhtml += '<div class="dc-turn"><span class="r ra">Agent:</span>'+t.agent_reply+'</div>';
+      });
+      dhtml += '</div>';
+    });
+    dhtml += '</div></div>';
+    dp.innerHTML = dhtml;
+    dp.scrollTop = 0;
+  };
+
+  /* ── Table ── */
+  const tbody = document.getElementById('tbody');
+  let curFilter = 'all';
+
+  function renderTbl(f) {
+    tbody.innerHTML = '';
+    let list = summaries;
+    if(f==='risk') list = summaries.filter(s=>s.pass_rate<.8);
+    if(f==='ok') list = summaries.filter(s=>s.pass_rate>=.8);
+
+    list.forEach((s,i) => {
+      const c = rc(s.pass_rate);
+      const stat = R.constraint_stats.find(st=>st.constraint_text===s.constraint_text);
+      const suf = stat ? stat.sufficiently_tested : true;
+      const evals = R.evaluations.filter(e=>e.constraint_text===s.constraint_text);
+      const realIdx = summaries.indexOf(s);
+
+      const tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td class="tc" title="'+esc(s.constraint_text)+'">'+esc(s.constraint_text)+'</td>'+
+        '<td>'+s.total_segments+'</td>'+
+        '<td style="color:var(--green);font-weight:600">'+s.pass_count+'</td>'+
+        '<td style="color:var(--red);font-weight:600">'+s.fail_count+'</td>'+
+        '<td style="color:var(--muted)">'+s.invalid_count+'</td>'+
+        '<td class="tr-rate">'+fmt(s.pass_rate)+'<div class="rate-bar" style="width:'+s.pass_rate*100+'%;background:var(--'+c+')"></div></td>'+
+        '<td><span class="ts '+(s.pass_rate>=.8?'ts--ok':'ts--low')+'">'+(s.pass_rate>=.8?'✓ 达标':'⚠ 需关注')+'</span></td>'+
+        '<td><button class="te" data-ti="'+realIdx+'">展开 ▾</button></td>';
+      tbody.appendChild(tr);
+
+      const er = document.createElement('tr');
+      er.className = 'erow';
+      er.id = 'erow-'+realIdx;
+      let segH = evals.map(e =>
+        '<div class="seg-item"><div class="seg-head2"><span class="seg-r2 seg-r2--'+e.result+'">'+(e.result==='pass'?'通过':'失败')+'</span> Segment #'+e.segment_id+'</div>'+
+        '<div class="seg-ev2">'+esc(e.evidence)+'</div>'+
+        '<div>'+e.segment_turns.map(t=>
+          '<div class="seg-turn2"><span class="sr su">用户:</span>'+esc(t.user_reply)+'</div>'+
+          '<div class="seg-turn2"><span class="sr sa">Agent:</span>'+esc(t.agent_reply)+'</div>'
+        ).join('')+'</div></div>'
+      ).join('');
+      if(!evals.length) segH = '<p style="font-size:.78rem;color:var(--muted)">暂无评估证据</p>';
+      er.innerHTML = '<td colspan="8"><div class="econtent"><h4>测试证据（'+evals.length+' 条）</h4><div class="seg-list">'+segH+'</div></div></td>';
+      tbody.appendChild(er);
+    });
+
+    tbody.querySelectorAll('.te').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = document.getElementById('erow-'+btn.dataset.ti);
+        const open = row.classList.contains('open');
+        row.classList.toggle('open');
+        btn.textContent = open ? '展开 ▾' : '收起 ▴';
+      });
+    });
+  }
+  renderTbl('all');
+
+  document.querySelectorAll('.fbtn').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      renderTbl(b.dataset.f);
+    });
+  });
+
+  const tp = summaries.reduce((a,s)=>a+s.pass_count,0);
+  const tf = summaries.reduce((a,s)=>a+s.fail_count,0);
+  const ti = summaries.reduce((a,s)=>a+s.invalid_count,0);
+  document.getElementById('tfoot').innerHTML =
+    '<span>共 '+summaries.length+' 条约束</span><span>总计 '+tp+' 通过 / '+tf+' 失败 / '+ti+' 无效</span>';
+})();
+</script>
+</body>
+</html>

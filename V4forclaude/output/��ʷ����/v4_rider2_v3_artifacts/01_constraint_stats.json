@@ -1,0 +1,44 @@
+[
+  {
+    "constraint_text": "保持语气随意，像打电话一样自然。",
+    "count": 3,
+    "covered_chars": 16,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+    "count": 3,
+    "covered_chars": 23,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+    "count": 3,
+    "covered_chars": 43,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "每次回复控制在**约 30 个字以内**",
+    "count": 1,
+    "covered_chars": 20,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "count": 2,
+    "covered_chars": 21,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "遵循对话流程和常见问题解答。",
+    "count": 2,
+    "covered_chars": 14,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+    "count": 2,
+    "covered_chars": 22,
+    "sufficiently_tested": true
+  }
+]

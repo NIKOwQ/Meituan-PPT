@@ -1,0 +1,44 @@
+[
+  {
+    "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+    "count": 4,
+    "covered_chars": 23,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+    "count": 4,
+    "covered_chars": 43,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "如需退出飞毛腿，必须在前一天 **Z 点之前**在 App 的\"飞毛腿报名\"中取消；次日生效。",
+    "count": 1,
+    "covered_chars": 47,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "每次回复控制在**约 30 个字以内**",
+    "count": 1,
+    "covered_chars": 20,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "count": 3,
+    "covered_chars": 21,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "连续完成 **W 天**多日合同，且每天完成 **Y 单**，将获得额外奖励（例如，与单日合同相比每单多 +$ 元）。",
+    "count": 1,
+    "covered_chars": 59,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+    "count": 1,
+    "covered_chars": 22,
+    "sufficiently_tested": true
+  }
+]

@@ -1,0 +1,14 @@
+[
+  "conversation 1: 执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "conversation 0: 执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "conversation 2: 执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "conversation 3: 执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "conversation 5: 执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "conversation 4: 执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}",
+  "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}"
+]

@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>扁平几何风 · 美团员工形象</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --meituan-yellow: #FFD333;
+      --meituan-yellow-dark: #E8B800;
+      --uniform-dark: #2f2c25;
+      --uniform-dark-light: #3d3930;
+      --face-peach: #f4be72;
+      --face-peach-dark: #e0a85a;
+      --badge-cream: #fff8d5;
+      --bg: #FAF8F2;
+      --card-bg: #FFFFFF;
+      --ink: #171713;
+      --muted: #8A877D;
+      --border: #E8E4D8;
+      --shadow: rgba(42, 34, 10, 0.08);
+      --alert-red: #D95A4F;
+      --success-green: #4CAF6E;
+      --calling-blue: #5B9BD5;
+    }
+
+    body {
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+
+    header {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 48px;
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    header h1 span { color: var(--meituan-yellow-dark); }
+    header p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ====== Grid Layout ====== */
+    .state-grid {
+      max-width: 860px;
+      margin: 0 auto 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .state-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+    .state-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .state-card .state-label-en {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    /* ====== Flat Worker Figure ====== */
+    .flat-worker {
+      position: relative;
+      width: 100px;
+      height: 130px;
+      margin-bottom: 12px;
+    }
+
+    /* --- Helmet --- */
+    .flat-helmet {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 24px;
+      background: var(--meituan-yellow);
+      border-radius: 14px 14px 6px 6px;
+      z-index: 3;
+    }
+    /* Kangaroo ear bumps */
+    .flat-ear {
+      position: absolute;
+      top: -10px;
+      width: 16px;
+      height: 16px;
+      background: var(--meituan-yellow);
+      border-radius: 50% 50% 4px 4px;
+    }
+    .flat-ear-l {
+      left: 4px;
+      transform: rotate(-12deg);
+    }
+    .flat-ear-r {
+      right: 4px;
+      transform: rotate(12deg);
+    }
+    .flat-visor {
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 8px;
+      background: var(--meituan-yellow-dark);
+      border-radius: 0 0 6px 6px;
+    }
+
+    /* --- Face --- */
+    .flat-face {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 28px;
+      background: var(--face-peach);
+      border-radius: 50%;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding-top: 6px;
+    }
+    .flat-eye {
+      display: block;
+      width: 5px;
+      height: 6px;
+      background: var(--ink);
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+    .flat-mouth {
+      display: block;
+      width: 10px;
+      height: 4px;
+      border-bottom: 2.5px solid var(--face-peach-dark);
+      border-radius: 0 0 50% 50%;
+      margin-top: 2px;
+    }
+
+    /* --- Torso --- */
+    .flat-torso {
+      position: absolute;
+      top: 46px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px;
+      height: 38px;
+      background: var(--uniform-dark);
+      border-radius: 8px 8px 6px 6px;
+      z-index: 1;
+    }
+    .flat-collar {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 6px;
+      background: var(--uniform-dark-light);
+      border-radius: 0 0 4px 4px;
+    }
+    .flat-nametag {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 10px;
+      background: var(--badge-cream);
+      border-radius: 2px;
+    }
+
+    /* --- Arms --- */
+    .flat-arm {
+      position: absolute;
+      top: 50px;
+      width: 12px;
+      height: 30px;
+      background: var(--uniform-dark);
+      border-radius: 6px;
+      z-index: 0;
+    }
+    .flat-arm-l {
+      left: 10px;
+      transform: rotate(8deg);
+    }
+    .flat-arm-r {
+      right: 10px;
+      transform: rotate(-8deg);
+    }
+
+    /* Phone in right hand */
+    .flat-phone {
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 14px;
+      background: #555;
+      border-radius: 2px;
+    }
+    .flat-phone::before {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 6px;
+      height: 9px;
+      background: #8ec8e8;
+      border-radius: 1px;
+    }
+
+    /* --- Legs --- */
+    .flat-legs {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 0;
+    }
+    .flat-leg {
+      width: 14px;
+      height: 18px;
+      background: var(--uniform-dark);
+      border-radius: 4px 4px 6px 6px;
+    }
+
+    /* ====== State: Idle ====== */
+    [data-state="idle"] .flat-worker {
+      animation: flat-idle-float 3s ease-in-out infinite;
+    }
+
+    @keyframes flat-idle-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* ====== State: Calling ====== */
+    [data-state="calling"] .flat-worker {
+      animation: flat-calling-pulse 2s ease-in-out infinite;
+    }
+
+    /* Headset arc */
+    [data-state="calling"] .flat-face::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 14px;
+      border: 3px solid var(--calling-blue);
+      border-bottom: none;
+      border-radius: 50% 50% 0 0;
+      animation: flat-headset-pulse 1.5s ease-in-out infinite;
+    }
+    /* Headset mic dot */
+    [data-state="calling"] .flat-face::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: -4px;
+      width: 6px;
+      height: 6px;
+      background: var(--calling-blue);
+      border-radius: 50%;
+    }
+    /* Move phone to ear */
+    [data-state="calling"] .flat-arm-r {
+      transform: rotate(-45deg);
+      top: 42px;
+      right: 6px;
+    }
+    [data-state="calling"] .flat-arm-l {
+      transform: rotate(15deg);
+    }
+
+    @keyframes flat-calling-pulse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-1px); }
+    }
+    @keyframes flat-headset-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Speech bubble */
+    .speech-bubble {
+      position: absolute;
+      top: 2px;
+      right: -30px;
+      width: 28px;
+      height: 20px;
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      z-index: 10;
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 6px;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid #fff;
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 5px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 7px solid var(--border);
+      z-index: -1;
+    }
+    .speech-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: flat-dot-bounce 1.2s ease-in-out infinite;
+    }
+    .speech-dot:nth-child(2) { animation-delay: 0.2s; }
+    .speech-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes flat-dot-bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    /* ====== State: Alert ====== */
+    [data-state="alert"] .flat-worker {
+      animation: flat-alert-shake 0.4s ease-in-out infinite;
+    }
+    [data-state="alert"] .state-card,
+    [data-state="alert"] {
+      animation: flat-alert-glow 1.5s ease-in-out infinite;
+    }
+    [data-state="alert"] .flat-worker {
+      filter: drop-shadow(0 0 6px rgba(217, 90, 79, 0.2));
+    }
+
+    /* Concerned eyes */
+    [data-state="alert"] .flat-eye {
+      width: 6px;
+      height: 3px;
+      border-radius: 50%;
+    }
+
+    /* Open mouth - concerned */
+    [data-state="alert"] .flat-mouth {
+      width: 6px;
+      height: 6px;
+      border: none;
+      background: var(--face-peach-dark);
+      border-radius: 50%;
+    }
+
+    /* Exclamation mark */
+    .exclamation {
+      position: absolute;
+      top: -4px;
+      left: -16px;
+      width: 16px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .exclamation-bar {
+      width: 4px;
+      height: 10px;
+      background: var(--alert-red);
+      border-radius: 2px;
+    }
+    .exclamation-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--alert-red);
+      border-radius: 50%;
+      margin-top: 2px;
+    }
+
+    @keyframes flat-alert-shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-2px); }
+      75% { transform: translateX(2px); }
+    }
+    @keyframes flat-alert-glow {
+      0%, 100% { box-shadow: 0 2px 8px var(--shadow); }
+      50% { box-shadow: 0 0 12px rgba(217, 90, 79, 0.3), 0 2px 8px var(--shadow); }
+    }
+
+    /* ====== State: Success ====== */
+    [data-state="success"] .flat-worker {
+      animation: flat-success-bounce 0.6s ease-out;
+    }
+
+    /* Bigger smile */
+    [data-state="success"] .flat-mouth {
+      width: 14px;
+      height: 6px;
+      border-bottom-width: 3px;
+    }
+
+    /* Arm up */
+    [data-state="success"] .flat-arm-l {
+      transform: rotate(-40deg);
+      top: 40px;
+      left: 8px;
+    }
+    [data-state="success"] .flat-arm-r {
+      transform: rotate(8deg);
+    }
+
+    /* Green checkmark overlay */
+    .checkmark-overlay {
+      position: absolute;
+      top: -6px;
+      right: -14px;
+      width: 24px;
+      height: 24px;
+      background: var(--success-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      animation: flat-checkmark-in 0.5s ease-out 0.2s both;
+    }
+    .checkmark-overlay::after {
+      content: '';
+      width: 8px;
+      height: 5px;
+      border-left: 2.5px solid #fff;
+      border-bottom: 2.5px solid #fff;
+      transform: rotate(-45deg);
+      margin-top: -2px;
+    }
+
+    @keyframes flat-success-bounce {
+      0% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+      50% { transform: translateY(0); }
+      70% { transform: translateY(-3px); }
+      100% { transform: translateY(0); }
+    }
+    @keyframes flat-checkmark-in {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ====== Footer Link ====== */
+    .back-link {
+      display: inline-block;
+      text-align: center;
+      margin: 0 auto;
+      padding: 10px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .back-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+    .footer-wrap {
+      text-align: center;
+      margin-top: 12px;
+      padding: 20px;
+    }
+
+    /* ====== Color Palette Section ====== */
+    .palette-section {
+      max-width: 860px;
+      margin: 0 auto 40px;
+    }
+    .palette-section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .palette-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .palette-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .palette-swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* ====== Technique Description ====== */
+    .technique-box {
+      max-width: 860px;
+      margin: 0 auto 40px;
+      padding: 20px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .technique-box h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .technique-box ul {
+      list-style: none;
+      padding: 0;
+    }
+    .technique-box li {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      padding-left: 16px;
+      position: relative;
+    }
+    .technique-box li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      background: var(--meituan-yellow);
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>扁平几何风 · <span>美团员工形象</span></h1>
+    <p>纯色块零渐变，简洁几何形状构建角色，类似 Duolingo 的现代扁平设计风格</p>
+  </header>
+
+  <!-- Technique -->
+  <section class="technique-box">
+    <h2>设计技法</h2>
+    <ul>
+      <li>纯色块（zero gradients）：所有元素使用纯色填充，无渐变、无纹理</li>
+      <li>几何形状：圆形头部 + 圆角矩形躯干 + 简单线条四肢</li>
+      <li>微阴影浮起：统一 0 4px 0 rgba(0,0,0,0.08) 阴影营造轻微立体感</li>
+      <li>美团品牌元素：黄色头盔 + 袋鼠耳凸起 + 深色制服 + 工牌</li>
+      <li>4 种状态动画：空闲浮动 / 通话中脉冲 / 警报抖动 / 成功弹跳</li>
+    </ul>
+  </section>
+
+  <!-- Color Palette -->
+  <section class="palette-section">
+    <h2>品牌色板</h2>
+    <div class="palette-row">
+      <div class="palette-chip">
+        <div class="palette-swatch" style="background:#FFD333"></div>
+        #FFD333 头盔黄
+      </div>
+      <div class="palette-chip">
+        <div class="palette-swatch" style="background:#E8B800"></div>
+        #E8B800 深黄
+      </div>
+      <div class="palette-chip">
+        <div class="palette-swatch" style="background:#2f2c25"></div>
+        #2f2c25 制服深
+      </div>
+      <div class="palette-chip">
+        <div class="palette-swatch" style="background:#f4be72"></div>
+        #f4be72 肤色
+      </div>
+      <div class="palette-chip">
+        <div class="palette-swatch" style="background:#fff8d5"></div>
+        #fff8d5 工牌
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 States Grid -->
+  <main class="state-grid">
+
+    <!-- 1. Idle -->
+    <div class="state-card" data-state="idle">
+      <h3>空闲<div class="state-label-en">Idle</div></h3>
+      <div class="flat-worker">
+        <div class="flat-helmet">
+          <div class="flat-ear flat-ear-l"></div>
+          <div class="flat-ear flat-ear-r"></div>
+          <div class="flat-visor"></div>
+        </div>
+        <div class="flat-face">
+          <span class="flat-eye"></span>
+          <span class="flat-eye"></span>
+          <span class="flat-mouth"></span>
+        </div>
+        <div class="flat-torso">
+          <div class="flat-collar"></div>
+          <div class="flat-nametag"></div>
+        </div>
+        <div class="flat-arm flat-arm-l"></div>
+        <div class="flat-arm flat-arm-r">
+          <div class="flat-phone"></div>
+        </div>
+        <div class="flat-legs">
+          <div class="flat-leg"></div>
+          <div class="flat-leg"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Calling -->
+    <div class="state-card" data-state="calling">
+      <h3>通话中<div class="state-label-en">Calling</div></h3>
+      <div class="flat-worker">
+        <div class="flat-helmet">
+          <div class="flat-ear flat-ear-l"></div>
+          <div class="flat-ear flat-ear-r"></div>
+          <div class="flat-visor"></div>
+        </div>
+        <div class="flat-face">
+          <span class="flat-eye"></span>
+          <span class="flat-eye"></span>
+          <span class="flat-mouth"></span>
+        </div>
+        <div class="flat-torso">
+          <div class="flat-collar"></div>
+          <div class="flat-nametag"></div>
+        </div>
+        <div class="flat-arm flat-arm-l"></div>
+        <div class="flat-arm flat-arm-r">
+          <div class="flat-phone"></div>
+        </div>
+        <div class="flat-legs">
+          <div class="flat-leg"></div>
+          <div class="flat-leg"></div>
+        </div>
+        <div class="speech-bubble">
+          <span class="speech-dot"></span>
+          <span class="speech-dot"></span>
+          <span class="speech-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Alert -->
+    <div class="state-card" data-state="alert">
+      <h3>警报<div class="state-label-en">Alert</div></h3>
+      <div class="flat-worker">
+        <div class="flat-helmet">
+          <div class="flat-ear flat-ear-l"></div>
+          <div class="flat-ear flat-ear-r"></div>
+          <div class="flat-visor"></div>
+        </div>
+        <div class="flat-face">
+          <span class="flat-eye"></span>
+          <span class="flat-eye"></span>
+          <span class="flat-mouth"></span>
+        </div>
+        <div class="flat-torso">
+          <div class="flat-collar"></div>
+          <div class="flat-nametag"></div>
+        </div>
+        <div class="flat-arm flat-arm-l"></div>
+        <div class="flat-arm flat-arm-r">
+          <div class="flat-phone"></div>
+        </div>
+        <div class="flat-legs">
+          <div class="flat-leg"></div>
+          <div class="flat-leg"></div>
+        </div>
+        <div class="exclamation">
+          <div class="exclamation-bar"></div>
+          <div class="exclamation-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Success -->
+    <div class="state-card" data-state="success">
+      <h3>完成<div class="state-label-en">Success</div></h3>
+      <div class="flat-worker">
+        <div class="flat-helmet">
+          <div class="flat-ear flat-ear-l"></div>
+          <div class="flat-ear flat-ear-r"></div>
+          <div class="flat-visor"></div>
+        </div>
+        <div class="flat-face">
+          <span class="flat-eye"></span>
+          <span class="flat-eye"></span>
+          <span class="flat-mouth"></span>
+        </div>
+        <div class="flat-torso">
+          <div class="flat-collar"></div>
+          <div class="flat-nametag"></div>
+        </div>
+        <div class="flat-arm flat-arm-l"></div>
+        <div class="flat-arm flat-arm-r">
+          <div class="flat-phone"></div>
+        </div>
+        <div class="flat-legs">
+          <div class="flat-leg"></div>
+          <div class="flat-leg"></div>
+        </div>
+        <div class="checkmark-overlay"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="footer-wrap">
+    <a href="worker-showcase-index.html" class="back-link">返回风格总览</a>
+  </div>
+</body>
+</html>

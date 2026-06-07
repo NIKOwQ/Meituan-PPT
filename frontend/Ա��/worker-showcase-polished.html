@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mavis · 美团评测员工</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --yellow: #ffd333;
+      --yellow-dark: #d9a900;
+      --ink: #171713;
+      --muted: #6b675c;
+      --paper: #fffdf7;
+      --bg: #f6f1e5;
+      --line: #e4ddc9;
+      --teal: #48b7a8;
+      --coral: #e86c5c;
+      --green: #77b96c;
+      --blue: #6577c8;
+      --shadow: 0 24px 70px rgba(47, 41, 24, 0.14);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(90deg, rgba(23, 23, 19, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(23, 23, 19, 0.035) 1px, transparent 1px),
+        linear-gradient(135deg, #fffaf0 0%, var(--bg) 58%, #e9f3ef 100%);
+      background-size: 72px 72px, 72px 72px, auto;
+      color: var(--ink);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .back-link {
+      position: fixed;
+      top: 22px;
+      left: 22px;
+      z-index: 20;
+      min-height: 38px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 247, 0.78);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(47, 41, 24, 0.08);
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 78px 0 44px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: center;
+    }
+
+    .intro {
+      display: grid;
+      gap: 18px;
+      align-self: start;
+      padding-top: 20px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(38px, 6vw, 82px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .stage-shell {
+      position: relative;
+      min-height: min(66vw, 610px);
+      border: 1px solid rgba(23, 23, 19, 0.1);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.48)),
+        linear-gradient(135deg, #fef4ce, #e7f2ef 62%, #f7e3df);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .stage-shell::before {
+      content: "";
+      position: absolute;
+      inset: 28px 34px auto;
+      height: 1px;
+      background: rgba(23, 23, 19, 0.12);
+      box-shadow: 0 88px 0 rgba(23, 23, 19, 0.07), 0 176px 0 rgba(23, 23, 19, 0.05);
+    }
+
+    .window {
+      position: absolute;
+      top: 48px;
+      right: 56px;
+      width: 150px;
+      height: 116px;
+      border: 3px solid rgba(23, 23, 19, 0.76);
+      border-radius: 6px;
+      background:
+        linear-gradient(90deg, transparent 48%, rgba(23, 23, 19, 0.2) 48% 52%, transparent 52%),
+        linear-gradient(180deg, transparent 48%, rgba(23, 23, 19, 0.2) 48% 52%, transparent 52%),
+        linear-gradient(135deg, #d9f2ff, #fff6ce);
+      box-shadow: 8px 8px 0 rgba(23, 23, 19, 0.1);
+    }
+
+    .pinboard {
+      position: absolute;
+      top: 70px;
+      left: 46px;
+      width: 150px;
+      height: 106px;
+      border: 3px solid #2c281f;
+      border-radius: 5px;
+      background: #f0d6a2;
+      box-shadow: inset 0 8px 0 rgba(255, 255, 255, 0.22), 7px 7px 0 rgba(23, 23, 19, 0.09);
+    }
+
+    .pinboard::before,
+    .pinboard::after {
+      content: "";
+      position: absolute;
+      width: 42px;
+      height: 34px;
+      top: 18px;
+      border-radius: 4px;
+      background: var(--paper);
+      transform: rotate(-5deg);
+      box-shadow: 64px 24px 0 #e4f6ee;
+    }
+
+    .pinboard::before {
+      left: 18px;
+    }
+
+    .pinboard::after {
+      right: 18px;
+      width: 34px;
+      height: 42px;
+      background: #ffe9e5;
+      transform: rotate(6deg);
+      box-shadow: none;
+    }
+
+    .floor {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 168px;
+      background:
+        linear-gradient(90deg, rgba(23, 23, 19, 0.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(23, 23, 19, 0.07), transparent 42%),
+        #eadcc4;
+      background-size: 64px 100%, auto, auto;
+    }
+
+    .desk-scene {
+      position: absolute;
+      left: 50%;
+      bottom: 76px;
+      width: 590px;
+      height: 354px;
+      transform: translateX(-50%);
+    }
+
+    .desk-shadow {
+      position: absolute;
+      left: 62px;
+      right: 36px;
+      bottom: -22px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(65, 54, 30, 0.16);
+      filter: blur(2px);
+    }
+
+    .desk-top {
+      position: absolute;
+      left: 28px;
+      right: 18px;
+      bottom: 78px;
+      height: 68px;
+      border: 4px solid #221f18;
+      border-radius: 10px 10px 6px 6px;
+      background: linear-gradient(180deg, #fff8df 0%, #e9c879 100%);
+      box-shadow: inset 0 9px 0 rgba(255, 255, 255, 0.35), inset 0 -10px 0 rgba(111, 82, 25, 0.12);
+    }
+
+    .desk-top::before,
+    .desk-top::after {
+      content: "";
+      position: absolute;
+      top: 58px;
+      width: 28px;
+      height: 92px;
+      border: 4px solid #221f18;
+      border-top: 0;
+      background: linear-gradient(90deg, #a8793c, #7d542b);
+    }
+
+    .desk-top::before {
+      left: 58px;
+    }
+
+    .desk-top::after {
+      right: 58px;
+    }
+
+    .monitor {
+      position: absolute;
+      left: 328px;
+      bottom: 126px;
+      width: 148px;
+      height: 100px;
+      border: 4px solid #1d1b16;
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 28%, transparent 28%),
+        #242620;
+      box-shadow: inset 0 -8px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .monitor::before {
+      content: "";
+      position: absolute;
+      left: 23px;
+      right: 23px;
+      top: 24px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 22px 0 var(--yellow), 46px 22px 0 var(--coral);
+    }
+
+    .monitor::after {
+      content: "";
+      position: absolute;
+      left: 55px;
+      bottom: -34px;
+      width: 36px;
+      height: 30px;
+      border: 4px solid #1d1b16;
+      border-top: 0;
+      background: #b8b5a7;
+      box-shadow: -22px 28px 0 -10px #1d1b16, 22px 28px 0 -10px #1d1b16;
+    }
+
+    .mug {
+      position: absolute;
+      right: 76px;
+      bottom: 112px;
+      width: 38px;
+      height: 42px;
+      border: 4px solid #221f18;
+      border-radius: 4px 4px 10px 10px;
+      background: #fffdf7;
+      box-shadow: inset -7px 0 0 #e9eef0;
+    }
+
+    .mug::before {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: 9px;
+      width: 16px;
+      height: 18px;
+      border: 4px solid #221f18;
+      border-left: 0;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .mug::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: -30px;
+      width: 6px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(72, 183, 168, 0.55);
+      box-shadow: 12px -8px 0 rgba(72, 183, 168, 0.34);
+      animation: steam 2.9s ease-in-out infinite;
+    }
+
+    .plant {
+      position: absolute;
+      left: 68px;
+      bottom: 110px;
+      width: 46px;
+      height: 46px;
+      border: 4px solid #221f18;
+      border-radius: 0 0 8px 8px;
+      background: #d8744f;
+      box-shadow: inset -8px 0 0 #aa4e39;
+    }
+
+    .plant::before {
+      content: "";
+      position: absolute;
+      left: -9px;
+      top: -34px;
+      width: 26px;
+      height: 34px;
+      border: 4px solid #221f18;
+      border-radius: 50% 50% 40% 40%;
+      background: var(--green);
+      transform: rotate(-22deg);
+      box-shadow: 24px -8px 0 -4px var(--teal), 24px -8px 0 0 #221f18, 42px 4px 0 -5px #4e9a62, 42px 4px 0 -1px #221f18;
+    }
+
+    .worker {
+      --hood: var(--yellow);
+      --hood-dark: var(--yellow-dark);
+      --jacket: #28261f;
+      --accent: var(--teal);
+      position: absolute;
+      left: 162px;
+      bottom: 118px;
+      width: 168px;
+      height: 214px;
+      transform-origin: center bottom;
+      animation: breathe 3.6s ease-in-out infinite;
+    }
+
+    .worker::before {
+      content: "";
+      position: absolute;
+      left: 42px;
+      bottom: 0;
+      width: 84px;
+      height: 96px;
+      border: 4px solid #201e18;
+      border-radius: 34px 34px 10px 10px;
+      background:
+        linear-gradient(90deg, transparent 46%, rgba(255, 255, 255, 0.16) 46% 55%, transparent 55%),
+        linear-gradient(180deg, #3b3830, var(--jacket));
+      box-shadow: inset 10px 0 0 rgba(255, 255, 255, 0.08), inset -10px 0 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .worker::after {
+      content: "";
+      position: absolute;
+      left: 74px;
+      bottom: 50px;
+      width: 28px;
+      height: 22px;
+      border: 3px solid #201e18;
+      border-radius: 5px;
+      background:
+        linear-gradient(90deg, var(--accent) 0 36%, #fff7d6 36%);
+      box-shadow: 46px -20px 0 -8px var(--jacket), -46px -20px 0 -8px var(--jacket);
+    }
+
+    .head {
+      position: absolute;
+      left: 34px;
+      top: 10px;
+      width: 100px;
+      height: 106px;
+      border: 4px solid #201e18;
+      border-radius: 34px 34px 42px 42px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.34) 0 22%, transparent 22%),
+        linear-gradient(180deg, var(--hood), var(--hood-dark));
+      box-shadow: inset -12px -10px 0 rgba(122, 86, 0, 0.16), 0 14px 20px rgba(32, 30, 24, 0.14);
+    }
+
+    .head::before,
+    .head::after {
+      content: "";
+      position: absolute;
+      top: -34px;
+      width: 30px;
+      height: 48px;
+      border: 4px solid #201e18;
+      border-radius: 18px 18px 8px 8px;
+      background:
+        linear-gradient(180deg, #ffe7a1 0 45%, var(--hood) 45%);
+      z-index: -1;
+    }
+
+    .head::before {
+      left: 5px;
+      transform: rotate(-16deg);
+    }
+
+    .head::after {
+      right: 5px;
+      transform: rotate(16deg);
+    }
+
+    .face {
+      position: absolute;
+      left: 16px;
+      bottom: 12px;
+      width: 68px;
+      height: 58px;
+      border: 4px solid #201e18;
+      border-radius: 22px 22px 26px 26px;
+      background:
+        radial-gradient(circle at 22px 24px, #201e18 0 3px, transparent 3.5px),
+        radial-gradient(circle at 45px 24px, #201e18 0 3px, transparent 3.5px),
+        radial-gradient(circle at 18px 36px, rgba(232, 108, 92, 0.28) 0 6px, transparent 6.5px),
+        radial-gradient(circle at 50px 36px, rgba(232, 108, 92, 0.28) 0 6px, transparent 6.5px),
+        linear-gradient(180deg, #ffd79c, #f0ad72);
+      box-shadow: inset -8px -5px 0 rgba(165, 85, 41, 0.18);
+    }
+
+    .face::after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 36px;
+      width: 14px;
+      height: 8px;
+      border-bottom: 3px solid #201e18;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .headset {
+      position: absolute;
+      left: 20px;
+      top: 45px;
+      width: 106px;
+      height: 48px;
+      border-top: 4px solid #201e18;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .headset::before,
+    .headset::after {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      width: 16px;
+      height: 22px;
+      border: 4px solid #201e18;
+      border-radius: 8px;
+      background: #fffdf7;
+    }
+
+    .headset::before {
+      left: 3px;
+    }
+
+    .headset::after {
+      right: 3px;
+      box-shadow: 17px 16px 0 -8px #201e18;
+    }
+
+    .bubble {
+      position: absolute;
+      left: 110px;
+      top: 2px;
+      min-width: 112px;
+      padding: 10px 12px;
+      border: 3px solid #201e18;
+      border-radius: 8px;
+      background: #fffdf7;
+      color: #2c281f;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 6px 6px 0 rgba(32, 30, 24, 0.13);
+      opacity: 0;
+      transform: translateY(8px) scale(0.96);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .bubble::after {
+      content: "";
+      position: absolute;
+      left: 16px;
+      bottom: -11px;
+      width: 16px;
+      height: 16px;
+      border-right: 3px solid #201e18;
+      border-bottom: 3px solid #201e18;
+      background: #fffdf7;
+      transform: rotate(45deg);
+    }
+
+    .status-panel {
+      align-self: center;
+      display: grid;
+      gap: 14px;
+    }
+
+    .state-button {
+      display: grid;
+      grid-template-columns: 12px 1fr;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+      min-height: 58px;
+      padding: 12px 14px;
+      border: 1px solid rgba(23, 23, 19, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, 0.76);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(47, 41, 24, 0.06);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .state-button:hover,
+    .state-button.is-active {
+      transform: translateY(-2px);
+      border-color: rgba(23, 23, 19, 0.28);
+      background: var(--paper);
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--yellow);
+    }
+
+    .state-button[data-mode="calling"] .dot { background: var(--blue); }
+    .state-button[data-mode="alert"] .dot { background: var(--coral); }
+    .state-button[data-mode="success"] .dot { background: var(--green); }
+
+    .state-button strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .state-button span:not(.dot) {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .scene[data-mode="calling"] .worker {
+      --accent: var(--blue);
+      animation-duration: 2.4s;
+    }
+
+    .scene[data-mode="calling"] .headset,
+    .scene[data-mode="calling"] .bubble,
+    .scene[data-mode="alert"] .bubble,
+    .scene[data-mode="success"] .bubble {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .scene[data-mode="calling"] .bubble::before { content: "通话中"; }
+    .scene[data-mode="alert"] .bubble::before { content: "发现风险"; }
+    .scene[data-mode="success"] .bubble::before { content: "已通过"; }
+
+    .scene[data-mode="alert"] .worker {
+      --hood: #ffbe45;
+      --hood-dark: #df7c34;
+      --accent: var(--coral);
+      animation: alert 0.22s steps(2) infinite;
+    }
+
+    .scene[data-mode="alert"] .face::after {
+      left: 29px;
+      top: 38px;
+      width: 12px;
+      height: 8px;
+      border: 3px solid #201e18;
+      border-radius: 999px;
+      background: transparent;
+    }
+
+    .scene[data-mode="success"] .worker {
+      --accent: var(--green);
+      --jacket: #27352a;
+      transform: rotate(2deg) translateY(-2px);
+    }
+
+    .scene[data-mode="success"] .face::after {
+      width: 20px;
+      left: 24px;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-4px) rotate(-0.6deg); }
+    }
+
+    @keyframes alert {
+      0%, 100% { transform: translateX(0) rotate(0); }
+      50% { transform: translateX(3px) rotate(1deg); }
+    }
+
+    @keyframes steam {
+      0% { transform: translateY(10px); opacity: 0; }
+      42% { opacity: 0.8; }
+      100% { transform: translateY(-18px); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+        padding-top: 84px;
+      }
+
+      .stage-shell {
+        min-height: 560px;
+      }
+
+      .status-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+      }
+
+      .back-link {
+        position: absolute;
+      }
+
+      .lead {
+        font-size: 15px;
+      }
+
+      .stage-shell {
+        min-height: 500px;
+      }
+
+      .desk-scene {
+        width: 520px;
+        transform: translateX(-50%) scale(0.82);
+      }
+
+      .pinboard,
+      .window {
+        transform: scale(0.78);
+        transform-origin: top center;
+      }
+
+      .status-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="worker-showcase-index.html">返回总览</a>
+
+  <main class="page">
+    <section class="intro" aria-label="员工形象展示">
+      <p class="eyebrow">Meituan Evaluation Worker</p>
+      <h1>Mavis</h1>
+      <p class="lead">一个更精致、更有工作感的评测员工：保留美团黄色安全帽和外呼工位语义，同时加入耳机、胸牌、状态气泡和办公场景，适合放进 AI 指令评测系统的微缩工位。</p>
+
+      <div class="stage-shell scene" id="scene" data-mode="idle">
+        <div class="window" aria-hidden="true"></div>
+        <div class="pinboard" aria-hidden="true"></div>
+        <div class="floor" aria-hidden="true"></div>
+        <div class="desk-scene">
+          <div class="desk-shadow"></div>
+          <div class="monitor"></div>
+          <div class="plant"></div>
+          <div class="mug"></div>
+          <div class="worker" aria-label="Mavis 员工角色">
+            <div class="bubble"></div>
+            <div class="head">
+              <div class="face"></div>
+            </div>
+            <div class="headset"></div>
+          </div>
+          <div class="desk-top"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="status-panel" aria-label="员工状态切换">
+      <button class="state-button is-active" type="button" data-mode="idle">
+        <span class="dot" aria-hidden="true"></span>
+        <span><strong>待命</strong><span>安静呼吸，准备接收评测任务</span></span>
+      </button>
+      <button class="state-button" type="button" data-mode="calling">
+        <span class="dot" aria-hidden="true"></span>
+        <span><strong>外呼中</strong><span>耳机上线，正在推进对话片段</span></span>
+      </button>
+      <button class="state-button" type="button" data-mode="alert">
+        <span class="dot" aria-hidden="true"></span>
+        <span><strong>风险</strong><span>检测到异常约束或失败证据</span></span>
+      </button>
+      <button class="state-button" type="button" data-mode="success">
+        <span class="dot" aria-hidden="true"></span>
+        <span><strong>通过</strong><span>完成校验，进入归档状态</span></span>
+      </button>
+    </aside>
+  </main>
+
+  <script>
+    const scene = document.querySelector("#scene");
+    const buttons = document.querySelectorAll(".state-button");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        scene.dataset.mode = button.dataset.mode;
+        buttons.forEach((item) => item.classList.toggle("is-active", item === button));
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Agent 长指令遵循能力评测系统</title>
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/animations/animations.css">
+  <link rel="stylesheet" id="theme-link" href="assets/themes/meituan.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="deck product-deck" data-themes="meituan">
+
+  <section class="slide product-slide is-active cover-slide" data-title="项目定位">
+    <div class="cover-grid">
+      <div class="cover-copy">
+        <div class="brand-line"><span class="brand-mark">美</span><b>AI 指令评测工具</b></div>
+        <p class="eyebrow">FROM INSTRUCTION TO EVIDENCE</p>
+        <h1>不是再给 Agent<br>打一个总分。</h1>
+        <p class="cover-lede">输入一段长指令，系统主动生成多轮测试对话，逐条定位 Agent 在哪里失守、为什么失守、应该改哪句话。</p>
+        <button class="primary-cta" data-goto="2">进入真实产品体验 <span>→</span></button>
+        <div class="cover-stats">
+          <div><strong data-stat="groups">--</strong><span>并行对话组</span></div>
+          <div><strong data-stat="segments">--</strong><span>测试片段</span></div>
+          <div><strong data-stat="evaluations">--</strong><span>证据评估</span></div>
+        </div>
+      </div>
+      <div class="cover-product">
+        <div class="live-frame cover-frame" data-product-viewport>
+          <iframe src="product/index.html?view=workspace" title="真实产品工作区预览"></iframe>
+        </div>
+        <span class="cover-tag">真实前端 · 任意交互</span>
+      </div>
+    </div>
+    <footer class="deck-footer"><span>产品体验 · 技术答辩 · 完全离线</span><span class="slide-number" data-current="1" data-total="9"></span></footer>
+  </section>
+
+  <section class="slide product-slide immersive-slide" data-title="创建评测">
+    <header class="scene-header">
+      <div><span class="scene-index">01</span><p>输入一段长指令，配置本次派遣</p></div>
+      <b>CREATE EVALUATION</b>
+    </header>
+    <div class="live-frame full-product" data-product-viewport>
+      <iframe src="product/index.html?view=setup" title="真实前端创建评测页面"></iframe>
+    </div>
+    <button class="annotation-dot dot-a" data-note="input">1</button>
+    <button class="annotation-dot dot-b" data-note="config">2</button>
+    <button class="annotation-dot dot-c" data-note="dispatch">3</button>
+    <div class="annotation-ribbon">
+      <span><i>1</i><b>长指令原文</b> 不要求改写成 DSL</span>
+      <span><i>2</i><b>主参数先行</b> 高级参数按需展开</span>
+      <span><i>3</i><b>并行预览</b> 配置立即映射为工位</span>
+    </div>
+    <footer class="deck-footer"><span>真实 frontend/index.html · Setup Mode</span><span class="slide-number" data-current="2" data-total="9"></span></footer>
+  </section>
+
+  <section class="slide product-slide path-slide" data-title="评测工作区">
+    <div class="path-title">
+      <span>02 / WORKSPACE</span>
+      <h2>一张界面，同时回答三个问题。</h2>
+    </div>
+    <div class="live-frame workspace-frame" data-product-viewport>
+      <iframe src="product/index.html?view=workspace" title="真实前端评测工作区"></iframe>
+    </div>
+    <div class="path-overlay">
+      <div><i>01</i><b>测什么</b><span>原始指令与约束热力图</span></div>
+      <em>→</em>
+      <div><i>02</i><b>怎么测</b><span>多个独立外呼工位</span></div>
+      <em>→</em>
+      <div><i>03</i><b>得到什么</b><span>Segment 与评估证据</span></div>
+    </div>
+    <footer class="deck-footer"><span>原文 · 工位 · 证据</span><span class="slide-number" data-current="3" data-total="9"></span></footer>
+  </section>
+
+  <section class="slide product-slide inspector-slide" data-title="会话追溯">
+    <div class="inspector-copy">
+      <span class="scene-index">03</span>
+      <p class="eyebrow">CONVERSATION TRACE</p>
+      <h2>不离开工作区，<br>向右再深一层。</h2>
+      <p>真实前端的 Inspector 抽屉承载深层信息。主界面保持对运行现场的感知，抽屉负责逐轮对话、约束和门控错误。</p>
+      <div class="layer-legend"><span>工作区</span><i>+</i><span>检查抽屉</span><i>+</i><span>原始证据</span></div>
+    </div>
+    <div class="live-frame inspector-frame" data-product-viewport>
+      <iframe src="product/index.html?view=trace" title="真实前端会话追溯抽屉"></iframe>
+    </div>
+    <div class="focus-line"></div>
+    <footer class="deck-footer"><span>渐进披露：任务层保持稳定，证据层按需出现</span><span class="slide-number" data-current="4" data-total="9"></span></footer>
+  </section>
+
+  <section class="slide product-slide evidence-slide" data-title="评估证据">
+    <div class="evidence-heading">
+      <span>04 / EVIDENCE</span>
+      <h2>通过、失败、无效，必须各自有证据。</h2>
+    </div>
+    <div class="live-frame evidence-frame" data-product-viewport>
+      <iframe src="product/index.html?view=evidence" title="真实前端证据库"></iframe>
+    </div>
+    <div class="evidence-cards">
+      <article class="pass"><b>PASS</b><p>行为满足被测约束</p></article>
+      <article class="fail"><b>FAIL</b><p>触发成立但 Agent 未遵守</p></article>
+      <article class="invalid"><b>INVALID</b><p>样本不足，不进入有效通过率</p></article>
+    </div>
+    <button class="annotation-dot evidence-dot" data-note="evidence">1</button>
+    <footer class="deck-footer"><span>结论、理由、原对话一起交付</span><span class="slide-number" data-current="5" data-total="9"></span></footer>
+  </section>
+
+  <section class="slide product-slide dashboard-slide" data-title="量化报告">
+    <div class="dashboard-label">
+      <span>05</span><b>REPORT DASHBOARD</b>
+      <p>从总览发现风险，再回到原文和完整对话。</p>
+    </div>
+    <div class="live-frame dashboard-frame" data-product-viewport>
+      <iframe src="product/index.html?view=report&v=7" title="真实前端量化报告"></iframe>
+    </div>
+    <div class="dashboard-tabs">
+      <button class="active" type="button" data-dashboard-tab="overview">总览</button>
+      <button type="button" data-dashboard-tab="heatmap">覆盖热力</button>
+      <button type="button" data-dashboard-tab="detail">逐约束明细</button>
+      <button type="button" data-dashboard-tab="evidence">证据展开</button>
+    </div>
+    <div class="dashboard-insight" id="dashboardInsight">
+      <span>OVERVIEW</span>
+      <b>先看覆盖率、总通过率和风险约束数量，再决定从哪里追证据。</b>
+      <p>外部切换会同步驱动真实产品 iframe：不是讲解胶囊，而是报告定位器。</p>
+    </div>
+    <footer class="deck-footer"><span>总览 → 定位 → 证据</span><span class="slide-number" data-current="6" data-total="9"></span></footer>
+  </section>
+
+  <section class="slide product-slide component-slide" data-title="机制与组件">
+    <div class="component-heading">
+      <p class="eyebrow">REAL COMPONENTS, EXPLAINED</p>
+      <h2>界面组件和评测机制，一一对应。</h2>
+      <p>左侧保留真实工作区，右侧只解释组件背后的系统职责。</p>
+    </div>
+    <div class="component-grid">
+      <div class="live-frame component-frame" data-product-viewport>
+        <iframe src="product/index.html?view=workspace" title="真实前端组件工作区"></iframe>
+      </div>
+      <aside class="mechanism-panel">
+        <span>MECHANISM MAP</span>
+        <h3>V4 Collector 把抽象评测拆成五个可解释界面层。</h3>
+        <ol>
+          <li><b>约束抽取</b><p>指令平面承接原文、约束和覆盖热力，避免先把需求改写丢失。</p></li>
+          <li><b>并行外呼</b><p>工位把并发参数变成可见运行资源，异常也被限制在单组内。</p></li>
+          <li><b>最小归因</b><p>Segment 便签记录触发、回应和判定，报告不只剩一个总分。</p></li>
+        </ol>
+      </aside>
+      <div class="component-strip">
+        <article><i>01</i><b>Instruction Plane</b><span>事实来源</span><em>原文 / 约束 / 覆盖热力</em><small class="viz-plane"></small></article>
+        <article><i>02</i><b>Worker Grid</b><span>调度状态</span><em>并发 / 进度 / 异常隔离</em><small class="viz-workers"></small></article>
+        <article><i>03</i><b>Segment Notes</b><span>归因单元</span><em>触发句 / 回应 / 判定</em><small class="viz-segments"></small></article>
+        <article><i>04</i><b>Inspector</b><span>证据深挖</span><em>逐轮消息 / 门控原因</em><small class="viz-inspector"></small></article>
+        <article><i>05</i><b>Report</b><span>风险聚合</span><em>分母口径 / 失败排行</em><small class="viz-report"></small></article>
+      </div>
+    </div>
+    <footer class="deck-footer"><span>组件不是装饰，每个组件承载一个系统机制</span><span class="slide-number" data-current="7" data-total="9"></span></footer>
+  </section>
+
+  <section class="slide product-slide lab-slide" data-title="异常实验室">
+    <div class="lab-heading"><span>06 / RESILIENCE</span><h2>把极端情况放进实验室，而不是藏进备注。</h2></div>
+    <nav class="lab-nav" id="labNav">
+      <button class="active" data-lab="code">代码门控</button>
+      <button data-lab="semantic">语义门控</button>
+      <button data-lab="stale">覆盖停滞</button>
+      <button data-lab="worker">工位异常</button>
+      <button data-lab="invalid">无效评估</button>
+    </nav>
+    <div class="lab-stage" id="labStage"></div>
+    <footer class="deck-footer"><span>失败可见 · 恢复明确 · 指标不污染</span><span class="slide-number" data-current="8" data-total="9"></span></footer>
+  </section>
+
+  <section class="slide product-slide closing-slide" data-title="诊断闭环">
+    <div class="closing-top">
+      <p class="eyebrow">FROM FINDING TO FIXING</p>
+      <h1>报告不是终点。<br>改对那句话才是。</h1>
+    </div>
+    <div class="closing-loop">
+      <div class="loop-step done"><span>01</span><b>自动测试</b><p>多工位生成有效测试</p></div>
+      <i>→</i>
+      <div class="loop-step done"><span>02</span><b>定位风险</b><p>逐约束通过率与证据链</p></div>
+      <i>→</i>
+      <div class="loop-step active"><span>03</span><b>修改指令</b><p data-closing="suggestion">明确触发条件、必做动作与终止条件</p></div>
+      <i>→</i>
+      <div class="loop-step"><span>04</span><b>真实复测</b><p>有真实数据时再展示提升</p></div>
+    </div>
+    <div class="closing-quote">传统质检告诉运营“合规吗”。<br>我们告诉运营“哪里不行、怎么改”。</div>
+    <button class="primary-cta closing-cta" data-goto="2">重新体验产品 <span>↺</span></button>
+    <footer class="deck-footer"><span>可发现 · 可归因 · 可改进</span><span class="slide-number" data-current="9" data-total="9"></span></footer>
+  </section>
+</div>
+
+<aside class="note-popover" id="notePopover">
+  <button data-close-note>×</button><span id="noteIndex">01</span><h3 id="noteTitle"></h3><p id="noteBody"></p>
+</aside>
+<div class="note-backdrop" id="noteBackdrop" data-close-note></div>
+
+<script src="data/scenario-bundles.js"></script>
+<script src="demo-api.js"></script>
+<script src="deck-app.js"></script>
+<script src="assets/runtime.js"></script>
+</body>
+</html>

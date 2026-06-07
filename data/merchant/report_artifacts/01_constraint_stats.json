@@ -1,0 +1,620 @@
+[
+  {
+    "constraint_text": "## Step 4: 确认前端是否可见 ### 4.1 询问发布方式 **询问：**",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "**第三方系统：** - 若已显示 → 按需选择即可 - 若未显示 → 缓慢引导开通（每步暂",
+    "count": 3,
+    "covered_chars": 36,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "-2秒；互动更流畅；适合小班课/实操课 ### 3.2 价格 - 标准直播更便宜 -",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": ". 【我的】→【教务/财务设置】 2. →【收费规则】 3. →编辑直播线路附加费，为低延迟直",
+    "count": 3,
+    "covered_chars": 37,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "4: 确认前端是否可见 ### 4.1 询问发布方式 **询问：** 您是通过Web控制台、",
+    "count": 3,
+    "covered_chars": 37,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": ": ## Step 1: 身份确认 - 若是负责人 → 进入第2步 - 若不是 → 请其转",
+    "count": 3,
+    "covered_chars": 30,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Conversation Flow:",
+    "count": 3,
+    "covered_chars": 17,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Conversation Flow: ## Step 1: 身份确认 - 若是负",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Opening Line: 您好，请问您是贵培训机构",
+    "count": 3,
+    "covered_chars": 24,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Publishing Platform ## Task: 告知机构客户，课程发布页",
+    "count": 3,
+    "covered_chars": 36,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Role: Customer Support Specialist for Course Publishing Platform",
+    "count": 5,
+    "covered_chars": 57,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Step 1: 身份确认",
+    "count": 3,
+    "covered_chars": 10,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Step 2: 确认是否知情",
+    "count": 3,
+    "covered_chars": 12,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Step 3: 传达升级内容",
+    "count": 3,
+    "covered_chars": 12,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Step 4: 确认前端是否可见",
+    "count": 3,
+    "covered_chars": 14,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Step 5: 检查学员端费用",
+    "count": 3,
+    "covered_chars": 13,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Step 6: 企业微信添加",
+    "count": 3,
+    "covered_chars": 12,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Step 7: 结束通话",
+    "count": 3,
+    "covered_chars": 10,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Task: 告知机构客户",
+    "count": 3,
+    "covered_chars": 11,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "b控制台：** - 若低延迟直播已显示 → 直接使用 - 若未显示 → 后台为其配",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "p 1: 身份确认 - 若是负责人 → 进入第2步 - 若不是 → 请其转达，然后进入第2",
+    "count": 3,
+    "covered_chars": 33,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "p 4: 确认前端是否可见 ### 4.1 询问发布方式 **询问：** 您是通过",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "tep 1: 身份确认 - 若是负责人 → 进入第2步 - 若不是 → 请其转达，",
+    "count": 3,
+    "covered_chars": 29,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "tep 5: 检查学员端费用/加速线路费（如有使用） - 未设置费用 → 进入第6步 - 已",
+    "count": 3,
+    "covered_chars": 36,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "→ 提醒确认低延迟直播也已适用该费用 **若无法自行配置 → 缓慢引导设置（每步暂停3秒）：**",
+    "count": 3,
+    "covered_chars": 44,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "、校务系统A，还是SaaS系统B发课？ **Web控制台：** - 若低延迟直播已显示 → 直接使用",
+    "count": 3,
+    "covered_chars": 44,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "。 ## Step 2: 确认是否知情 **询问：** 您之前选的是标准直播，但我们后台其实已",
+    "count": 3,
+    "covered_chars": 40,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "不使用正式或冗长的解释——保持随意直接",
+    "count": 6,
+    "covered_chars": 19,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "不能承诺给商家折扣券或优惠券",
+    "count": 19,
+    "covered_chars": 14,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "之后发布页会分开显示两个选项，根据课程类型自行选择即可。",
+    "count": 9,
+    "covered_chars": 28,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "也已适用该费用 **若无法自行配置 → 缓慢引导设置（每步暂停3秒）：** 1. 【我的】→【教务/财务设置】 2",
+    "count": 3,
+    "covered_chars": 48,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "低延迟直播带宽和节点保障更强，费用略高",
+    "count": 10,
+    "covered_chars": 19,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "低延迟直播带宽和节点保障更强，费用略高 ### 3.3 其他问题 - 按知识库作答，",
+    "count": 3,
+    "covered_chars": 33,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "使用简短、自然的口语化表达，符合电话沟通风格",
+    "count": 15,
+    "covered_chars": 22,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "供可添加的手机号，再发送同样的验证提示 ## Step 7: 结束通话 - 按知识",
+    "count": 3,
+    "covered_chars": 33,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "保存",
+    "count": 7,
+    "covered_chars": 4,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "保持随意直接",
+    "count": 6,
+    "covered_chars": 6,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "保障音视频与白板同步 - 若已知情 → 进入第3步 ## Step 3: 传达升级内容 *",
+    "count": 3,
+    "covered_chars": 34,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "其明天再查看 **第三方系统：** - 若已显示 → 按需选择即可 - 若未显示 → 缓",
+    "count": 3,
+    "covered_chars": 33,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "制台：** - 若低延迟直播已显示 → 直接使用 - 若未显示 → 后台为其配置，请其明",
+    "count": 3,
+    "covered_chars": 34,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "前端当时未开放，临时开启低延迟是为保障音视频与白板同步",
+    "count": 7,
+    "covered_chars": 27,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "加速线路费（如有使用） - 未设置费用 → 进入第6步 - 已设置费用 → 提醒确",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "即使任务完成，若商家有疑问，继续简短作答",
+    "count": 15,
+    "covered_chars": 20,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "发课时选低延迟直播即可，其他流程不变。 ## Step 2: 确认是否知情 **询",
+    "count": 3,
+    "covered_chars": 35,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "告知机构客户，课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项。当需要实时互动时，鼓励选择低延迟直播。",
+    "count": 7,
+    "covered_chars": 56,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "在【服务产品】下勾选低延迟直播",
+    "count": 3,
+    "covered_chars": 15,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "在【服务产品】下勾选低延迟直播，保存",
+    "count": 6,
+    "covered_chars": 18,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "在【服务产品】下勾选低延迟直播，保存 ## Step 5: 检查学员端费用/加速",
+    "count": 3,
+    "covered_chars": 35,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "学员端费用/加速线路费（如有使用） - 未设置费用 → 进入第6步 - 已设置费用 → 提",
+    "count": 3,
+    "covered_chars": 35,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "宽和节点保障更强，费用略高 ### 3.3 其他问题 - 按知识库作答，然后进入第",
+    "count": 3,
+    "covered_chars": 32,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "延迟约1-2秒；互动更流畅；适合小班课/实操课",
+    "count": 5,
+    "covered_chars": 23,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "开启低延迟是为保障音视频与白板同步 - 若已知情 → 进入第3步 ## Step 3:",
+    "count": 3,
+    "covered_chars": 34,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "您之前选的是标准直播",
+    "count": 3,
+    "covered_chars": 10,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？",
+    "count": 27,
+    "covered_chars": 38,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "您好，请问您是贵培训机构/校区的负责人吗？",
+    "count": 28,
+    "covered_chars": 21,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "count": 29,
+    "covered_chars": 29,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "我们对直播产品做了升级",
+    "count": 3,
+    "covered_chars": 11,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。",
+    "count": 5,
+    "covered_chars": 47,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "按知识库作答，然后进入第4步",
+    "count": 9,
+    "covered_chars": 14,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "按知识库解答剩余问题",
+    "count": 8,
+    "covered_chars": 10,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "是为保障音视频与白板同步 - 若已知情 → 进入第3步 ## Step 3: 传达",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "是否可见 ### 4.1 询问发布方式 **询问：** 您是通过Web控制台、校务系统A，还是",
+    "count": 3,
+    "covered_chars": 39,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "显示 → 后台为其配置，请其明天再查看 **第三方系统：** - 若已显示 → 按需选择即可 - 若",
+    "count": 3,
+    "covered_chars": 39,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "更流畅；适合小班课/实操课 ### 3.2 价格 - 标准直播更便宜 - 低延迟直",
+    "count": 3,
+    "covered_chars": 29,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "标准直播更便宜",
+    "count": 7,
+    "covered_chars": 7,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "根据课程类型自行选择即可。 ### 3.1 区别 - **标准直播：** 费用较低",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "步 ## Step 3: 传达升级内容 **参考话术：** 之后发布页会分开显示两个选项，根据课程",
+    "count": 3,
+    "covered_chars": 42,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "count": 23,
+    "covered_chars": 17,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "点击【服务商/直播平台管理】",
+    "count": 3,
+    "covered_chars": 14,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "畅；适合小班课/实操课 ### 3.2 价格 - 标准直播更便宜 - 低延迟直播带宽",
+    "count": 3,
+    "covered_chars": 30,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "白板同步 - 若已知情 → 进入第3步 ## Step 3: 传达升级内容 **参",
+    "count": 3,
+    "covered_chars": 30,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "直播也已适用该费用 **若无法自行配置 → 缓慢引导设置（每步暂停3秒）：** 1",
+    "count": 3,
+    "covered_chars": 36,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "看 **第三方系统：** - 若已显示 → 按需选择即可 - 若未显示 → 缓慢引",
+    "count": 3,
+    "covered_chars": 30,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "示两个选项，根据课程类型自行选择即可。 ### 3.1 区别 - **标准直播：**",
+    "count": 3,
+    "covered_chars": 33,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "线路费（如有使用） - 未设置费用 → 进入第6步 - 已设置费用 → 提醒确认低延迟直播",
+    "count": 3,
+    "covered_chars": 35,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "给出信息后，暂停等待商家回应再继续",
+    "count": 5,
+    "covered_chars": 17,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "统B发课？ **Web控制台：** - 若低延迟直播已显示 → 直接使用 - 若未显示 → 后台为",
+    "count": 3,
+    "covered_chars": 38,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "缓慢引导开通（每步暂停3秒）：",
+    "count": 5,
+    "covered_chars": 15,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "缓慢引导开通（每步暂停3秒）： 1. 进入【我的】 2. 点击【服务商/直播平台管理】 3. 选择【直播平台】 4. 在【服务产品】下勾选低延迟直播，保存",
+    "count": 7,
+    "covered_chars": 61,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "节点保障更强，费用略高 ### 3.3 其他问题 - 按知识库作答，然后进入第4步 ##",
+    "count": 3,
+    "covered_chars": 33,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若不可添加 → 请提供可添加的手机号，再发送同样的验证提示",
+    "count": 6,
+    "covered_chars": 27,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若不是 → 请其转达，然后进入第2步 **参考话术：** 我们对直播产品做了升级，新增了独立的\"",
+    "count": 3,
+    "covered_chars": 44,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "count": 29,
+    "covered_chars": 22,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若对话被打断，使用简短过渡语，如\"您刚才提到……\"或\"我刚说到……\"",
+    "count": 15,
+    "covered_chars": 34,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若当前号码可添加 → 告知稍后通过企业微信添加，请通过验证",
+    "count": 6,
+    "covered_chars": 27,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若当前号码可添加 → 告知稍后通过企业微信添加，请通过验证 - 若不可添加 → 请提供可添加的手机号，再发送同样的验证提示",
+    "count": 6,
+    "covered_chars": 54,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若无问题，祝其课程顺利",
+    "count": 3,
+    "covered_chars": 11,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若无问题，祝其课程顺利、招生满满，结束通话",
+    "count": 7,
+    "covered_chars": 21,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若是负责人 → 进入第2步 - 若不是 → 请其转达，然后进入第2步 **参考话术",
+    "count": 3,
+    "covered_chars": 33,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若未显示 → 缓慢引导开通（每步暂停3秒）： 1. 进入【我的】 2. 点击【服务商/直播平台管理】 3. 选择【直播平台】 4. 在【服务产品】下勾选低延迟直播，保存",
+    "count": 6,
+    "covered_chars": 66,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若老板说忙，说\"就1分钟，保证简短\"后继续简短说明",
+    "count": 21,
+    "covered_chars": 25,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "行选择即可。 ### 3.1 区别 - **标准直播：** 费用较低；延迟约5-10秒；适合大班课",
+    "count": 3,
+    "covered_chars": 39,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "要实时互动时，鼓励选择低延迟直播。 # Constraints: - 每次回复极简——最多15-20个字",
+    "count": 3,
+    "covered_chars": 46,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "认 - 若是负责人 → 进入第2步 - 若不是 → 请其转达，然后进入第2步 **参考",
+    "count": 3,
+    "covered_chars": 32,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "课程类型自行选择即可。 ### 3.1 区别 - **标准直播：** 费用较低；延迟",
+    "count": 3,
+    "covered_chars": 32,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "负责人 → 进入第2步 - 若不是 → 请其转达，然后进入第2步 **参考话术：** 我们对直播产品做了",
+    "count": 3,
+    "covered_chars": 43,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "财务设置】 2. →【收费规则】 3. →编辑直播线路附加费，为低延迟直播启用 4",
+    "count": 3,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "费用较低；延迟约5-10秒；适合大班课",
+    "count": 5,
+    "covered_chars": 19,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "路附加费，为低延迟直播启用 4. 保存 ## Step 6: 企业微信添加 - 若",
+    "count": 3,
+    "covered_chars": 29,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "较低；延迟约5-10秒；适合大班课 - **低延迟直播：** 延迟约1-2秒；互动更流畅；适合小班课",
+    "count": 3,
+    "covered_chars": 46,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "进入【我的】",
+    "count": 3,
+    "covered_chars": 6,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "问题 - 按知识库作答，然后进入第4步 ## Step 4: 确认前端是否可见 #",
+    "count": 3,
+    "covered_chars": 32,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "频繁给商家发言和提问的机会",
+    "count": 13,
+    "covered_chars": 13,
+    "sufficiently_tested": true
+  }
+]

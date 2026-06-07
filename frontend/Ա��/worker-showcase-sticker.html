@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表情贴纸风 - 美团骑手形象展示</title>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #FAF8F2;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: #3a3a3a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+
+/* ===== Header ===== */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2f2c25;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+.page-subtitle {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 40px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.back-link {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  font-size: 13px;
+  color: #888;
+  text-decoration: none;
+  transition: color .2s;
+}
+.back-link:hover { color: #FFD333; }
+.back-link::before { content: "\2190 "; }
+
+/* ===== State Grid ===== */
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: 880px;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .state-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+.state-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform .25s, box-shadow .25s;
+}
+.state-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+
+.state-label {
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2f2c25;
+}
+.state-desc {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ============================================================
+   STICKER WORKER — Pure CSS, bold outlines, emoji/sticker style
+   ~110px wide, ~140px tall
+   ============================================================ */
+
+/* --- Container --- */
+.sticker-worker {
+  position: relative;
+  width: 110px;
+  height: 140px;
+  transform: rotate(-3deg);
+  /* Entrance bounce */
+  animation: sticker-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes sticker-entrance {
+  0% { transform: rotate(-3deg) scale(0); opacity: 0; }
+  60% { transform: rotate(-3deg) scale(1.1); opacity: 1; }
+  100% { transform: rotate(-3deg) scale(1); opacity: 1; }
+}
+
+/* --- Decorative accent (floating element behind figure) --- */
+.sticker-accent {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  top: 10px;
+  left: 5px;
+  background: radial-gradient(circle, rgba(255,211,51,0.12) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- Body wrapper --- */
+.sticker-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 110px;
+  height: 140px;
+  z-index: 1;
+}
+
+/* ==================== TORSO ==================== */
+.sticker-torso {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: 70px;
+  height: 50px;
+  background: #2f2c25;
+  border: 3px solid #1a1a1a;
+  border-radius: 10px 10px 6px 6px;
+  z-index: 2;
+}
+
+/* Badge on chest */
+.sticker-badge {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 12px;
+  background: #fff;
+  border: 2.5px solid #1a1a1a;
+  border-radius: 3px;
+}
+/* Small text mark inside badge */
+.sticker-badge::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 3px;
+  background: #FFD333;
+  border-radius: 1px;
+}
+
+/* ==================== ARMS ==================== */
+.sticker-arm {
+  position: absolute;
+  width: 16px;
+  height: 40px;
+  background: #2f2c25;
+  border: 3px solid #1a1a1a;
+  border-radius: 8px;
+  z-index: 1;
+}
+.sticker-arm-l {
+  bottom: 14px;
+  left: 10px;
+  transform: rotate(10deg);
+}
+.sticker-arm-r {
+  bottom: 14px;
+  right: 10px;
+  transform: rotate(-10deg);
+}
+
+/* Hands (skin-colored circles at arm ends) */
+.sticker-arm::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: #f4be72;
+  border: 3px solid #1a1a1a;
+  border-radius: 50%;
+}
+
+/* Phone in right hand */
+.sticker-arm-r::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 16px;
+  background: #444;
+  border: 2px solid #1a1a1a;
+  border-radius: 2px;
+  z-index: 2;
+}
+
+/* ==================== FACE ==================== */
+.sticker-face {
+  position: absolute;
+  top: 36px;
+  left: 20px;
+  width: 70px;
+  height: 56px;
+  background: #f4be72;
+  border: 3px solid #1a1a1a;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+/* ==================== EYES ==================== */
+.sticker-eye {
+  position: absolute;
+  width: 14px;
+  height: 16px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  top: 16px;
+  z-index: 5;
+}
+.sticker-eye-l { left: 14px; }
+.sticker-eye-r { right: 14px; }
+
+/* White highlight dot in eye */
+.sticker-eye::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  top: 3px;
+  right: 2px;
+}
+
+/* ==================== MOUTH ==================== */
+.sticker-mouth {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 8px;
+  background: #c0705a;
+  border-radius: 0 0 16px 16px;
+  z-index: 5;
+}
+
+/* ==================== BLUSH ==================== */
+.sticker-blush {
+  position: absolute;
+  width: 16px;
+  height: 10px;
+  background: #ff8fa3;
+  border-radius: 50%;
+  top: 28px;
+  z-index: 5;
+  opacity: 0.7;
+}
+.sticker-blush-l { left: 4px; }
+.sticker-blush-r { right: 4px; }
+
+/* ==================== HELMET ==================== */
+.sticker-helmet {
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  width: 82px;
+  height: 44px;
+  background: #FFD333;
+  border: 3px solid #1a1a1a;
+  border-radius: 42px 42px 10px 10px;
+  z-index: 5;
+}
+
+/* Glossy highlight on helmet */
+.sticker-highlight {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 50px;
+  height: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.45), transparent 60%);
+  border-radius: 30px 20px 4px 4px;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Kangaroo ear bumps */
+.sticker-ear {
+  position: absolute;
+  width: 22px;
+  height: 28px;
+  background: #FFD333;
+  border: 3px solid #1a1a1a;
+  border-radius: 50% 50% 6px 6px;
+  top: -16px;
+  z-index: 4;
+  /* Inner ear color */
+}
+.sticker-ear::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  width: 10px;
+  height: 12px;
+  background: #e6b800;
+  border-radius: 50% 50% 3px 3px;
+}
+.sticker-ear-l { left: 8px; transform: rotate(-10deg); }
+.sticker-ear-r { right: 8px; transform: rotate(10deg); }
+
+/* ============================================================
+   STATE-SPECIFIC OVERRIDES
+   ============================================================ */
+
+/* ---------- STATE: idle ---------- */
+.sticker-worker[data-state="idle"] {
+  animation: sticker-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             idle-tilt 3s ease-in-out infinite 0.6s;
+}
+@keyframes idle-tilt {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  50% { transform: rotate(-1deg) translateY(-3px); }
+}
+
+/* Idle: happy crescent eyes (^_^) */
+.sticker-worker[data-state="idle"] .sticker-eye {
+  width: 12px;
+  height: 5px;
+  top: 22px;
+  border-radius: 12px 12px 0 0;
+  background: #1a1a1a;
+}
+.sticker-worker[data-state="idle"] .sticker-eye::after {
+  display: none;
+}
+
+/* Idle: big curved smile */
+.sticker-worker[data-state="idle"] .sticker-mouth {
+  width: 22px;
+  height: 10px;
+  border-radius: 0 0 22px 22px;
+}
+
+/* Idle: floating musical note */
+.sticker-worker[data-state="idle"]::before {
+  content: "\266B";
+  position: absolute;
+  top: -2px;
+  right: -8px;
+  font-size: 18px;
+  color: #FFD333;
+  z-index: 10;
+  text-shadow: 0 0 2px rgba(0,0,0,0.2);
+  animation: note-drift-up 2.8s ease-in-out infinite;
+}
+@keyframes note-drift-up {
+  0% { opacity: 0; transform: translateY(8px) rotate(0deg); }
+  20% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-18px) rotate(15deg); }
+}
+
+/* Idle: tiny sparkle */
+.sticker-worker[data-state="idle"]::after {
+  content: "\2727";
+  position: absolute;
+  top: 8px;
+  left: -6px;
+  font-size: 12px;
+  color: #FFD333;
+  z-index: 10;
+  animation: sparkle-pulse 2.2s ease-in-out infinite 0.8s;
+}
+@keyframes sparkle-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Sticker shadow on all states (applied via sticker-body) */
+.sticker-worker .sticker-body {
+  filter: drop-shadow(4px 6px 0 rgba(0,0,0,0.15));
+}
+
+
+/* ---------- STATE: calling ---------- */
+.sticker-worker[data-state="calling"] {
+  animation: sticker-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             calling-bob 1.5s ease-in-out infinite 0.6s;
+}
+@keyframes calling-bob {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  50% { transform: rotate(-3deg) translateY(-4px); }
+}
+
+/* Calling: big attentive eyes */
+.sticker-worker[data-state="calling"] .sticker-eye {
+  width: 16px;
+  height: 18px;
+}
+
+/* Calling: "O" open mouth */
+.sticker-worker[data-state="calling"] .sticker-mouth {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  bottom: 10px;
+}
+
+/* Headset: thick arc over head */
+.sticker-worker[data-state="calling"] .sticker-face::before {
+  content: "";
+  position: absolute;
+  width: 78px;
+  height: 30px;
+  top: -6px;
+  left: -6px;
+  border: 3.5px solid #555;
+  border-bottom: none;
+  border-radius: 40px 40px 0 0;
+  z-index: 7;
+}
+
+/* Headset: earpiece circle on right */
+.sticker-worker[data-state="calling"] .sticker-face::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 3.5px solid #555;
+  border-radius: 50%;
+  top: 12px;
+  right: -12px;
+  background: #ddd;
+  z-index: 7;
+}
+
+/* Speech bubble with animated dots */
+.sticker-worker[data-state="calling"] .sticker-accent {
+  background: none;
+  width: auto;
+  height: auto;
+  top: -20px;
+  left: auto;
+  right: -30px;
+}
+.sticker-worker[data-state="calling"] .sticker-accent::before {
+  content: "...";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 36px;
+  height: 28px;
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  border-radius: 14px;
+  z-index: 10;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 28px;
+  text-align: center;
+  letter-spacing: 2px;
+  animation: bubble-pop 0.4s ease-out forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Bubble tail */
+.sticker-worker[data-state="calling"] .sticker-accent::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  right: 18px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #1a1a1a;
+  z-index: 10;
+}
+
+@keyframes bubble-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Animated dots inside bubble - use helmet pseudo for one dot */
+.sticker-worker[data-state="calling"] .sticker-helmet::after {
+  content: "\266A";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #FFD333;
+  z-index: 10;
+  animation: note-drift-up 2.5s ease-in-out infinite;
+}
+
+
+/* ---------- STATE: alert ---------- */
+.sticker-worker[data-state="alert"] {
+  animation: sticker-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             alert-shake 0.4s ease-in-out infinite 0.6s;
+}
+@keyframes alert-shake {
+  0%, 100% { transform: rotate(-5deg) translateX(0); }
+  25% { transform: rotate(-1deg) translateX(-4px); }
+  50% { transform: rotate(-5deg) translateX(0); }
+  75% { transform: rotate(-1deg) translateX(4px); }
+}
+
+/* Alert: wide open panicked eyes (large circles) */
+.sticker-worker[data-state="alert"] .sticker-eye {
+  width: 18px;
+  height: 20px;
+  background: #fff;
+  border: 3px solid #1a1a1a;
+  top: 14px;
+}
+/* Big black pupil */
+.sticker-worker[data-state="alert"] .sticker-eye::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.sticker-worker[data-state="alert"] .sticker-eye::after {
+  width: 4px;
+  height: 4px;
+  top: 4px;
+  right: 4px;
+}
+
+/* Alert: wavy zigzag mouth */
+.sticker-worker[data-state="alert"] .sticker-mouth {
+  width: 18px;
+  height: 3px;
+  background: transparent;
+  bottom: 12px;
+  border-radius: 0;
+  overflow: visible;
+}
+/* Zigzag via gradient teeth */
+.sticker-worker[data-state="alert"] .sticker-mouth::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 22px;
+  height: 10px;
+  background:
+    linear-gradient(135deg, #1a1a1a 25%, transparent 25%) -4px 0,
+    linear-gradient(225deg, #1a1a1a 25%, transparent 25%) -4px 0,
+    linear-gradient(315deg, #1a1a1a 25%, transparent 25%),
+    linear-gradient(45deg, #1a1a1a 25%, transparent 25%);
+  background-size: 8px 8px;
+  background-repeat: repeat-x;
+  background-position: top;
+}
+
+/* Alert: BIG sweat drop on forehead */
+.sticker-worker[data-state="alert"] .sticker-face::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 20px;
+  background: #8ed1fc;
+  border: 2.5px solid #1a1a1a;
+  border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+  top: -6px;
+  right: 0px;
+  z-index: 8;
+  animation: sweat-grow 1s ease-in-out infinite;
+}
+@keyframes sweat-grow {
+  0% { opacity: 0; transform: scale(0.4); }
+  30% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.7; transform: scale(1.15) translateY(2px); }
+}
+
+/* Alert: red exclamation marks floating */
+.sticker-worker[data-state="alert"] .sticker-face::before {
+  content: "!";
+  position: absolute;
+  top: -14px;
+  left: 4px;
+  font-size: 16px;
+  font-weight: 900;
+  color: #d95a4f;
+  z-index: 8;
+  animation: exclaim-pulse 0.8s ease-in-out infinite;
+}
+@keyframes exclaim-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Alert: second exclamation mark */
+.sticker-worker[data-state="alert"] .sticker-accent::before {
+  content: "!!";
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  font-size: 14px;
+  font-weight: 900;
+  color: #d95a4f;
+  z-index: 10;
+  animation: exclaim-pulse 0.8s ease-in-out infinite 0.4s;
+}
+
+/* Alert: reduce blush, increase tilt */
+.sticker-worker[data-state="alert"] .sticker-blush {
+  opacity: 0.2;
+}
+
+/* Alert: right arm holds phone closer to head */
+.sticker-worker[data-state="alert"] .sticker-arm-r {
+  transform: rotate(-25deg);
+}
+
+
+/* ---------- STATE: success ---------- */
+.sticker-worker[data-state="success"] {
+  animation: sticker-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             success-bounce 0.9s ease-in-out infinite 0.6s;
+}
+@keyframes success-bounce {
+  0%, 100% { transform: rotate(-3deg) translateY(0) scaleY(1) scaleX(1); }
+  35% { transform: rotate(-3deg) translateY(-12px) scaleY(1.06) scaleX(0.95); }
+  55% { transform: rotate(-3deg) translateY(-12px) scaleY(1.06) scaleX(0.95); }
+  80% { transform: rotate(-3deg) translateY(3px) scaleY(0.94) scaleX(1.06); }
+}
+
+/* Success: happy crescent eyes (^_^) */
+.sticker-worker[data-state="success"] .sticker-eye {
+  width: 14px;
+  height: 6px;
+  top: 22px;
+  border-radius: 14px 14px 0 0;
+  background: #1a1a1a;
+}
+.sticker-worker[data-state="success"] .sticker-eye::after {
+  display: none;
+}
+.sticker-worker[data-state="success"] .sticker-eye::before {
+  display: none;
+}
+
+/* Success: huge beaming smile with teeth */
+.sticker-worker[data-state="success"] .sticker-mouth {
+  width: 28px;
+  height: 14px;
+  border-radius: 0 0 28px 28px;
+  background: #c0705a;
+  overflow: hidden;
+}
+/* White teeth bar */
+.sticker-worker[data-state="success"] .sticker-mouth::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 2px;
+  right: 2px;
+  height: 5px;
+  background: #fff;
+  border-radius: 0 0 3px 3px;
+}
+
+/* Success: bigger blush */
+.sticker-worker[data-state="success"] .sticker-blush {
+  opacity: 0.9;
+  width: 18px;
+  height: 12px;
+}
+
+/* Success: arms raised up */
+.sticker-worker[data-state="success"] .sticker-arm-l {
+  bottom: 38px;
+  left: 4px;
+  transform: rotate(-50deg);
+}
+.sticker-worker[data-state="success"] .sticker-arm-r {
+  bottom: 38px;
+  right: 4px;
+  transform: rotate(50deg);
+}
+
+/* Success: stars floating around */
+.sticker-worker[data-state="success"]::before {
+  content: "\2605";
+  position: absolute;
+  top: -6px;
+  left: -10px;
+  font-size: 16px;
+  color: #77b96c;
+  z-index: 10;
+  animation: star-twinkle 1.2s ease-in-out infinite;
+}
+.sticker-worker[data-state="success"]::after {
+  content: "\2605";
+  position: absolute;
+  top: 2px;
+  right: -8px;
+  font-size: 20px;
+  color: #FFD333;
+  z-index: 10;
+  animation: star-twinkle 1.2s ease-in-out infinite 0.5s;
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.6) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+}
+
+/* Success: more stars via helmet and accent pseudos */
+.sticker-worker[data-state="success"] .sticker-helmet::before {
+  content: "\2605";
+  position: absolute;
+  top: -14px;
+  right: -8px;
+  font-size: 12px;
+  color: #77b96c;
+  z-index: 10;
+  animation: star-twinkle 1.5s ease-in-out infinite 0.3s;
+}
+.sticker-worker[data-state="success"] .sticker-accent::before {
+  content: "\2727";
+  position: absolute;
+  top: -4px;
+  left: -14px;
+  font-size: 14px;
+  color: #FFD333;
+  z-index: 10;
+  animation: star-twinkle 1.3s ease-in-out infinite 0.7s;
+}
+
+/* Success: no phone visible */
+.sticker-worker[data-state="success"] .sticker-arm-r::before {
+  display: none;
+}
+
+
+/* ===== Color-coding state labels ===== */
+.state-card:nth-child(1) .state-label { color: #c49a00; }
+.state-card:nth-child(2) .state-label { color: #4a90d9; }
+.state-card:nth-child(3) .state-label { color: #d95a4f; }
+.state-card:nth-child(4) .state-label { color: #77b96c; }
+
+/* ===== Footer note ===== */
+.footer-note {
+  margin-top: 48px;
+  font-size: 12px;
+  color: #bbb;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="worker-showcase-index.html">返回总览</a>
+
+<div class="page-title">表情贴纸风</div>
+<div class="page-subtitle">
+  粗黑描边 · 饱和色彩 · 夸张表情 · 四种工作状态动画<br>
+  类似微信表情包 / LINE 贴纸风格
+</div>
+
+<div class="state-grid">
+
+  <!-- ===== 空闲 idle ===== -->
+  <div class="state-card">
+    <div class="sticker-worker" data-state="idle">
+      <div class="sticker-accent"></div>
+      <div class="sticker-body">
+        <div class="sticker-helmet">
+          <div class="sticker-highlight"></div>
+          <div class="sticker-ear sticker-ear-l"></div>
+          <div class="sticker-ear sticker-ear-r"></div>
+        </div>
+        <div class="sticker-face">
+          <div class="sticker-eye sticker-eye-l"></div>
+          <div class="sticker-eye sticker-eye-r"></div>
+          <div class="sticker-mouth"></div>
+          <div class="sticker-blush sticker-blush-l"></div>
+          <div class="sticker-blush sticker-blush-r"></div>
+        </div>
+        <div class="sticker-torso">
+          <div class="sticker-badge"></div>
+        </div>
+        <div class="sticker-arm sticker-arm-l"></div>
+        <div class="sticker-arm sticker-arm-r"></div>
+      </div>
+    </div>
+    <div class="state-label">空闲</div>
+    <div class="state-desc">Idle ^_^ · 音符漂浮</div>
+  </div>
+
+  <!-- ===== 通话中 calling ===== -->
+  <div class="state-card">
+    <div class="sticker-worker" data-state="calling">
+      <div class="sticker-accent"></div>
+      <div class="sticker-body">
+        <div class="sticker-helmet">
+          <div class="sticker-highlight"></div>
+          <div class="sticker-ear sticker-ear-l"></div>
+          <div class="sticker-ear sticker-ear-r"></div>
+        </div>
+        <div class="sticker-face">
+          <div class="sticker-eye sticker-eye-l"></div>
+          <div class="sticker-eye sticker-eye-r"></div>
+          <div class="sticker-mouth"></div>
+          <div class="sticker-blush sticker-blush-l"></div>
+          <div class="sticker-blush sticker-blush-r"></div>
+        </div>
+        <div class="sticker-torso">
+          <div class="sticker-badge"></div>
+        </div>
+        <div class="sticker-arm sticker-arm-l"></div>
+        <div class="sticker-arm sticker-arm-r"></div>
+      </div>
+    </div>
+    <div class="state-label">通话中</div>
+    <div class="state-desc">Calling · 耳机 + 对话气泡</div>
+  </div>
+
+  <!-- ===== 警报 alert ===== -->
+  <div class="state-card">
+    <div class="sticker-worker" data-state="alert">
+      <div class="sticker-accent"></div>
+      <div class="sticker-body">
+        <div class="sticker-helmet">
+          <div class="sticker-highlight"></div>
+          <div class="sticker-ear sticker-ear-l"></div>
+          <div class="sticker-ear sticker-ear-r"></div>
+        </div>
+        <div class="sticker-face">
+          <div class="sticker-eye sticker-eye-l"></div>
+          <div class="sticker-eye sticker-eye-r"></div>
+          <div class="sticker-mouth"></div>
+          <div class="sticker-blush sticker-blush-l"></div>
+          <div class="sticker-blush sticker-blush-r"></div>
+        </div>
+        <div class="sticker-torso">
+          <div class="sticker-badge"></div>
+        </div>
+        <div class="sticker-arm sticker-arm-l"></div>
+        <div class="sticker-arm sticker-arm-r"></div>
+      </div>
+    </div>
+    <div class="state-label">警报</div>
+    <div class="state-desc">Alert O_O!! · 汗滴 + 抖动</div>
+  </div>
+
+  <!-- ===== 完成 success ===== -->
+  <div class="state-card">
+    <div class="sticker-worker" data-state="success">
+      <div class="sticker-accent"></div>
+      <div class="sticker-body">
+        <div class="sticker-helmet">
+          <div class="sticker-highlight"></div>
+          <div class="sticker-ear sticker-ear-l"></div>
+          <div class="sticker-ear sticker-ear-r"></div>
+        </div>
+        <div class="sticker-face">
+          <div class="sticker-eye sticker-eye-l"></div>
+          <div class="sticker-eye sticker-eye-r"></div>
+          <div class="sticker-mouth"></div>
+          <div class="sticker-blush sticker-blush-l"></div>
+          <div class="sticker-blush sticker-blush-r"></div>
+        </div>
+        <div class="sticker-torso">
+          <div class="sticker-badge"></div>
+        </div>
+        <div class="sticker-arm sticker-arm-l"></div>
+        <div class="sticker-arm sticker-arm-r"></div>
+      </div>
+    </div>
+    <div class="state-label">完成</div>
+    <div class="state-desc">Success ★_★ · 举手庆祝</div>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  纯 HTML + CSS · 无外部依赖 · 粗描边贴纸风格 · 每个状态独立动画
+</div>
+
+</body>
+</html>

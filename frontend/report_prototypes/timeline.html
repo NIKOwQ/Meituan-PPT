@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>评测报告 — Conversation Timeline</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#fafafa;--surface:#fff;--ink:#1a1a1a;--muted:#999;--border:#eee;
+      --green:#52c41a;--green-bg:#f6ffed;
+      --red:#ff4d4f;--red-bg:#fff2f0;
+      --yellow:#faad14;--yellow-bg:#fffbe6;
+      --blue:#1890ff;--blue-bg:#e6f7ff;
+      --agent-bg:#f0f0f0;--user-bg:#e8f4fd;
+      --timeline:#ddd;--accent:#6c5ce7;
+      --radius:10px;
+      --font:Inter,"Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    }
+    html{font-size:14px}
+    body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6}
+
+    /* ── Header ── */
+    .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 32px;position:sticky;top:0;z-index:10}
+    .header h1{font-size:1.15rem;font-weight:700}
+    .header p{color:var(--muted);font-size:.8rem;margin-top:2px}
+
+    /* ── Mini summary bar ── */
+    .mini-bar{display:flex;gap:24px;padding:12px 32px;background:var(--surface);border-bottom:1px solid var(--border);font-size:.8rem;align-items:center}
+    .mini-bar .metric{display:flex;align-items:center;gap:6px}
+    .mini-bar .metric .val{font-weight:800;font-size:1rem}
+    .mini-bar .metric .lbl{color:var(--muted)}
+
+    /* ── Tag filter ── */
+    .tag-filter{display:flex;gap:6px;padding:12px 32px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--surface)}
+    .tag-btn{padding:4px 12px;border-radius:999px;font-size:.75rem;font-weight:600;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .15s;color:var(--muted)}
+    .tag-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .tag-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+    /* ── Timeline ── */
+    .timeline{max-width:800px;margin:0 auto;padding:24px 32px 64px}
+    .tl-group{position:relative;margin-bottom:8px}
+    .tl-node{position:absolute;left:0;top:14px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);z-index:2}
+    .tl-node--fail{border-color:var(--red)}
+    .tl-node--mixed{border-color:var(--yellow)}
+
+    /* Group header (collapsed) */
+    .group-header{margin-left:28px;padding:12px 16px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px;user-select:none}
+    .group-header:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(108,92,231,.1)}
+    .group-header.open{border-bottom-left-radius:0;border-bottom-right-radius:0;border-color:var(--accent)}
+    .gh-id{font-weight:800;color:var(--accent);font-size:.85rem}
+    .gh-preview{flex:1;font-size:.8rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .gh-stats{display:flex;gap:8px;font-size:.75rem;flex-shrink:0}
+    .gh-stats span{padding:2px 8px;border-radius:999px;background:#f5f5f5}
+    .gh-arrow{font-size:.7rem;color:var(--muted);transition:transform .2s}
+    .group-header.open .gh-arrow{transform:rotate(180deg)}
+
+    /* Chat panel (expanded) */
+    .chat-panel{display:none;margin-left:28px;background:var(--surface);border:1px solid var(--accent);border-top:none;border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);padding:20px}
+    .chat-panel.open{display:block}
+
+    /* Chat bubbles */
+    .chat-msg{display:flex;gap:8px;margin-bottom:12px;align-items:flex-start}
+    .chat-msg:last-child{margin-bottom:0}
+    .chat-msg--agent{flex-direction:row}
+    .chat-msg--user{flex-direction:row-reverse}
+    .chat-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+    .chat-msg--agent .chat-avatar{background:var(--agent-bg);color:var(--muted)}
+    .chat-msg--user .chat-avatar{background:var(--user-bg);color:var(--blue)}
+    .chat-bubble{max-width:65%;padding:8px 14px;border-radius:12px;font-size:.85rem;line-height:1.5;position:relative}
+    .chat-msg--agent .chat-bubble{background:var(--agent-bg);border-bottom-left-radius:4px}
+    .chat-msg--user .chat-bubble{background:var(--user-bg);border-bottom-right-radius:4px}
+
+    /* Constraint labels */
+    .msg-labels{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+    .msg-label{font-size:.65rem;font-weight:700;padding:1px 7px;border-radius:999px;cursor:pointer;transition:all .15s}
+    .msg-label--pass{background:var(--green-bg);color:var(--green);border:1px solid var(--green)}
+    .msg-label--fail{background:var(--red-bg);color:var(--red);border:1px solid var(--red)}
+    .msg-label--invalid{background:#f5f5f5;color:var(--muted);border:1px solid var(--muted)}
+    .msg-label:hover{transform:scale(1.05);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+    /* Separator */
+    .chat-sep{border:none;border-top:1px dashed var(--border);margin:16px 0}
+
+    /* Evidence popup */
+    .evidence-popup{display:none;margin-top:8px;padding:12px 16px;background:var(--surface);border-radius:8px;border:1px solid var(--border);font-size:.8rem;animation:fadeSlide .2s ease}
+    .evidence-popup.open{display:block}
+    .evidence-popup h5{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+    .evidence-popup .ev-text{color:var(--ink);line-height:1.6;padding-left:10px;border-left:3px solid var(--accent)}
+    @keyframes fadeSlide{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+    /* Segment divider */
+    .seg-divider{display:flex;align-items:center;gap:8px;margin:14px 0;font-size:.7rem;color:var(--muted)}
+    .seg-divider::before,.seg-divider::after{content:'';flex:1;border-top:1px solid var(--border)}
+    .seg-divider .seg-tag{font-weight:600;padding:1px 8px;border-radius:999px;background:#f5f5f5}
+
+    /* Diagnostics */
+    .diag-list{margin-top:12px;padding:10px 14px;background:var(--yellow-bg);border-radius:6px;font-size:.75rem;color:#ad6800;border:1px solid #ffe58f}
+    .diag-list h5{font-size:.7rem;font-weight:700;margin-bottom:4px}
+    .diag-list li{margin-left:16px;margin-bottom:2px}
+
+    /* ── Responsive ── */
+    @media(max-width:980px){
+      .header,.mini-bar,.tag-filter{padding-left:16px;padding-right:16px}
+      .timeline{padding:16px}
+      .chat-bubble{max-width:80%}
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>评测报告 — Conversation Timeline</h1>
+  <p>飞毛腿骑手外呼指令 · 以对话为主线的评测追溯</p>
+</div>
+
+<div class="mini-bar" id="miniBar"></div>
+<div class="tag-filter" id="tagFilter"></div>
+
+<div class="timeline" id="timeline"></div>
+
+<script src="mock_data.js"></script>
+<script>
+(function(){
+  const R = MOCK_REPORT;
+  const fmt = p => (p*100).toFixed(1)+'%';
+  const fmtTime = s => { const m=Math.round(s/60); return m>=60?(m/60).toFixed(1)+'h':m+'min'; };
+  const short = (t,n=36) => t.length>n ? t.slice(0,n)+'…' : t;
+
+  /* ── Mini bar ── */
+  document.getElementById('miniBar').innerHTML =
+    '<div class="metric"><span class="val">'+fmt(R.coverage)+'</span><span class="lbl">覆盖率</span></div>'+
+    '<div class="metric"><span class="val">'+fmt(R.overall_score.overall_pass_rate)+'</span><span class="lbl">通过率</span></div>'+
+    '<div class="metric"><span class="val">'+R.overall_score.total_constraints_tested+'</span><span class="lbl">约束</span></div>'+
+    '<div class="metric"><span class="val">'+R.conversation_groups.length+'</span><span class="lbl">对话组</span></div>'+
+    '<div class="metric"><span class="val">'+R.overall_score.total_segments+'</span><span class="lbl">测试片段</span></div>'+
+    '<div class="metric"><span class="val">'+fmtTime(R.elapsed_seconds)+'</span><span class="lbl">耗时</span></div>';
+
+  /* ── Constraint tag filter ── */
+  const allConstraints = [...new Set(R.overall_score.constraint_eval_summaries.map(s => s.constraint_text))];
+  const tagDiv = document.getElementById('tagFilter');
+  const allBtn = document.createElement('button');
+  allBtn.className = 'tag-btn active';
+  allBtn.textContent = '全部';
+  allBtn.dataset.constraint = '';
+  tagDiv.appendChild(allBtn);
+  allConstraints.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'tag-btn';
+    btn.textContent = short(c, 20);
+    btn.title = c;
+    btn.dataset.constraint = c;
+    tagDiv.appendChild(btn);
+  });
+
+  tagDiv.querySelectorAll('.tag-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tagDiv.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterGroups(btn.dataset.constraint);
+    });
+  });
+
+  function filterGroups(constraint) {
+    document.querySelectorAll('.tl-group').forEach(g => {
+      if (!constraint) { g.style.display = ''; return; }
+      const hasIt = g.dataset.constraints.split('||').includes(constraint);
+      g.style.display = hasIt ? '' : 'none';
+    });
+  }
+
+  /* ── Build timeline ── */
+  const tlDiv = document.getElementById('timeline');
+
+  R.conversation_groups.forEach((group, gi) => {
+    const constraintsInGroup = [...new Set(group.turns.map(t => t.constraint_text))];
+    // Determine node color based on pass/fail of segments
+    const segResults = group.segments.map(seg => {
+      const ev = R.evaluations.find(e => e.segment_id === seg.segment_id);
+      return ev ? ev.result : 'unknown';
+    });
+    const hasFail = segResults.includes('fail');
+    const nodeClass = hasFail ? 'tl-node--fail' : (segResults.length > 1 ? 'tl-node--mixed' : '');
+
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'tl-group';
+    groupDiv.dataset.constraints = constraintsInGroup.join('||');
+
+    // Node dot
+    groupDiv.innerHTML = '<div class="tl-node '+nodeClass+'"></div>';
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'group-header';
+    header.innerHTML =
+      '<span class="gh-id">#'+group.conversation_id+'</span>'+
+      '<span class="gh-preview">'+short(group.opening_line, 50)+'</span>'+
+      '<span class="gh-stats">'+
+        '<span>'+group.turns.length+' 轮</span>'+
+        '<span>'+group.segments.length+' 片段</span>'+
+      '</span>'+
+      '<span class="gh-arrow">▾</span>';
+    groupDiv.appendChild(header);
+
+    // Chat panel
+    const panel = document.createElement('div');
+    panel.className = 'chat-panel';
+
+    // Build turns grouped by segments
+    let segMap = {};
+    group.segments.forEach(seg => { segMap[seg.segment_id] = seg; });
+
+    // First add the opening line as agent message
+    let html = '<div class="chat-msg chat-msg--agent"><div class="chat-avatar">AI</div><div><div class="chat-bubble">'+short(group.opening_line, 120)+'</div><div class="msg-labels"><span class="msg-label" style="background:#f5f5f5;color:var(--muted);border:1px solid #ddd">开场白</span></div></div></div>';
+
+    group.turns.forEach((turn, ti) => {
+      // Check if this turn starts a new segment
+      const prevTurn = ti > 0 ? group.turns[ti-1] : null;
+      if (ti > 0 && turn.segment_id !== prevTurn.segment_id) {
+        html += '<div class="seg-divider"><span class="seg-tag">Segment #'+turn.segment_id+'</span></div>';
+      } else if (ti === 0) {
+        html += '<div class="seg-divider"><span class="seg-tag">Segment #'+turn.segment_id+'</span></div>';
+      }
+
+      // User bubble
+      html += '<div class="chat-msg chat-msg--user"><div class="chat-avatar">👤</div><div class="chat-bubble">'+turn.user_reply+'</div></div>';
+
+      // Agent bubble with labels
+      const eval_ = R.evaluations.find(e => e.segment_id === turn.segment_id);
+      // Find all evaluations for this segment
+      const segEvals = R.evaluations.filter(e => e.segment_id === turn.segment_id);
+
+      html += '<div class="chat-msg chat-msg--agent"><div class="chat-avatar">AI</div><div>';
+      html += '<div class="chat-bubble">'+turn.agent_reply+'</div>';
+
+      // Show constraint label only on test turns
+      if (turn.is_test_turn) {
+        const labelClass = eval_ ? (eval_.result === 'pass' ? 'msg-label--pass' : eval_.result === 'fail' ? 'msg-label--fail' : 'msg-label--invalid') : '';
+        const labelText = eval_ ? (eval_.result === 'pass' ? '✓ '+short(turn.constraint_text,18) : '✗ '+short(turn.constraint_text,18)) : short(turn.constraint_text,18);
+        html += '<div class="msg-labels">';
+        html += '<span class="msg-label '+labelClass+'" data-segment="'+turn.segment_id+'" onclick="toggleEvidence(this)">'+labelText+'</span>';
+        html += '</div>';
+
+        // Evidence popup
+        if (eval_) {
+          html += '<div class="evidence-popup" id="ev-'+group.conversation_id+'-'+turn.segment_id+'">';
+          html += '<h5>评估证据</h5>';
+          html += '<div class="ev-text">'+eval_.evidence+'</div>';
+          html += '</div>';
+        }
+      }
+
+      html += '</div></div>';
+    });
+
+    // Diagnostics
+    if (group.diagnostics && group.diagnostics.length) {
+      html += '<div class="diag-list"><h5>⚠ 诊断信息</h5><ul>';
+      group.diagnostics.forEach(d => { html += '<li>'+d+'</li>'; });
+      html += '</ul></div>';
+    }
+
+    panel.innerHTML = html;
+    groupDiv.appendChild(panel);
+
+    // Toggle
+    header.addEventListener('click', () => {
+      header.classList.toggle('open');
+      panel.classList.toggle('open');
+    });
+
+    tlDiv.appendChild(groupDiv);
+  });
+
+  // Global toggle evidence
+  window.toggleEvidence = function(el) {
+    const segId = el.dataset.segment;
+    // Find the parent group
+    const group = el.closest('.chat-panel');
+    const popup = group.querySelector('#ev-'+el.closest('.tl-group').dataset.constraints.split('||')[0]+'-'+segId) ||
+                  group.querySelector('.evidence-popup');
+    // simpler: find closest popup
+    const nextPopup = el.closest('div').querySelector('.evidence-popup');
+    if (nextPopup) {
+      nextPopup.classList.toggle('open');
+    }
+  };
+
+  // Auto-expand first group
+  const firstHeader = tlDiv.querySelector('.group-header');
+  if (firstHeader) { firstHeader.click(); }
+})();
+</script>
+</body>
+</html>

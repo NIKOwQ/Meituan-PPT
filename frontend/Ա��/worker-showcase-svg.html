@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG 精细角色 — 美团员工</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    background: #FAF8F2;
+    color: #3a362e;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 60px;
+  }
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2f2c25;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .page-subtitle {
+    font-size: 14px;
+    color: #8a8578;
+    margin-bottom: 36px;
+    letter-spacing: 0.5px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 680px;
+    width: 100%;
+  }
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(47,44,37,0.06);
+    padding: 24px 12px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 4px 20px rgba(47,44,37,0.12); }
+  .card svg { width: 120px; height: 160px; display: block; }
+  .card-label {
+    margin-top: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #2f2c25;
+    letter-spacing: 1px;
+  }
+  .card-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #a09a90;
+  }
+  .back-link {
+    margin-top: 40px;
+    font-size: 13px;
+    color: #8a8578;
+    text-decoration: none;
+    border-bottom: 1px dashed #c5c0b6;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: #2f2c25; }
+
+  /* ---- Animations ---- */
+  @keyframes breathe {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.025); }
+  }
+  @keyframes breathe-alert {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.045); }
+  }
+  .anim-breathe {
+    animation: breathe 2.8s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  .anim-breathe-alert {
+    animation: breathe-alert 1s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  @keyframes dot-pulse {
+    0%, 80%, 100% { opacity: 0.2; }
+    40% { opacity: 1; }
+  }
+  .speech-dot { animation: dot-pulse 1.4s ease-in-out infinite; }
+  .speech-dot:nth-child(2) { animation-delay: 0.2s; }
+  .speech-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-1.5px); }
+    40% { transform: translateX(1.5px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+  }
+  .anim-shake {
+    animation: shake 0.6s ease-in-out infinite;
+  }
+  @keyframes check-pop {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .anim-check {
+    animation: check-pop 0.6s ease-out forwards;
+    transform-origin: center;
+  }
+  @keyframes arm-thumbsup {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(-18deg); }
+    70% { transform: rotate(-18deg); }
+  }
+  .anim-arm-up {
+    animation: arm-thumbsup 2.5s ease-in-out infinite;
+    transform-origin: 72px 84px;
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 0.7; }
+  }
+  .anim-glow { animation: glow-pulse 1.2s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<div class="page-title">SVG 精细角色</div>
+<div class="page-subtitle">美团骑手 &middot; 内联矢量图 &middot; 四种状态</div>
+
+<div class="grid">
+
+  <!-- ========== 1. 空闲 idle ========== -->
+  <div class="card">
+    <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow1" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#2f2c25" flood-opacity="0.10"/>
+        </filter>
+      </defs>
+      <g class="anim-breathe" filter="url(#shadow1)">
+        <!-- Legs -->
+        <rect x="40" y="138" width="14" height="28" rx="5" fill="#2f2c25"/>
+        <rect x="66" y="138" width="14" height="28" rx="5" fill="#2f2c25"/>
+        <!-- Shoes -->
+        <ellipse cx="47" cy="168" rx="10" ry="5" fill="#3a362e"/>
+        <ellipse cx="73" cy="168" rx="10" ry="5" fill="#3a362e"/>
+        <!-- Body / Torso -->
+        <rect x="30" y="82" width="60" height="58" rx="10" fill="#2f2c25"/>
+        <!-- Collar trim -->
+        <path d="M40 84 Q60 94 80 84" stroke="#FFD333" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- Badge -->
+        <rect x="44" y="100" width="18" height="10" rx="2" fill="#fff8d5" stroke="#E8B800" stroke-width="0.7"/>
+        <line x1="48" y1="104" x2="58" y2="104" stroke="#d4c9a0" stroke-width="0.8"/>
+        <line x1="48" y1="107" x2="55" y2="107" stroke="#d4c9a0" stroke-width="0.6"/>
+        <!-- Left arm (straight down) -->
+        <path d="M30 88 Q22 88 22 98 L22 120 Q22 126 28 126" stroke="#2f2c25" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Hand left -->
+        <circle cx="28" cy="126" r="5" fill="#f4be72"/>
+        <!-- Right arm (bent, holding phone) -->
+        <path d="M90 88 Q98 88 98 98 L96 110 Q94 118 88 116" stroke="#2f2c25" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Hand right -->
+        <circle cx="88" cy="116" r="5" fill="#f4be72"/>
+        <!-- Phone -->
+        <rect x="82" y="108" width="11" height="18" rx="2.5" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+        <rect x="84" y="111" width="7" height="10" rx="1" fill="#4fc3f7" opacity="0.7"/>
+        <!-- Neck -->
+        <rect x="52" y="74" width="16" height="12" rx="4" fill="#f4be72"/>
+        <!-- Head / Face -->
+        <ellipse cx="60" cy="56" rx="24" ry="24" fill="#f4be72"/>
+        <!-- Ears -->
+        <ellipse cx="36" cy="56" rx="4" ry="6" fill="#e8a85e"/>
+        <ellipse cx="84" cy="56" rx="4" ry="6" fill="#e8a85e"/>
+        <!-- Eyes -->
+        <circle cx="50" cy="54" r="2.5" fill="#2f2c25"/>
+        <circle cx="70" cy="54" r="2.5" fill="#2f2c25"/>
+        <!-- Eye highlights -->
+        <circle cx="51" cy="53" r="0.8" fill="#fff"/>
+        <circle cx="71" cy="53" r="0.8" fill="#fff"/>
+        <!-- Smile -->
+        <path d="M52 63 Q60 70 68 63" stroke="#2f2c25" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Helmet dome -->
+        <path d="M34 48 Q34 22 60 18 Q86 22 86 48" fill="#FFD333"/>
+        <!-- Helmet brim -->
+        <rect x="30" y="44" width="60" height="6" rx="3" fill="#E8B800"/>
+        <!-- Kangaroo ears on helmet -->
+        <path d="M42 26 L38 10 L50 22 Z" fill="#FFD333" stroke="#E8B800" stroke-width="0.5"/>
+        <path d="M78 26 L82 10 L70 22 Z" fill="#FFD333" stroke="#E8B800" stroke-width="0.5"/>
+        <!-- Visor strip -->
+        <rect x="38" y="40" width="44" height="4" rx="2" fill="#E8B800" opacity="0.6"/>
+      </g>
+    </svg>
+    <div class="card-label">空闲</div>
+    <div class="card-desc">待命呼吸动画</div>
+  </div>
+
+  <!-- ========== 2. 通话中 calling ========== -->
+  <div class="card">
+    <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow2" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#2f2c25" flood-opacity="0.10"/>
+        </filter>
+      </defs>
+      <g class="anim-breathe" filter="url(#shadow2)">
+        <!-- Legs -->
+        <rect x="40" y="138" width="14" height="28" rx="5" fill="#2f2c25"/>
+        <rect x="66" y="138" width="14" height="28" rx="5" fill="#2f2c25"/>
+        <!-- Shoes -->
+        <ellipse cx="47" cy="168" rx="10" ry="5" fill="#3a362e"/>
+        <ellipse cx="73" cy="168" rx="10" ry="5" fill="#3a362e"/>
+        <!-- Body / Torso -->
+        <rect x="30" y="82" width="60" height="58" rx="10" fill="#2f2c25"/>
+        <!-- Collar trim -->
+        <path d="M40 84 Q60 94 80 84" stroke="#FFD333" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- Badge -->
+        <rect x="44" y="100" width="18" height="10" rx="2" fill="#fff8d5" stroke="#E8B800" stroke-width="0.7"/>
+        <line x1="48" y1="104" x2="58" y2="104" stroke="#d4c9a0" stroke-width="0.8"/>
+        <line x1="48" y1="107" x2="55" y2="107" stroke="#d4c9a0" stroke-width="0.6"/>
+        <!-- Left arm (straight) -->
+        <path d="M30 88 Q22 88 22 98 L22 120 Q22 126 28 126" stroke="#2f2c25" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="28" cy="126" r="5" fill="#f4be72"/>
+        <!-- Right arm (raised to ear, holding phone) -->
+        <path d="M90 88 Q100 86 100 74 L98 62 Q96 56 90 56" stroke="#2f2c25" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="90" cy="56" r="5" fill="#f4be72"/>
+        <!-- Phone at ear -->
+        <rect x="85" y="46" width="11" height="18" rx="2.5" fill="#1a1a1a" stroke="#555" stroke-width="0.5"/>
+        <rect x="87" y="49" width="7" height="10" rx="1" fill="#81c784" opacity="0.7"/>
+        <!-- Headset arc -->
+        <path d="M36 50 Q30 32 60 28 Q90 32 84 50" stroke="#555" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Headset mic boom -->
+        <path d="M36 50 Q32 56 36 60" stroke="#555" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="36" cy="61" r="2.5" fill="#666"/>
+        <!-- Headset earpiece -->
+        <circle cx="36" cy="50" r="4" fill="#555"/>
+        <!-- Neck -->
+        <rect x="52" y="74" width="16" height="12" rx="4" fill="#f4be72"/>
+        <!-- Head / Face -->
+        <ellipse cx="60" cy="56" rx="24" ry="24" fill="#f4be72"/>
+        <!-- Ear (right hidden by phone) -->
+        <ellipse cx="84" cy="56" rx="4" ry="6" fill="#e8a85e"/>
+        <!-- Eyes -->
+        <circle cx="50" cy="54" r="2.5" fill="#2f2c25"/>
+        <circle cx="70" cy="54" r="2.5" fill="#2f2c25"/>
+        <circle cx="51" cy="53" r="0.8" fill="#fff"/>
+        <circle cx="71" cy="53" r="0.8" fill="#fff"/>
+        <!-- Smile -->
+        <path d="M52 63 Q60 68 68 63" stroke="#2f2c25" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Helmet dome -->
+        <path d="M34 48 Q34 22 60 18 Q86 22 86 48" fill="#FFD333"/>
+        <!-- Helmet brim -->
+        <rect x="30" y="44" width="60" height="6" rx="3" fill="#E8B800"/>
+        <!-- Kangaroo ears on helmet -->
+        <path d="M42 26 L38 10 L50 22 Z" fill="#FFD333" stroke="#E8B800" stroke-width="0.5"/>
+        <path d="M78 26 L82 10 L70 22 Z" fill="#FFD333" stroke="#E8B800" stroke-width="0.5"/>
+        <!-- Visor strip -->
+        <rect x="38" y="40" width="44" height="4" rx="2" fill="#E8B800" opacity="0.6"/>
+      </g>
+      <!-- Speech bubble -->
+      <g>
+        <rect x="2" y="4" width="30" height="20" rx="8" fill="#fff" stroke="#ddd" stroke-width="0.8"/>
+        <polygon points="22,24 28,24 24,30" fill="#fff"/>
+        <circle class="speech-dot" cx="11" cy="14" r="2" fill="#FFD333"/>
+        <circle class="speech-dot" cx="17" cy="14" r="2" fill="#FFD333"/>
+        <circle class="speech-dot" cx="23" cy="14" r="2" fill="#FFD333"/>
+      </g>
+    </svg>
+    <div class="card-label">通话中</div>
+    <div class="card-desc">耳机 + 对话气泡</div>
+  </div>
+
+  <!-- ========== 3. 警报 alert ========== -->
+  <div class="card">
+    <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow3" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#2f2c25" flood-opacity="0.10"/>
+        </filter>
+        <filter id="red-glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+          <feFlood flood-color="#e53935" flood-opacity="0.5" result="color"/>
+          <feComposite in="color" in2="blur" operator="in" result="glow"/>
+          <feMerge>
+            <feMergeNode in="glow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <g class="anim-shake" filter="url(#shadow3)">
+        <!-- Red glow aura -->
+        <ellipse class="anim-glow" cx="60" cy="110" rx="50" ry="60" fill="#e53935" opacity="0.35"/>
+        <!-- Legs -->
+        <rect x="40" y="138" width="14" height="28" rx="5" fill="#2f2c25"/>
+        <rect x="66" y="138" width="14" height="28" rx="5" fill="#2f2c25"/>
+        <!-- Shoes -->
+        <ellipse cx="47" cy="168" rx="10" ry="5" fill="#3a362e"/>
+        <ellipse cx="73" cy="168" rx="10" ry="5" fill="#3a362e"/>
+        <!-- Body / Torso -->
+        <rect x="30" y="82" width="60" height="58" rx="10" fill="#2f2c25"/>
+        <!-- Collar trim -->
+        <path d="M40 84 Q60 94 80 84" stroke="#FFD333" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- Badge -->
+        <rect x="44" y="100" width="18" height="10" rx="2" fill="#fff8d5" stroke="#E8B800" stroke-width="0.7"/>
+        <line x1="48" y1="104" x2="58" y2="104" stroke="#d4c9a0" stroke-width="0.8"/>
+        <line x1="48" y1="107" x2="55" y2="107" stroke="#d4c9a0" stroke-width="0.6"/>
+        <!-- Arms at sides, slightly out -->
+        <path d="M30 88 Q20 90 20 102 L22 122 Q22 128 28 128" stroke="#2f2c25" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="28" cy="128" r="5" fill="#f4be72"/>
+        <path d="M90 88 Q100 90 100 102 L98 122 Q98 128 92 128" stroke="#2f2c25" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="92" cy="128" r="5" fill="#f4be72"/>
+        <!-- Neck -->
+        <rect x="52" y="74" width="16" height="12" rx="4" fill="#f4be72"/>
+        <!-- Head / Face -->
+        <ellipse cx="60" cy="56" rx="24" ry="24" fill="#f4be72"/>
+        <!-- Ears -->
+        <ellipse cx="36" cy="56" rx="4" ry="6" fill="#e8a85e"/>
+        <ellipse cx="84" cy="56" rx="4" ry="6" fill="#e8a85e"/>
+        <!-- Eyes (wider, startled) -->
+        <ellipse cx="50" cy="53" rx="4" ry="4.5" fill="#2f2c25"/>
+        <ellipse cx="70" cy="53" rx="4" ry="4.5" fill="#2f2c25"/>
+        <circle cx="51.5" cy="52" r="1.2" fill="#fff"/>
+        <circle cx="71.5" cy="52" r="1.2" fill="#fff"/>
+        <!-- Open mouth "O" -->
+        <ellipse cx="60" cy="66" rx="5" ry="4" fill="#2f2c25"/>
+        <ellipse cx="60" cy="66" rx="3.5" ry="2.8" fill="#c4604a"/>
+        <!-- Helmet dome -->
+        <path d="M34 48 Q34 22 60 18 Q86 22 86 48" fill="#FFD333"/>
+        <!-- Helmet brim -->
+        <rect x="30" y="44" width="60" height="6" rx="3" fill="#E8B800"/>
+        <!-- Kangaroo ears -->
+        <path d="M42 26 L38 10 L50 22 Z" fill="#FFD333" stroke="#E8B800" stroke-width="0.5"/>
+        <path d="M78 26 L82 10 L70 22 Z" fill="#FFD333" stroke="#E8B800" stroke-width="0.5"/>
+        <!-- Visor strip -->
+        <rect x="38" y="40" width="44" height="4" rx="2" fill="#E8B800" opacity="0.6"/>
+        <!-- Red exclamation badge -->
+        <g filter="url(#red-glow)">
+          <circle cx="92" cy="38" r="10" fill="#e53935"/>
+          <text x="92" y="43" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">!</text>
+        </g>
+      </g>
+    </svg>
+    <div class="card-label" style="color:#c62828;">警报</div>
+    <div class="card-desc">红色警告 + 震动</div>
+  </div>
+
+  <!-- ========== 4. 完成 success ========== -->
+  <div class="card">
+    <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow4" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#2f2c25" flood-opacity="0.10"/>
+        </filter>
+      </defs>
+      <g class="anim-breathe" filter="url(#shadow4)">
+        <!-- Legs -->
+        <rect x="40" y="138" width="14" height="28" rx="5" fill="#2f2c25"/>
+        <rect x="66" y="138" width="14" height="28" rx="5" fill="#2f2c25"/>
+        <!-- Shoes -->
+        <ellipse cx="47" cy="168" rx="10" ry="5" fill="#3a362e"/>
+        <ellipse cx="73" cy="168" rx="10" ry="5" fill="#3a362e"/>
+        <!-- Body / Torso -->
+        <rect x="30" y="82" width="60" height="58" rx="10" fill="#2f2c25"/>
+        <!-- Collar trim -->
+        <path d="M40 84 Q60 94 80 84" stroke="#FFD333" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- Badge -->
+        <rect x="44" y="100" width="18" height="10" rx="2" fill="#fff8d5" stroke="#E8B800" stroke-width="0.7"/>
+        <line x1="48" y1="104" x2="58" y2="104" stroke="#d4c9a0" stroke-width="0.8"/>
+        <line x1="48" y1="107" x2="55" y2="107" stroke="#d4c9a0" stroke-width="0.6"/>
+        <!-- Left arm (straight) -->
+        <path d="M30 88 Q22 88 22 98 L22 120 Q22 126 28 126" stroke="#2f2c25" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="28" cy="126" r="5" fill="#f4be72"/>
+        <!-- Right arm (raised, thumbs up) -->
+        <g class="anim-arm-up">
+          <path d="M90 88 Q100 84 102 72 L102 60" stroke="#2f2c25" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="102" cy="58" r="5" fill="#f4be72"/>
+          <!-- Thumbs up -->
+          <rect x="99" y="44" width="5" height="10" rx="2.5" fill="#f4be72"/>
+          <rect x="96" y="52" width="11" height="6" rx="3" fill="#f4be72"/>
+        </g>
+        <!-- Neck -->
+        <rect x="52" y="74" width="16" height="12" rx="4" fill="#f4be72"/>
+        <!-- Head / Face -->
+        <ellipse cx="60" cy="56" rx="24" ry="24" fill="#f4be72"/>
+        <!-- Ears -->
+        <ellipse cx="36" cy="56" rx="4" ry="6" fill="#e8a85e"/>
+        <ellipse cx="84" cy="56" rx="4" ry="6" fill="#e8a85e"/>
+        <!-- Eyes (happy, slightly curved) -->
+        <path d="M46 52 Q50 48 54 52" stroke="#2f2c25" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M66 52 Q70 48 74 52" stroke="#2f2c25" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <!-- Wide smile with teeth -->
+        <path d="M48 63 Q60 74 72 63" stroke="#2f2c25" stroke-width="1.5" fill="#fff" stroke-linecap="round"/>
+        <line x1="49" y1="63" x2="71" y2="63" stroke="#2f2c25" stroke-width="0.8"/>
+        <!-- Blush cheeks -->
+        <ellipse cx="42" cy="62" rx="5" ry="3" fill="#f0a0a0" opacity="0.3"/>
+        <ellipse cx="78" cy="62" rx="5" ry="3" fill="#f0a0a0" opacity="0.3"/>
+        <!-- Helmet dome -->
+        <path d="M34 48 Q34 22 60 18 Q86 22 86 48" fill="#FFD333"/>
+        <!-- Helmet brim -->
+        <rect x="30" y="44" width="60" height="6" rx="3" fill="#E8B800"/>
+        <!-- Kangaroo ears -->
+        <path d="M42 26 L38 10 L50 22 Z" fill="#FFD333" stroke="#E8B800" stroke-width="0.5"/>
+        <path d="M78 26 L82 10 L70 22 Z" fill="#FFD333" stroke="#E8B800" stroke-width="0.5"/>
+        <!-- Visor strip -->
+        <rect x="38" y="40" width="44" height="4" rx="2" fill="#E8B800" opacity="0.6"/>
+        <!-- Floating green checkmark -->
+        <g class="anim-check">
+          <circle cx="24" cy="24" r="12" fill="#43a047"/>
+          <polyline points="18,24 22,28 30,18" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </g>
+    </svg>
+    <div class="card-label" style="color:#2e7d32;">完成</div>
+    <div class="card-desc">竖拇指 + 绿色勾</div>
+  </div>
+
+</div>
+
+<a class="back-link" href="worker-showcase-index.html">&larr; 返回角色总览</a>
+
+</body>
+</html>

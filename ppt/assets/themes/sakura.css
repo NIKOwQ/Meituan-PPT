@@ -1,0 +1,30 @@
+/* theme: sakura — 樱花 · 温柔粉调 */
+:root{
+  --bg:#FFFAFB;--bg-soft:#FFF1F3;--surface:#FFFFFF;--surface-2:#FFE4E8;
+  --border:rgba(74,25,66,.08);--border-strong:rgba(74,25,66,.18);
+  --text-1:#4A1942;--text-2:#9B5074;--text-3:#C99AB5;
+  --accent:#E8457C;--accent-2:#4A1942;--accent-3:#DC2626;
+  --good:#3DAA6D;--warn:#D4882B;--bad:#D9365D;
+  --grad:linear-gradient(135deg,#E8457C,#BE185D);
+  --grad-soft:linear-gradient(135deg,#FFFAFB,#FFF1F3);
+  --grad-dark:linear-gradient(135deg,#4A1942,#7B2D5E);
+  --radius:16px;--radius-sm:10px;--radius-lg:24px;
+  --shadow:0 2px 8px rgba(74,25,66,.06),0 12px 32px rgba(74,25,66,.06);
+  --shadow-lg:0 8px 24px rgba(74,25,66,.1),0 30px 80px rgba(74,25,66,.08);
+  --font-sans:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Inter','Noto Sans SC',sans-serif;
+  --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
+  /* component tokens */
+  --accent-solid:#E8457C;
+  --accent-on-accent:#FFFFFF;
+  --accent-glow:rgba(232,69,124,.25);
+  --info-color:#7C3AED;
+  --good-bg:#F0FDF4;--good-border:#86EFAC;
+  --bad-bg:#FFF1F2;--bad-border:#FECDD3;
+  --good-grad:linear-gradient(90deg,#6EE7B7,#3DAA6D);
+  --warn-grad:linear-gradient(90deg,#FCD34D,#D4882B);
+  --bad-grad:linear-gradient(90deg,#FDA4AF,#D9365D);
+  --terminal-bg:#4A1942;
+  --img-blend:multiply;
+  --img-opacity:.88;
+}

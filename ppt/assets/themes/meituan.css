@@ -1,0 +1,30 @@
+/* theme: meituan — 美团黄 · 品牌默认 */
+:root{
+  --bg:#ffffff;--bg-soft:#fffbf0;--surface:#ffffff;--surface-2:#fff8e1;
+  --border:rgba(51,51,51,.1);--border-strong:rgba(51,51,51,.22);
+  --text-1:#333333;--text-2:#666666;--text-3:#999999;
+  --accent:#FFD100;--accent-2:#333333;--accent-3:#FF4D4F;
+  --good:#52C41A;--warn:#FAAD14;--bad:#FF4D4F;
+  --grad:linear-gradient(135deg,#FFD100,#FFAB00);
+  --grad-soft:linear-gradient(135deg,#fffde7,#fff8e1);
+  --grad-dark:linear-gradient(135deg,#333333,#555555);
+  --radius:16px;--radius-sm:10px;--radius-lg:24px;
+  --shadow:0 2px 8px rgba(51,51,51,.06),0 12px 32px rgba(51,51,51,.06);
+  --shadow-lg:0 8px 24px rgba(51,51,51,.1),0 30px 80px rgba(51,51,51,.08);
+  --font-sans:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Inter','Noto Sans SC',sans-serif;
+  --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
+  /* component tokens */
+  --accent-solid:#FFD100;
+  --accent-on-accent:#333333;
+  --accent-glow:rgba(255,209,0,.3);
+  --info-color:#1890ff;
+  --good-bg:#f6ffed;--good-border:#b7eb8f;
+  --bad-bg:#fff1f0;--bad-border:#ffccc7;
+  --good-grad:linear-gradient(90deg,#95de64,#52c41a);
+  --warn-grad:linear-gradient(90deg,#ffd666,#faad14);
+  --bad-grad:linear-gradient(90deg,#ff7875,#ff4d4f);
+  --terminal-bg:#1e1e1e;
+  --img-blend:multiply;
+  --img-opacity:.88;
+}

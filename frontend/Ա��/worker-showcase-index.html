@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>美团员工形象 · 视觉风格展示</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --yellow: #FFD333;
+      --yellow-dark: #E8B800;
+      --ink: #171713;
+      --bg: #FAF8F2;
+      --card-bg: #FFFFFF;
+      --muted: #8A877D;
+      --border: #E8E4D8;
+      --shadow: rgba(42, 34, 10, 0.08);
+    }
+    body {
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+    header {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 48px;
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    header h1 span { color: var(--yellow-dark); }
+    header p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .gallery {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      display: block;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+    .card .preview {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card h2 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #FFF8D5;
+      color: #A68B00;
+    }
+    /* --- Mini previews for each style --- */
+
+    /* Flat mini */
+    .mini-flat { position: relative; width: 48px; height: 64px; }
+    .mini-flat .mf-helm {
+      position: absolute; top: 0; left: 4px;
+      width: 40px; height: 20px; border-radius: 12px 12px 4px 4px;
+      background: var(--yellow);
+    }
+    .mini-flat .mf-face {
+      position: absolute; top: 12px; left: 10px;
+      width: 28px; height: 18px; border-radius: 50%;
+      background: #f4be72;
+    }
+    .mini-flat .mf-body {
+      position: absolute; top: 30px; left: 6px;
+      width: 36px; height: 28px; border-radius: 6px;
+      background: #2f2c25;
+    }
+    .mini-flat .mf-badge {
+      position: absolute; top: 36px; left: 16px;
+      width: 10px; height: 8px; border-radius: 2px;
+      background: #fff8d5;
+    }
+
+    /* SVG mini */
+    .mini-svg svg { width: 48px; height: 64px; }
+
+    /* Chibi mini */
+    .mini-chibi { position: relative; width: 56px; height: 64px; }
+    .mini-chibi .mc-head {
+      position: absolute; top: 2px; left: 4px;
+      width: 48px; height: 42px; border-radius: 50%;
+      background: #f4be72;
+    }
+    .mini-chibi .mc-helm {
+      position: absolute; top: -2px; left: 2px;
+      width: 52px; height: 22px; border-radius: 16px 16px 4px 4px;
+      background: var(--yellow);
+    }
+    .mini-chibi .mc-body {
+      position: absolute; bottom: 2px; left: 14px;
+      width: 28px; height: 20px; border-radius: 6px;
+      background: #2f2c25;
+    }
+
+    /* Pixel mini */
+    .mini-pixel {
+      width: 0; height: 0;
+      box-shadow:
+        3px -8px 0 3px #FFD333,   /* 左耳朵 */
+        3px -4px 0 3px #FFD333,   /* 左耳朵 */
+        13px -2px 0 3px #FFD333,  /* 右耳朵 */
+        13px -4px 0 3px #FFD333,  /* 右耳朵 */
+        4px 0 0 4px #FFD333, 8px 0 0 4px #FFD333, 12px 0 0 4px #FFD333,
+        0 4px 0 4px #FFD333, 4px 4px 0 4px #E8B800, 8px 4px 0 4px #E8B800, 12px 4px 0 4px #FFD333, 16px 4px 0 4px #FFD333,
+        0 8px 0 4px #f4be72, 4px 8px 0 4px #2a1a0a, 8px 8px 0 4px #f4be72, 12px 8px 0 4px #2a1a0a, 16px 8px 0 4px #f4be72,
+        0 12px 0 4px #f4be72, 4px 12px 0 4px #f4be72, 8px 12px 0 4px #f4be72, 12px 12px 0 4px #f4be72, 16px 12px 0 4px #f4be72,
+        4px 16px 0 4px #2f2c25, 8px 16px 0 4px #2f2c25, 12px 16px 0 4px #2f2c25,
+        4px 20px 0 4px #fff8d5, 8px 20px 0 4px #2f2c25, 12px 20px 0 4px #2f2c25,
+        4px 24px 0 4px #2f2c25, 8px 24px 0 4px #2f2c25, 12px 24px 0 4px #2f2c25;
+    }
+
+    /* Line art mini */
+    .mini-line { position: relative; width: 48px; height: 64px; }
+    .mini-line .ml-helm {
+      position: absolute; top: 0; left: 6px;
+      width: 36px; height: 18px; border-radius: 10px 10px 2px 2px;
+      border: 1.5px solid #2a1a0a; background: var(--yellow);
+    }
+    .mini-line .ml-face {
+      position: absolute; top: 10px; left: 10px;
+      width: 28px; height: 18px; border-radius: 50%;
+      border: 1.5px solid #2a1a0a; background: transparent;
+    }
+    .mini-line .ml-body {
+      position: absolute; top: 28px; left: 8px;
+      width: 32px; height: 28px; border-radius: 4px;
+      border: 1.5px solid #2a1a0a; background: transparent;
+    }
+
+    /* Sticker mini */
+    .mini-sticker { position: relative; width: 52px; height: 64px; transform: rotate(-3deg); }
+    .mini-sticker .ms-helm {
+      position: absolute; top: 0; left: 4px;
+      width: 44px; height: 22px; border-radius: 14px 14px 4px 4px;
+      background: var(--yellow); border: 2.5px solid #1a1a1a;
+    }
+    .mini-sticker .ms-face {
+      position: absolute; top: 14px; left: 8px;
+      width: 36px; height: 22px; border-radius: 50%;
+      background: #f4be72; border: 2.5px solid #1a1a1a;
+    }
+    .mini-sticker .ms-body {
+      position: absolute; top: 36px; left: 6px;
+      width: 40px; height: 24px; border-radius: 6px;
+      background: #2f2c25; border: 2.5px solid #1a1a1a;
+    }
+
+    /* Paper mini */
+    .mini-paper { position: relative; width: 48px; height: 64px; }
+    .mini-paper .mp-shadow {
+      position: absolute; top: 4px; left: 4px;
+      width: 40px; height: 52px; border-radius: 10px;
+      background: #d8d4c8;
+    }
+    .mini-paper .mp-body {
+      position: absolute; top: 26px; left: 5px;
+      width: 36px; height: 28px; border-radius: 6px 6px 8px 8px;
+      background: #2f2c25;
+      box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+    }
+    .mini-paper .mp-face {
+      position: absolute; top: 14px; left: 9px;
+      width: 28px; height: 18px; border-radius: 50%;
+      background: #f4be72;
+      box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+    }
+    .mini-paper .mp-helm {
+      position: absolute; top: 2px; left: 3px;
+      width: 42px; height: 20px; border-radius: 12px 12px 4px 4px;
+      background: var(--yellow);
+      box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+    }
+
+    /* Isometric mini */
+    .mini-iso {
+      width: 50px; height: 64px;
+      position: relative;
+      transform: rotateX(30deg) rotateZ(-45deg);
+      transform-style: preserve-3d;
+    }
+    .mini-iso .mi-helm {
+      position: absolute; top: 0; left: 8px;
+      width: 34px; height: 16px; border-radius: 8px 8px 2px 2px;
+      background: var(--yellow);
+      box-shadow: 3px 3px 0 #E8B800;
+    }
+    .mini-iso .mi-body {
+      position: absolute; top: 20px; left: 6px;
+      width: 38px; height: 36px; border-radius: 4px;
+      background: #2f2c25;
+      box-shadow: 3px 3px 0 #1a1a18;
+    }
+
+    /* Polished mini */
+    .mini-polished {
+      position: relative;
+      width: 78px;
+      height: 70px;
+    }
+    .mini-polished .mpo-window {
+      position: absolute; top: 0; right: 3px;
+      width: 24px; height: 18px; border-radius: 3px;
+      background: #d9f2ff; border: 2px solid #242117;
+    }
+    .mini-polished .mpo-desk {
+      position: absolute; left: 2px; right: 2px; bottom: 12px;
+      height: 12px; border-radius: 4px;
+      background: linear-gradient(180deg, #fff8df, #e9c879);
+      border: 2px solid #242117;
+    }
+    .mini-polished .mpo-monitor {
+      position: absolute; top: 14px; right: 8px;
+      width: 28px; height: 20px; border-radius: 4px;
+      background: #242620; border: 2px solid #242117;
+    }
+    .mini-polished .mpo-monitor::before {
+      content: ''; position: absolute; left: 5px; right: 5px; top: 6px;
+      height: 3px; border-radius: 999px; background: #77b96c;
+      box-shadow: 8px 7px 0 #ffd333;
+    }
+    .mini-polished .mpo-head {
+      position: absolute; top: 8px; left: 19px;
+      width: 30px; height: 32px; border-radius: 12px 12px 14px 14px;
+      background: linear-gradient(180deg, var(--yellow), #d9a900);
+      border: 2px solid #242117;
+    }
+    .mini-polished .mpo-head::before,
+    .mini-polished .mpo-head::after {
+      content: ''; position: absolute; top: -12px;
+      width: 9px; height: 15px; border-radius: 8px 8px 3px 3px;
+      background: var(--yellow); border: 2px solid #242117;
+    }
+    .mini-polished .mpo-head::before { left: 2px; transform: rotate(-14deg); }
+    .mini-polished .mpo-head::after { right: 2px; transform: rotate(14deg); }
+    .mini-polished .mpo-face {
+      position: absolute; top: 20px; left: 25px;
+      width: 18px; height: 15px; border-radius: 9px;
+      background: #f4be72; border: 2px solid #242117;
+    }
+    .mini-polished .mpo-body {
+      position: absolute; top: 38px; left: 19px;
+      width: 30px; height: 24px; border-radius: 11px 11px 4px 4px;
+      background: #2f2c25; border: 2px solid #242117;
+    }
+    .mini-polished .mpo-badge {
+      position: absolute; top: 47px; left: 31px;
+      width: 8px; height: 6px; border-radius: 2px;
+      background: #fff8d5;
+    }
+
+    /* Office mini */
+    .mini-office { position: relative; width: 72px; height: 64px; }
+    .mini-office .mo-monitor {
+      position: absolute; top: 0; left: 14px;
+      width: 32px; height: 20px; border-radius: 3px;
+      background: #252521;
+    }
+    .mini-office .mo-monitor::before {
+      content: ''; position: absolute; top: 2px; left: 2px; right: 2px; bottom: 2px;
+      background: #3A5F8A; border-radius: 1px;
+    }
+    .mini-office .mo-desk {
+      position: absolute; bottom: 14px; left: 2px; right: 2px;
+      height: 8px; background: #E2DFD5; border-radius: 2px;
+    }
+    .mini-office .mo-desk::before {
+      content: ''; position: absolute; top: -2px; left: 0; right: 0;
+      height: 3px; background: #F5F3ED; border-radius: 2px 2px 0 0;
+    }
+    .mini-office .mo-helm {
+      position: absolute; top: 18px; left: 18px;
+      width: 22px; height: 9px; border-radius: 6px 6px 2px 2px;
+      background: var(--yellow);
+    }
+    .mini-office .mo-face {
+      position: absolute; top: 23px; left: 21px;
+      width: 16px; height: 11px; border-radius: 50%;
+      background: #f4be72;
+    }
+    .mini-office .mo-body {
+      position: absolute; top: 32px; left: 16px;
+      width: 26px; height: 18px; border-radius: 4px;
+      background: #2f2c25;
+    }
+    .mini-office .mo-mug {
+      position: absolute; bottom: 12px; right: 6px;
+      width: 6px; height: 6px; border-radius: 1px;
+      background: #fff; border: 1px solid #E8E4D8;
+    }
+
+    /* Paper Office mini */
+    .mini-paper-office { position: relative; width: 68px; height: 64px; }
+    .mini-paper-office .mpo-desk {
+      position: absolute; bottom: 16px; left: 4px; right: 4px;
+      height: 7px; background: #DDD9CE; border-radius: 2px;
+      box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+    }
+    .mini-paper-office .mpo-desk::before {
+      content: ''; position: absolute; top: -3px; left: 0; right: 0;
+      height: 3px; background: #F0EDE5; border-radius: 2px 2px 0 0;
+    }
+    .mini-paper-office .mpo-monitor {
+      position: absolute; top: 2px; left: 14px;
+      width: 30px; height: 18px; border-radius: 3px;
+      background: #2A2A26;
+      box-shadow: 1px 2px 0 rgba(0,0,0,0.10);
+    }
+    .mini-paper-office .mpo-monitor::before {
+      content: ''; position: absolute; top: 2px; left: 2px; right: 2px; bottom: 2px;
+      background: #3A5F8A; border-radius: 1px;
+    }
+    .mini-paper-office .mpo-helm {
+      position: absolute; top: 16px; left: 16px;
+      width: 22px; height: 10px; border-radius: 12px 12px 3px 3px;
+      background: var(--yellow);
+      box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+    }
+    .mini-paper-office .mpo-face {
+      position: absolute; top: 22px; left: 19px;
+      width: 16px; height: 12px; border-radius: 48% 52% 46% 50%;
+      background: #f4be72;
+      box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+    }
+    .mini-paper-office .mpo-body {
+      position: absolute; top: 32px; left: 14px;
+      width: 26px; height: 16px; border-radius: 6px;
+      background: #2f2c25;
+      box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>美团员工形象 · <span>视觉风格展示</span></h1>
+    <p>10 种纯 HTML+CSS/SVG 视觉方案对比，均为独立可运行文件，点击卡片查看详情</p>
+  </header>
+
+  <main class="gallery">
+    <a href="worker-showcase-polished.html" class="card">
+      <div class="preview">
+        <div class="mini-polished">
+          <div class="mpo-window"></div>
+          <div class="mpo-monitor"></div>
+          <div class="mpo-head"></div>
+          <div class="mpo-face"></div>
+          <div class="mpo-body"></div>
+          <div class="mpo-badge"></div>
+          <div class="mpo-desk"></div>
+        </div>
+      </div>
+      <h2>Mavis 精修版</h2>
+      <p>完整办公场景 + 耳机员工 + 四种状态切换，适合最终落地</p>
+      <span class="tag">Polished</span>
+    </a>
+
+    <a href="worker-showcase-svg.html" class="card">
+      <div class="preview">
+        <div class="mini-svg">
+          <svg viewBox="0 0 20 28" fill="none">
+            <path d="M4 8 Q10 0 16 8 L16 10 L4 10 Z" fill="#FFD333"/>
+            <ellipse cx="10" cy="13" rx="5" ry="4" fill="#f4be72"/>
+            <circle cx="8" cy="12" r="0.8" fill="#2a1a0a"/><circle cx="12" cy="12" r="0.8" fill="#2a1a0a"/>
+            <path d="M8 14.5 Q10 16 12 14.5" stroke="#c47a3a" fill="none" stroke-width="0.6"/>
+            <rect x="5" y="17" width="10" height="9" rx="2" fill="#2f2c25"/>
+            <rect x="8" y="19" width="4" height="2.5" rx="0.5" fill="#fff8d5"/>
+          </svg>
+        </div>
+      </div>
+      <h2>SVG 精细角色</h2>
+      <p>完整内联 SVG，含身体四肢面部细节，袋鼠耳朵头盔</p>
+      <span class="tag">SVG</span>
+    </a>
+
+    <a href="worker-showcase-pixel.html" class="card">
+      <div class="preview">
+        <div class="mini-pixel"></div>
+      </div>
+      <h2>像素艺术</h2>
+      <p>单元素 box-shadow 像素画，16-bit 复古游戏风格</p>
+      <span class="tag">CSS Box-Shadow</span>
+    </a>
+
+    <a href="worker-showcase-chibi.html" class="card">
+      <div class="preview">
+        <div class="mini-chibi">
+          <div class="mc-helm"></div>
+          <div class="mc-head"></div>
+          <div class="mc-body"></div>
+        </div>
+      </div>
+      <h2>Q 版卡通风</h2>
+      <p>大头小身可爱比例，闪亮大眼 + 腮红，弹跳动画</p>
+      <span class="tag">Kawaii</span>
+    </a>
+
+    <a href="worker-showcase-flat.html" class="card">
+      <div class="preview">
+        <div class="mini-flat">
+          <div class="mf-helm"></div>
+          <div class="mf-face"></div>
+          <div class="mf-body"></div>
+          <div class="mf-badge"></div>
+        </div>
+      </div>
+      <h2>扁平几何风</h2>
+      <p>纯色块零渐变，简洁几何形状，现代扁平设计</p>
+      <span class="tag">Flat Design</span>
+    </a>
+
+    <a href="worker-showcase-isometric.html" class="card">
+      <div class="preview">
+        <div class="mini-iso">
+          <div class="mi-helm"></div>
+          <div class="mi-body"></div>
+        </div>
+      </div>
+      <h2>等轴测伪 3D</h2>
+      <p>CSS 3D 变换模拟等轴视角，桌游棋子质感</p>
+      <span class="tag">CSS 3D</span>
+    </a>
+
+    <a href="worker-showcase-paper.html" class="card">
+      <div class="preview">
+        <div class="mini-paper">
+          <div class="mp-shadow"></div>
+          <div class="mp-body"></div>
+          <div class="mp-face"></div>
+          <div class="mp-helm"></div>
+        </div>
+      </div>
+      <h2>纸片叠层风</h2>
+      <p>多层彩色纸片叠加，手剪纸感，温和亲和力</p>
+      <span class="tag">Paper Cut</span>
+    </a>
+
+    <a href="worker-showcase-lineart.html" class="card">
+      <div class="preview">
+        <div class="mini-line">
+          <div class="ml-helm"></div>
+          <div class="ml-face"></div>
+          <div class="ml-body"></div>
+        </div>
+      </div>
+      <h2>线描极简风</h2>
+      <p>1.5px 细线条描边，仅头盔填色，蓝图/图标质感</p>
+      <span class="tag">Line Art</span>
+    </a>
+
+    <a href="worker-showcase-sticker.html" class="card">
+      <div class="preview">
+        <div class="mini-sticker">
+          <div class="ms-helm"></div>
+          <div class="ms-face"></div>
+          <div class="ms-body"></div>
+        </div>
+      </div>
+      <h2>表情贴纸风</h2>
+      <p>粗黑描边 + 饱和色彩 + 夸张表情，贴纸包风格</p>
+      <span class="tag">Sticker</span>
+    </a>
+
+    <a href="worker-showcase-office.html" class="card">
+      <div class="preview">
+        <div class="mini-office">
+          <div class="mo-monitor"></div>
+          <div class="mo-desk"></div>
+          <div class="mo-helm"></div>
+          <div class="mo-face"></div>
+          <div class="mo-body"></div>
+          <div class="mo-mug"></div>
+        </div>
+      </div>
+      <h2>办公室工位</h2>
+      <p>扁平几何风 + 精致办公桌/显示器/咖啡杯，完整工位场景</p>
+      <span class="tag">Office Scene</span>
+    </a>
+
+    <a href="worker-showcase-paper-office.html" class="card">
+      <div class="preview">
+        <div class="mini-paper-office">
+          <div class="mpo-desk"></div>
+          <div class="mpo-monitor"></div>
+          <div class="mpo-helm"></div>
+          <div class="mpo-face"></div>
+          <div class="mpo-body"></div>
+        </div>
+      </div>
+      <h2>纸片办公室</h2>
+      <p>纸片叠层风 + 纸片办公桌，所有物品保持手剪拼贴质感</p>
+      <span class="tag">Paper Office</span>
+    </a>
+  </main>
+
+  <footer>
+    美团 AI 指令评测系统 · 员工形象视觉方案对比
+  </footer>
+</body>
+</html>

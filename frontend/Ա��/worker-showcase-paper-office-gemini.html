@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>纸片办公室 · 极致叠层风工位</title>
+<style>
+/* ===== 基础重置与优雅质感背景 ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: #F7F4EB;
+  background-image: 
+    radial-gradient(rgba(0,0,0,0.03) 1px, transparent 0),
+    repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,0.01) 4px, rgba(0,0,0,0.01) 8px);
+  background-size: 20px 20px, 100% 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  color: #3A352A;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+
+/* ===== 头部排版 ===== */
+.page-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: #2F2A21;
+  margin-bottom: 8px;
+  letter-spacing: 3px;
+  text-shadow: 1px 2px 0px #FFF;
+}
+.page-title span { color: #E0AB00; text-shadow: 1px 1px 0px rgba(0,0,0,0.1); }
+.page-subtitle {
+  font-size: 14px;
+  color: #8A8172;
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* ===== 纸片厚度公共阴影定义 ===== */
+/* 一层用于切面厚度(硬阴影)，一层用于物理投影(软阴影) */
+.paper-shadow-sm { box-shadow: 1px 1px 0px #C8C1B0, 2px 4px 6px rgba(0,0,0,0.06); }
+.paper-shadow-md { box-shadow: 1.5px 1.5px 0px #BFAF9F, 3px 6px 12px rgba(60,50,40,0.1); }
+.paper-shadow-lg { box-shadow: 2px 2px 0px #AFA090, 4px 10px 18px rgba(60,50,40,0.15); }
+
+/* ===== 元素清单卡片 ===== */
+.elements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  max-width: 960px;
+  width: 100%;
+  margin-bottom: 36px;
+}
+.element-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #FFF;
+  border-radius: 12px;
+  border: 1px solid #EBE6D8;
+  box-shadow: 1px 2px 0px rgba(0,0,0,0.03);
+  font-size: 13px;
+  color: #666053;
+}
+.element-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+/* ===== 状态网格布局 ===== */
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  max-width: 1000px;
+  width: 100%;
+}
+@media (max-width: 900px) { .state-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+@media (max-width: 500px) { .state-grid { grid-template-columns: 1fr; } }
+
+.state-card {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 28px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #EBE6D8;
+  box-shadow: 0 4px 20px rgba(60,50,40,0.04);
+  transition: transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.15), box-shadow .3s;
+}
+.state-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(60,50,40,0.09);
+}
+
+.state-label { margin-top: 16px; font-size: 16px; font-weight: 700; color: #2F2A21; }
+.state-desc { margin-top: 4px; font-size: 12px; color: #9E9584; text-align: center; }
+
+/* ===== 纸片舞台容器 ===== */
+.paper-scene {
+  position: relative;
+  width: 190px;
+  height: 230px;
+  background: #FAF8F5;
+  border-radius: 16px;
+  border: 1px dashed #DDD7C9;
+  overflow: hidden;
+}
+
+.paper-piece { position: absolute; }
+
+/* ==================== 地板防悬空平面 ==================== */
+.p-floor {
+  bottom: 0; left: 0; right: 0; height: 24px;
+  background: #EBE6D8;
+  border-top: 2px solid #D6CEBE;
+  z-index: 1;
+}
+
+/* ==================== 电脑工学椅层叠 ==================== */
+.p-chair-back {
+  bottom: 56px; left: 54px; width: 54px; height: 38px;
+  background: #524F47; border-radius: 12px 12px 4px 4px; z-index: 2;
+  box-shadow: 1.5px 1.5px 0px #383630, 3px 5px 8px rgba(0,0,0,0.15);
+}
+.p-chair-seat {
+  bottom: 46px; left: 47px; width: 68px; height: 12px;
+  background: #423F38; border-radius: 5px; z-index: 4;
+  box-shadow: 1.5px 1.5px 0px #2B2924, 3px 4px 6px rgba(0,0,0,0.15);
+}
+.p-chair-pillar {
+  bottom: 26px; left: 77px; width: 8px; height: 22px;
+  background: #807B70; z-index: 1;
+  box-shadow: 1px 1px 0px #5E5A52;
+}
+.p-chair-base {
+  bottom: 22px; left: 58px; width: 46px; height: 6px;
+  background: #6E695E; border-radius: 3px; z-index: 2;
+}
+.p-chair-wheel {
+  bottom: 15px; width: 8px; height: 8px;
+  background: #423F38; border-radius: 50%; z-index: 2;
+}
+.p-cw-l { left: 60px; }
+.p-cw-r { left: 94px; }
+
+/* ==================== 办公桌组合 ==================== */
+.p-desk-shadow {
+  bottom: 18px; left: 10px; width: 170px; height: 10px;
+  background: rgba(60,50,40,0.07); border-radius: 50%; z-index: 3;
+}
+.p-desk-front {
+  bottom: 32px; left: 12px; width: 166px; height: 28px;
+  background: #D6CEBE; border-radius: 2px 2px 8px 8px; z-index: 10;
+  box-shadow: 1.5px 1.5px 0px #B8AE9C, 2px 4px 8px rgba(0,0,0,0.08);
+}
+.p-desk-top {
+  bottom: 60px; left: 6px; width: 178px; height: 12px;
+  background: #ECE8DF; border-radius: 6px 6px 3px 3px; z-index: 11;
+  box-shadow: 0px 2px 0px #D0C6B4, 2px 4px 8px rgba(0,0,0,0.1);
+}
+.p-desk-leg {
+  bottom: 22px; width: 8px; height: 14px;
+  background: #B8AE9C; z-index: 9;
+}
+.p-dl-l { left: 20px; }
+.p-dl-r { left: 162px; }
+
+/* ==================== 精致显示器 ==================== */
+.p-monitor-frame {
+  bottom: 80px; left: 47px; width: 76px; height: 50px;
+  background: #2B2A26; border-radius: 6px; z-index: 14;
+  box-shadow: 2px 2px 0px #151513, 3px 6px 12px rgba(0,0,0,0.15);
+}
+.p-monitor-screen {
+  bottom: 84px; left: 51px; width: 68px; height: 40px;
+  background: #3B5E85; border-radius: 3px; z-index: 15;
+  overflow: hidden;
+}
+.p-screen-line {
+  position: absolute; left: 6px; height: 3px;
+  background: rgba(255,255,255,0.15); border-radius: 1.5px;
+}
+.p-sl-1 { top: 6px; width: 75%; }
+.p-sl-2 { top: 12px; width: 50%; }
+.p-sl-3 { top: 18px; width: 85%; }
+.p-sl-4 { top: 24px; width: 35%; }
+.p-screen-dot {
+  position: absolute; bottom: 4px; right: 4px; width: 5px; height: 5px;
+  border-radius: 50%; background: #69BD55;
+}
+.p-monitor-stand {
+  bottom: 72px; left: 80px; width: 10px; height: 10px;
+  background: #2B2A26; z-index: 13; box-shadow: 1px 1px 0px #151513;
+}
+.p-monitor-base {
+  bottom: 68px; left: 70px; width: 30px; height: 5px;
+  background: #1F1E1B; border-radius: 3px; z-index: 13;
+}
+
+/* ==================== 键盘鼠标及桌面杂物 ==================== */
+.p-keyboard {
+  bottom: 69px; left: 22px; width: 42px; height: 15px;
+  background: #DCD9D0; border-radius: 3px; z-index: 16;
+  box-shadow: 1px 1px 0px #B8B4A6, 1px 2px 4px rgba(0,0,0,0.1);
+}
+.p-key-row { display: flex; gap: 2.5px; justify-content: center; padding-top: 2px; }
+.p-key { width: 5px; height: 3px; background: #BAB6A7; border-radius: 0.5px; }
+
+.p-mousepad {
+  bottom: 67px; right: 24px; width: 30px; height: 20px;
+  background: #C4BEAF; border-radius: 3px; z-index: 15;
+}
+.p-mouse {
+  bottom: 71px; right: 32px; width: 11px; height: 14px;
+  background: #F5F3ED; border-radius: 6px 6px 4px 4px; z-index: 16;
+  box-shadow: 1px 1px 0px #CDCAC0, 1px 2px 3px rgba(0,0,0,0.1);
+}
+
+/* 带有微风摇曳的绿植 */
+.p-plant { bottom: 71px; left: 16px; z-index: 17; }
+.p-pot {
+  width: 16px; height: 12px; background: #BA662D; border-radius: 2px 2px 5px 5px;
+  box-shadow: 1px 1.5px 0px #8A461A, 2px 3px 5px rgba(0,0,0,0.12);
+}
+.p-leaf { position: absolute; border-radius: 50% 50% 0 50%; transform-origin: bottom center; }
+.p-leaf-1 { top: -11px; left: 2px; width: 13px; height: 13px; background: #6BB55E; animation: paper-sway 3.5s ease-in-out infinite; }
+.p-leaf-2 { top: -8px; left: -4px; width: 9px; height: 9px; background: #529446; animation: paper-sway 2.8s ease-in-out infinite alternate; }
+.p-leaf-3 { top: -7px; left: 11px; width: 8px; height: 8px; background: #7EC771; animation: paper-sway 4s ease-in-out infinite 0.5s; }
+
+/* 冒着立体蒸汽的咖啡杯 */
+.p-mug { bottom: 71px; right: 10px; z-index: 17; }
+.p-mug-body {
+  width: 15px; height: 15px; background: #FFFFFF; border-radius: 2px 2px 5px 5px;
+  border: 1px solid #D1C9BA; box-shadow: 1.5px 1.5px 0px #C2B8A5, 2px 3px 5px rgba(0,0,0,0.1);
+}
+.p-mug-body::before { content: ''; position: absolute; top: 1.5px; left: 1.5px; right: 1.5px; height: 6px; background: #735438; border-radius: 1px; }
+.p-mug-handle { position: absolute; top: 2px; right: -5px; width: 6px; height: 9px; border: 2px solid #FFFFFF; border-left: none; border-radius: 0 4px 4px 0; }
+.p-steam { position: absolute; top: -8px; width: 2px; height: 6px; background: rgba(160,150,135,0.4); border-radius: 1px; animation: steam-pop 2s infinite linear; }
+.p-steam-1 { left: 3px; }
+.p-steam-2 { left: 7px; animation-delay: 0.6s; }
+.p-steam-3 { left: 11px; animation-delay: 1.2s; }
+
+.p-sticky {
+  bottom: 71px; left: 70px; width: 16px; height: 15px;
+  background: #FFF59D; transform: rotate(-5deg); z-index: 16;
+  box-shadow: 1px 1.5px 0px #D4CB79, 1px 2px 4px rgba(0,0,0,0.08);
+}
+.p-nameplate {
+  bottom: 71px; left: 94px; width: 24px; height: 9px;
+  background: #FFD333; border-radius: 2px; z-index: 16;
+  box-shadow: 1px 1px 0px #C29E1B; font-size: 6px; font-weight: 900;
+  color: #2F2A21; text-align: center; line-height: 9px;
+}
+
+/* ==================== 小人核心重构 (多层立体剪纸) ==================== */
+.p-worker-shadow { bottom: 74px; left: 63px; width: 48px; height: 32px; background: rgba(60,50,40,0.08); border-radius: 50%; z-index: 19; }
+.p-worker-body {
+  bottom: 78px; left: 59px; width: 54px; height: 35px;
+  background: #2F2A21; border-radius: 12px 12px 6px 6px; z-index: 22;
+  box-shadow: 1.5px 1.5px 0px #1C1914, 2px 5px 10px rgba(0,0,0,0.2);
+}
+.p-worker-collar {
+  bottom: 108px; left: 68px; width: 36px; height: 8px;
+  background: #FFD333; border-radius: 2px 2px 4px 4px; z-index: 24;
+  box-shadow: 1px 1px 0px #C29E1B;
+}
+.p-worker-badge {
+  bottom: 86px; left: 78px; width: 16px; height: 10px;
+  background: #FFFCEB; border-radius: 2px; z-index: 26;
+  box-shadow: 1px 1px 0px #DDD4AF;
+}
+.p-worker-arm {
+  bottom: 80px; width: 10px; height: 20px; background: #2F2A21;
+  border-radius: 5px; z-index: 23;
+}
+.p-wa-l { left: 52px; transform: rotate(15deg); box-shadow: -1px 2px 4px rgba(0,0,0,0.15); }
+.p-wa-r { left: 110px; transform: rotate(-15deg); box-shadow: 1px 2px 4px rgba(0,0,0,0.15); }
+
+.p-worker-face {
+  bottom: 111px; left: 64px; width: 44px; height: 38px;
+  background: #F5C282; border-radius: 20px 20px 18px 18px; z-index: 25;
+  box-shadow: 1.5px 1.5px 0px #D6A05A, 2px 4px 8px rgba(0,0,0,0.15);
+}
+.p-w-eye { position: absolute; width: 5px; height: 6px; background: #231F18; border-radius: 50%; top: 14px; }
+.p-we-l { left: 11px; }
+.p-we-r { right: 11px; }
+.p-w-mouth { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 10px; height: 4px; border-bottom: 2px solid #A87334; border-radius: 0 0 5px 5px; }
+
+.p-worker-helmet {
+  bottom: 141px; left: 58px; width: 56px; height: 28px;
+  background: #FFD333; border-radius: 28px 28px 4px 4px; z-index: 27;
+  box-shadow: 1.5px 1.5px 0px #C29E1B, 2px 4px 8px rgba(0,0,0,0.15);
+}
+.p-w-ear { position: absolute; width: 13px; height: 16px; background: #FFD333; border-radius: 50% 50% 2px 2px; top: -9px; box-shadow: 1px 1px 0px #C29E1B; }
+.p-we-ear-l { left: 7px; transform: rotate(-10deg); }
+.p-we-ear-r { right: 7px; transform: rotate(10deg); }
+
+
+/* ============================================================
+   动态状态重构设计（利用 CSS 属性联动增强各状态高级感）
+   ============================================================ */
+
+/* ----- IDLE (空闲微浮动) ----- */
+[data-state="idle"] .paper-scene { animation: stage-float 4s ease-in-out infinite; }
+@keyframes stage-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+/* ----- CALLING (通话耳麦与呼吸气泡) ----- */
+[data-state="calling"] .p-worker-helmet::after {
+  content: ""; position: absolute; right: -6px; top: 12px;
+  width: 8px; height: 14px; background: #47443C; border-radius: 3px 6px 6px 3px;
+  box-shadow: 1px 1px 0px #24221E; animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+}
+[data-state="calling"] .paper-scene::after {
+  content: "💬"; position: absolute; top: 18px; right: 16px;
+  font-size: 16px; background: #FFF; padding: 4px; border-radius: 50% 50% 0 50%;
+  box-shadow: 1.5px 1.5px 0px #C2B8A5, 2px 5px 10px rgba(0,0,0,0.1);
+  animation: bubble-bounce 1.5s ease-in-out infinite; z-index: 40;
+}
+[data-state="calling"] .p-monitor-screen { background: #4E86C4; }
+[data-state="calling"] .p-screen-dot { background: #FFD333; animation: dot-glow 0.8s ease-in-out infinite alternate; }
+
+/* ----- ALERT (惊恐抖动与独立纸片碎汗) ----- */
+[data-state="alert"] .p-worker-body, [data-state="alert"] .p-worker-face, [data-state="alert"] .p-worker-helmet {
+  animation: paper-jitter 0.2s linear infinite alternate;
+}
+[data-state="alert"] .paper-scene::before {
+  content: "⚠️"; position: absolute; top: 16px; right: 24px; font-size: 18px; z-index: 40;
+  animation: alert-pop 0.4s ease-in-out infinite alternate;
+}
+[data-state="alert"] .p-monitor-screen { background: #963D32; }
+[data-state="alert"] .p-screen-dot { background: #E74C3C; animation: dot-glow 0.4s linear infinite alternate; }
+[data-state="alert"] .p-w-mouth { width: 6px; height: 6px; background: #824E16; border-radius: 50%; border: none; bottom: 8px; }
+[data-state="alert"] .p-worker-face::after {
+  content: ""; position: absolute; top: 12px; right: 4px; width: 4px; height: 8px; 
+  background: #73C2E6; border-radius: 0 50% 50% 50%; transform: rotate(15deg);
+}
+
+/* ----- SUCCESS (极其治愈的弯弯眼与对勾卡片) ----- */
+[data-state="success"] .paper-scene::before {
+  content: "✨"; position: absolute; top: 20px; left: 20px; font-size: 14px; z-index: 40; animation: flash 1s infinite alternate;
+}
+[data-state="success"] .paper-scene::after {
+  content: "✓"; position: absolute; top: 16px; right: 20px; width: 26px; height: 26px;
+  background: #2ECC71; color: #FFF; border-radius: 8px; font-weight: 900; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; box-shadow: 1.5px 1.5px 0px #1E824A, 2px 4px 6px rgba(0,0,0,0.15);
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2) both; z-index: 40;
+}
+[data-state="success"] .p-w-eye { height: 3px; background: transparent; border-top: 3px solid #231F18; border-radius: 50% 50% 0 0; top: 16px; }
+[data-state="success"] .p-w-mouth { width: 14px; height: 6px; border-bottom: 3px solid #A87334; border-radius: 0 0 10px 10px; bottom: 7px; }
+[data-state="success"] .p-monitor-screen { background: #2E7D32; }
+[data-state="success"] .p-steam { animation: none; opacity: 0; }
+[data-state="success"] .p-wa-l { transform: translateY(-4px) rotate(45deg); }
+
+/* ==================== 统一动画效果库 ==================== */
+@keyframes paper-sway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(4deg); } }
+@keyframes steam-pop { 0% { transform: translateY(0) scale(0.8); opacity: 0; } 40% { opacity: 0.6; } 100% { transform: translateY(-8px) scale(1.3); opacity: 0; } }
+@keyframes pop-in { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes bubble-bounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.05); } }
+@keyframes paper-jitter { 0% { transform: translate(1px, 0.5px); } 100% { transform: translate(-0.5px, -1px); } }
+@keyframes alert-pop { 0% { transform: scale(0.9); } 100% { transform: scale(1.1); filter: drop-shadow(0 0 4px rgba(231,76,60,0.3)); } }
+@keyframes dot-glow { 0% { opacity: 0.3; } 100% { opacity: 1; transform: scale(1.2); } }
+@keyframes flash { 0% { opacity: 0.2; } 100% { opacity: 1; } }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">纸片办公室 · <span>极致叠层风工位</span></h1>
+<p class="page-subtitle">强化双重物理纸质阴影（硬切面厚度 + 软空间投影），大幅优化了各工作状态小人的微表情剪纸互动物件</p>
+
+<div class="elements-grid">
+  <div class="element-chip"><div class="element-swatch" style="background:#3B5E85"></div>智能变色拼贴大屏</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#6BB55E"></div>风吹摇曳立体手工绿植</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#FFD333"></div>重构多层立体纸质小人</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#524F47"></div>带有物理边缘的人体工学椅</div>
+</div>
+
+<div class="state-grid">
+
+  <div class="state-card" data-state="idle">
+    <div class="paper-scene">
+      <div class="paper-piece p-floor"></div>
+      <div class="paper-piece p-chair-back"></div>
+      <div class="paper-piece p-chair-pillar"></div>
+      <div class="paper-piece p-chair-base"></div>
+      <div class="paper-piece p-chair-wheel p-cw-l"></div>
+      <div class="paper-piece p-chair-wheel p-cw-r"></div>
+      <div class="paper-piece p-chair-seat"></div>
+      <div class="paper-piece p-desk-shadow"></div>
+      <div class="paper-piece p-desk-leg p-dl-l"></div>
+      <div class="paper-piece p-desk-leg p-dl-r"></div>
+      <div class="paper-piece p-desk-front"></div>
+      <div class="paper-piece p-desk-top"></div>
+      <div class="paper-piece p-monitor-stand"></div>
+      <div class="paper-piece p-monitor-base"></div>
+      <div class="paper-piece p-monitor-frame"></div>
+      <div class="paper-piece p-monitor-screen">
+        <div class="p-screen-line p-sl-1"></div><div class="p-screen-line p-sl-2"></div><div class="p-screen-line p-sl-3"></div><div class="p-screen-line p-sl-4"></div>
+        <div class="p-screen-dot"></div>
+      </div>
+      <div class="paper-piece p-keyboard">
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+      </div>
+      <div class="paper-piece p-mousepad"></div><div class="paper-piece p-mouse"></div>
+      <div class="paper-piece p-plant">
+        <div class="p-leaf p-leaf-1"></div><div class="p-leaf p-leaf-2"></div><div class="p-leaf p-leaf-3"></div>
+        <div class="p-pot"></div>
+      </div>
+      <div class="paper-piece p-mug">
+        <div class="p-steam p-steam-1"></div><div class="p-steam p-steam-2"></div><div class="p-steam p-steam-3"></div>
+        <div class="p-mug-body"></div><div class="p-mug-handle"></div>
+      </div>
+      <div class="paper-piece p-sticky"></div><div class="paper-piece p-nameplate">C1</div>
+      <div class="paper-piece p-worker-shadow"></div>
+      <div class="paper-piece p-worker-body"></div>
+      <div class="paper-piece p-worker-collar"></div>
+      <div class="paper-piece p-worker-badge"></div>
+      <div class="paper-piece p-worker-arm p-wa-l"></div><div class="paper-piece p-worker-arm p-wa-r"></div>
+      <div class="paper-piece p-worker-face">
+        <span class="p-w-eye p-we-l"></span><span class="p-w-eye p-we-r"></span>
+        <span class="p-w-mouth"></span>
+      </div>
+      <div class="paper-piece p-worker-helmet">
+        <div class="p-w-ear p-we-ear-l"></div><div class="p-w-ear p-we-ear-r"></div>
+      </div>
+    </div>
+    <div class="state-label">空闲中</div>
+    <div class="state-desc">舞台有轻微整体浮动质感</div>
+  </div>
+
+  <div class="state-card" data-state="calling">
+    <div class="paper-scene">
+      <div class="paper-piece p-floor"></div>
+      <div class="paper-piece p-chair-back"></div><div class="paper-piece p-chair-pillar"></div><div class="paper-piece p-chair-base"></div><div class="paper-piece p-chair-wheel p-cw-l"></div><div class="paper-piece p-chair-wheel p-cw-r"></div><div class="paper-piece p-chair-seat"></div>
+      <div class="paper-piece p-desk-shadow"></div><div class="paper-piece p-desk-leg p-dl-l"></div><div class="paper-piece p-desk-leg p-dl-r"></div><div class="paper-piece p-desk-front"></div><div class="paper-piece p-desk-top"></div>
+      <div class="paper-piece p-monitor-stand"></div><div class="paper-piece p-monitor-base"></div><div class="paper-piece p-monitor-frame"></div>
+      <div class="paper-piece p-monitor-screen">
+        <div class="p-screen-line p-sl-1"></div><div class="p-screen-line p-sl-2"></div><div class="p-screen-line p-sl-3"></div><div class="p-screen-line p-sl-4"></div>
+        <div class="p-screen-dot"></div>
+      </div>
+      <div class="paper-piece p-keyboard"><div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div></div>
+      <div class="paper-piece p-mousepad"></div><div class="paper-piece p-mouse"></div>
+      <div class="paper-piece p-plant"><div class="p-leaf p-leaf-1"></div><div class="p-leaf p-leaf-2"></div><div class="p-pot"></div></div>
+      <div class="paper-piece p-mug"><div class="p-steam p-steam-1"></div><div class="p-mug-body"></div><div class="p-mug-handle"></div></div>
+      <div class="paper-piece p-sticky"></div><div class="paper-piece p-nameplate">C1</div>
+      <div class="paper-piece p-worker-shadow"></div>
+      <div class="paper-piece p-worker-body"></div><div class="paper-piece p-worker-collar"></div><div class="paper-piece p-worker-badge"></div>
+      <div class="paper-piece p-worker-arm p-wa-l"></div><div class="paper-piece p-worker-arm p-wa-r"></div>
+      <div class="paper-piece p-worker-face">
+        <span class="p-w-eye p-we-l"></span><span class="p-w-eye p-we-r"></span>
+        <span class="p-w-mouth"></span>
+      </div>
+      <div class="paper-piece p-worker-helmet">
+        <div class="p-w-ear p-we-ear-l"></div><div class="p-w-ear p-we-ear-r"></div>
+      </div>
+    </div>
+    <div class="state-label">通话中</div>
+    <div class="state-desc">右侧滑入纸片对话气泡</div>
+  </div>
+
+  <div class="state-card" data-state="alert">
+    <div class="paper-scene">
+      <div class="paper-piece p-floor"></div>
+      <div class="paper-piece p-chair-back"></div><div class="paper-piece p-chair-pillar"></div><div class="paper-piece p-chair-base"></div><div class="paper-piece p-chair-wheel p-cw-l"></div><div class="paper-piece p-chair-wheel p-cw-r"></div><div class="paper-piece p-chair-seat"></div>
+      <div class="paper-piece p-desk-shadow"></div><div class="paper-piece p-desk-leg p-dl-l"></div><div class="paper-piece p-desk-leg p-dl-r"></div><div class="paper-piece p-desk-front"></div><div class="paper-piece p-desk-top"></div>
+      <div class="paper-piece p-monitor-stand"></div><div class="paper-piece p-monitor-base"></div><div class="paper-piece p-monitor-frame"></div>
+      <div class="paper-piece p-monitor-screen">
+        <div class="p-screen-line p-sl-1"></div><div class="p-screen-line p-sl-2"></div><div class="p-screen-line p-sl-3"></div>
+        <div class="p-screen-dot"></div>
+      </div>
+      <div class="paper-piece p-keyboard"><div class="p-key-row"><span class="p-key"></span><span class="p-key"></span></div></div>
+      <div class="paper-piece p-mousepad"></div><div class="paper-piece p-mouse"></div>
+      <div class="paper-piece p-plant"><div class="p-leaf p-leaf-1"></div><div class="p-pot"></div></div>
+      <div class="paper-piece p-mug"><div class="p-mug-body"></div><div class="p-mug-handle"></div></div>
+      <div class="paper-piece p-sticky"></div><div class="paper-piece p-nameplate">C1</div>
+      <div class="paper-piece p-worker-shadow"></div>
+      <div class="paper-piece p-worker-body"></div><div class="paper-piece p-worker-collar"></div><div class="paper-piece p-worker-badge"></div>
+      <div class="paper-piece p-worker-arm p-wa-l"></div><div class="paper-piece p-worker-arm p-wa-r"></div>
+      <div class="paper-piece p-worker-face">
+        <span class="p-w-eye p-we-l"></span><span class="p-w-eye p-we-r"></span>
+        <span class="p-w-mouth"></span>
+      </div>
+      <div class="paper-piece p-worker-helmet">
+        <div class="p-w-ear p-we-ear-l"></div><div class="p-w-ear p-we-ear-r"></div>
+      </div>
+    </div>
+    <div class="state-label">有警报</div>
+    <div class="state-desc">小人高频抖动、圆嘴生动流汗</div>
+  </div>
+
+  <div class="state-card" data-state="success">
+    <div class="paper-scene">
+      <div class="paper-piece p-floor"></div>
+      <div class="paper-piece p-chair-back"></div><div class="paper-piece p-chair-pillar"></div><div class="paper-piece p-chair-base"></div><div class="paper-piece p-chair-wheel p-cw-l"></div><div class="paper-piece p-chair-wheel p-cw-r"></div><div class="paper-piece p-chair-seat"></div>
+      <div class="paper-piece p-desk-shadow"></div><div class="paper-piece p-desk-leg p-dl-l"></div><div class="paper-piece p-desk-leg p-dl-r"></div><div class="paper-piece p-desk-front"></div><div class="paper-piece p-desk-top"></div>
+      <div class="paper-piece p-monitor-stand"></div><div class="paper-piece p-monitor-base"></div><div class="paper-piece p-monitor-frame"></div>
+      <div class="paper-piece p-monitor-screen">
+        <div class="p-screen-line p-sl-1"></div><div class="p-screen-line p-sl-2"></div>
+        <div class="p-screen-dot"></div>
+      </div>
+      <div class="paper-piece p-keyboard"><div class="p-key-row"><span class="p-key"></span><span class="p-key"></span></div></div>
+      <div class="paper-piece p-mousepad"></div><div class="paper-piece p-mouse"></div>
+      <div class="paper-piece p-plant"><div class="p-leaf p-leaf-1"></div><div class="p-pot"></div></div>
+      <div class="paper-piece p-mug"><div class="p-mug-body"></div><div class="p-mug-handle"></div></div>
+      <div class="paper-piece p-sticky"></div><div class="paper-piece p-nameplate">C1</div>
+      <div class="paper-piece p-worker-shadow"></div>
+      <div class="paper-piece p-worker-body"></div><div class="paper-piece p-worker-collar"></div><div class="paper-piece p-worker-badge"></div>
+      <div class="paper-piece p-worker-arm p-wa-l"></div><div class="paper-piece p-worker-arm p-wa-r"></div>
+      <div class="paper-piece p-worker-face">
+        <span class="p-w-eye p-we-l"></span><span class="p-w-eye p-we-r"></span>
+        <span class="p-w-mouth"></span>
+      </div>
+      <div class="paper-piece p-worker-helmet">
+        <div class="p-w-ear p-we-ear-l"></div><div class="p-w-ear p-we-ear-r"></div>
+      </div>
+    </div>
+    <div class="state-label">已完成</div>
+    <div class="state-desc">治愈笑脸、招手庆祝、热气冷却</div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+[
+  {
+    "constraint_text": "Call Flow",
+    "count": 3,
+    "covered_chars": 8,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Constraints",
+    "count": 3,
+    "covered_chars": 11,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Knowledge Points (FAQ)",
+    "count": 3,
+    "covered_chars": 20,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Opening Line",
+    "count": 3,
+    "covered_chars": 11,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Role 你是美团外卖骑手的站长",
+    "count": 3,
+    "covered_chars": 15,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "Task 致电\"飞毛腿\"骑手，通知他们今天合同已成功签署",
+    "count": 3,
+    "covered_chars": 27,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。",
+    "count": 3,
+    "covered_chars": 54,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "你是美团外卖骑手的站长",
+    "count": 12,
+    "covered_chars": 11,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "保持语气随意，像打电话一样自然",
+    "count": 20,
+    "covered_chars": 15,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "单日合同每天至少完成 **X 单**",
+    "count": 3,
+    "covered_chars": 16,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**",
+    "count": 24,
+    "covered_chars": 33,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "单日合同：在生效当天必须完成 **X 单**，否则合同及派单可能受到影响。",
+    "count": 6,
+    "covered_chars": 35,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "单日飞毛腿合同需要**连续 Y 天**完成配送；否则合同将受到影响。",
+    "count": 10,
+    "covered_chars": 32,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送",
+    "count": 22,
+    "covered_chars": 28,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "多日合同：每天必须完成 **Y 单**，否则后续合同及派单可能受到影响。",
+    "count": 6,
+    "covered_chars": 34,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+    "count": 25,
+    "covered_chars": 23,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+    "count": 22,
+    "covered_chars": 43,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "如需退出飞毛腿，必须在前一天 **Z 点之前**在 App 的\"飞毛腿报名\"中取消；次日生效。",
+    "count": 25,
+    "covered_chars": 43,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "尽量挽留不想配送的骑手，鼓励能配送的骑手，并提醒他们注意安全。",
+    "count": 19,
+    "covered_chars": 31,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "我向同事确认后再回电给你。我现在能回答的先回答。",
+    "count": 7,
+    "covered_chars": 24,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "每次回复控制在**约 30 个字以内**",
+    "count": 20,
+    "covered_chars": 18,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "目前，许多骑手正在申请飞毛腿。如果你无法连续配送 **Y 天**，你的名额可能会被他人占用。",
+    "count": 3,
+    "covered_chars": 44,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "说明单日飞毛腿合同需要**连续 Y 天**完成配送；否则合同将受到影响。",
+    "count": 15,
+    "covered_chars": 34,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "说明飞毛腿报名是按排名进行的，并非站长干预。骑手应减少拒单、取消和超时。在恶劣天气下工作、订单量更高，有助于保住飞毛腿资格。",
+    "count": 21,
+    "covered_chars": 62,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "连续完成 **W 天**多日合同，且每天完成 **Y 单**，将获得额外奖励（例如，与单日合同相比每单多 +$ 元）。",
+    "count": 25,
+    "covered_chars": 53,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "通知他们今天合同已成功签署，并提醒他们完成配送任务",
+    "count": 14,
+    "covered_chars": 25,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+    "count": 7,
+    "covered_chars": 22,
+    "sufficiently_tested": true
+  }
+]

@@ -1,0 +1,612 @@
+[
+  {
+    "segment_id": 1,
+    "conversation_id": 0,
+    "constraint_text": "每次回复控制在**约 30 个字以内**",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 20 单；多日合同每天至少完成 15 单。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 1,
+        "conversation_id": 0,
+        "local_turn_index": 1,
+        "user_reply": "好的站长，我今天就开始跑单！",
+        "agent_reply": "好嘞小李，飞毛腿合同今天已生效！记得午餐和晚餐高峰期上线哦。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 2,
+    "conversation_id": 0,
+    "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 20 单；多日合同每天至少完成 15 单。"
+      },
+      {
+        "role": "user",
+        "content": "好的站长，我今天就开始跑单！"
+      },
+      {
+        "role": "assistant",
+        "content": "好嘞小李，飞毛腿合同今天已生效！记得午餐和晚餐高峰期上线哦。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 2,
+        "conversation_id": 0,
+        "local_turn_index": 2,
+        "user_reply": "对了站长，飞毛腿骑手的社保是咋交的？",
+        "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 3,
+    "conversation_id": 0,
+    "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 20 单；多日合同每天至少完成 15 单。"
+      },
+      {
+        "role": "user",
+        "content": "好的站长，我今天就开始跑单！"
+      },
+      {
+        "role": "assistant",
+        "content": "好嘞小李，飞毛腿合同今天已生效！记得午餐和晚餐高峰期上线哦。"
+      },
+      {
+        "role": "user",
+        "content": "对了站长，飞毛腿骑手的社保是咋交的？"
+      },
+      {
+        "role": "assistant",
+        "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 3,
+        "conversation_id": 0,
+        "local_turn_index": 3,
+        "user_reply": "站长，那高峰期上线和跑单的事你再给我说一遍呗。",
+        "agent_reply": "单日合同今天需完成 20 单，多日合同每天 15 单，连续完成别中断哦！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 4,
+    "conversation_id": 0,
+    "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 20 单；多日合同每天至少完成 15 单。"
+      },
+      {
+        "role": "user",
+        "content": "好的站长，我今天就开始跑单！"
+      },
+      {
+        "role": "assistant",
+        "content": "好嘞小李，飞毛腿合同今天已生效！记得午餐和晚餐高峰期上线哦。"
+      },
+      {
+        "role": "user",
+        "content": "对了站长，飞毛腿骑手的社保是咋交的？"
+      },
+      {
+        "role": "assistant",
+        "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      },
+      {
+        "role": "user",
+        "content": "站长，那高峰期上线和跑单的事你再给我说一遍呗。"
+      },
+      {
+        "role": "assistant",
+        "content": "单日合同今天需完成 20 单，多日合同每天 15 单，连续完成别中断哦！"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 4,
+        "conversation_id": 0,
+        "local_turn_index": 4,
+        "user_reply": "站长，我今天身体实在不舒服，真没法跑单了，抱歉啊。",
+        "agent_reply": "理解你小李，身体要紧先休息。但飞毛腿名额竞争激烈，中断可能影响资格哦。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 5,
+    "conversation_id": 0,
+    "constraint_text": "说明飞毛腿报名是按排名进行的，并非站长干预。骑手应减少拒单、取消和超时。在恶劣天气下工作、订单量更高，有助于保住飞毛腿资格。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 20 单；多日合同每天至少完成 15 单。"
+      },
+      {
+        "role": "user",
+        "content": "好的站长，我今天就开始跑单！"
+      },
+      {
+        "role": "assistant",
+        "content": "好嘞小李，飞毛腿合同今天已生效！记得午餐和晚餐高峰期上线哦。"
+      },
+      {
+        "role": "user",
+        "content": "对了站长，飞毛腿骑手的社保是咋交的？"
+      },
+      {
+        "role": "assistant",
+        "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      },
+      {
+        "role": "user",
+        "content": "站长，那高峰期上线和跑单的事你再给我说一遍呗。"
+      },
+      {
+        "role": "assistant",
+        "content": "单日合同今天需完成 20 单，多日合同每天 15 单，连续完成别中断哦！"
+      },
+      {
+        "role": "user",
+        "content": "站长，我今天身体实在不舒服，真没法跑单了，抱歉啊。"
+      },
+      {
+        "role": "assistant",
+        "content": "理解你小李，身体要紧先休息。但飞毛腿名额竞争激烈，中断可能影响资格哦。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 5,
+        "conversation_id": 0,
+        "local_turn_index": 5,
+        "user_reply": "站长，我听说是你挑的人，能不能通融一下让我休息几天？",
+        "agent_reply": "小李，飞毛腿是按排名自动选的，站长干预不了。中断配送可能影响合同，你考虑清楚哦。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 6,
+    "conversation_id": 1,
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 6,
+        "conversation_id": 1,
+        "local_turn_index": 1,
+        "user_reply": "站长好！合同生效了是吧，那我今天就开始跑单吧。",
+        "agent_reply": "好的！合同今天已生效。今天午餐和晚餐高峰期记得上线哈，注意安全，加油！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 7,
+    "conversation_id": 1,
+    "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "站长好！合同生效了是吧，那我今天就开始跑单吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的！合同今天已生效。今天午餐和晚餐高峰期记得上线哈，注意安全，加油！"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 7,
+        "conversation_id": 1,
+        "local_turn_index": 2,
+        "user_reply": "对了站长，飞毛腿骑手的社保是怎么交的？",
+        "agent_reply": "社保这块我不太确定，我向同事确认后再回电给你。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 8,
+    "conversation_id": 1,
+    "constraint_text": "如需退出飞毛腿，必须在前一天 **Z 点之前**在 App 的\"飞毛腿报名\"中取消；次日生效。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "站长好！合同生效了是吧，那我今天就开始跑单吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的！合同今天已生效。今天午餐和晚餐高峰期记得上线哈，注意安全，加油！"
+      },
+      {
+        "role": "user",
+        "content": "对了站长，飞毛腿骑手的社保是怎么交的？"
+      },
+      {
+        "role": "assistant",
+        "content": "社保这块我不太确定，我向同事确认后再回电给你。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 8,
+        "conversation_id": 1,
+        "local_turn_index": 3,
+        "user_reply": "站长，如果我不想继续飞毛腿了，怎么退出啊？",
+        "agent_reply": "需在**前一天 Z 点前**在 App\"飞毛腿报名\"中取消，次日生效。建议连续跑够天数拿额外奖励哦！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 9,
+    "conversation_id": 1,
+    "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "站长好！合同生效了是吧，那我今天就开始跑单吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "好的！合同今天已生效。今天午餐和晚餐高峰期记得上线哈，注意安全，加油！"
+      },
+      {
+        "role": "user",
+        "content": "对了站长，飞毛腿骑手的社保是怎么交的？"
+      },
+      {
+        "role": "assistant",
+        "content": "社保这块我不太确定，我向同事确认后再回电给你。"
+      },
+      {
+        "role": "user",
+        "content": "站长，如果我不想继续飞毛腿了，怎么退出啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "需在**前一天 Z 点前**在 App\"飞毛腿报名\"中取消，次日生效。建议连续跑够天数拿额外奖励哦！"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 9,
+        "conversation_id": 1,
+        "local_turn_index": 4,
+        "user_reply": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。",
+        "agent_reply": "理解，身体要紧，先休息吧。下次报名再参与，祝早日康复！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 10,
+    "conversation_id": 2,
+    "constraint_text": "每次回复控制在**约 30 个字以内**",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗?我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 10,
+        "conversation_id": 2,
+        "local_turn_index": 1,
+        "user_reply": "站长，今天合同生效了是吧？我现在就能开始跑单！",
+        "agent_reply": "对，今天飞毛腿合同已生效！单日合同今天必须完成 X 单，多日合同需连续 Y 天每天完成 Y 单，否则会影响派单。加油干，注意安全！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 11,
+    "conversation_id": 2,
+    "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗?我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "站长，今天合同生效了是吧？我现在就能开始跑单！"
+      },
+      {
+        "role": "assistant",
+        "content": "对，今天飞毛腿合同已生效！单日合同今天必须完成 X 单，多日合同需连续 Y 天每天完成 Y 单，否则会影响派单。加油干，注意安全！"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 11,
+        "conversation_id": 2,
+        "local_turn_index": 2,
+        "user_reply": "对了站长，飞毛腿骑手的社保是咋交的？",
+        "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 12,
+    "conversation_id": 2,
+    "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗?我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "站长，今天合同生效了是吧？我现在就能开始跑单！"
+      },
+      {
+        "role": "assistant",
+        "content": "对，今天飞毛腿合同已生效！单日合同今天必须完成 X 单，多日合同需连续 Y 天每天完成 Y 单，否则会影响派单。加油干，注意安全！"
+      },
+      {
+        "role": "user",
+        "content": "对了站长，飞毛腿骑手的社保是咋交的？"
+      },
+      {
+        "role": "assistant",
+        "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 12,
+        "conversation_id": 2,
+        "local_turn_index": 3,
+        "user_reply": "站长，我今天实在有事跑不了，之后也不一定能连续跑，我还是退出算了。",
+        "agent_reply": "理解你有事，但飞毛腿名额来之不易，退出需前一天在 App 报名处取消。再考虑下吧，坚持跑对你很有益。"
+      },
+      {
+        "turn_index": 13,
+        "conversation_id": 2,
+        "local_turn_index": 4,
+        "user_reply": "站长，我理解您的好意，但我真的没办法，家里有事必须得处理，实在跑不了，您帮我取消吧。",
+        "agent_reply": "家里有事能理解，但取消需你自己在 App 报名处操作，我没法代劳。祝一切顺利，有需要随时联系我。"
+      }
+    ],
+    "complete_reason": "done"
+  },
+  {
+    "segment_id": 13,
+    "conversation_id": 2,
+    "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗?我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "站长，今天合同生效了是吧？我现在就能开始跑单！"
+      },
+      {
+        "role": "assistant",
+        "content": "对，今天飞毛腿合同已生效！单日合同今天必须完成 X 单，多日合同需连续 Y 天每天完成 Y 单，否则会影响派单。加油干，注意安全！"
+      },
+      {
+        "role": "user",
+        "content": "对了站长，飞毛腿骑手的社保是咋交的？"
+      },
+      {
+        "role": "assistant",
+        "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      },
+      {
+        "role": "user",
+        "content": "站长，我今天实在有事跑不了，之后也不一定能连续跑，我还是退出算了。"
+      },
+      {
+        "role": "assistant",
+        "content": "理解你有事，但飞毛腿名额来之不易，退出需前一天在 App 报名处取消。再考虑下吧，坚持跑对你很有益。"
+      },
+      {
+        "role": "user",
+        "content": "站长，我理解您的好意，但我真的没办法，家里有事必须得处理，实在跑不了，您帮我取消吧。"
+      },
+      {
+        "role": "assistant",
+        "content": "家里有事能理解，但取消需你自己在 App 报名处操作，我没法代劳。祝一切顺利，有需要随时联系我。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 14,
+        "conversation_id": 2,
+        "local_turn_index": 5,
+        "user_reply": "站长，那我自己在 App 上取消就行了吧？取消后明天就生效了对吗？",
+        "agent_reply": "对，在 App 报名处取消后次日生效。祝家里的事顺利解决，有问题随时找我。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 14,
+    "conversation_id": 3,
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小王吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 40 单；多日合同每天至少完成 25 单。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 15,
+        "conversation_id": 3,
+        "local_turn_index": 1,
+        "user_reply": "好的站长，飞毛腿合同今天生效了是吧？我现在就能开始配送！",
+        "agent_reply": "对的，合同今天生效上线了！你报的是单日还是多日合同呀？"
+      },
+      {
+        "turn_index": 16,
+        "conversation_id": 3,
+        "local_turn_index": 2,
+        "user_reply": "我报的是多日合同，连续跑完有额外奖励对吧？",
+        "agent_reply": "没错！连续完成7天且每天25单以上，每单额外加2块奖励。加油干吧！"
+      },
+      {
+        "turn_index": 17,
+        "conversation_id": 3,
+        "local_turn_index": 3,
+        "user_reply": "明白了站长，那我这就上线跑单，争取每天稳在25单以上！",
+        "agent_reply": "好嘞！跑单注意安全，高峰期别硬撑，有问题随时找我！"
+      }
+    ],
+    "complete_reason": "max_pending_turns"
+  },
+  {
+    "segment_id": 15,
+    "conversation_id": 4,
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "是我，站长好。合同今天生效了是吧？那我今天可以开始跑单了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "合同今天已生效，可以开始跑单了。记得高峰期上线，加油！"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 19,
+        "conversation_id": 4,
+        "local_turn_index": 2,
+        "user_reply": "好的站长，那我今天就去跑单了，争取多接几单！",
+        "agent_reply": "好的！安全第一，争取多接单，祝你今天顺利完成任务！"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 16,
+    "conversation_id": 4,
+    "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "是我，站长好。合同今天生效了是吧？那我今天可以开始跑单了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "合同今天已生效，可以开始跑单了。记得高峰期上线，加油！"
+      },
+      {
+        "role": "user",
+        "content": "好的站长，那我今天就去跑单了，争取多接几单！"
+      },
+      {
+        "role": "assistant",
+        "content": "好的！安全第一，争取多接单，祝你今天顺利完成任务！"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 20,
+        "conversation_id": 4,
+        "local_turn_index": 3,
+        "user_reply": "站长，不好意思，我今天身体实在不舒服，没法跑单了，抱歉啊。",
+        "agent_reply": "身体要紧，好好休息。飞毛腿需要连续跑 **Y 天**，中断可能影响名额。"
+      }
+    ],
+    "complete_reason": "none"
+  },
+  {
+    "segment_id": 17,
+    "conversation_id": 4,
+    "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "是我，站长好。合同今天生效了是吧？那我今天可以开始跑单了吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "合同今天已生效，可以开始跑单了。记得高峰期上线，加油！"
+      },
+      {
+        "role": "user",
+        "content": "好的站长，那我今天就去跑单了，争取多接几单！"
+      },
+      {
+        "role": "assistant",
+        "content": "好的！安全第一，争取多接单，祝你今天顺利完成任务！"
+      },
+      {
+        "role": "user",
+        "content": "站长，不好意思，我今天身体实在不舒服，没法跑单了，抱歉啊。"
+      },
+      {
+        "role": "assistant",
+        "content": "身体要紧，好好休息。飞毛腿需要连续跑 **Y 天**，中断可能影响名额。"
+      }
+    ],
+    "turns": [
+      {
+        "turn_index": 21,
+        "conversation_id": 4,
+        "local_turn_index": 4,
+        "user_reply": "对了站长，我想问下飞毛腿的社保是怎么交的？",
+        "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      }
+    ],
+    "complete_reason": "none"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "constraint_text": "不使用正式或冗长的解释——保持随意直接",
+    "count": 1,
+    "covered_chars": 19,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "不能承诺给商家折扣券或优惠券",
+    "count": 1,
+    "covered_chars": 14,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "不说\"好的\"、\"哈哈\"、\"嘿嘿\"、\"嘻嘻\"等语气词",
+    "count": 1,
+    "covered_chars": 25,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "count": 3,
+    "covered_chars": 17,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "count": 2,
+    "covered_chars": 22,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若对话被打断，使用简短过渡语，如\"您刚才提到……\"或\"我刚说到……\"",
+    "count": 1,
+    "covered_chars": 34,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若老板说忙，说\"就1分钟，保证简短\"后继续简短说明",
+    "count": 1,
+    "covered_chars": 25,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "频繁给商家发言和提问的机会",
+    "count": 1,
+    "covered_chars": 13,
+    "sufficiently_tested": true
+  }
+]

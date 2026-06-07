@@ -1,0 +1,30 @@
+/* theme: dopamine — 多巴胺 · 暗底撞色活力 */
+:root{
+  --bg:#110B1E;--bg-soft:#1A1230;--surface:#221940;--surface-2:#2E2254;
+  --border:rgba(200,180,255,.1);--border-strong:rgba(200,180,255,.22);
+  --text-1:#F0ECFE;--text-2:#B8AEDE;--text-3:#7A6EA8;
+  --accent:#FF3E6C;--accent-2:#F0ECFE;--accent-3:#FF3E6C;
+  --good:#00F5A0;--warn:#FFD93D;--bad:#FF6B6B;
+  --grad:linear-gradient(135deg,#FF3E6C,#9B59F0);
+  --grad-soft:linear-gradient(135deg,#1A1230,#221940);
+  --grad-dark:linear-gradient(135deg,#110B1E,#2E2254);
+  --radius:16px;--radius-sm:10px;--radius-lg:24px;
+  --shadow:0 2px 8px rgba(0,0,0,.25),0 12px 32px rgba(0,0,0,.2);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.35),0 30px 80px rgba(0,0,0,.25);
+  --font-sans:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Inter','Noto Sans SC',sans-serif;
+  --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
+  /* component tokens */
+  --accent-solid:#FF3E6C;
+  --accent-on-accent:#FFFFFF;
+  --accent-glow:rgba(255,62,108,.4);
+  --info-color:#00D4FF;
+  --good-bg:rgba(0,245,160,.08);--good-border:rgba(0,245,160,.3);
+  --bad-bg:rgba(255,107,107,.08);--bad-border:rgba(255,107,107,.3);
+  --good-grad:linear-gradient(90deg,#00F5A0,#00C98D);
+  --warn-grad:linear-gradient(90deg,#FFE66D,#FFD93D);
+  --bad-grad:linear-gradient(90deg,#FF9A9A,#FF6B6B);
+  --terminal-bg:#0A0618;
+  --img-blend:screen;
+  --img-opacity:.82;
+}

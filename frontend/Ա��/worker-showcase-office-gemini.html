@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>办公室工位 · 现代轻拟物几何风</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      /* 色彩系统深度微调：增强现代数字化明亮感 */
+      --meituan-yellow: #FFD400;
+      --meituan-yellow-dark: #FF9900;
+      --uniform-dark: #232529;
+      --uniform-dark-light: #3A3F47;
+      --face-peach: #FFCD9B;
+      --face-peach-dark: #E5A367;
+      --badge-cream: #FFFDEB;
+      --bg: #F4F6F9;
+      --card-bg: #FFFFFF;
+      --ink: #1E2229;
+      --muted: #8E9AA8;
+      --border: #E4EBF4;
+      --shadow: rgba(24, 38, 56, 0.08);
+      
+      --alert-red: #FF4D4D;
+      --success-green: #2ECC71;
+      --calling-blue: #3498DB;
+
+      /* 设备与桌椅色彩 */
+      --desk-top: #FFFFFF;
+      --desk-front: #EBF1F6;
+      --desk-leg: #BDCAD6;
+      --monitor-frame: #1C1E22;
+      --chair-back: #31353E;
+      --chair-seat: #252830;
+      --chair-leg: #95A5A6;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 50px 24px;
+    }
+
+    header { text-align: center; max-width: 960px; margin: 0 auto 40px; }
+    header h1 { font-size: 32px; font-weight: 800; margin-bottom: 12px; color: #1E2229; }
+    header h1 span { color: var(--meituan-yellow-dark); }
+    header p { font-size: 15px; color: var(--muted); max-width: 650px; margin: 0 auto; line-height: 1.6; }
+
+    /* ====== 完美的响应式卡片网格 ====== */
+    .state-grid {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .state-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .state-grid { grid-template-columns: 1fr; } }
+
+    .state-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 8px 24px rgba(24,38,56,0.04);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .state-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(24,38,56,0.1);
+      border-color: #D2DFEE;
+    }
+    .state-card h3 { font-size: 16px; font-weight: 700; color: #2C3E50; display: flex; flex-direction: column; align-items: center; }
+    .state-label-en { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ====== 场景舞台设计 ====== */
+    .office-scene {
+      position: relative;
+      width: 180px;
+      height: 220px;
+      margin: 20px 0 10px;
+    }
+
+    /* 地板灰色几何横条 */
+    .office-floor {
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 16px;
+      background: #EBF1F6; border-radius: 4px;
+    }
+
+    /* 椅子的线条感重塑 */
+    .chair { position: absolute; bottom: 16px; left: 54px; width: 72px; height: 90px; z-index: 2; }
+    .chair-back {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 46px; height: 44px; background: var(--chair-back); border-radius: 12px;
+    }
+    .chair-seat {
+      position: absolute; top: 44px; left: 50%; transform: translateX(-50%);
+      width: 58px; height: 10px; background: var(--chair-seat); border-radius: 4px;
+    }
+    .chair-pillar {
+      position: absolute; top: 54px; left: 50%; transform: translateX(-50%);
+      width: 6px; height: 22px; background: var(--chair-leg);
+    }
+    .chair-base {
+      position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 4px; background: var(--chair-leg); border-radius: 2px;
+    }
+
+    /* ====== 精致智能外卖小人模型 ====== */
+    .flat-worker { position: absolute; bottom: 58px; left: 56px; width: 68px; height: 85px; z-index: 4; }
+    
+    .flat-helmet {
+      position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+      width: 44px; height: 20px; background: linear-gradient(to bottom, var(--meituan-yellow), #FFC000);
+      border-radius: 14px 14px 4px 4px; z-index: 3;
+    }
+    .flat-ear { position: absolute; top: -7px; width: 11px; height: 11px; background: var(--meituan-yellow); border-radius: 50% 50% 2px 2px; }
+    .flat-ear-l { left: 4px; transform: rotate(-10deg); }
+    .flat-ear-r { right: 4px; transform: rotate(10deg); }
+    .flat-visor {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+      background: rgba(0,0,0,0.15); border-radius: 0 0 4px 4px;
+    }
+
+    .flat-face {
+      position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+      width: 34px; height: 22px; background: var(--face-peach); border-radius: 11px;
+      z-index: 2; display: flex; justify-content: center; align-items: center; gap: 4px; padding-top: 4px;
+    }
+    .flat-eye { width: 4px; height: 4px; background: #2C3E50; border-radius: 50%; }
+    .flat-mouth {
+      position: absolute; bottom: 4px; width: 8px; height: 4px;
+      border-bottom: 2px solid var(--face-peach-dark); border-radius: 0 0 4px 4px;
+    }
+
+    .flat-torso {
+      position: absolute; top: 36px; left: 50%; transform: translateX(-50%);
+      width: 50px; height: 34px; background: var(--uniform-dark); border-radius: 10px 10px 4px 4px; z-index: 1;
+    }
+    .flat-collar {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 16px; height: 6px; background: var(--meituan-yellow); border-radius: 0 0 4px 4px;
+    }
+    .flat-nametag {
+      position: absolute; top: 12px; left: 10px; width: 12px; height: 6px;
+      background: var(--badge-cream); border-radius: 1px;
+    }
+
+    .flat-arm { position: absolute; top: 38px; width: 10px; height: 26px; background: var(--uniform-dark); border-radius: 5px; z-index: 5; }
+    .flat-arm-l { left: 5px; transform: rotate(15deg); }
+    .flat-arm-r { right: 5px; transform: rotate(-15deg); }
+
+    /* ====== 带有现代质感的悬浮办公桌 ====== */
+    .desk { position: absolute; bottom: 16px; left: 8px; right: 8px; height: 48px; z-index: 6; }
+    .desk-top {
+      position: absolute; top: 0; left: 0; right: 0; height: 8px;
+      background: var(--desk-top); border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    .desk-front { position: absolute; top: 8px; left: 2px; right: 2px; height: 24px; background: var(--desk-front); border-radius: 0 0 6px 6px; }
+    .desk-leg { position: absolute; bottom: -16px; width: 6px; height: 16px; background: var(--desk-leg); border-radius: 2px; }
+    .desk-leg-l { left: 10px; }
+    .desk-leg-r { right: 10px; }
+
+    /* ====== 科技感微渐变屏幕 ====== */
+    .monitor { position: absolute; top: -44px; left: 50%; transform: translateX(-50%); z-index: 7; }
+    .monitor-frame { width: 72px; height: 44px; background: var(--monitor-frame); border-radius: 6px; padding: 3px; }
+    .monitor-screen {
+      width: 100%; height: 100%; 
+      background: linear-gradient(135deg, #2C3E50, #34495E); /* 高级黑透蓝渐变 */
+      border-radius: 3px; overflow: hidden; position: relative;
+    }
+    .monitor-line { position: absolute; left: 6px; height: 2px; background: rgba(255,255,255,0.12); border-radius: 1px; }
+    .monitor-line:nth-child(1) { top: 6px; width: 60%; }
+    .monitor-line:nth-child(2) { top: 11px; width: 40%; }
+    .monitor-line:nth-child(3) { top: 16px; width: 70%; }
+    
+    .monitor-dot { position: absolute; bottom: 4px; right: 4px; width: 4px; height: 4px; border-radius: 50%; background: var(--success-green); }
+    .monitor-stand { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: var(--monitor-frame); }
+    .monitor-base { position: absolute; bottom: -11px; left: 50%; transform: translateX(-50%); width: 28px; height: 3px; background: var(--monitor-frame); border-radius: 2px; }
+
+    /* ====== 精致迷你桌面外设 ====== */
+    .keyboard { position: absolute; top: -5px; left: 16px; width: 38px; height: 12px; background: #E4EBF4; border-radius: 2px; z-index: 8; display: flex; gap: 2px; padding: 2px 4px; }
+    .key-block { flex: 1; background: #BDCAD6; border-radius: 1px; }
+
+    .mousepad { position: absolute; top: -6px; right: 12px; width: 24px; height: 18px; background: #D2DFEE; border-radius: 3px; z-index: 7; }
+    .mouse { position: absolute; top: -4px; right: 18px; width: 8px; height: 12px; background: #FFFFFF; border-radius: 4px; z-index: 8; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+
+    /* 极简风绿植 */
+    .plant { position: absolute; top: -16px; left: 16px; z-index: 8; display: flex; flex-direction: column; align-items: center; }
+    .plant-pot { width: 14px; height: 10px; background: #E67E22; border-radius: 0 0 4px 4px; }
+    .plant-leaves { display: flex; gap: 1px; margin-bottom: -1px; }
+    .p-leaf { width: 5px; height: 7px; background: var(--success-green); border-radius: 50% 50% 0 0; }
+
+    /* 迷你咖啡杯组件 */
+    .mug { position: absolute; top: -14px; right: 16px; z-index: 8; }
+    .mug-body { width: 12px; height: 12px; background: #FFFFFF; border-radius: 1px 1px 3px 3px; border: 1px solid var(--border); position: relative; }
+    .mug-handle { position: absolute; top: 2px; right: -4px; width: 4px; height: 6px; border: 1px solid var(--desk-leg); border-left: none; border-radius: 0 2px 2px 0; }
+    
+    /* 顺滑微动气流 */
+    .mug-steam { position: absolute; top: -6px; left: 50%; width: 2px; height: 4px; background: #BDCAD6; opacity: 0; animation: geo-steam 2s infinite ease-in-out; }
+    @keyframes geo-steam { 0% { opacity: 0; transform: translateY(0); } 50% { opacity: 0.6; } 100% { opacity: 0; transform: translateY(-4px); } }
+
+    .sticky-note { position: absolute; top: -2px; left: 58px; width: 14px; height: 12px; background: #FFEAA7; transform: rotate(-3deg); z-index: 8; }
+    .nameplate { position: absolute; top: -3px; left: 76px; width: 20px; height: 7px; background: var(--meituan-yellow); border-radius: 1px; z-index: 8; font-size: 5px; font-weight: 800; text-align: center; line-height: 7px; }
+
+    /* ============================================================
+       扁平几何动态引擎（高精度的变形控制）
+       ============================================================ */
+
+    /* [IDLE] 空闲 */
+    [data-state="idle"] .flat-worker { animation: geo-idle 3s ease-in-out infinite; }
+    @keyframes geo-idle { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.98) translateY(1px); } }
+
+    /* [CALLING] 通话中大屏高亮 */
+    [data-state="calling"] .monitor-screen { background: linear-gradient(135deg, #2980B9, #3498DB); }
+    [data-state="calling"] .monitor-dot { background: var(--meituan-yellow); animation: dot-flash 0.6s infinite alternate; }
+    [data-state="calling"] .flat-arm-r { transform: rotate(-40deg) translateY(-2px); }
+    [data-state="calling"] .office-scene::after {
+      content: "•••"; position: absolute; top: -4px; right: 8px; background: #FFFFFF;
+      border: 1px solid var(--border); border-radius: 10px; padding: 2px 6px; font-size: 10px;
+      letter-spacing: 1px; color: var(--calling-blue); font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    @keyframes dot-flash { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
+    /* [ALERT] 极简感叹号与闪红大屏 */
+    [data-state="alert"] .monitor-screen { background: linear-gradient(135deg, #C0392B, #E74C3C); }
+    [data-state="alert"] .monitor-dot { background: var(--alert-red); }
+    [data-state="alert"] .flat-face { background: #FFB3A7; }
+    [data-state="alert"] .flat-mouth { width: 6px; height: 6px; background: #C0392B; border-radius: 50%; border: none; }
+    [data-state="alert"] .office-scene::after {
+      content: "!"; position: absolute; top: 0; left: 16px; background: var(--alert-red);
+      color: #FFF; font-weight: 900; width: 16px; height: 16px; border-radius: 50%;
+      text-align: center; line-height: 16px; font-size: 11px;
+    }
+
+    /* [SUCCESS] 欢呼快乐弧线 */
+    [data-state="success"] .flat-mouth { width: 12px; height: 6px; border-bottom: 2.5px solid #2ECC71; border-radius: 0 0 6px 6px; }
+    [data-state="success"] .flat-arm-l { transform: rotate(-45deg) translateY(-2px); }
+    [data-state="success"] .monitor-screen { background: linear-gradient(135deg, #27AE60, #2ECC71); }
+    [data-state="success"] .office-scene::after {
+      content: "✓"; position: absolute; top: -2px; right: 12px; background: var(--success-green);
+      color: #FFF; font-weight: 900; width: 18px; height: 18px; border-radius: 50%;
+      text-align: center; line-height: 18px; font-size: 12px;
+    }
+    [data-state="success"] .mug-steam { animation: none; }
+
+    /* 清单展示底板 */
+    .detail-section { max-width: 1000px; margin: 0 auto 32px; padding: 24px; background: #FFF; border-radius: 20px; border: 1px solid var(--border); }
+    .detail-section h2 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #2C3E50; }
+    .detail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .detail-item { display: flex; align-items: center; gap: 12px; font-size: 13px; color: #566573; }
+    .detail-icon { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>办公室工位 · <span>现代轻拟物几何风</span></h1>
+    <p>深度规范了纯色块拼接的数字化几何网格，结合微光泽屏幕、像素风格外设及一体化动态状态反馈</p>
+  </header>
+
+  <section class="detail-section">
+    <h2>组件视觉规范</h2>
+    <div class="detail-grid">
+      <div class="detail-item"><div class="detail-icon" style="background:#2C3E50"></div> 数字化渐变显示器</div>
+      <div class="detail-item"><div class="detail-icon" style="background:var(--meituan-yellow)"></div> 标准高阶美团制服</div>
+      <div class="detail-item"><div class="detail-icon" style="background:var(--success-green)"></div> 极简圆点状态机</div>
+      <div class="detail-item"><div class="detail-icon" style="background:#BDCAD6"></div> 像素集成外设架构</div>
+    </div>
+  </section>
+
+  <main class="state-grid">
+
+    <div class="state-card" data-state="idle">
+      <h3>空闲中<div class="state-label-en">System Idle</div></h3>
+      <div class="office-scene">
+        <div class="office-floor"></div>
+        <div class="chair">
+          <div class="chair-back"></div><div class="chair-seat"></div><div class="chair-pillar"></div><div class="chair-base"></div>
+        </div>
+        <div class="flat-worker">
+          <div class="flat-helmet"><div class="flat-ear flat-ear-l"></div><div class="flat-ear flat-ear-r"></div><div class="flat-visor"></div></div>
+          <div class="flat-face"><span class="flat-eye"></span><span class="flat-eye"></span><div class="flat-mouth"></div></div>
+          <div class="flat-torso"><div class="flat-collar"></div><div class="flat-nametag"></div></div>
+          <div class="flat-arm flat-arm-l"></div><div class="flat-arm flat-arm-r"></div>
+        </div>
+        <div class="desk">
+          <div class="monitor">
+            <div class="monitor-frame"><div class="monitor-screen"><div class="monitor-line"></div><div class="monitor-line"></div><div class="monitor-line"></div><div class="monitor-dot"></div></div></div>
+            <div class="monitor-stand"></div><div class="monitor-base"></div>
+          </div>
+          <div class="keyboard"><div class="key-block"></div><div class="key-block"></div></div>
+          <div class="mousepad"></div><div class="mouse"></div>
+          <div class="plant"><div class="plant-leaves"><div class="p-leaf"></div><div class="p-leaf"></div></div><div class="plant-pot"></div></div>
+          <div class="mug"><div class="mug-steam"></div><div class="mug-body"></div><div class="mug-handle"></div></div>
+          <div class="sticky-note"></div><div class="nameplate">C1</div>
+          <div class="desk-top"></div><div class="desk-front"></div><div class="desk-leg desk-leg-l"></div><div class="desk-leg desk-leg-r"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-card" data-state="calling">
+      <h3>通话中<div class="state-label-en">On Calling</div></h3>
+      <div class="office-scene">
+        <div class="office-floor"></div>
+        <div class="chair"><div class="chair-back"></div><div class="chair-seat"></div><div class="chair-pillar"></div><div class="chair-base"></div></div>
+        <div class="flat-worker">
+          <div class="flat-helmet"><div class="flat-ear flat-ear-l"></div><div class="flat-ear flat-ear-r"></div><div class="flat-visor"></div></div>
+          <div class="flat-face"><span class="flat-eye"></span><span class="flat-eye"></span><div class="flat-mouth"></div></div>
+          <div class="flat-torso"><div class="flat-collar"></div><div class="flat-nametag"></div></div>
+          <div class="flat-arm flat-arm-l"></div><div class="flat-arm flat-arm-r"></div>
+        </div>
+        <div class="desk">
+          <div class="monitor">
+            <div class="monitor-frame"><div class="monitor-screen"><div class="monitor-line"></div><div class="monitor-dot"></div></div></div>
+            <div class="monitor-stand"></div><div class="monitor-base"></div>
+          </div>
+          <div class="keyboard"><div class="key-block"></div></div>
+          <div class="mousepad"></div><div class="mouse"></div>
+          <div class="plant"><div class="plant-leaves"><div class="p-leaf"></div></div><div class="plant-pot"></div></div>
+          <div class="mug"><div class="mug-steam"></div><div class="mug-body"></div><div class="mug-handle"></div></div>
+          <div class="sticky-note"></div><div class="nameplate">C1</div>
+          <div class="desk-top"></div><div class="desk-front"></div><div class="desk-leg desk-leg-l"></div><div class="desk-leg desk-leg-r"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-card" data-state="alert">
+      <h3>有警报<div class="state-label-en">Emergency</div></h3>
+      <div class="office-scene">
+        <div class="office-floor"></div>
+        <div class="chair"><div class="chair-back"></div><div class="chair-seat"></div><div class="chair-pillar"></div><div class="chair-base"></div></div>
+        <div class="flat-worker">
+          <div class="flat-helmet"><div class="flat-ear flat-ear-l"></div><div class="flat-ear flat-ear-r"></div><div class="flat-visor"></div></div>
+          <div class="flat-face"><span class="flat-eye"></span><span class="flat-eye"></span><div class="flat-mouth"></div></div>
+          <div class="flat-torso"><div class="flat-collar"></div><div class="flat-nametag"></div></div>
+          <div class="flat-arm flat-arm-l"></div><div class="flat-arm flat-arm-r"></div>
+        </div>
+        <div class="desk">
+          <div class="monitor">
+            <div class="monitor-frame"><div class="monitor-screen"><div class="monitor-dot"></div></div></div>
+            <div class="monitor-stand"></div><div class="monitor-base"></div>
+          </div>
+          <div class="keyboard"><div class="key-block"></div></div>
+          <div class="mousepad"></div><div class="mouse"></div>
+          <div class="plant"><div class="plant-pot"></div></div>
+          <div class="mug"><div class="mug-body"></div><div class="mug-handle"></div></div>
+          <div class="sticky-note"></div><div class="nameplate">C1</div>
+          <div class="desk-top"></div><div class="desk-front"></div><div class="desk-leg desk-leg-l"></div><div class="desk-leg desk-leg-r"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-card" data-state="success">
+      <h3>已完成<div class="state-label-en">Task Success</div></h3>
+      <div class="office-scene">
+        <div class="office-floor"></div>
+        <div class="chair"><div class="chair-back"></div><div class="chair-seat"></div><div class="chair-pillar"></div><div class="chair-base"></div></div>
+        <div class="flat-worker">
+          <div class="flat-helmet"><div class="flat-ear flat-ear-l"></div><div class="flat-ear flat-ear-r"></div><div class="flat-visor"></div></div>
+          <div class="flat-face"><span class="flat-eye"></span><span class="flat-eye"></span><div class="flat-mouth"></div></div>
+          <div class="flat-torso"><div class="flat-collar"></div><div class="flat-nametag"></div></div>
+          <div class="flat-arm flat-arm-l"></div><div class="flat-arm flat-arm-r"></div>
+        </div>
+        <div class="desk">
+          <div class="monitor">
+            <div class="monitor-frame"><div class="monitor-screen"><div class="monitor-line"></div><div class="monitor-dot"></div></div></div>
+            <div class="monitor-stand"></div><div class="monitor-base"></div>
+          </div>
+          <div class="keyboard"><div class="key-block"></div></div>
+          <div class="mousepad"></div><div class="mouse"></div>
+          <div class="plant"><div class="plant-leaves"><div class="p-leaf"></div></div><div class="plant-pot"></div></div>
+          <div class="mug"><div class="mug-body"></div><div class="mug-handle"></div></div>
+          <div class="sticky-note"></div><div class="nameplate">C1</div>
+          <div class="desk-top"></div><div class="desk-front"></div><div class="desk-leg desk-leg-l"></div><div class="desk-leg desk-leg-r"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

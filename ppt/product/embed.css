@@ -1,0 +1,15 @@
+html,body{background:#f6f2e8}
+html{overflow-x:hidden;overflow-y:auto;scrollbar-gutter:stable}
+body{overflow-x:hidden;overflow-y:auto;min-height:100vh}
+body::-webkit-scrollbar{width:12px}
+body::-webkit-scrollbar-track{background:#eee9dc}
+body::-webkit-scrollbar-thumb{background:#aaa391;border:3px solid #eee9dc;border-radius:999px}
+.app-shell{width:100%;max-width:none;min-height:100vh;height:auto;padding:18px 24px 34px}
+.topbar{min-height:52px}
+.setup-screen{margin-top:24px;min-height:calc(100vh - 112px)}
+.workspace{margin-top:14px;min-height:calc(100vh - 94px)}
+.report-page{padding-bottom:20px}
+html[data-presentation-view="setup"] .setup-copy textarea{font-size:15px}
+html[data-presentation-view="run"] .instruction-plane{max-height:330px}
+html[data-presentation-view="run"] .eval-zone{max-height:310px}
+html[data-presentation-view="report"] body{overflow-y:auto}

@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>纸片办公室 · 纸片叠层风工位</title>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: #FAF8F2;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.012) 2px,
+    rgba(0,0,0,0.012) 4px
+  );
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: #3a3a3a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+
+/* ===== Header ===== */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2f2c25;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+.page-title span { color: #E8B800; }
+.page-subtitle {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 24px;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+.back-link {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  font-size: 13px;
+  color: #888;
+  text-decoration: none;
+  transition: color .2s;
+}
+.back-link:hover { color: #FFD333; }
+.back-link::before { content: "\2190 "; }
+
+/* ===== Elements Legend ===== */
+.elements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  max-width: 880px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+.element-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.06);
+  font-size: 12px;
+  color: #777;
+}
+.element-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.08);
+}
+
+/* ===== State Grid ===== */
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 920px;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .state-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+.state-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform .25s, box-shadow .25s;
+  position: relative;
+  overflow: hidden;
+}
+.state-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+.state-card::before {
+  content: "";
+  position: absolute;
+  width: 16px; height: 16px;
+  background: #FFD333;
+  border-radius: 3px;
+  top: 8px; right: 10px;
+  transform: rotate(15deg);
+  opacity: 0.12;
+}
+.state-card::after {
+  content: "";
+  position: absolute;
+  width: 10px; height: 10px;
+  background: #f4be72;
+  border-radius: 2px;
+  bottom: 10px; left: 8px;
+  transform: rotate(-20deg);
+  opacity: 0.12;
+}
+
+.state-label {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2f2c25;
+}
+.state-desc {
+  margin-top: 3px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* ============================================================
+   PAPER-CUT OFFICE SCENE — all layered paper pieces
+   ============================================================ */
+
+.paper-scene {
+  position: relative;
+  width: 180px;
+  height: 220px;
+}
+
+.paper-piece {
+  position: absolute;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease;
+}
+
+/* ==================== FLOOR ==================== */
+.p-floor {
+  bottom: 0; left: 0; right: 0;
+  height: 20px;
+  background: #E8E4D8;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 -2px 0 rgba(0,0,0,0.04);
+  z-index: 1;
+}
+
+/* ==================== CHAIR ==================== */
+/* Chair back */
+.p-chair-back {
+  bottom: 52px; left: 56px;
+  width: 52px; height: 36px;
+  background: #5A574E;
+  border-radius: 10px 10px 3px 3px;
+  z-index: 3;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.10);
+}
+/* Chair seat */
+.p-chair-seat {
+  bottom: 44px; left: 50px;
+  width: 64px; height: 12px;
+  background: #4A4740;
+  border-radius: 4px 4px 2px 2px;
+  z-index: 4;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.10);
+}
+/* Chair pillar */
+.p-chair-pillar {
+  bottom: 30px; left: 78px;
+  width: 8px; height: 14px;
+  background: #8A877D;
+  border-radius: 0 0 3px 3px;
+  z-index: 2;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+}
+/* Chair base */
+.p-chair-base {
+  bottom: 24px; left: 60px;
+  width: 44px; height: 5px;
+  background: #8A877D;
+  border-radius: 3px;
+  z-index: 2;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+}
+/* Chair wheels */
+.p-chair-wheel {
+  bottom: 20px;
+  width: 7px; height: 7px;
+  background: #6B6860;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.10);
+}
+.p-cw-l { left: 62px; }
+.p-cw-r { left: 95px; }
+
+/* ==================== DESK SHADOW ==================== */
+.p-desk-shadow {
+  bottom: 22px; left: 10px;
+  width: 156px; height: 10px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 6px;
+  z-index: 5;
+}
+
+/* ==================== DESK ==================== */
+/* Desk front panel */
+.p-desk-front {
+  bottom: 30px; left: 12px;
+  width: 152px; height: 24px;
+  background: #DDD9CE;
+  border-radius: 3px 3px 6px 6px;
+  z-index: 10;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.08);
+}
+/* Desk surface */
+.p-desk-top {
+  bottom: 54px; left: 8px;
+  width: 160px; height: 10px;
+  background: #F0EDE5;
+  border-radius: 6px 6px 2px 2px;
+  z-index: 11;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.08);
+}
+/* Desk legs */
+.p-desk-leg {
+  bottom: 20px;
+  width: 7px; height: 10px;
+  background: #C8C4B8;
+  border-radius: 0 0 2px 2px;
+  z-index: 9;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.06);
+}
+.p-dl-l { left: 20px; }
+.p-dl-r { left: 149px; }
+
+/* ==================== MONITOR ==================== */
+/* Monitor screen bezel */
+.p-monitor-frame {
+  bottom: 72px; left: 44px;
+  width: 72px; height: 48px;
+  background: #2A2A26;
+  border-radius: 4px 4px 6px 6px;
+  z-index: 14;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.10);
+}
+/* Monitor screen */
+.p-monitor-screen {
+  bottom: 76px; left: 48px;
+  width: 64px; height: 38px;
+  background: #3A5F8A;
+  border-radius: 2px;
+  z-index: 15;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+/* Screen content lines */
+.p-screen-line {
+  position: absolute;
+  left: 5px;
+  height: 2.5px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 1px;
+}
+.p-sl-1 { top: 6px; width: 70%; }
+.p-sl-2 { top: 11px; width: 55%; }
+.p-sl-3 { top: 16px; width: 78%; }
+.p-sl-4 { top: 21px; width: 42%; }
+/* Screen status dot */
+.p-screen-dot {
+  position: absolute;
+  bottom: 5px; right: 5px;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #77B96C;
+}
+/* Monitor stand */
+.p-monitor-stand {
+  bottom: 64px; left: 74px;
+  width: 10px; height: 10px;
+  background: #2A2A26;
+  border-radius: 0 0 2px 2px;
+  z-index: 14;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+}
+/* Monitor base */
+.p-monitor-base {
+  bottom: 60px; left: 66px;
+  width: 26px; height: 5px;
+  background: #2A2A26;
+  border-radius: 2px;
+  z-index: 13;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+}
+
+/* ==================== KEYBOARD ==================== */
+.p-keyboard {
+  bottom: 62px; left: 24px;
+  width: 38px; height: 16px;
+  background: #DDDBD4;
+  border-radius: 3px 3px 4px 4px;
+  z-index: 16;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+}
+/* Key rows */
+.p-key-row {
+  display: flex; gap: 2px; justify-content: center;
+  padding: 1.5px 4px 0;
+}
+.p-key {
+  width: 4px; height: 3px;
+  background: #C8C5BC;
+  border-radius: 1px;
+}
+
+/* ==================== MOUSE + PAD ==================== */
+.p-mousepad {
+  bottom: 60px; right: 22px;
+  width: 28px; height: 22px;
+  background: #D0CCC2;
+  border-radius: 4px;
+  z-index: 15;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.06);
+}
+.p-mouse {
+  bottom: 66px; right: 28px;
+  width: 10px; height: 14px;
+  background: #DDDBD4;
+  border-radius: 5px;
+  z-index: 16;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+}
+
+/* ==================== COFFEE MUG ==================== */
+.p-mug {
+  bottom: 64px; right: 14px;
+  z-index: 17;
+}
+.p-mug-body {
+  width: 14px; height: 14px;
+  background: #fff;
+  border-radius: 2px 2px 4px 4px;
+  border: 1.5px solid #E0D9CC;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.08);
+}
+.p-mug-body::before {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px; right: 2px;
+  height: 7px;
+  background: #8B6B4A;
+  border-radius: 1px;
+}
+.p-mug-handle {
+  position: absolute;
+  top: 2px; right: -5px;
+  width: 5px; height: 8px;
+  border: 1.5px solid #E0D9CC;
+  border-left: none;
+  border-radius: 0 3px 3px 0;
+}
+/* Steam */
+.p-steam {
+  position: absolute;
+  top: -7px;
+  width: 0; height: 5px;
+  border-left: 1.5px solid rgba(180,175,165,0.5);
+  animation: steam-up 2s ease-in-out infinite;
+}
+.p-steam-1 { left: 3px; }
+.p-steam-2 { left: 7px; animation-delay: 0.4s; }
+.p-steam-3 { left: 11px; animation-delay: 0.8s; }
+@keyframes steam-up {
+  0%   { opacity: 0; transform: translateY(0) scaleX(1); }
+  30%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-7px) scaleX(1.5); }
+}
+
+/* ==================== PLANT ==================== */
+.p-plant {
+  bottom: 64px; left: 20px;
+  z-index: 17;
+}
+.p-pot {
+  width: 14px; height: 10px;
+  background: #C47A3A;
+  border-radius: 2px 2px 4px 4px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.08);
+}
+.p-pot::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -1px; right: -1px;
+  height: 3px;
+  background: #D4894A;
+  border-radius: 2px;
+}
+.p-leaf {
+  position: absolute;
+  border-radius: 50%;
+}
+.p-leaf-1 {
+  top: -10px; left: 1px;
+  width: 12px; height: 12px;
+  background: #77B96C;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+  animation: leaf-sway 3s ease-in-out infinite;
+}
+.p-leaf-2 {
+  top: -7px; left: -3px;
+  width: 8px; height: 8px;
+  background: #5A9450;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+  animation: leaf-sway 3.2s ease-in-out 0.3s infinite;
+}
+.p-leaf-3 {
+  top: -6px; left: 8px;
+  width: 7px; height: 7px;
+  background: #77B96C;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+  animation: leaf-sway 2.8s ease-in-out 0.6s infinite;
+}
+@keyframes leaf-sway {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(3deg); }
+}
+
+/* ==================== STICKY NOTE ==================== */
+.p-sticky {
+  bottom: 64px; left: 68px;
+  width: 18px; height: 16px;
+  background: #FFF9B1;
+  border-radius: 1px 2px 2px 3px;
+  z-index: 17;
+  transform: rotate(-3deg);
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.06);
+}
+.p-sticky::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px; right: 3px;
+  height: 1.5px;
+  background: rgba(200,180,100,0.3);
+  border-radius: 1px;
+  box-shadow: 0 3px 0 rgba(200,180,100,0.3), 0 6px 0 rgba(200,180,100,0.3);
+}
+
+/* ==================== NAMEPLATE ==================== */
+.p-nameplate {
+  bottom: 64px; left: 96px;
+  width: 26px; height: 9px;
+  background: #FFD333;
+  border-radius: 2px 3px 3px 2px;
+  z-index: 17;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.08);
+}
+.p-nameplate::before {
+  content: 'C1';
+  position: absolute;
+  top: 1px; left: 0; right: 0;
+  text-align: center;
+  font-size: 5.5px;
+  font-weight: 800;
+  color: #2f2c25;
+}
+
+/* ==================== WORKER (sitting, torso only) ==================== */
+/* Worker shadow */
+.p-worker-shadow {
+  bottom: 72px; left: 62px;
+  width: 48px; height: 32px;
+  background: #D8D4C8;
+  border-radius: 9px 7px 10px 8px;
+  z-index: 20;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.06);
+}
+
+/* Worker body */
+.p-worker-body {
+  bottom: 74px; left: 60px;
+  width: 52px; height: 36px;
+  background: #2f2c25;
+  border-radius: 10px 11px 8px 9px;
+  z-index: 22;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+
+/* Worker collar */
+.p-worker-collar {
+  bottom: 106px; left: 68px;
+  width: 36px; height: 9px;
+  background: #FFD333;
+  border-radius: 3px 2px 4px 3px;
+  z-index: 24;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+
+/* Worker badge */
+.p-worker-badge {
+  bottom: 82px; left: 76px;
+  width: 16px; height: 10px;
+  background: #fff8d5;
+  border-radius: 2px 3px 2px 3px;
+  z-index: 26;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.10);
+}
+
+/* Worker face */
+.p-worker-face {
+  bottom: 110px; left: 62px;
+  width: 44px; height: 40px;
+  background: #f4be72;
+  border-radius: 48% 52% 46% 50% / 45% 48% 54% 50%;
+  z-index: 25;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+.p-w-eye {
+  position: absolute;
+  width: 5px; height: 6px;
+  background: #2a1a0a;
+  border-radius: 50%;
+  top: 14px;
+  z-index: 28;
+}
+.p-we-l { left: 11px; }
+.p-we-r { right: 11px; }
+.p-w-mouth {
+  position: absolute;
+  bottom: 10px;
+  left: 50%; transform: translateX(-50%);
+  width: 9px; height: 3px;
+  border-bottom: 2px solid #c48a3f;
+  border-radius: 0 0 5px 5px;
+  z-index: 28;
+}
+
+/* Worker helmet */
+.p-worker-helmet {
+  bottom: 140px; left: 56px;
+  width: 56px; height: 30px;
+  background: #FFD333;
+  border-radius: 28px 28px 7px 7px;
+  z-index: 27;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+/* Kangaroo ears */
+.p-w-ear {
+  position: absolute;
+  width: 12px; height: 15px;
+  background: #FFD333;
+  border-radius: 50% 50% 3px 3px;
+  top: -8px;
+  z-index: 29;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+.p-we-ear-l { left: 8px; transform: rotate(-8deg); }
+.p-we-ear-r { right: 8px; transform: rotate(8deg); }
+
+/* Worker arms (visible below desk edge) */
+.p-worker-arm {
+  bottom: 76px;
+  width: 9px; height: 22px;
+  background: #2f2c25;
+  border-radius: 5px;
+  z-index: 23;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.10);
+}
+.p-wa-l { left: 54px; transform: rotate(15deg); }
+.p-wa-r { left: 108px; transform: rotate(-15deg); }
+
+/* ============================================================
+   STATE ANIMATIONS
+   ============================================================ */
+
+/* ===== IDLE ===== */
+[data-state="idle"] .paper-scene {
+  animation: paper-idle 3s ease-in-out infinite;
+}
+[data-state="idle"] .p-screen-dot {
+  animation: dot-blink 2.5s ease-in-out infinite;
+}
+@keyframes paper-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+}
+@keyframes dot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ===== CALLING ===== */
+/* Headset slides in */
+[data-state="calling"] .p-worker-helmet::after {
+  content: "";
+  position: absolute;
+  right: -16px; top: 8px;
+  width: 12px; height: 12px;
+  background: #555;
+  border-radius: 50% 50% 50% 4px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+  z-index: 30;
+  animation: headset-slide 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes headset-slide {
+  0% { transform: translateX(16px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Speech bubble paper piece */
+[data-state="calling"] .paper-scene::after {
+  content: "...";
+  position: absolute;
+  top: 14px; right: 16px;
+  width: 34px; height: 24px;
+  background: #fff;
+  border-radius: 10px 11px 9px 12px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.10);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #2a1a0a;
+  letter-spacing: 1px;
+  animation: bubble-in 0.4s 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes bubble-in {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Screen active */
+[data-state="calling"] .p-monitor-screen {
+  background: #5B9BD5;
+}
+[data-state="calling"] .p-screen-dot {
+  background: #FFD333;
+  animation: dot-pulse 0.8s ease-in-out infinite;
+}
+
+/* Face gentle pulse */
+[data-state="calling"] .p-worker-face {
+  animation: face-pulse 1.2s ease-in-out infinite;
+}
+@keyframes face-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+}
+
+/* ===== ALERT ===== */
+/* All worker layers jitter independently */
+[data-state="alert"] .p-worker-shadow {
+  animation: j-shadow 0.3s ease-in-out infinite;
+}
+[data-state="alert"] .p-worker-body {
+  animation: j-body 0.3s ease-in-out 0.03s infinite;
+}
+[data-state="alert"] .p-worker-collar {
+  animation: j-collar 0.3s ease-in-out 0.01s infinite;
+}
+[data-state="alert"] .p-worker-face {
+  animation: j-face 0.3s ease-in-out 0.05s infinite;
+}
+[data-state="alert"] .p-worker-helmet {
+  animation: j-helmet 0.3s ease-in-out 0.02s infinite;
+}
+[data-state="alert"] .p-worker-badge {
+  animation: j-badge 0.3s ease-in-out 0.04s infinite;
+}
+
+@keyframes j-shadow { 0%,100%{transform:translate(0,0)} 30%{transform:translate(2px,-1px)} 70%{transform:translate(-1px,2px)} }
+@keyframes j-body   { 0%,100%{transform:translate(0,0)} 25%{transform:translate(-2px,1px)} 75%{transform:translate(1px,-1px)} }
+@keyframes j-collar { 0%,100%{transform:translate(0,0)} 40%{transform:translate(1px,-2px)} 80%{transform:translate(-2px,1px)} }
+@keyframes j-face   { 0%,100%{transform:translate(0,0)} 35%{transform:translate(2px,1px)} 65%{transform:translate(-1px,-1px)} }
+@keyframes j-helmet { 0%,100%{transform:translate(0,0)} 30%{transform:translate(-1px,-2px)} 60%{transform:translate(2px,1px)} }
+@keyframes j-badge  { 0%,100%{transform:translate(0,0)} 45%{transform:translate(1px,2px)} 80%{transform:translate(-2px,-1px)} }
+
+/* Red alert paper piece */
+[data-state="alert"] .paper-scene::before {
+  content: "!";
+  position: absolute;
+  top: 16px; right: 28px;
+  width: 20px; height: 20px;
+  background: #e74c3c;
+  color: #fff;
+  border-radius: 9px 11px 10px 8px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.15);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  animation: alert-blink 0.5s ease-in-out infinite alternate;
+}
+@keyframes alert-blink {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.15); opacity: 0.7; }
+}
+
+/* Screen turns red */
+[data-state="alert"] .p-monitor-screen {
+  background: #8A4040;
+}
+[data-state="alert"] .p-screen-line {
+  background: rgba(255,255,255,0.08);
+}
+[data-state="alert"] .p-screen-dot {
+  background: #e74c3c;
+  animation: dot-pulse 0.5s ease-in-out infinite;
+}
+
+/* Concerned mouth */
+[data-state="alert"] .p-w-mouth {
+  width: 7px; height: 0;
+  border-bottom: 2px solid #c48a3f;
+  border-radius: 0;
+  bottom: 11px;
+}
+
+/* Card red glow */
+[data-state="alert"].state-card {
+  animation: card-alert-glow 1.5s ease-in-out infinite;
+}
+@keyframes card-alert-glow {
+  0%, 100% { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  50% { box-shadow: 0 0 12px rgba(217,90,79,0.2), 0 2px 12px rgba(0,0,0,0.06); }
+}
+
+/* ===== SUCCESS ===== */
+/* Worker layers spread then compress */
+[data-state="success"] .p-worker-shadow {
+  animation: sp-shadow 1.5s ease-out forwards;
+}
+[data-state="success"] .p-worker-body {
+  animation: sp-body 1.5s ease-out 0.03s forwards;
+}
+[data-state="success"] .p-worker-collar {
+  animation: sp-collar 1.5s ease-out 0.01s forwards;
+}
+[data-state="success"] .p-worker-face {
+  animation: sp-face 1.5s ease-out 0.05s forwards;
+}
+[data-state="success"] .p-worker-helmet {
+  animation: sp-helmet 1.5s ease-out 0.02s forwards;
+}
+[data-state="success"] .p-worker-badge {
+  animation: sp-badge 1.5s ease-out 0.04s forwards;
+}
+
+@keyframes sp-shadow { 0%{transform:translate(0,0)} 40%{transform:translate(3px,3px)} 100%{transform:translate(1px,1px)} }
+@keyframes sp-body   { 0%{transform:translate(0,0)} 40%{transform:translate(-1px,2px)} 100%{transform:translate(0,0)} }
+@keyframes sp-collar { 0%{transform:translate(0,0)} 40%{transform:translate(0px,-3px)} 100%{transform:translate(0,0)} }
+@keyframes sp-face   { 0%{transform:translate(0,0)} 40%{transform:translate(2px,-3px)} 100%{transform:translate(0,0)} }
+@keyframes sp-helmet { 0%{transform:translate(0,0)} 40%{transform:translate(1px,-4px)} 100%{transform:translate(0,0)} }
+@keyframes sp-badge  { 0%{transform:translate(0,0)} 40%{transform:translate(-2px,2px)} 100%{transform:translate(0,0)} }
+
+/* Green checkmark paper piece */
+[data-state="success"] .paper-scene::before {
+  content: "\2713";
+  position: absolute;
+  top: 18px; right: 26px;
+  width: 24px; height: 24px;
+  background: #27ae60;
+  color: #fff;
+  border-radius: 10px 8px 11px 9px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  animation: check-pop 0.5s 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes check-pop {
+  0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* Happy expression */
+[data-state="success"] .p-w-mouth {
+  width: 11px; height: 5px;
+  border-bottom: 2px solid #c48a3f;
+  border-radius: 0 0 7px 7px;
+  bottom: 9px;
+}
+[data-state="success"] .p-w-eye {
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: transparent;
+  border-top: 2.5px solid #2a1a0a;
+  top: 15px;
+}
+
+/* Screen green */
+[data-state="success"] .p-monitor-screen {
+  background: #3A7050;
+}
+[data-state="success"] .p-screen-dot {
+  background: #4CAF6E;
+  animation: dot-pulse 1s ease-in-out infinite;
+}
+
+/* Steam stops */
+[data-state="success"] .p-steam {
+  animation: none;
+  opacity: 0;
+}
+
+/* Divider */
+.divider {
+  width: 80px; height: 4px;
+  background: repeating-linear-gradient(90deg, #FFD333 0px, #FFD333 8px, transparent 8px, transparent 12px);
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+</style>
+</head>
+<body>
+
+<a href="worker-showcase-index.html" class="back-link">返回总览</a>
+
+<h1 class="page-title">纸片办公室 · <span>纸片叠层风工位</span></h1>
+<p class="page-subtitle">
+  在纸片叠层风基础上增加完整办公桌工位场景 — 每件物品都是独立纸片层<br>
+  桌子、显示器、键盘、咖啡杯、绿植……全都保持手剪拼贴质感
+</p>
+<div class="divider"></div>
+
+<!-- Elements legend -->
+<div class="elements-grid">
+  <div class="element-chip"><div class="element-swatch" style="background:#2A2A26"></div> 显示器（屏幕随状态变色）</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#DDDBD4"></div> 键盘 + 鼠标</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#fff; border:1px solid #E0D9CC"></div> 咖啡杯（热气动画）</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#77B96C"></div> 小绿植（叶子摇曳）</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#FFF9B1"></div> 便签纸</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#5A574E"></div> 人体工学椅</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#FFD333"></div> 工位号牌</div>
+  <div class="element-chip"><div class="element-swatch" style="background:#F0EDE5"></div> 办公桌</div>
+</div>
+
+<!-- 4 States -->
+<div class="state-grid">
+
+  <!-- IDLE -->
+  <div class="state-card" data-state="idle">
+    <div class="paper-scene" data-state="idle">
+      <!-- Floor -->
+      <div class="paper-piece p-floor"></div>
+
+      <!-- Chair -->
+      <div class="paper-piece p-chair-back"></div>
+      <div class="paper-piece p-chair-seat"></div>
+      <div class="paper-piece p-chair-pillar"></div>
+      <div class="paper-piece p-chair-base"></div>
+      <div class="paper-piece p-chair-wheel p-cw-l"></div>
+      <div class="paper-piece p-chair-wheel p-cw-r"></div>
+
+      <!-- Desk shadow -->
+      <div class="paper-piece p-desk-shadow"></div>
+
+      <!-- Desk -->
+      <div class="paper-piece p-desk-front"></div>
+      <div class="paper-piece p-desk-top"></div>
+      <div class="paper-piece p-desk-leg p-dl-l"></div>
+      <div class="paper-piece p-desk-leg p-dl-r"></div>
+
+      <!-- Monitor -->
+      <div class="paper-piece p-monitor-frame"></div>
+      <div class="paper-piece p-monitor-screen">
+        <div class="p-screen-line p-sl-1"></div>
+        <div class="p-screen-line p-sl-2"></div>
+        <div class="p-screen-line p-sl-3"></div>
+        <div class="p-screen-line p-sl-4"></div>
+        <div class="p-screen-dot"></div>
+      </div>
+      <div class="paper-piece p-monitor-stand"></div>
+      <div class="paper-piece p-monitor-base"></div>
+
+      <!-- Keyboard -->
+      <div class="paper-piece p-keyboard">
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+      </div>
+
+      <!-- Mouse + pad -->
+      <div class="paper-piece p-mousepad"></div>
+      <div class="paper-piece p-mouse"></div>
+
+      <!-- Plant -->
+      <div class="paper-piece p-plant">
+        <div class="p-leaf p-leaf-1"></div>
+        <div class="p-leaf p-leaf-2"></div>
+        <div class="p-leaf p-leaf-3"></div>
+        <div class="p-pot"></div>
+      </div>
+
+      <!-- Mug -->
+      <div class="paper-piece p-mug">
+        <div class="p-steam p-steam-1"></div>
+        <div class="p-steam p-steam-2"></div>
+        <div class="p-steam p-steam-3"></div>
+        <div class="p-mug-body"></div>
+        <div class="p-mug-handle"></div>
+      </div>
+
+      <!-- Sticky note -->
+      <div class="paper-piece p-sticky"></div>
+
+      <!-- Nameplate -->
+      <div class="paper-piece p-nameplate"></div>
+
+      <!-- Worker -->
+      <div class="paper-piece p-worker-shadow"></div>
+      <div class="paper-piece p-worker-body"></div>
+      <div class="paper-piece p-worker-collar"></div>
+      <div class="paper-piece p-worker-badge"></div>
+      <div class="paper-piece p-worker-arm p-wa-l"></div>
+      <div class="paper-piece p-worker-arm p-wa-r"></div>
+      <div class="paper-piece p-worker-face">
+        <span class="p-w-eye p-we-l"></span>
+        <span class="p-w-eye p-we-r"></span>
+        <span class="p-w-mouth"></span>
+      </div>
+      <div class="paper-piece p-worker-helmet">
+        <div class="p-w-ear p-we-ear-l"></div>
+        <div class="p-w-ear p-we-ear-r"></div>
+      </div>
+    </div>
+    <div class="state-label">空闲</div>
+    <div class="state-desc">纸片轻浮 · 静待接单</div>
+  </div>
+
+  <!-- CALLING -->
+  <div class="state-card" data-state="calling">
+    <div class="paper-scene" data-state="calling">
+      <div class="paper-piece p-floor"></div>
+      <div class="paper-piece p-chair-back"></div>
+      <div class="paper-piece p-chair-seat"></div>
+      <div class="paper-piece p-chair-pillar"></div>
+      <div class="paper-piece p-chair-base"></div>
+      <div class="paper-piece p-chair-wheel p-cw-l"></div>
+      <div class="paper-piece p-chair-wheel p-cw-r"></div>
+      <div class="paper-piece p-desk-shadow"></div>
+      <div class="paper-piece p-desk-front"></div>
+      <div class="paper-piece p-desk-top"></div>
+      <div class="paper-piece p-desk-leg p-dl-l"></div>
+      <div class="paper-piece p-desk-leg p-dl-r"></div>
+      <div class="paper-piece p-monitor-frame"></div>
+      <div class="paper-piece p-monitor-screen">
+        <div class="p-screen-line p-sl-1"></div>
+        <div class="p-screen-line p-sl-2"></div>
+        <div class="p-screen-line p-sl-3"></div>
+        <div class="p-screen-line p-sl-4"></div>
+        <div class="p-screen-dot"></div>
+      </div>
+      <div class="paper-piece p-monitor-stand"></div>
+      <div class="paper-piece p-monitor-base"></div>
+      <div class="paper-piece p-keyboard">
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+      </div>
+      <div class="paper-piece p-mousepad"></div>
+      <div class="paper-piece p-mouse"></div>
+      <div class="paper-piece p-plant">
+        <div class="p-leaf p-leaf-1"></div>
+        <div class="p-leaf p-leaf-2"></div>
+        <div class="p-leaf p-leaf-3"></div>
+        <div class="p-pot"></div>
+      </div>
+      <div class="paper-piece p-mug">
+        <div class="p-steam p-steam-1"></div>
+        <div class="p-steam p-steam-2"></div>
+        <div class="p-steam p-steam-3"></div>
+        <div class="p-mug-body"></div>
+        <div class="p-mug-handle"></div>
+      </div>
+      <div class="paper-piece p-sticky"></div>
+      <div class="paper-piece p-nameplate"></div>
+      <div class="paper-piece p-worker-shadow"></div>
+      <div class="paper-piece p-worker-body"></div>
+      <div class="paper-piece p-worker-collar"></div>
+      <div class="paper-piece p-worker-badge"></div>
+      <div class="paper-piece p-worker-arm p-wa-l"></div>
+      <div class="paper-piece p-worker-arm p-wa-r"></div>
+      <div class="paper-piece p-worker-face">
+        <span class="p-w-eye p-we-l"></span>
+        <span class="p-w-eye p-we-r"></span>
+        <span class="p-w-mouth"></span>
+      </div>
+      <div class="paper-piece p-worker-helmet">
+        <div class="p-w-ear p-we-ear-l"></div>
+        <div class="p-w-ear p-we-ear-r"></div>
+      </div>
+    </div>
+    <div class="state-label">通话中</div>
+    <div class="state-desc">耳麦滑入 · 对话气泡</div>
+  </div>
+
+  <!-- ALERT -->
+  <div class="state-card" data-state="alert">
+    <div class="paper-scene" data-state="alert">
+      <div class="paper-piece p-floor"></div>
+      <div class="paper-piece p-chair-back"></div>
+      <div class="paper-piece p-chair-seat"></div>
+      <div class="paper-piece p-chair-pillar"></div>
+      <div class="paper-piece p-chair-base"></div>
+      <div class="paper-piece p-chair-wheel p-cw-l"></div>
+      <div class="paper-piece p-chair-wheel p-cw-r"></div>
+      <div class="paper-piece p-desk-shadow"></div>
+      <div class="paper-piece p-desk-front"></div>
+      <div class="paper-piece p-desk-top"></div>
+      <div class="paper-piece p-desk-leg p-dl-l"></div>
+      <div class="paper-piece p-desk-leg p-dl-r"></div>
+      <div class="paper-piece p-monitor-frame"></div>
+      <div class="paper-piece p-monitor-screen">
+        <div class="p-screen-line p-sl-1"></div>
+        <div class="p-screen-line p-sl-2"></div>
+        <div class="p-screen-line p-sl-3"></div>
+        <div class="p-screen-line p-sl-4"></div>
+        <div class="p-screen-dot"></div>
+      </div>
+      <div class="paper-piece p-monitor-stand"></div>
+      <div class="paper-piece p-monitor-base"></div>
+      <div class="paper-piece p-keyboard">
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+      </div>
+      <div class="paper-piece p-mousepad"></div>
+      <div class="paper-piece p-mouse"></div>
+      <div class="paper-piece p-plant">
+        <div class="p-leaf p-leaf-1"></div>
+        <div class="p-leaf p-leaf-2"></div>
+        <div class="p-leaf p-leaf-3"></div>
+        <div class="p-pot"></div>
+      </div>
+      <div class="paper-piece p-mug">
+        <div class="p-steam p-steam-1"></div>
+        <div class="p-steam p-steam-2"></div>
+        <div class="p-steam p-steam-3"></div>
+        <div class="p-mug-body"></div>
+        <div class="p-mug-handle"></div>
+      </div>
+      <div class="paper-piece p-sticky"></div>
+      <div class="paper-piece p-nameplate"></div>
+      <div class="paper-piece p-worker-shadow"></div>
+      <div class="paper-piece p-worker-body"></div>
+      <div class="paper-piece p-worker-collar"></div>
+      <div class="paper-piece p-worker-badge"></div>
+      <div class="paper-piece p-worker-arm p-wa-l"></div>
+      <div class="paper-piece p-worker-arm p-wa-r"></div>
+      <div class="paper-piece p-worker-face">
+        <span class="p-w-eye p-we-l"></span>
+        <span class="p-w-eye p-we-r"></span>
+        <span class="p-w-mouth"></span>
+      </div>
+      <div class="paper-piece p-worker-helmet">
+        <div class="p-w-ear p-we-ear-l"></div>
+        <div class="p-w-ear p-we-ear-r"></div>
+      </div>
+    </div>
+    <div class="state-label">警报</div>
+    <div class="state-desc">纸片抖动 · 屏幕变红</div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="state-card" data-state="success">
+    <div class="paper-scene" data-state="success">
+      <div class="paper-piece p-floor"></div>
+      <div class="paper-piece p-chair-back"></div>
+      <div class="paper-piece p-chair-seat"></div>
+      <div class="paper-piece p-chair-pillar"></div>
+      <div class="paper-piece p-chair-base"></div>
+      <div class="paper-piece p-chair-wheel p-cw-l"></div>
+      <div class="paper-piece p-chair-wheel p-cw-r"></div>
+      <div class="paper-piece p-desk-shadow"></div>
+      <div class="paper-piece p-desk-front"></div>
+      <div class="paper-piece p-desk-top"></div>
+      <div class="paper-piece p-desk-leg p-dl-l"></div>
+      <div class="paper-piece p-desk-leg p-dl-r"></div>
+      <div class="paper-piece p-monitor-frame"></div>
+      <div class="paper-piece p-monitor-screen">
+        <div class="p-screen-line p-sl-1"></div>
+        <div class="p-screen-line p-sl-2"></div>
+        <div class="p-screen-line p-sl-3"></div>
+        <div class="p-screen-line p-sl-4"></div>
+        <div class="p-screen-dot"></div>
+      </div>
+      <div class="paper-piece p-monitor-stand"></div>
+      <div class="paper-piece p-monitor-base"></div>
+      <div class="paper-piece p-keyboard">
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+        <div class="p-key-row"><span class="p-key"></span><span class="p-key"></span><span class="p-key"></span></div>
+      </div>
+      <div class="paper-piece p-mousepad"></div>
+      <div class="paper-piece p-mouse"></div>
+      <div class="paper-piece p-plant">
+        <div class="p-leaf p-leaf-1"></div>
+        <div class="p-leaf p-leaf-2"></div>
+        <div class="p-leaf p-leaf-3"></div>
+        <div class="p-pot"></div>
+      </div>
+      <div class="paper-piece p-mug">
+        <div class="p-steam p-steam-1"></div>
+        <div class="p-steam p-steam-2"></div>
+        <div class="p-steam p-steam-3"></div>
+        <div class="p-mug-body"></div>
+        <div class="p-mug-handle"></div>
+      </div>
+      <div class="paper-piece p-sticky"></div>
+      <div class="paper-piece p-nameplate"></div>
+      <div class="paper-piece p-worker-shadow"></div>
+      <div class="paper-piece p-worker-body"></div>
+      <div class="paper-piece p-worker-collar"></div>
+      <div class="paper-piece p-worker-badge"></div>
+      <div class="paper-piece p-worker-arm p-wa-l"></div>
+      <div class="paper-piece p-worker-arm p-wa-r"></div>
+      <div class="paper-piece p-worker-face">
+        <span class="p-w-eye p-we-l"></span>
+        <span class="p-w-eye p-we-r"></span>
+        <span class="p-w-mouth"></span>
+      </div>
+      <div class="paper-piece p-worker-helmet">
+        <div class="p-w-ear p-we-ear-l"></div>
+        <div class="p-w-ear p-we-ear-r"></div>
+      </div>
+    </div>
+    <div class="state-label">完成</div>
+    <div class="state-desc">纸片舒展 · 绿色对勾</div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>纸片叠层风 - 美团骑手形象展示</title>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: #FAF8F2;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.012) 2px,
+    rgba(0,0,0,0.012) 4px
+  );
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: #3a3a3a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+
+/* ===== Header ===== */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2f2c25;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+.page-subtitle {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 40px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.back-link {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  font-size: 13px;
+  color: #888;
+  text-decoration: none;
+  transition: color .2s;
+}
+.back-link:hover { color: #FFD333; }
+.back-link::before { content: "\2190 "; }
+
+/* ===== State Grid ===== */
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: 880px;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .state-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+.state-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform .25s, box-shadow .25s;
+}
+.state-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+
+.state-label {
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2f2c25;
+}
+.state-desc {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ============================================================
+   PAPER-CUT WORKER — Pure CSS layered paper figure (~100x130)
+   ============================================================ */
+
+.paper-worker {
+  position: relative;
+  width: 100px;
+  height: 130px;
+}
+
+/* Shared paper-layer base: every piece is "cut paper" */
+.paper-layer {
+  position: absolute;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease;
+}
+
+/* ==================== SHADOW BOARD ==================== */
+.paper-shadow {
+  top: 6px;
+  left: 5px;
+  width: 60px;
+  height: 90px;
+  background: #d8d4c8;
+  border-radius: 11px 9px 12px 10px;
+  z-index: 1;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.08);
+}
+
+/* ==================== BODY ==================== */
+.paper-body {
+  top: 42px;
+  left: 18px;
+  width: 56px;
+  height: 58px;
+  background: #2f2c25;
+  border-radius: 10px 12px 8px 11px;
+  z-index: 2;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+
+/* ==================== COLLAR ==================== */
+.paper-collar {
+  top: 40px;
+  left: 26px;
+  width: 40px;
+  height: 10px;
+  background: #FFD333;
+  border-radius: 3px 4px 2px 3px;
+  z-index: 3;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+
+/* ==================== FACE ==================== */
+.paper-face {
+  top: 16px;
+  left: 20px;
+  width: 52px;
+  height: 48px;
+  background: #f4be72;
+  border-radius: 48% 52% 46% 50% / 45% 48% 54% 50%;
+  z-index: 4;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+
+/* ==================== EYES ==================== */
+.paper-eye {
+  position: absolute;
+  width: 6px;
+  height: 7px;
+  background: #2a1a0a;
+  border-radius: 50%;
+  top: 18px;
+  z-index: 6;
+}
+.paper-eye-l { left: 14px; }
+.paper-eye-r { right: 14px; }
+
+/* ==================== MOUTH ==================== */
+.paper-mouth {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 4px;
+  border-bottom: 2px solid #c48a3f;
+  border-radius: 0 0 6px 6px;
+  z-index: 6;
+}
+
+/* ==================== HELMET ==================== */
+.paper-helmet {
+  top: 2px;
+  left: 14px;
+  width: 66px;
+  height: 36px;
+  background: #FFD333;
+  border-radius: 33px 33px 8px 8px;
+  z-index: 5;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+
+/* ==================== EARS (kangaroo ear bumps) ==================== */
+.paper-ear {
+  position: absolute;
+  width: 14px;
+  height: 18px;
+  background: #FFD333;
+  border-radius: 50% 50% 4px 4px;
+  top: -10px;
+  z-index: 7;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+}
+.paper-ear-l { left: 10px; transform: rotate(-8deg); }
+.paper-ear-r { right: 10px; transform: rotate(8deg); }
+
+/* ==================== BADGE ==================== */
+.paper-badge {
+  top: 56px;
+  left: 32px;
+  width: 18px;
+  height: 12px;
+  background: #fff8d5;
+  border-radius: 2px 3px 2px 3px;
+  z-index: 8;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.10);
+}
+
+/* ============================================================
+   STATE 1: IDLE — gentle sway
+   ============================================================ */
+.paper-worker[data-state="idle"] {
+  animation: paper-sway 2.5s ease-in-out infinite;
+}
+
+@keyframes paper-sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(2px); }
+}
+
+/* ============================================================
+   STATE 2: CALLING — headset piece + speech bubble
+   ============================================================ */
+.paper-worker[data-state="calling"] .paper-helmet::after {
+  content: "";
+  position: absolute;
+  right: -18px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  background: #555;
+  border-radius: 50% 50% 50% 4px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+  z-index: 9;
+  animation: headset-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes headset-in {
+  0% { transform: translateX(20px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Speech bubble paper piece */
+.paper-worker[data-state="calling"]::after {
+  content: "...";
+  position: absolute;
+  top: -20px;
+  right: -8px;
+  width: 36px;
+  height: 26px;
+  background: #fff;
+  border-radius: 10px 11px 10px 12px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.10);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #2a1a0a;
+  letter-spacing: 1px;
+  animation: bubble-pop 0.4s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bubble-pop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Calling: gentle pulse on face */
+.paper-worker[data-state="calling"] .paper-face {
+  animation: face-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes face-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* ============================================================
+   STATE 3: ALERT — erratic shift, red indicator, concerned look
+   ============================================================ */
+.paper-worker[data-state="alert"] .paper-shadow {
+  animation: jitter-shadow 0.3s ease-in-out infinite;
+}
+.paper-worker[data-state="alert"] .paper-body {
+  animation: jitter-body 0.3s ease-in-out 0.05s infinite;
+}
+.paper-worker[data-state="alert"] .paper-collar {
+  animation: jitter-collar 0.3s ease-in-out 0.02s infinite;
+}
+.paper-worker[data-state="alert"] .paper-face {
+  animation: jitter-face 0.3s ease-in-out 0.08s infinite;
+}
+.paper-worker[data-state="alert"] .paper-helmet {
+  animation: jitter-helmet 0.3s ease-in-out 0.03s infinite;
+}
+.paper-worker[data-state="alert"] .paper-badge {
+  animation: jitter-badge 0.3s ease-in-out 0.06s infinite;
+}
+
+@keyframes jitter-shadow {
+  0%, 100% { transform: translate(0, 0); }
+  30% { transform: translate(2px, -1px); }
+  70% { transform: translate(-1px, 2px); }
+}
+@keyframes jitter-body {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -2px); }
+  75% { transform: translate(-1px, 0px); }
+}
+@keyframes jitter-collar {
+  0%, 100% { transform: translate(0, 0); }
+  40% { transform: translate(1px, -2px); }
+  80% { transform: translate(-2px, 1px); }
+}
+@keyframes jitter-face {
+  0%, 100% { transform: translate(0, 0); }
+  35% { transform: translate(2px, 1px); }
+  65% { transform: translate(-1px, -1px); }
+}
+@keyframes jitter-helmet {
+  0%, 100% { transform: translate(0, 0); }
+  30% { transform: translate(-1px, -2px); }
+  60% { transform: translate(2px, 1px); }
+}
+@keyframes jitter-badge {
+  0%, 100% { transform: translate(0, 0); }
+  45% { transform: translate(1px, 2px); }
+  80% { transform: translate(-2px, -1px); }
+}
+
+/* Red alert paper piece */
+.paper-worker[data-state="alert"]::before {
+  content: "!";
+  position: absolute;
+  top: -14px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  background: #e74c3c;
+  color: #fff;
+  border-radius: 9px 11px 10px 12px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.15);
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  animation: alert-blink 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes alert-blink {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.15); opacity: 0.7; }
+}
+
+/* Concerned expression: mouth becomes wavy line */
+.paper-worker[data-state="alert"] .paper-mouth {
+  width: 8px;
+  height: 0;
+  border-bottom: 2px solid #c48a3f;
+  border-radius: 0;
+  bottom: 13px;
+}
+
+/* ============================================================
+   STATE 4: SUCCESS — layers spread then compress, checkmark
+   ============================================================ */
+.paper-worker[data-state="success"] .paper-shadow {
+  animation: spread-shadow 1.5s ease-out forwards;
+}
+.paper-worker[data-state="success"] .paper-body {
+  animation: spread-body 1.5s ease-out 0.05s forwards;
+}
+.paper-worker[data-state="success"] .paper-collar {
+  animation: spread-collar 1.5s ease-out 0.02s forwards;
+}
+.paper-worker[data-state="success"] .paper-face {
+  animation: spread-face 1.5s ease-out 0.08s forwards;
+}
+.paper-worker[data-state="success"] .paper-helmet {
+  animation: spread-helmet 1.5s ease-out 0.03s forwards;
+}
+.paper-worker[data-state="success"] .paper-badge {
+  animation: spread-badge 1.5s ease-out 0.06s forwards;
+}
+
+@keyframes spread-shadow {
+  0% { transform: translate(0, 0); }
+  40% { transform: translate(3px, 4px); }
+  100% { transform: translate(1px, 1px); }
+}
+@keyframes spread-body {
+  0% { transform: translate(0, 0); }
+  40% { transform: translate(-1px, 3px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes spread-collar {
+  0% { transform: translate(0, 0); }
+  40% { transform: translate(0px, -3px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes spread-face {
+  0% { transform: translate(0, 0); }
+  40% { transform: translate(2px, -4px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes spread-helmet {
+  0% { transform: translate(0, 0); }
+  40% { transform: translate(1px, -5px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes spread-badge {
+  0% { transform: translate(0, 0); }
+  40% { transform: translate(-2px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Green checkmark paper piece */
+.paper-worker[data-state="success"]::before {
+  content: "\2713";
+  position: absolute;
+  top: -16px;
+  right: 2px;
+  width: 26px;
+  height: 26px;
+  background: #27ae60;
+  color: #fff;
+  border-radius: 10px 12px 9px 11px;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  animation: check-pop 0.5s 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes check-pop {
+  0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* Happy expression: curved smile */
+.paper-worker[data-state="success"] .paper-mouth {
+  width: 12px;
+  height: 6px;
+  border-bottom: 2px solid #c48a3f;
+  border-radius: 0 0 8px 8px;
+  bottom: 11px;
+}
+
+/* Happy eyes become small arcs */
+.paper-worker[data-state="success"] .paper-eye {
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: transparent;
+  border-top: 2.5px solid #2a1a0a;
+  top: 19px;
+}
+
+/* ===== Decorative paper confetti in background ===== */
+.state-card::before,
+.state-card::after {
+  content: "";
+  position: absolute;
+  border-radius: 3px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.state-card {
+  position: relative;
+  overflow: hidden;
+}
+.state-card::before {
+  width: 18px;
+  height: 18px;
+  background: #FFD333;
+  top: 8px;
+  right: 12px;
+  transform: rotate(15deg);
+}
+.state-card::after {
+  width: 12px;
+  height: 12px;
+  background: #f4be72;
+  bottom: 12px;
+  left: 10px;
+  transform: rotate(-20deg);
+}
+
+/* ===== Paper cut decorative line ===== */
+.divider {
+  width: 80px;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFD333 0px,
+    #FFD333 8px,
+    transparent 8px,
+    transparent 12px
+  );
+  border-radius: 2px;
+  margin-bottom: 36px;
+}
+</style>
+</head>
+<body>
+
+<a href="worker-showcase-index.html" class="back-link">返回总览</a>
+
+<h1 class="page-title">纸片叠层风</h1>
+<p class="page-subtitle">
+  Paper Cut / Collage 风格 — 彩色纸片层叠、微偏移、手剪纸感<br>
+  每一层纸片都有独立阴影和不规则圆角，营造手工拼贴质感
+</p>
+<div class="divider"></div>
+
+<div class="state-grid">
+
+  <!-- 空闲 -->
+  <div class="state-card">
+    <div class="paper-worker" data-state="idle">
+      <div class="paper-layer paper-shadow"></div>
+      <div class="paper-layer paper-body"></div>
+      <div class="paper-layer paper-collar"></div>
+      <div class="paper-layer paper-face">
+        <span class="paper-eye paper-eye-l"></span>
+        <span class="paper-eye paper-eye-r"></span>
+        <span class="paper-mouth"></span>
+      </div>
+      <div class="paper-layer paper-helmet">
+        <div class="paper-ear paper-ear-l"></div>
+        <div class="paper-ear paper-ear-r"></div>
+      </div>
+      <div class="paper-layer paper-badge"></div>
+    </div>
+    <div class="state-label">空闲</div>
+    <div class="state-desc">轻柔摇摆 · 静待接单</div>
+  </div>
+
+  <!-- 通话中 -->
+  <div class="state-card">
+    <div class="paper-worker" data-state="calling">
+      <div class="paper-layer paper-shadow"></div>
+      <div class="paper-layer paper-body"></div>
+      <div class="paper-layer paper-collar"></div>
+      <div class="paper-layer paper-face">
+        <span class="paper-eye paper-eye-l"></span>
+        <span class="paper-eye paper-eye-r"></span>
+        <span class="paper-mouth"></span>
+      </div>
+      <div class="paper-layer paper-helmet">
+        <div class="paper-ear paper-ear-l"></div>
+        <div class="paper-ear paper-ear-r"></div>
+      </div>
+      <div class="paper-layer paper-badge"></div>
+    </div>
+    <div class="state-label">通话中</div>
+    <div class="state-desc">耳麦滑入 · 对话气泡</div>
+  </div>
+
+  <!-- 警报 -->
+  <div class="state-card">
+    <div class="paper-worker" data-state="alert">
+      <div class="paper-layer paper-shadow"></div>
+      <div class="paper-layer paper-body"></div>
+      <div class="paper-layer paper-collar"></div>
+      <div class="paper-layer paper-face">
+        <span class="paper-eye paper-eye-l"></span>
+        <span class="paper-eye paper-eye-r"></span>
+        <span class="paper-mouth"></span>
+      </div>
+      <div class="paper-layer paper-helmet">
+        <div class="paper-ear paper-ear-l"></div>
+        <div class="paper-ear paper-ear-r"></div>
+      </div>
+      <div class="paper-layer paper-badge"></div>
+    </div>
+    <div class="state-label">警报</div>
+    <div class="state-desc">纸片抖动 · 红色警告</div>
+  </div>
+
+  <!-- 完成 -->
+  <div class="state-card">
+    <div class="paper-worker" data-state="success">
+      <div class="paper-layer paper-shadow"></div>
+      <div class="paper-layer paper-body"></div>
+      <div class="paper-layer paper-collar"></div>
+      <div class="paper-layer paper-face">
+        <span class="paper-eye paper-eye-l"></span>
+        <span class="paper-eye paper-eye-r"></span>
+        <span class="paper-mouth"></span>
+      </div>
+      <div class="paper-layer paper-helmet">
+        <div class="paper-ear paper-ear-l"></div>
+        <div class="paper-ear paper-ear-r"></div>
+      </div>
+      <div class="paper-layer paper-badge"></div>
+    </div>
+    <div class="state-label">完成</div>
+    <div class="state-desc">纸片舒展 · 绿色对勾</div>
+  </div>
+
+</div>
+
+</body>
+</html>

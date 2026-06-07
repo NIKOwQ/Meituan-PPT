@@ -1,0 +1,62 @@
+[
+  {
+    "conversation_id": 0,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}"
+    ]
+  },
+  {
+    "conversation_id": 1,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}"
+    ]
+  },
+  {
+    "conversation_id": 2,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}"
+    ]
+  },
+  {
+    "conversation_id": 3,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}"
+    ]
+  },
+  {
+    "conversation_id": 4,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}"
+    ]
+  },
+  {
+    "conversation_id": 5,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Error code: 429 - {'error': {'code': 'too_many_requests', 'message': '调用失败：Token 额度不足。欢迎反馈模型使用case（https://longcat.chat/platform/feedback）获取更多额度', 'type': 'rate_limit_error'}}"
+    ]
+  }
+]

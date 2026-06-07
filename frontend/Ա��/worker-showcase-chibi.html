@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q 版卡通风 - 美团骑手形象展示</title>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #FAF8F2;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: #3a3a3a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+
+/* ===== Header ===== */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2f2c25;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+.page-subtitle {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 40px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.back-link {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  font-size: 13px;
+  color: #888;
+  text-decoration: none;
+  transition: color .2s;
+}
+.back-link:hover { color: #FFD333; }
+.back-link::before { content: "\2190 "; }
+
+/* ===== State Grid ===== */
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: 880px;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .state-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+.state-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform .25s, box-shadow .25s;
+}
+.state-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+
+.state-label {
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2f2c25;
+}
+.state-desc {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ============================================================
+   CHIBI WORKER — Pure CSS figure (~120px tall)
+   ============================================================ */
+
+/* --- Container --- */
+.chibi-worker {
+  position: relative;
+  width: 80px;
+  height: 120px;
+}
+
+/* ==================== HEAD (80x80) ==================== */
+.chibi-face {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background: #f4be72;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* ==================== HELMET ==================== */
+.chibi-helmet {
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 88px;
+  height: 44px;
+  background: #FFD333;
+  border-radius: 44px 44px 8px 8px;
+  z-index: 3;
+  /* slight droop illusion via box-shadow underside */
+  box-shadow: 0 3px 0 0 #e6bf2e;
+}
+
+/* Helmet kangaroo-ear bumps */
+.chibi-ear {
+  position: absolute;
+  width: 18px;
+  height: 22px;
+  background: #FFD333;
+  border-radius: 50% 50% 4px 4px;
+  top: -10px;
+  z-index: 4;
+}
+.chibi-ear-l { left: 14px; transform: rotate(-8deg); }
+.chibi-ear-r { right: 14px; transform: rotate(8deg); }
+
+/* ==================== EYES ==================== */
+.chibi-eye {
+  position: absolute;
+  width: 20px;
+  height: 22px;
+  background: #2f2c25;
+  border-radius: 50%;
+  top: 32px;
+  z-index: 5;
+  overflow: hidden;
+}
+.chibi-eye-l { left: 14px; }
+.chibi-eye-r { right: 14px; }
+
+.chibi-pupil {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #2f2c25;
+  border-radius: 50%;
+  top: 6px;
+  left: 5px;
+}
+
+/* White sparkle dots */
+.chibi-sparkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  top: 5px;
+  right: 4px;
+  z-index: 6;
+}
+.chibi-sparkle::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  top: 7px;
+  left: -2px;
+}
+
+/* ==================== MOUTH ==================== */
+.chibi-mouth {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 5px;
+  background: #c0705a;
+  border-radius: 0 0 10px 10px;
+  z-index: 5;
+}
+
+/* ==================== BLUSH ==================== */
+.chibi-blush {
+  position: absolute;
+  width: 14px;
+  height: 8px;
+  background: radial-gradient(ellipse, #ff8fa3 0%, rgba(255,143,163,0) 70%);
+  border-radius: 50%;
+  top: 42px;
+  z-index: 5;
+}
+.chibi-blush-l { left: 4px; }
+.chibi-blush-r { right: 4px; }
+
+/* ==================== BODY (50x35) ==================== */
+.chibi-body {
+  position: absolute;
+  top: 82px;
+  left: 15px;
+  width: 50px;
+  height: 35px;
+  background: #2f2c25;
+  border-radius: 8px 8px 4px 4px;
+  z-index: 1;
+}
+
+.chibi-badge {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #FFD333;
+  border-radius: 2px;
+}
+
+/* ==================== LEGS ==================== */
+.chibi-legs {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 1;
+}
+.chibi-leg {
+  width: 12px;
+  height: 15px;
+  background: #2f2c25;
+  border-radius: 3px 3px 4px 4px;
+}
+
+/* ============================================================
+   STATE-SPECIFIC OVERRIDES
+   ============================================================ */
+
+/* ---------- STATE: idle ---------- */
+.chibi-worker[data-state="idle"] {
+  animation: chibi-idle-bounce 2s ease-in-out infinite;
+}
+@keyframes chibi-idle-bounce {
+  0%, 100% { transform: translateY(0) scaleY(1) scaleX(1); }
+  40% { transform: translateY(-6px) scaleY(1.06) scaleX(0.96); }
+  60% { transform: translateY(-6px) scaleY(1.06) scaleX(0.96); }
+}
+
+/* Idle: happy closed-smile eyes (^_^) */
+.chibi-worker[data-state="idle"] .chibi-eye {
+  height: 6px;
+  top: 38px;
+  border-radius: 6px 6px 0 0;
+  background: #2f2c25;
+}
+.chibi-worker[data-state="idle"] .chibi-pupil,
+.chibi-worker[data-state="idle"] .chibi-sparkle {
+  display: none;
+}
+
+/* Idle: gentle smile */
+.chibi-worker[data-state="idle"] .chibi-mouth {
+  width: 14px;
+  height: 6px;
+  border-radius: 0 0 14px 14px;
+}
+
+/* Idle sparkles (floating particles near head) */
+.chibi-worker[data-state="idle"]::before,
+.chibi-worker[data-state="idle"]::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #FFD333;
+  border-radius: 50%;
+  z-index: 10;
+  animation: idle-sparkle-float 2.5s ease-in-out infinite;
+}
+.chibi-worker[data-state="idle"]::before {
+  top: 2px;
+  left: -8px;
+  animation-delay: 0s;
+}
+.chibi-worker[data-state="idle"]::after {
+  top: 8px;
+  right: -6px;
+  animation-delay: 1.2s;
+}
+@keyframes idle-sparkle-float {
+  0%, 100% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-12px); }
+}
+
+
+/* ---------- STATE: calling ---------- */
+.chibi-worker[data-state="calling"] {
+  animation: chibi-calling-gentle 1.8s ease-in-out infinite;
+}
+@keyframes chibi-calling-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Calling: big open attentive eyes */
+.chibi-worker[data-state="calling"] .chibi-eye {
+  width: 22px;
+  height: 24px;
+}
+.chibi-worker[data-state="calling"] .chibi-pupil {
+  width: 12px;
+  height: 12px;
+  top: 6px;
+  left: 5px;
+}
+
+/* Calling: "O" mouth */
+.chibi-worker[data-state="calling"] .chibi-mouth {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  bottom: 18px;
+}
+
+/* Headset near ear */
+.chibi-worker[data-state="calling"] .chibi-face::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2.5px solid #555;
+  border-radius: 50%;
+  top: 28px;
+  right: -8px;
+  z-index: 6;
+  background: transparent;
+  animation: headset-pulse 1.5s ease-in-out infinite;
+}
+@keyframes headset-pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Musical note floating */
+.chibi-worker[data-state="calling"] .chibi-helmet::after {
+  content: "\266A";
+  position: absolute;
+  top: -6px;
+  right: -12px;
+  font-size: 14px;
+  color: #FFD333;
+  z-index: 10;
+  animation: note-float 2s ease-in-out infinite;
+}
+@keyframes note-float {
+  0% { opacity: 0; transform: translateY(0); }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-18px); }
+}
+
+
+/* ---------- STATE: alert ---------- */
+.chibi-worker[data-state="alert"] {
+  animation: chibi-shake 0.5s ease-in-out infinite;
+}
+@keyframes chibi-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* Alert: squeezed eyes >_< */
+.chibi-worker[data-state="alert"] .chibi-eye {
+  width: 16px;
+  height: 4px;
+  top: 40px;
+  border-radius: 2px;
+}
+.chibi-worker[data-state="alert"] .chibi-pupil,
+.chibi-worker[data-state="alert"] .chibi-sparkle {
+  display: none;
+}
+
+/* Alert: wavy worried mouth */
+.chibi-worker[data-state="alert"] .chibi-mouth {
+  width: 12px;
+  height: 4px;
+  border-radius: 4px;
+  background: #c0705a;
+  bottom: 19px;
+}
+
+/* Alert: sweat drop on forehead */
+.chibi-worker[data-state="alert"] .chibi-face::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  background: #8ed1fc;
+  border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+  top: 8px;
+  right: 4px;
+  z-index: 7;
+  animation: sweat-grow 1.2s ease-in-out infinite;
+}
+@keyframes sweat-grow {
+  0% { opacity: 0; transform: scale(0.5); }
+  40% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.6; transform: scale(1.1) translateY(2px); }
+}
+
+/* No blush during alert */
+.chibi-worker[data-state="alert"] .chibi-blush {
+  opacity: 0.3;
+}
+
+
+/* ---------- STATE: success ---------- */
+.chibi-worker[data-state="success"] {
+  animation: chibi-celebrate 0.8s ease-in-out infinite;
+}
+@keyframes chibi-celebrate {
+  0%, 100% { transform: translateY(0) scaleY(1) scaleX(1); }
+  30% { transform: translateY(-10px) scaleY(1.08) scaleX(0.94); }
+  50% { transform: translateY(-10px) scaleY(1.08) scaleX(0.94); }
+  80% { transform: translateY(2px) scaleY(0.94) scaleX(1.06); }
+}
+
+/* Success: star eyes */
+.chibi-worker[data-state="success"] .chibi-eye {
+  background: transparent;
+  width: 20px;
+  height: 20px;
+  top: 32px;
+  overflow: visible;
+}
+.chibi-worker[data-state="success"] .chibi-pupil {
+  display: none;
+}
+.chibi-worker[data-state="success"] .chibi-sparkle {
+  display: none;
+}
+.chibi-worker[data-state="success"] .chibi-eye::after {
+  content: "\2605";
+  font-size: 20px;
+  color: #FFD333;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  line-height: 1;
+}
+
+/* Success: huge open smile */
+.chibi-worker[data-state="success"] .chibi-mouth {
+  width: 18px;
+  height: 10px;
+  border-radius: 0 0 18px 18px;
+  background: #c0705a;
+  bottom: 17px;
+}
+
+/* Success: tiny raised arms (via body pseudo-elements) */
+.chibi-worker[data-state="success"] .chibi-body::before,
+.chibi-worker[data-state="success"] .chibi-body::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 16px;
+  background: #f4be72;
+  border-radius: 4px;
+  top: -14px;
+}
+.chibi-worker[data-state="success"] .chibi-body::before {
+  left: -10px;
+  transform: rotate(-30deg);
+}
+.chibi-worker[data-state="success"] .chibi-body::after {
+  right: -10px;
+  transform: rotate(30deg);
+}
+
+/* Success: sparkles everywhere */
+.chibi-worker[data-state="success"]::before {
+  content: "\2728";
+  position: absolute;
+  top: -4px;
+  left: -14px;
+  font-size: 12px;
+  z-index: 10;
+  animation: success-sparkle 1.4s ease-in-out infinite;
+}
+.chibi-worker[data-state="success"]::after {
+  content: "\2728";
+  position: absolute;
+  top: 4px;
+  right: -16px;
+  font-size: 14px;
+  z-index: 10;
+  animation: success-sparkle 1.4s ease-in-out infinite 0.6s;
+}
+@keyframes success-sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+}
+
+/* Success: extra sparkle between legs area */
+.chibi-worker[data-state="success"] .chibi-helmet::before {
+  content: "\2605";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #FFD333;
+  z-index: 10;
+  animation: success-sparkle 1.6s ease-in-out infinite 0.3s;
+}
+
+/* ===== Footer note ===== */
+.footer-note {
+  margin-top: 48px;
+  font-size: 12px;
+  color: #bbb;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="worker-showcase-index.html">返回总览</a>
+
+<div class="page-title">Q 版卡通风</div>
+<div class="page-subtitle">
+  纯 CSS 实现 · 圆润比例 · 表情丰富 · 四种工作状态动画
+</div>
+
+<div class="state-grid">
+
+  <!-- ===== 空闲 idle ===== -->
+  <div class="state-card">
+    <div class="chibi-worker" data-state="idle">
+      <div class="chibi-helmet">
+        <div class="chibi-ear chibi-ear-l"></div>
+        <div class="chibi-ear chibi-ear-r"></div>
+      </div>
+      <div class="chibi-face">
+        <div class="chibi-eye chibi-eye-l">
+          <div class="chibi-pupil"></div>
+          <div class="chibi-sparkle"></div>
+        </div>
+        <div class="chibi-eye chibi-eye-r">
+          <div class="chibi-pupil"></div>
+          <div class="chibi-sparkle"></div>
+        </div>
+        <div class="chibi-mouth"></div>
+        <div class="chibi-blush chibi-blush-l"></div>
+        <div class="chibi-blush chibi-blush-r"></div>
+      </div>
+      <div class="chibi-body">
+        <div class="chibi-badge"></div>
+      </div>
+      <div class="chibi-legs">
+        <div class="chibi-leg chibi-leg-l"></div>
+        <div class="chibi-leg chibi-leg-r"></div>
+      </div>
+    </div>
+    <div class="state-label">空闲</div>
+    <div class="state-desc">Idle · 开心微笑</div>
+  </div>
+
+  <!-- ===== 通话中 calling ===== -->
+  <div class="state-card">
+    <div class="chibi-worker" data-state="calling">
+      <div class="chibi-helmet">
+        <div class="chibi-ear chibi-ear-l"></div>
+        <div class="chibi-ear chibi-ear-r"></div>
+      </div>
+      <div class="chibi-face">
+        <div class="chibi-eye chibi-eye-l">
+          <div class="chibi-pupil"></div>
+          <div class="chibi-sparkle"></div>
+        </div>
+        <div class="chibi-eye chibi-eye-r">
+          <div class="chibi-pupil"></div>
+          <div class="chibi-sparkle"></div>
+        </div>
+        <div class="chibi-mouth"></div>
+        <div class="chibi-blush chibi-blush-l"></div>
+        <div class="chibi-blush chibi-blush-r"></div>
+      </div>
+      <div class="chibi-body">
+        <div class="chibi-badge"></div>
+      </div>
+      <div class="chibi-legs">
+        <div class="chibi-leg chibi-leg-l"></div>
+        <div class="chibi-leg chibi-leg-r"></div>
+      </div>
+    </div>
+    <div class="state-label">通话中</div>
+    <div class="state-desc">Calling · 耳机 + 音符</div>
+  </div>
+
+  <!-- ===== 警报 alert ===== -->
+  <div class="state-card">
+    <div class="chibi-worker" data-state="alert">
+      <div class="chibi-helmet">
+        <div class="chibi-ear chibi-ear-l"></div>
+        <div class="chibi-ear chibi-ear-r"></div>
+      </div>
+      <div class="chibi-face">
+        <div class="chibi-eye chibi-eye-l">
+          <div class="chibi-pupil"></div>
+          <div class="chibi-sparkle"></div>
+        </div>
+        <div class="chibi-eye chibi-eye-r">
+          <div class="chibi-pupil"></div>
+          <div class="chibi-sparkle"></div>
+        </div>
+        <div class="chibi-mouth"></div>
+        <div class="chibi-blush chibi-blush-l"></div>
+        <div class="chibi-blush chibi-blush-r"></div>
+      </div>
+      <div class="chibi-body">
+        <div class="chibi-badge"></div>
+      </div>
+      <div class="chibi-legs">
+        <div class="chibi-leg chibi-leg-l"></div>
+        <div class="chibi-leg chibi-leg-r"></div>
+      </div>
+    </div>
+    <div class="state-label">警报</div>
+    <div class="state-desc">Alert >_< · 汗滴 + 抖动</div>
+  </div>
+
+  <!-- ===== 完成 success ===== -->
+  <div class="state-card">
+    <div class="chibi-worker" data-state="success">
+      <div class="chibi-helmet">
+        <div class="chibi-ear chibi-ear-l"></div>
+        <div class="chibi-ear chibi-ear-r"></div>
+      </div>
+      <div class="chibi-face">
+        <div class="chibi-eye chibi-eye-l">
+          <div class="chibi-pupil"></div>
+          <div class="chibi-sparkle"></div>
+        </div>
+        <div class="chibi-eye chibi-eye-r">
+          <div class="chibi-pupil"></div>
+          <div class="chibi-sparkle"></div>
+        </div>
+        <div class="chibi-mouth"></div>
+        <div class="chibi-blush chibi-blush-l"></div>
+        <div class="chibi-blush chibi-blush-r"></div>
+      </div>
+      <div class="chibi-body">
+        <div class="chibi-badge"></div>
+      </div>
+      <div class="chibi-legs">
+        <div class="chibi-leg chibi-leg-l"></div>
+        <div class="chibi-leg chibi-leg-r"></div>
+      </div>
+    </div>
+    <div class="state-label">完成</div>
+    <div class="state-desc">Success ★_★ · 庆祝 + 星星</div>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  纯 HTML + CSS · 无外部依赖 · 每个状态独立动画
+</div>
+
+</body>
+</html>

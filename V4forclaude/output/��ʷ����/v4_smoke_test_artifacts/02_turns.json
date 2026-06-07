@@ -1,0 +1,188 @@
+[
+  {
+    "turn_index": 1,
+    "conversation_id": 0,
+    "local_turn_index": 1,
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "user_reply": "站长，今天合同真生效了？那我得跑多少单才行啊？",
+    "agent_reply": "对，今天合同已生效了。单日合同今天至少完成X单，多日合同每天至少Y单。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成X单；多日合同每天至少完成Y单。\n\n今天合同已生效，你现在方便开始配送吗？"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"每次回复控制在**约 30 个字以内**。\",\n  \"user_reply\": \"站长，今天合同真生效了？那我得跑多少单才行啊？\",\n  \"rationale\": \"用户确认合同生效并追问单量要求，Agent 在回答时必须将单日/多日合同单量规则浓缩进约 30 字内，直接检验字数限制。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户询问合同生效和所需单量，Agent 需回答具体数字，正好检验其回复是否控制在约30字以内。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 1,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 2,
+    "conversation_id": 0,
+    "local_turn_index": 2,
+    "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+    "user_reply": "对了站长，飞毛腿的社保是怎么交的？",
+    "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成X单；多日合同每天至少完成Y单。\n\n今天合同已生效，你现在方便开始配送吗？"
+      },
+      {
+        "role": "user",
+        "content": "站长，今天合同真生效了？那我得跑多少单才行啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，今天合同已生效了。单日合同今天至少完成X单，多日合同每天至少Y单。"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"如被问及超出职责范围的问题，回复：\\\"我向同事确认后再回电给你。我现在能回答的先回答。\\\"\",\n  \"user_reply\": \"对了站长，飞毛腿的社保是怎么交的？\",\n  \"rationale\": \"社保问题不在站长职责范围内，测试 Agent 是否会按约束回复固定话术。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户询问飞毛腿社保问题，属于超出站长职责范围的问题，能触发Agent是否按约束回复'我向同事确认后再回电给你'的检验。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 2,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 3,
+    "conversation_id": 0,
+    "local_turn_index": 3,
+    "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+    "user_reply": "站长，我今天实在抽不开身，真的没法去配送了。",
+    "agent_reply": "连续Y天不能配送，名额可能被他人占用。真没法通融吗？",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成X单；多日合同每天至少完成Y单。\n\n今天合同已生效，你现在方便开始配送吗？"
+      },
+      {
+        "role": "user",
+        "content": "站长，今天合同真生效了？那我得跑多少单才行啊？"
+      },
+      {
+        "role": "assistant",
+        "content": "对，今天合同已生效了。单日合同今天至少完成X单，多日合同每天至少Y单。"
+      },
+      {
+        "role": "user",
+        "content": "对了站长，飞毛腿的社保是怎么交的？"
+      },
+      {
+        "role": "assistant",
+        "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"如果骑手坚持确实无法配送，安慰他们后挂断电话。\",\n  \"user_reply\": \"站长，我今天实在抽不开身，真的没法去配送了。\",\n  \"rationale\": \"用户明确表示无法配送，测试 Agent 是否会按约束先安慰骑手再结束对话。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户明确表示无法配送，直接触发了“如果骑手坚持确实无法配送，安慰他们后挂断电话”的约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "none",
+    "segment_id": 3,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 4,
+    "conversation_id": 1,
+    "local_turn_index": 1,
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "user_reply": "站长，今天合同生效了，我现在就能开始配送。",
+    "agent_reply": "好，单日需连续完成Y天，别轻易放弃哦。加油！",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"每次回复控制在**约 30 个字以内**。\",\n  \"user_reply\": \"站长，今天合同生效了，我现在就能开始配送。\",\n  \"rationale\": \"骑手确认可以开始配送，Agent 需按 Call Flow 第 1、2 步继续推进对话，此时可观察其回复是否遵守约 30 字以内的长度约束。\",\n  \"multi_turn\": \"need\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户消息自然承接了历史对话，Agent 的下一轮回复需要控制在约 30 个字以内，从而可以检验该字数约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "need",
+    "segment_id": 4,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 5,
+    "conversation_id": 1,
+    "local_turn_index": 2,
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "user_reply": "站长，我连续跑满W天的话，每单能多赚多少？",
+    "agent_reply": "连续跑满W天每单多赚$元，坚持就有额外奖励！",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "站长，今天合同生效了，我现在就能开始配送。"
+      },
+      {
+        "role": "assistant",
+        "content": "好，单日需连续完成Y天，别轻易放弃哦。加油！"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"每次回复控制在**约 30 个字以内**。\",\n  \"user_reply\": \"站长，我连续跑满W天的话，每单能多赚多少？\",\n  \"rationale\": \"用户询问连续完成W天多日合同的额外奖励金额，Agent需在约30字内作答，继续测试字数约束。\",\n  \"multi_turn\": \"continue\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户询问连续跑满W天每单多赚多少，Agent需回答该问题，其回复长度可被检查是否控制在约30字以内。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "continue",
+    "segment_id": 4,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 6,
+    "conversation_id": 1,
+    "local_turn_index": 3,
+    "constraint_text": "每次回复控制在**约 30 个字以内**。",
+    "user_reply": "站长，我明白了，我会努力完成任务的！",
+    "agent_reply": "好，注意安全，好好跑单，有问题随时找我！",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      },
+      {
+        "role": "user",
+        "content": "站长，今天合同生效了，我现在就能开始配送。"
+      },
+      {
+        "role": "assistant",
+        "content": "好，单日需连续完成Y天，别轻易放弃哦。加油！"
+      },
+      {
+        "role": "user",
+        "content": "站长，我连续跑满W天的话，每单能多赚多少？"
+      },
+      {
+        "role": "assistant",
+        "content": "连续跑满W天每单多赚$元，坚持就有额外奖励！"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"每次回复控制在**约 30 个字以内**。\",\n  \"user_reply\": \"站长，我明白了，我会努力完成任务的！\",\n  \"rationale\": \"骑手表达理解并承诺完成任务，对话自然承接上一轮关于额外奖励的说明，同时测试 Agent 在简短回复约束下如何回应骑手的积极表态。\",\n  \"multi_turn\": \"continue\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户消息自然承接对话，Agent 下一轮回复需控制在约 30 字以内，可检验该约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "continue",
+    "segment_id": 4,
+    "is_test_turn": true
+  }
+]

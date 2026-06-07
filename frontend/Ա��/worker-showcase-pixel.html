@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>像素艺术 · 美团骑手</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a18;
+    color: #e8e4d9;
+    font-family: "Courier New", "Noto Sans SC", "Microsoft YaHei", monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 60px;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: #FFD333;
+    text-shadow: 2px 2px 0 #E8B800, 4px 4px 0 rgba(0,0,0,0.3);
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 13px;
+    color: #8a8478;
+    letter-spacing: 2px;
+  }
+  .header .back-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: #6a6458;
+    text-decoration: none;
+    font-size: 12px;
+    border: 1px solid #3a362e;
+    padding: 4px 14px;
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .header .back-link:hover {
+    color: #FFD333;
+    border-color: #FFD333;
+  }
+
+  /* ===== Grid ===== */
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    max-width: 900px;
+    width: 100%;
+  }
+  @media (max-width: 700px) {
+    .showcase-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+
+  /* ===== Card ===== */
+  .pixel-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #222018;
+    border: 1px solid #2f2c25;
+    border-radius: 4px;
+    padding: 32px 16px 20px;
+    position: relative;
+  }
+  .pixel-card .state-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #c8c0b0;
+    margin-top: 24px;
+    margin-bottom: 4px;
+  }
+  .pixel-card .state-sub {
+    font-size: 11px;
+    color: #6a6458;
+    letter-spacing: 1px;
+  }
+
+  /* ===== Pixel Figure Base ===== */
+  .pixel-worker {
+    width: 0;
+    height: 0;
+    transform: scale(2.5);
+    position: relative;
+    display: inline-block;
+  }
+
+  /* ============================================================
+     PIXEL LAYOUT LEGEND (coordinate grid, each cell = 4px)
+     X axis →  0   4   8  12  16  20  24  28  32  36
+                col 0   1   2   3   4   5   6   7   8
+     ============================================================ */
+
+  /* ===== STATE 1: 空闲 (Idle) ===== */
+  .pixel-worker.idle {
+    animation: idle-float 2.5s ease-in-out infinite;
+    box-shadow:
+      /* Kangaroo ear bumps - row 0 (sticking up from helmet) */
+       8px -4px 0 4px #FFD333,
+      20px -4px 0 4px #FFD333,
+      /* Helmet top - row 0 */
+       4px  0px 0 4px #FFD333,
+       8px  0px 0 4px #FFD333,
+      12px  0px 0 4px #FFD333,
+      16px  0px 0 4px #FFD333,
+      20px  0px 0 4px #FFD333,
+      24px  0px 0 4px #FFD333,
+      /* Helmet mid - row 1 */
+       4px  4px 0 4px #FFD333,
+       8px  4px 0 4px #FFD333,
+      12px  4px 0 4px #FFD333,
+      16px  4px 0 4px #FFD333,
+      20px  4px 0 4px #FFD333,
+      24px  4px 0 4px #FFD333,
+      /* Helmet visor - row 2 */
+       4px  8px 0 4px #E8B800,
+       8px  8px 0 4px #E8B800,
+      12px  8px 0 4px #E8B800,
+      16px  8px 0 4px #E8B800,
+      20px  8px 0 4px #E8B800,
+      24px  8px 0 4px #E8B800,
+      /* Helmet brim - row 3 (wider) */
+       0px 12px 0 4px #E8B800,
+       4px 12px 0 4px #E8B800,
+       8px 12px 0 4px #E8B800,
+      12px 12px 0 4px #E8B800,
+      16px 12px 0 4px #E8B800,
+      20px 12px 0 4px #E8B800,
+      24px 12px 0 4px #E8B800,
+      28px 12px 0 4px #E8B800,
+      /* Face - row 4 */
+       8px 16px 0 4px #f4be72,
+      12px 16px 0 4px #f4be72,
+      16px 16px 0 4px #f4be72,
+      20px 16px 0 4px #f4be72,
+      /* Face - row 5 (eyes) */
+       8px 20px 0 4px #f4be72,
+      12px 20px 0 4px #2a1a0a,
+      16px 20px 0 4px #f4be72,
+      20px 20px 0 4px #2a1a0a,
+      /* Face - row 6 (mouth) */
+       8px 24px 0 4px #f4be72,
+      12px 24px 0 4px #f4be72,
+      14px 24px 0 4px #c47a3a,
+      16px 24px 0 4px #f4be72,
+      20px 24px 0 4px #f4be72,
+      /* Neck - row 7 */
+      12px 28px 0 4px #f4be72,
+      16px 28px 0 4px #f4be72,
+      /* Body top - row 8 */
+       8px 32px 0 4px #2f2c25,
+      12px 32px 0 4px #2f2c25,
+      16px 32px 0 4px #2f2c25,
+      20px 32px 0 4px #2f2c25,
+      /* Body mid + badge - row 9 */
+       4px 36px 0 4px #2f2c25,
+       8px 36px 0 4px #2f2c25,
+      12px 36px 0 4px #fff8d5,
+      16px 36px 0 4px #fff8d5,
+      20px 36px 0 4px #2f2c25,
+      24px 36px 0 4px #2f2c25,
+      /* Body lower + arm left - row 10 */
+       0px 40px 0 4px #2f2c25,
+       4px 40px 0 4px #2f2c25,
+       8px 40px 0 4px #2f2c25,
+      12px 40px 0 4px #2f2c25,
+      16px 40px 0 4px #2f2c25,
+      20px 40px 0 4px #2f2c25,
+      24px 40px 0 4px #2f2c25,
+      28px 40px 0 4px #2f2c25,
+      /* Body bottom + arm right holding phone - row 11 */
+       4px 44px 0 4px #2f2c25,
+       8px 44px 0 4px #2f2c25,
+      12px 44px 0 4px #2f2c25,
+      16px 44px 0 4px #2f2c25,
+      20px 44px 0 4px #2f2c25,
+      24px 44px 0 4px #2f2c25,
+      28px 44px 0 4px #2f2c25,
+      32px 44px 0 4px #888888,
+      36px 44px 0 4px #888888,
+      /* Phone held in hand - row 12 */
+      28px 48px 0 4px #2f2c25,
+      32px 48px 0 4px #888888,
+      36px 48px 0 4px #888888,
+      /* Legs top - row 13 */
+       8px 52px 0 4px #3a362e,
+      12px 52px 0 4px #3a362e,
+      20px 52px 0 4px #3a362e,
+      24px 52px 0 4px #3a362e,
+      /* Legs mid - row 14 */
+       8px 56px 0 4px #3a362e,
+      12px 56px 0 4px #3a362e,
+      20px 56px 0 4px #3a362e,
+      24px 56px 0 4px #3a362e,
+      /* Shoes - row 15 */
+       4px 60px 0 4px #2a1a0a,
+       8px 60px 0 4px #2a1a0a,
+      12px 60px 0 4px #2a1a0a,
+      20px 60px 0 4px #2a1a0a,
+      24px 60px 0 4px #2a1a0a,
+      28px 60px 0 4px #2a1a0a
+    ;
+  }
+  @keyframes idle-float {
+    0%, 100% { transform: scale(2.5) translateY(0); }
+    50% { transform: scale(2.5) translateY(3px); }
+  }
+
+  /* ===== STATE 2: 通话中 (Calling) ===== */
+  .pixel-worker.calling {
+    animation: calling-bob 1.2s ease-in-out infinite;
+    box-shadow:
+      /* Kangaroo ear bumps */
+       8px -4px 0 4px #FFD333,
+      20px -4px 0 4px #FFD333,
+      /* Helmet top - row 0 */
+       4px  0px 0 4px #FFD333,
+       8px  0px 0 4px #FFD333,
+      12px  0px 0 4px #FFD333,
+      16px  0px 0 4px #FFD333,
+      20px  0px 0 4px #FFD333,
+      24px  0px 0 4px #FFD333,
+      /* Helmet mid */
+       4px  4px 0 4px #FFD333,
+       8px  4px 0 4px #FFD333,
+      12px  4px 0 4px #FFD333,
+      16px  4px 0 4px #FFD333,
+      20px  4px 0 4px #FFD333,
+      24px  4px 0 4px #FFD333,
+      /* Helmet visor */
+       4px  8px 0 4px #E8B800,
+       8px  8px 0 4px #E8B800,
+      12px  8px 0 4px #E8B800,
+      16px  8px 0 4px #E8B800,
+      20px  8px 0 4px #E8B800,
+      24px  8px 0 4px #E8B800,
+      /* Helmet brim */
+       0px 12px 0 4px #E8B800,
+       4px 12px 0 4px #E8B800,
+       8px 12px 0 4px #E8B800,
+      12px 12px 0 4px #E8B800,
+      16px 12px 0 4px #E8B800,
+      20px 12px 0 4px #E8B800,
+      24px 12px 0 4px #E8B800,
+      28px 12px 0 4px #E8B800,
+      /* Face */
+       8px 16px 0 4px #f4be72,
+      12px 16px 0 4px #f4be72,
+      16px 16px 0 4px #f4be72,
+      20px 16px 0 4px #f4be72,
+      /* Face eyes */
+       8px 20px 0 4px #f4be72,
+      12px 20px 0 4px #2a1a0a,
+      16px 20px 0 4px #f4be72,
+      20px 20px 0 4px #2a1a0a,
+      /* Headset earpiece (right side) */
+      24px 20px 0 4px #333333,
+      28px 16px 0 4px #333333,
+      28px 20px 0 4px #333333,
+      28px 24px 0 4px #333333,
+      /* Headset mic boom */
+      24px 24px 0 4px #333333,
+      20px 28px 0 4px #333333,
+      /* Face mouth (open, talking) */
+       8px 24px 0 4px #f4be72,
+      12px 24px 0 4px #f4be72,
+      14px 24px 0 4px #c47a3a,
+      16px 24px 0 4px #c47a3a,
+      20px 24px 0 4px #f4be72,
+      /* Neck */
+      12px 28px 0 4px #f4be72,
+      16px 28px 0 4px #f4be72,
+      /* Body top */
+       8px 32px 0 4px #2f2c25,
+      12px 32px 0 4px #2f2c25,
+      16px 32px 0 4px #2f2c25,
+      20px 32px 0 4px #2f2c25,
+      /* Body mid + badge */
+       4px 36px 0 4px #2f2c25,
+       8px 36px 0 4px #2f2c25,
+      12px 36px 0 4px #fff8d5,
+      16px 36px 0 4px #fff8d5,
+      20px 36px 0 4px #2f2c25,
+      24px 36px 0 4px #2f2c25,
+      /* Body + arms */
+       0px 40px 0 4px #2f2c25,
+       4px 40px 0 4px #2f2c25,
+       8px 40px 0 4px #2f2c25,
+      12px 40px 0 4px #2f2c25,
+      16px 40px 0 4px #2f2c25,
+      20px 40px 0 4px #2f2c25,
+      24px 40px 0 4px #2f2c25,
+      28px 40px 0 4px #2f2c25,
+      /* Body bottom + arm holding phone near ear */
+       4px 44px 0 4px #2f2c25,
+       8px 44px 0 4px #2f2c25,
+      12px 44px 0 4px #2f2c25,
+      16px 44px 0 4px #2f2c25,
+      20px 44px 0 4px #2f2c25,
+      24px 44px 0 4px #2f2c25,
+      /* Phone up by ear area (arm extended up) */
+      28px 36px 0 4px #2f2c25,
+      32px 36px 0 4px #888888,
+      36px 36px 0 4px #888888,
+      32px 32px 0 4px #888888,
+      36px 32px 0 4px #888888,
+      /* Legs */
+       8px 48px 0 4px #3a362e,
+      12px 48px 0 4px #3a362e,
+      20px 48px 0 4px #3a362e,
+      24px 48px 0 4px #3a362e,
+       8px 52px 0 4px #3a362e,
+      12px 52px 0 4px #3a362e,
+      20px 52px 0 4px #3a362e,
+      24px 52px 0 4px #3a362e,
+      /* Shoes */
+       4px 56px 0 4px #2a1a0a,
+       8px 56px 0 4px #2a1a0a,
+      12px 56px 0 4px #2a1a0a,
+      20px 56px 0 4px #2a1a0a,
+      24px 56px 0 4px #2a1a0a,
+      28px 56px 0 4px #2a1a0a
+    ;
+  }
+  @keyframes calling-bob {
+    0%, 100% { transform: scale(2.5) translateY(0); }
+    50% { transform: scale(2.5) translateY(-2px); }
+  }
+
+  /* Speech bubble dots for calling state */
+  .speech-bubble {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%) scale(1.8);
+    width: 0;
+    height: 0;
+    box-shadow:
+      -8px 0px 0 4px #FFD333,
+       0px 0px 0 4px #FFD333,
+       8px 0px 0 4px #FFD333,
+      -8px 8px 0 4px #FFD333,
+       0px 8px 0 4px #FFD333,
+       8px 8px 0 4px #FFD333;
+    animation: bubble-dots 1.5s steps(1) infinite;
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    box-shadow:
+      0px 16px 0 3px #FFD333;
+  }
+  @keyframes bubble-dots {
+    0%   { opacity: 1; }
+    25%  { opacity: 0.3; }
+    50%  { opacity: 1; }
+    75%  { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+
+  /* ===== STATE 3: 警报 (Alert) ===== */
+  .pixel-worker.alert {
+    animation: alert-flash 0.5s steps(1) infinite;
+    box-shadow:
+      /* Exclamation mark above head - row -4 */
+      16px -16px 0 4px #ee6d5d,
+      /* Exclamation mark - row -2 */
+      16px -8px 0 4px #ee6d5d,
+      /* Exclamation dot - row 0 */
+      16px -4px 0 4px #ee6d5d,
+      /* Kangaroo ear bumps */
+       8px -4px 0 4px #FFD333,
+      20px -4px 0 4px #FFD333,
+      /* Helmet top */
+       4px  0px 0 4px #FFD333,
+       8px  0px 0 4px #FFD333,
+      12px  0px 0 4px #FFD333,
+      16px  0px 0 4px #FFD333,
+      20px  0px 0 4px #FFD333,
+      24px  0px 0 4px #FFD333,
+      /* Helmet mid */
+       4px  4px 0 4px #FFD333,
+       8px  4px 0 4px #FFD333,
+      12px  4px 0 4px #FFD333,
+      16px  4px 0 4px #FFD333,
+      20px  4px 0 4px #FFD333,
+      24px  4px 0 4px #FFD333,
+      /* Helmet visor */
+       4px  8px 0 4px #E8B800,
+       8px  8px 0 4px #E8B800,
+      12px  8px 0 4px #E8B800,
+      16px  8px 0 4px #E8B800,
+      20px  8px 0 4px #E8B800,
+      24px  8px 0 4px #E8B800,
+      /* Helmet brim */
+       0px 12px 0 4px #E8B800,
+       4px 12px 0 4px #E8B800,
+       8px 12px 0 4px #E8B800,
+      12px 12px 0 4px #E8B800,
+      16px 12px 0 4px #E8B800,
+      20px 12px 0 4px #E8B800,
+      24px 12px 0 4px #E8B800,
+      28px 12px 0 4px #E8B800,
+      /* Face (red tinted) */
+       8px 16px 0 4px #f0a898,
+      12px 16px 0 4px #f0a898,
+      16px 16px 0 4px #f0a898,
+      20px 16px 0 4px #f0a898,
+      /* Eyes (alarmed, wider) */
+       8px 20px 0 4px #2a1a0a,
+      12px 20px 0 4px #ee6d5d,
+      16px 20px 0 4px #f0a898,
+      20px 20px 0 4px #ee6d5d,
+      /* Mouth (open shock) */
+       8px 24px 0 4px #f0a898,
+      12px 24px 0 4px #f0a898,
+      14px 24px 0 4px #ee6d5d,
+      16px 24px 0 4px #ee6d5d,
+      20px 24px 0 4px #f0a898,
+      /* Neck */
+      12px 28px 0 4px #f0a898,
+      16px 28px 0 4px #f0a898,
+      /* Body top */
+       8px 32px 0 4px #2f2c25,
+      12px 32px 0 4px #2f2c25,
+      16px 32px 0 4px #2f2c25,
+      20px 32px 0 4px #2f2c25,
+      /* Body mid + badge */
+       4px 36px 0 4px #2f2c25,
+       8px 36px 0 4px #2f2c25,
+      12px 36px 0 4px #fff8d5,
+      16px 36px 0 4px #fff8d5,
+      20px 36px 0 4px #2f2c25,
+      24px 36px 0 4px #2f2c25,
+      /* Body + arms */
+       0px 40px 0 4px #2f2c25,
+       4px 40px 0 4px #2f2c25,
+       8px 40px 0 4px #2f2c25,
+      12px 40px 0 4px #2f2c25,
+      16px 40px 0 4px #2f2c25,
+      20px 40px 0 4px #2f2c25,
+      24px 40px 0 4px #2f2c25,
+      28px 40px 0 4px #2f2c25,
+      /* Body bottom */
+       4px 44px 0 4px #2f2c25,
+       8px 44px 0 4px #2f2c25,
+      12px 44px 0 4px #2f2c25,
+      16px 44px 0 4px #2f2c25,
+      20px 44px 0 4px #2f2c25,
+      24px 44px 0 4px #2f2c25,
+      /* Phone on ground (dropped) */
+      32px 48px 0 4px #888888,
+      36px 48px 0 4px #888888,
+      32px 52px 0 4px #888888,
+      36px 52px 0 4px #888888,
+      /* Legs */
+       8px 48px 0 4px #3a362e,
+      12px 48px 0 4px #3a362e,
+      20px 48px 0 4px #3a362e,
+      24px 48px 0 4px #3a362e,
+       8px 52px 0 4px #3a362e,
+      12px 52px 0 4px #3a362e,
+      20px 52px 0 4px #3a362e,
+      24px 52px 0 4px #3a362e,
+      /* Shoes */
+       4px 56px 0 4px #2a1a0a,
+       8px 56px 0 4px #2a1a0a,
+      12px 56px 0 4px #2a1a0a,
+      20px 56px 0 4px #2a1a0a,
+      24px 56px 0 4px #2a1a0a,
+      28px 56px 0 4px #2a1a0a
+    ;
+  }
+  @keyframes alert-flash {
+    0%, 49% {
+      filter: none;
+      transform: scale(2.5);
+    }
+    50%, 100% {
+      filter: brightness(1.4) saturate(1.5);
+      transform: scale(2.5);
+    }
+  }
+
+  /* ===== STATE 4: 完成 (Success) ===== */
+  .pixel-worker.success {
+    animation: success-pulse 1.5s ease-in-out infinite;
+    box-shadow:
+      /* Green checkmark above head - row -8 to 0 */
+      /* Check mark: a V shape */
+       4px  0px 0 4px #77b96c,
+       8px  4px 0 4px #77b96c,
+      12px  0px 0 4px #77b96c,
+       8px -4px 0 4px #77b96c,
+      16px -8px 0 4px #77b96c,
+      20px -12px 0 4px #77b96c,
+      24px -8px 0 4px #77b96c,
+      /* Kangaroo ear bumps */
+       8px -4px 0 4px #FFD333,
+      20px -4px 0 4px #FFD333,
+      /* Helmet top */
+       4px  0px 0 4px #FFD333,
+       8px  0px 0 4px #FFD333,
+      12px  0px 0 4px #FFD333,
+      16px  0px 0 4px #FFD333,
+      20px  0px 0 4px #FFD333,
+      24px  0px 0 4px #FFD333,
+      /* Helmet mid */
+       4px  4px 0 4px #FFD333,
+       8px  4px 0 4px #FFD333,
+      12px  4px 0 4px #FFD333,
+      16px  4px 0 4px #FFD333,
+      20px  4px 0 4px #FFD333,
+      24px  4px 0 4px #FFD333,
+      /* Helmet visor */
+       4px  8px 0 4px #E8B800,
+       8px  8px 0 4px #E8B800,
+      12px  8px 0 4px #E8B800,
+      16px  8px 0 4px #E8B800,
+      20px  8px 0 4px #E8B800,
+      24px  8px 0 4px #E8B800,
+      /* Helmet brim */
+       0px 12px 0 4px #E8B800,
+       4px 12px 0 4px #E8B800,
+       8px 12px 0 4px #E8B800,
+      12px 12px 0 4px #E8B800,
+      16px 12px 0 4px #E8B800,
+      20px 12px 0 4px #E8B800,
+      24px 12px 0 4px #E8B800,
+      28px 12px 0 4px #E8B800,
+      /* Face (happy) */
+       8px 16px 0 4px #f4be72,
+      12px 16px 0 4px #f4be72,
+      16px 16px 0 4px #f4be72,
+      20px 16px 0 4px #f4be72,
+      /* Eyes (happy squint arcs) */
+       8px 20px 0 4px #f4be72,
+      12px 20px 0 4px #2a1a0a,
+      16px 20px 0 4px #f4be72,
+      20px 20px 0 4px #2a1a0a,
+      /* Mouth (big smile) */
+       8px 24px 0 4px #f4be72,
+      12px 24px 0 4px #c47a3a,
+      16px 24px 0 4px #c47a3a,
+      20px 24px 0 4px #c47a3a,
+      /* Neck */
+      12px 28px 0 4px #f4be72,
+      16px 28px 0 4px #f4be72,
+      /* Body top */
+       8px 32px 0 4px #2f2c25,
+      12px 32px 0 4px #2f2c25,
+      16px 32px 0 4px #2f2c25,
+      20px 32px 0 4px #2f2c25,
+      /* Body mid + badge */
+       4px 36px 0 4px #2f2c25,
+       8px 36px 0 4px #2f2c25,
+      12px 36px 0 4px #fff8d5,
+      16px 36px 0 4px #fff8d5,
+      20px 36px 0 4px #2f2c25,
+      24px 36px 0 4px #2f2c25,
+      /* Body + arms (one arm raised in victory) */
+       0px 40px 0 4px #2f2c25,
+       4px 40px 0 4px #2f2c25,
+       8px 40px 0 4px #2f2c25,
+      12px 40px 0 4px #2f2c25,
+      16px 40px 0 4px #2f2c25,
+      20px 40px 0 4px #2f2c25,
+      /* Raised arm (left, victory sign) */
+      -4px 24px 0 4px #2f2c25,
+      -4px 28px 0 4px #2f2c25,
+      -4px 32px 0 4px #2f2c25,
+      -4px 36px 0 4px #2f2c25,
+      /* Fist of raised arm */
+      -4px 20px 0 4px #f4be72,
+      /* Body bottom + other arm relaxed */
+       4px 44px 0 4px #2f2c25,
+       8px 44px 0 4px #2f2c25,
+      12px 44px 0 4px #2f2c25,
+      16px 44px 0 4px #2f2c25,
+      20px 44px 0 4px #2f2c25,
+      24px 44px 0 4px #2f2c25,
+      28px 44px 0 4px #2f2c25,
+      32px 44px 0 4px #888888,
+      36px 44px 0 4px #888888,
+      /* Phone */
+      32px 48px 0 4px #888888,
+      36px 48px 0 4px #888888,
+      /* Legs */
+       8px 48px 0 4px #3a362e,
+      12px 48px 0 4px #3a362e,
+      20px 48px 0 4px #3a362e,
+      24px 48px 0 4px #3a362e,
+       8px 52px 0 4px #3a362e,
+      12px 52px 0 4px #3a362e,
+      20px 52px 0 4px #3a362e,
+      24px 52px 0 4px #3a362e,
+      /* Shoes */
+       4px 56px 0 4px #2a1a0a,
+       8px 56px 0 4px #2a1a0a,
+      12px 56px 0 4px #2a1a0a,
+      20px 56px 0 4px #2a1a0a,
+      24px 56px 0 4px #2a1a0a,
+      28px 56px 0 4px #2a1a0a
+    ;
+  }
+  @keyframes success-pulse {
+    0%, 100% { transform: scale(2.5); }
+    50% { transform: scale(2.6) translateY(-2px); }
+  }
+
+  /* ===== Decorative scanlines overlay ===== */
+  .pixel-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    border-radius: 4px;
+  }
+
+  /* ===== Color accent per state ===== */
+  .pixel-card[data-state="idle"] .state-label { color: #FFD333; }
+  .pixel-card[data-state="calling"] .state-label { color: #6ec6ff; }
+  .pixel-card[data-state="alert"] .state-label { color: #ee6d5d; }
+  .pixel-card[data-state="success"] .state-label { color: #77b96c; }
+
+  .pixel-card[data-state="idle"] { border-color: #3a3525; }
+  .pixel-card[data-state="calling"] { border-color: #253a45; }
+  .pixel-card[data-state="alert"] { border-color: #452525; }
+  .pixel-card[data-state="success"] { border-color: #254525; }
+
+  /* ===== Footer note ===== */
+  .footer-note {
+    margin-top: 48px;
+    font-size: 11px;
+    color: #4a463e;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  /* ===== Figure wrapper (to contain speech bubble) ===== */
+  .figure-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    min-width: 120px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>像 素 艺 术</h1>
+    <p>PIXEL ART &middot; 美团骑手 &middot; CSS BOX-SHADOW</p>
+    <a href="worker-showcase-index.html" class="back-link">&larr; 返回总览</a>
+  </div>
+
+  <div class="showcase-grid">
+
+    <!-- 空闲 -->
+    <div class="pixel-card" data-state="idle">
+      <div class="figure-wrap">
+        <div class="pixel-worker idle"></div>
+      </div>
+      <div class="state-label">空 闲</div>
+      <div class="state-sub">IDLE &middot; 等待接单</div>
+    </div>
+
+    <!-- 通话中 -->
+    <div class="pixel-card" data-state="calling">
+      <div class="figure-wrap">
+        <div class="pixel-worker calling"></div>
+        <div class="speech-bubble"></div>
+      </div>
+      <div class="state-label">通 话 中</div>
+      <div class="state-sub">CALLING &middot; 语音沟通</div>
+    </div>
+
+    <!-- 警报 -->
+    <div class="pixel-card" data-state="alert">
+      <div class="figure-wrap">
+        <div class="pixel-worker alert"></div>
+      </div>
+      <div class="state-label">警 报</div>
+      <div class="state-sub">ALERT &middot; 异常状况</div>
+    </div>
+
+    <!-- 完成 -->
+    <div class="pixel-card" data-state="success">
+      <div class="figure-wrap">
+        <div class="pixel-worker success"></div>
+      </div>
+      <div class="state-label">完 成</div>
+      <div class="state-sub">SUCCESS &middot; 配送成功</div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    纯 CSS 像素绘制 &middot; 零外部依赖 &middot; 每个角色约 70+ box-shadow 像素
+  </div>
+
+</body>
+</html>

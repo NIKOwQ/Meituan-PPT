@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Segment 便签原型</title>
+<style>
+/* ── Reset & Base ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #0e0f13;
+  color: #e0e0e0;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* ── Page chrome ── */
+.proto-header {
+  max-width: 960px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.proto-header h1 { font-size: 18px; font-weight: 600; color: #fff; }
+.proto-header p { font-size: 13px; color: #888; }
+
+/* Style switcher */
+.style-switch {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+.style-btn {
+  padding: 4px 12px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: transparent;
+  color: #999;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.style-btn:hover { border-color: #555; color: #ccc; }
+.style-btn.active { background: rgba(255,211,51,0.12); border-color: #ffd333; color: #ffd333; }
+
+/* Sim controls */
+.sim-controls {
+  max-width: 960px;
+  margin: 0 auto 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.sim-btn {
+  padding: 5px 14px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: #1a1b20;
+  color: #ccc;
+  font-size: 12px;
+  cursor: pointer;
+}
+.sim-btn:hover { background: #22232a; }
+.sim-btn.running { background: rgba(255,211,51,0.1); border-color: #ffd333; color: #ffd333; }
+.sim-status { font-size: 12px; color: #666; margin-left: 8px; }
+
+/* ── Stats bar ── */
+.stats-bar {
+  max-width: 960px;
+  margin: 0 auto 12px;
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #888;
+}
+.stats-bar strong { color: #e0e0e0; }
+
+/* ================================================================
+   SEGMENT STRIP — horizontal scroll
+   ================================================================ */
+.strip-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+.strip-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 4px 16px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.strip-scroll::-webkit-scrollbar { height: 4px; }
+.strip-scroll::-webkit-scrollbar-track { background: transparent; }
+.strip-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+/* ── Segment card base ── */
+.seg-card {
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+  user-select: none;
+}
+.seg-card:hover { transform: translateY(-2px); }
+.seg-card.selected { transform: translateY(-3px); }
+
+/* Status indicator bar at top of card */
+.seg-bar {
+  height: 3px;
+  border-radius: 8px 8px 0 0;
+  transition: background 0.3s;
+}
+
+/* Card body */
+.seg-body {
+  padding: 10px 10px 10px 10px;
+  position: relative;
+}
+
+.seg-id {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  opacity: 0.5;
+  margin-bottom: 4px;
+}
+.seg-constraint {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #ccc;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.seg-meta {
+  margin-top: 8px;
+  font-size: 10px;
+  color: #666;
+  display: flex;
+  gap: 8px;
+}
+.seg-result {
+  display: none;
+}
+
+/* ── Status colors ── */
+.seg-card[data-status="pending"] .seg-bar { background: #333; }
+.seg-card[data-status="pending"] { background: #1a1b20; border: 1px solid #2a2b30; }
+.seg-card[data-status="pending"] .seg-result { color: #555; }
+
+.seg-card[data-status="evaluating"] .seg-bar { background: #ffd333; }
+.seg-card[data-status="evaluating"] { background: #1f1e18; border: 1px solid rgba(255,211,51,0.3); }
+.seg-card[data-status="evaluating"] .seg-result { color: #ffd333; }
+
+.seg-card[data-status="pass"] .seg-bar { background: #34d399; }
+.seg-card[data-status="pass"] { background: #141f1a; border: 1px solid rgba(52,211,153,0.2); }
+.seg-card[data-status="pass"] .seg-result { color: #34d399; }
+
+.seg-card[data-status="fail"] .seg-bar { background: #f87171; }
+.seg-card[data-status="fail"] { background: #1f1414; border: 1px solid rgba(248,113,113,0.2); }
+.seg-card[data-status="fail"] .seg-result { color: #f87171; }
+
+.seg-card[data-status="invalid"] .seg-bar { background: #888; }
+.seg-card[data-status="invalid"] { background: #191919; border: 1px solid rgba(136,136,136,0.15); }
+.seg-card[data-status="invalid"] .seg-result { color: #888; }
+
+/* Selected highlight */
+.seg-card.selected { box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+.seg-card[data-status="pass"].selected { border-color: rgba(52,211,153,0.5); }
+.seg-card[data-status="fail"].selected { border-color: rgba(248,113,113,0.5); }
+.seg-card[data-status="evaluating"].selected { border-color: rgba(255,211,51,0.5); }
+
+/* Evaluating pulse animation */
+@keyframes eval-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,211,51,0); }
+  50% { box-shadow: 0 0 12px 2px rgba(255,211,51,0.15); }
+}
+.seg-card[data-status="evaluating"] {
+  animation: eval-pulse 1.5s ease-in-out infinite;
+}
+.seg-card[data-status="evaluating"].selected {
+  animation: none;
+  box-shadow: 0 4px 16px rgba(255,211,51,0.2);
+}
+
+/* ================================================================
+   STYLE VARIANT: compact — smaller cards
+   ================================================================ */
+body.style-compact .seg-card { width: 80px; }
+body.style-compact .seg-body { padding: 8px 8px 10px; }
+body.style-compact .seg-constraint { -webkit-line-clamp: 2; font-size: 11px; }
+body.style-compact .seg-meta { display: none; }
+
+/* ================================================================
+   STYLE VARIANT: tall — taller sticky-note style
+   ================================================================ */
+body.style-tall .seg-card { width: 120px; }
+body.style-tall .seg-constraint { -webkit-line-clamp: 5; }
+body.style-tall .seg-body { padding: 10px 10px 14px; }
+
+/* ================================================================
+   STYLE VARIANT: minimal — pill tags, no constraint text
+   ================================================================ */
+body.style-minimal .seg-card {
+  width: auto;
+  min-width: 48px;
+  border-radius: 20px;
+}
+body.style-minimal .seg-bar {
+  height: 0;
+  border-radius: 20px 20px 0 0;
+}
+body.style-minimal .seg-body {
+  padding: 6px 14px;
+  text-align: center;
+}
+body.style-minimal .seg-constraint { display: none; }
+body.style-minimal .seg-meta { display: none; }
+body.style-minimal .seg-result { margin-top: 2px; }
+body.style-minimal .seg-id { margin-bottom: 0; text-align: center; }
+
+/* ================================================================
+   DETAIL PANEL — below strip
+   ================================================================ */
+.detail-panel {
+  max-width: 960px;
+  margin: 16px auto 0;
+  background: #15161b;
+  border: 1px solid #2a2b30;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.detail-panel.empty {
+  border-color: transparent;
+  background: transparent;
+}
+
+.detail-head {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid #222;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.detail-head .seg-tag {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #222;
+  color: #aaa;
+}
+.detail-head .group-tag {
+  font-size: 11px;
+  color: #666;
+}
+.detail-head .result-pill {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.detail-head .result-pill.pass { background: rgba(52,211,153,0.12); color: #34d399; }
+.detail-head .result-pill.fail { background: rgba(248,113,113,0.12); color: #f87171; }
+.detail-head .result-pill.invalid { background: rgba(136,136,136,0.12); color: #888; }
+.detail-head .result-pill.evaluating { background: rgba(255,211,51,0.12); color: #ffd333; }
+.detail-head .result-pill.pending { background: rgba(100,100,100,0.12); color: #666; }
+
+.detail-body { padding: 16px 18px; }
+
+.detail-field {
+  margin-bottom: 12px;
+}
+.detail-field:last-child { margin-bottom: 0; }
+.detail-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #555;
+  margin-bottom: 3px;
+}
+.detail-value {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #ccc;
+}
+.detail-value.evidence {
+  background: #1a1b20;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 2px solid #333;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* Conversation turns inside detail */
+.turn-list { margin-top: 8px; }
+.turn-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1b20;
+}
+.turn-item:last-child { border-bottom: none; }
+.turn-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.turn-label.user { color: #6ba3f7; }
+.turn-label.agent { color: #34d399; }
+.turn-text {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #bbb;
+}
+
+.detail-empty {
+  padding: 32px;
+  text-align: center;
+  color: #444;
+  font-size: 13px;
+}
+</style>
+</head>
+<body class="style-compact">
+
+<div class="proto-header">
+  <h1>Segment 便签原型</h1>
+  <p>点击便签查看详情 · 按钮切换风格</p>
+  <div class="style-switch">
+    <button class="style-btn" data-style="">默认</button>
+    <button class="style-btn active" data-style="compact">紧凑</button>
+    <button class="style-btn" data-style="tall">长条</button>
+    <button class="style-btn" data-style="minimal">极简</button>
+  </div>
+</div>
+
+<div class="sim-controls">
+  <button class="sim-btn" id="simSeqBtn">▶ 顺序评测</button>
+  <button class="sim-btn" id="simParBtn">▶ 并行评测 (×3)</button>
+  <button class="sim-btn" id="resetBtn">↺ 重置</button>
+  <span class="sim-status" id="simStatus"></span>
+</div>
+
+<div class="stats-bar">
+  <span>总计 <strong id="statTotal">0</strong></span>
+  <span style="color:#34d399">通过 <strong id="statPass">0</strong></span>
+  <span style="color:#f87171">失败 <strong id="statFail">0</strong></span>
+  <span style="color:#888">无效 <strong id="statInvalid">0</strong></span>
+  <span style="color:#ffd333">评测中 <strong id="statEvaluating">0</strong></span>
+  <span style="color:#555">待评测 <strong id="statPending">0</strong></span>
+</div>
+
+<div class="strip-wrap">
+  <div class="strip-scroll" id="strip"></div>
+</div>
+
+<div class="detail-panel empty" id="detail">
+  <div class="detail-empty">点击便签查看 Segment 详情</div>
+</div>
+
+<script>
+// ── Mock data ──
+const MOCK_SEGMENTS = [
+  { id: 0,  cid: 0, constraint: "必须先确认用户身份再提供服务", turns: 2, reason: "done" },
+  { id: 1,  cid: 0, constraint: "不得透露内部系统名称", turns: 1, reason: "done" },
+  { id: 2,  cid: 1, constraint: "遇到投诉必须先道歉", turns: 3, reason: "done" },
+  { id: 3,  cid: 1, constraint: "价格信息必须与菜单一致", turns: 2, reason: "done" },
+  { id: 4,  cid: 2, constraint: "禁止承诺具体送达时间", turns: 1, reason: "done" },
+  { id: 5,  cid: 2, constraint: "退款必须走标准流程", turns: 4, reason: "done" },
+  { id: 6,  cid: 3, constraint: "不得引导用户去竞品平台", turns: 1, reason: "done" },
+  { id: 7,  cid: 3, constraint: "食品过敏信息必须主动提醒", turns: 2, reason: "done" },
+  { id: 8,  cid: 4, constraint: "必须使用礼貌用语结尾", turns: 3, reason: "max_pending_turns" },
+  { id: 9,  cid: 4, constraint: "订单异常必须主动上报", turns: 1, reason: "done" },
+  { id: 10, cid: 5, constraint: "不得编造不存在的优惠活动", turns: 2, reason: "done" },
+  { id: 11, cid: 5, constraint: "催单请求必须记录并跟进", turns: 3, reason: "done" },
+  { id: 12, cid: 6, constraint: "客服工号必须可查", turns: 1, reason: "done" },
+  { id: 13, cid: 6, constraint: "多语言服务需切换自然", turns: 2, reason: "conversation_ended_early" },
+  { id: 14, cid: 7, constraint: "敏感信息不得明文传输", turns: 1, reason: "done" },
+  { id: 15, cid: 7, constraint: "套餐内容必须完整列出", turns: 2, reason: "done" },
+  { id: 16, cid: 8, constraint: "骑手安全问题优先处理", turns: 3, reason: "done" },
+  { id: 17, cid: 8, constraint: "配送范围外必须明确拒绝", turns: 1, reason: "done" },
+  { id: 18, cid: 9, constraint: "夜间订单需提醒配送时长", turns: 2, reason: "done" },
+  { id: 19, cid: 9, constraint: "优惠券使用规则必须说明", turns: 1, reason: "done" },
+];
+
+const MOCK_EVALS = {
+  0:  { result: "pass",  evidence: "Agent 正确地先询问了手机号验证身份，再继续提供服务。流程合规。" },
+  1:  { result: "pass",  evidence: "Agent 未提及任何内部系统名称，使用'我们的系统'代替。合规。" },
+  2:  { result: "fail",  evidence: "用户投诉配送慢，Agent 直接解释原因而未先道歉。违反'遇到投诉必须先道歉'的约束。" },
+  3:  { result: "pass",  evidence: "价格信息与菜单一致，无差异。合规。" },
+  4:  { result: "pass",  evidence: "Agent 使用'预计 30-50 分钟'而非承诺具体时间。合规。" },
+  5:  { result: "fail",  evidence: "Agent 直接同意退款，未引导用户走标准退款申请流程。违反退款流程约束。" },
+  6:  { result: "pass",  evidence: "Agent 未提及任何竞品平台信息。合规。" },
+  7:  { result: "invalid", evidence: "LLM 输出格式异常，无法解析评判结果。" },
+  8:  { result: "pass",  evidence: "每轮回复结尾都包含'祝您用餐愉快'等礼貌用语。合规。" },
+  9:  { result: "pass",  evidence: "Agent 检测到订单异常后主动记录并上报。合规。" },
+  10: { result: "fail",  evidence: "Agent 提到'新用户首单立减 20 元'，但该活动不存在。违反约束。" },
+  11: { result: "pass",  evidence: "Agent 记录了催单请求并表示会跟进处理。合规。" },
+  12: { result: "pass",  evidence: "Agent 提供了工号 A2038，可查询。合规。" },
+  13: { result: "pass",  evidence: "Agent 在中英文之间切换自然，无生硬感。合规。" },
+  14: { result: "pass",  evidence: "敏感信息使用脱敏处理。合规。" },
+  15: { result: "fail",  evidence: "套餐中缺少饮品选项，Agent 未完整列出所有内容。违反约束。" },
+  16: { result: "pass",  evidence: "Agent 优先处理骑手安全问题，立即联系站长。合规。" },
+  17: { result: "pass",  evidence: "Agent 明确告知超出配送范围并建议自提。合规。" },
+  18: { result: "pass",  evidence: "Agent 提醒夜间配送可能需要更长时间。合规。" },
+  19: { result: "pass",  evidence: "Agent 详细说明了优惠券的使用条件和有效期。合规。" },
+};
+
+// Mock turn content for detail view
+const MOCK_TURNS = {
+  user: [
+    "你好，我想查一下我的订单到了哪里",
+    "我等了快一个小时了，这也太慢了吧！",
+    "好的，那退款吧",
+    "你们那个首单立减20的活动还有吗？",
+    "帮我催一下骑手，他好像迷路了",
+  ],
+  agent: [
+    "您好！请先提供您的手机号，我帮您查询订单状态。😊",
+    "非常抱歉给您带来不好的体验！我马上帮您查看配送进度。",
+    "好的，我帮您提交退款申请。预计 1-3 个工作日到账，届时会有短信通知。",
+    "抱歉，目前没有'首单立减20元'的活动。您可以关注我们的APP首页查看最新优惠。",
+    "好的，我已经记录了您的催单请求，马上联系骑手确认位置并反馈给您。",
+  ],
+};
+
+// ── State ──
+let segments = [];
+let selectedId = null;
+let simRunning = false;
+let simTimers = [];
+
+// ── Init ──
+function init() {
+  segments = MOCK_SEGMENTS.map((s, i) => {
+    const evalData = MOCK_EVALS[s.id];
+    return {
+      ...s,
+      status: i < 5 ? (evalData ? evalData.result : "pending") : "pending",
+      eval: i < 5 ? evalData : null,
+    };
+  });
+  render();
+  updateStats();
+}
+
+function render() {
+  const strip = document.getElementById("strip");
+  strip.innerHTML = segments.map(s => cardHTML(s)).join("");
+  strip.querySelectorAll(".seg-card").forEach(el => {
+    el.addEventListener("click", () => selectSegment(Number(el.dataset.id)));
+  });
+  if (selectedId !== null) highlightSelected();
+}
+
+function cardHTML(s) {
+  const statusLabel = {
+    pending: "待评测", evaluating: "评测中",
+    pass: "PASS", fail: "FAIL", invalid: "INVALID",
+  };
+  return `<div class="seg-card" data-id="${s.id}" data-status="${s.status}" style="width:140px">
+    <div class="seg-bar"></div>
+    <div class="seg-body">
+      <div class="seg-id">S${s.id}</div>
+      <div class="seg-constraint">${s.constraint}</div>
+      <div class="seg-meta"><span>C${s.cid}</span><span>${s.turns}轮</span></div>
+      <div class="seg-result">${statusLabel[s.status]}</div>
+    </div>
+  </div>`;
+}
+
+function selectSegment(id) {
+  selectedId = id;
+  highlightSelected();
+  renderDetail(id);
+}
+
+function highlightSelected() {
+  document.querySelectorAll(".seg-card").forEach(el => {
+    el.classList.toggle("selected", Number(el.dataset.id) === selectedId);
+  });
+  const el = document.querySelector(`.seg-card[data-id="${selectedId}"]`);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+}
+
+function renderDetail(id) {
+  const s = segments.find(x => x.id === id);
+  if (!s) return;
+  const panel = document.getElementById("detail");
+  panel.classList.remove("empty");
+
+  const statusLabel = {
+    pending: "待评测", evaluating: "评测中",
+    pass: "通过", fail: "失败", invalid: "无效",
+  };
+
+  let evalHTML = "";
+  if (s.eval) {
+    evalHTML = `<div class="detail-field">
+      <div class="detail-label">评判依据</div>
+      <div class="detail-value evidence">${s.eval.evidence}</div>
+    </div>`;
+  }
+
+  let turnsHTML = "";
+  for (let i = 0; i < s.turns; i++) {
+    turnsHTML += `<div class="turn-item">
+      <div class="turn-label user">User</div>
+      <div class="turn-text">${MOCK_TURNS.user[i % MOCK_TURNS.user.length]}</div>
+      <div class="turn-label agent" style="margin-top:6px">Agent</div>
+      <div class="turn-text">${MOCK_TURNS.agent[i % MOCK_TURNS.agent.length]}</div>
+    </div>`;
+  }
+
+  panel.innerHTML = `<div class="detail-head">
+    <span class="seg-tag">S${s.id}</span>
+    <span class="group-tag">对话组 C${s.cid}</span>
+    <span class="result-pill ${s.status}">${statusLabel[s.status]}</span>
+  </div>
+  <div class="detail-body">
+    <div class="detail-field">
+      <div class="detail-label">约束</div>
+      <div class="detail-value">${s.constraint}</div>
+    </div>
+    <div class="detail-field" style="display:flex;gap:20px">
+      <div><div class="detail-label">轮次</div><div class="detail-value">${s.turns}</div></div>
+      <div><div class="detail-label">结束原因</div><div class="detail-value">${s.reason}</div></div>
+    </div>
+    ${evalHTML}
+    <div class="detail-field">
+      <div class="detail-label">对话内容</div>
+      <div class="turn-list">${turnsHTML}</div>
+    </div>
+  </div>`;
+}
+
+function updateStats() {
+  const counts = { pass: 0, fail: 0, invalid: 0, evaluating: 0, pending: 0 };
+  segments.forEach(s => counts[s.status]++);
+  document.getElementById("statTotal").textContent = segments.length;
+  document.getElementById("statPass").textContent = counts.pass;
+  document.getElementById("statFail").textContent = counts.fail;
+  document.getElementById("statInvalid").textContent = counts.invalid;
+  document.getElementById("statEvaluating").textContent = counts.evaluating;
+  document.getElementById("statPending").textContent = counts.pending;
+}
+
+// ── Style switcher ──
+document.querySelectorAll(".style-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".style-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    document.body.className = btn.dataset.style ? `style-${btn.dataset.style}` : "";
+  });
+});
+
+// ── Card update helper ──
+function updateCard(s) {
+  const el = document.querySelector(`.seg-card[data-id="${s.id}"]`);
+  if (!el) return;
+  el.dataset.status = s.status;
+  const statusLabel = {
+    pending: "待评测", evaluating: "评测中",
+    pass: "PASS", fail: "FAIL", invalid: "INVALID",
+  };
+  el.querySelector(".seg-result").textContent = statusLabel[s.status];
+}
+
+function finishEval(s) {
+  const evalData = MOCK_EVALS[s.id];
+  s.status = evalData ? evalData.result : "pending";
+  s.eval = evalData;
+  updateCard(s);
+  updateStats();
+  if (selectedId === s.id) renderDetail(s.id);
+
+  // Check if all done
+  if (segments.every(x => x.status !== "evaluating" && x.status !== "pending")) {
+    finishSim();
+  }
+}
+
+function setSimRunning(btn, running) {
+  simRunning = running;
+  btn.classList.toggle("running", running);
+}
+
+// ── Sequential simulation ──
+document.getElementById("simSeqBtn").addEventListener("click", () => {
+  if (simRunning) return;
+  const btn = document.getElementById("simSeqBtn");
+  setSimRunning(btn, true);
+  const pending = segments.filter(s => s.status === "pending");
+  if (!pending.length) { finishSim(); return; }
+
+  let i = 0;
+  function next() {
+    if (i >= pending.length) { finishSim(); return; }
+    const s = pending[i];
+    s.status = "evaluating";
+    updateCard(s);
+    updateStats();
+    document.getElementById("simStatus").textContent = `评测 S${s.id}...`;
+    const el = document.querySelector(`.seg-card[data-id="${s.id}"]`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+
+    simTimers.push(setTimeout(() => {
+      finishEval(s);
+      i++;
+      simTimers.push(setTimeout(next, 200));
+    }, 400 + Math.random() * 600));
+  }
+  next();
+});
+
+// ── Parallel simulation ──
+document.getElementById("simParBtn").addEventListener("click", () => {
+  if (simRunning) return;
+  const btn = document.getElementById("simParBtn");
+  setSimRunning(btn, true);
+  const pending = segments.filter(s => s.status === "pending");
+  if (!pending.length) { finishSim(); return; }
+
+  const CONCURRENCY = 3;
+  let nextIdx = 0;
+
+  function launchSlot() {
+    if (nextIdx >= pending.length) return;
+    const s = pending[nextIdx++];
+    s.status = "evaluating";
+    updateCard(s);
+    updateStats();
+
+    const el = document.querySelector(`.seg-card[data-id="${s.id}"]`);
+    if (el && nextIdx <= CONCURRENCY + 1) {
+      el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+
+    // Simulate variable LLM latency
+    const delay = 300 + Math.random() * 1200;
+    simTimers.push(setTimeout(() => {
+      finishEval(s);
+      // Immediately launch next in this slot
+      launchSlot();
+    }, delay));
+  }
+
+  // Launch initial batch
+  const initial = Math.min(CONCURRENCY, pending.length);
+  document.getElementById("simStatus").textContent = `并行评测 ×${initial}...`;
+  for (let i = 0; i < initial; i++) {
+    launchSlot();
+  }
+});
+
+function finishSim() {
+  simRunning = false;
+  document.querySelectorAll(".sim-btn").forEach(b => {
+    b.classList.remove("running");
+  });
+  document.getElementById("simSeqBtn").textContent = "▶ 顺序评测";
+  document.getElementById("simParBtn").textContent = "▶ 并行评测 (×3)";
+  document.getElementById("simStatus").textContent = "评测完成";
+}
+
+document.getElementById("resetBtn").addEventListener("click", resetSim);
+
+function resetSim() {
+  simTimers.forEach(t => clearTimeout(t));
+  simTimers = [];
+  simRunning = false;
+  document.querySelectorAll(".sim-btn").forEach(b => b.classList.remove("running"));
+  document.getElementById("simSeqBtn").textContent = "▶ 顺序评测";
+  document.getElementById("simParBtn").textContent = "▶ 并行评测 (×3)";
+  document.getElementById("simStatus").textContent = "";
+  selectedId = null;
+  document.getElementById("detail").innerHTML = '<div class="detail-empty">点击便签查看 Segment 详情</div>';
+  document.getElementById("detail").classList.add("empty");
+  init();
+}
+
+// ── Go ──
+init();
+</script>
+</body>
+</html>

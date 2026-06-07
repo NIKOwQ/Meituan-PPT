@@ -1,0 +1,102 @@
+[
+  {
+    "conversation_id": 0,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  },
+  {
+    "conversation_id": 1,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  },
+  {
+    "conversation_id": 2,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  },
+  {
+    "conversation_id": 3,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  },
+  {
+    "conversation_id": 4,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Request timed out."
+    ]
+  },
+  {
+    "conversation_id": 5,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  },
+  {
+    "conversation_id": 6,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  },
+  {
+    "conversation_id": 7,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  },
+  {
+    "conversation_id": 8,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  },
+  {
+    "conversation_id": 9,
+    "opening_line": "",
+    "turns": [],
+    "segments": [],
+    "completion_reason": "exception",
+    "diagnostics": [
+      "执行异常: Connection error."
+    ]
+  }
+]

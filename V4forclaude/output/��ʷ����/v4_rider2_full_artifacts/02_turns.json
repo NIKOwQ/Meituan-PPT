@@ -1,0 +1,133 @@
+[
+  {
+    "turn_index": 1,
+    "conversation_id": 0,
+    "local_turn_index": 1,
+    "constraint_text": "Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。",
+    "user_reply": "是我，小李。合同今天生效了是吧？我今天可以开始配送。",
+    "agent_reply": "对，小李，合同今天正式生效了！\n\n飞毛腿需要连续 4 天完成配送。如果能坚持，每单还能多赚 2 元哦！",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 18 单；多日合同每天至少完成 15 单。"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。\",\n  \"user_reply\": \"是我，小李。合同今天生效了是吧？我今天可以开始配送。\",\n  \"rationale\": \"用户确认身份并主动提及合同生效与是否可以配送，正好触发 Step1 的后续推进，测试 Agent 是否按流程告知合同已生效并询问配送意愿。\",\n  \"multi_turn\": \"need\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户确认身份并回应合同生效及是否可以配送，直接触发 Step1 中询问是否可以开始配送的约束。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "need",
+    "segment_id": 1,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 2,
+    "conversation_id": 0,
+    "local_turn_index": 2,
+    "constraint_text": "Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。",
+    "user_reply": "连续4天没问题，我这就上线跑单！",
+    "agent_reply": "好的，飞毛腿是按排名进的，不是站长干预的。记得少拒单、少取消、少超时哦！",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 18 单；多日合同每天至少完成 15 单。"
+      },
+      {
+        "role": "user",
+        "content": "是我，小李。合同今天生效了是吧？我今天可以开始配送。"
+      },
+      {
+        "role": "assistant",
+        "content": "对，小李，合同今天正式生效了！\n\n飞毛腿需要连续 4 天完成配送。如果能坚持，每单还能多赚 2 元哦！"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。\",\n  \"user_reply\": \"连续4天没问题，我这就上线跑单！\",\n  \"rationale\": \"用户明确表示可以开始配送并确认连续4天履约意愿，自然承接Agent关于连续配送天数和额外奖励的说明，同时推进对话进入Step2.2（说明排名机制、减少拒单等）的测试阶段。\",\n  \"multi_turn\": \"continue\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户明确表示可以连续4天配送，Agent 需继续执行 Step2.2 和 2.3 等后续流程，从而检验约束遵守情况。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "continue",
+    "segment_id": 1,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 3,
+    "conversation_id": 1,
+    "local_turn_index": 1,
+    "constraint_text": "Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。",
+    "user_reply": "是的，我是${rider_name}。合同今天生效了是吧？我今天可以开始配送。",
+    "agent_reply": "对，今天飞毛腿合同已生效。单日合同需连续 Y 天完成配送，否则会受影响。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。\",\n  \"user_reply\": \"是的，我是${rider_name}。合同今天生效了是吧？我今天可以开始配送。\",\n  \"rationale\": \"骑手确认身份并表示可以配送，自然触发 Agent 进入 Step1 的后续流程（确认合同生效并询问是否可以配送），同时测试 Agent 是否按流程推进。\",\n  \"multi_turn\": \"need\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户确认身份并同意开始配送，正好触发 Step1 中询问是否可以配送并得到肯定回答的情境，Agent 需据此推进后续流程。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "need",
+    "segment_id": 1,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 4,
+    "conversation_id": 2,
+    "local_turn_index": 1,
+    "constraint_text": "Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。",
+    "user_reply": "是我，合同今天生效了是吧？那我今天可以开始跑单。",
+    "agent_reply": "对，已生效！多日合同需连续跑 **15 天**，别断哦。",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小飞吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **40 单**；多日合同每天至少完成 **20 单**。"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。\",\n  \"user_reply\": \"是我，合同今天生效了是吧？那我今天可以开始跑单。\",\n  \"rationale\": \"用户确认身份并表示可以开始配送，自然接续开场白，同时触发 Step1 中「询问是否可以开始配送」的流程节点，测试 Agent 是否按流程推进。\",\n  \"multi_turn\": \"need\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户确认合同生效并开始配送，直接触发 Step1 中询问是否可以开始配送的后续分支，Agent 需据此进入 Step2.1 说明连续 Y 天要求。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "need",
+    "segment_id": 1,
+    "is_test_turn": true
+  },
+  {
+    "turn_index": 5,
+    "conversation_id": 2,
+    "local_turn_index": 2,
+    "constraint_text": "Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。",
+    "user_reply": "好的，那我现在就去上线跑单，争取今天完成20单！",
+    "agent_reply": "好的，加油！恶劣天气单量大，坚持跑有助于保住飞毛腿资格。注意安全！",
+    "history_before": [
+      {
+        "role": "assistant",
+        "content": "你好，请问是小飞吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **40 单**；多日合同每天至少完成 **20 单**。"
+      },
+      {
+        "role": "user",
+        "content": "是我，合同今天生效了是吧？那我今天可以开始跑单。"
+      },
+      {
+        "role": "assistant",
+        "content": "对，已生效！多日合同需连续跑 **15 天**，别断哦。"
+      }
+    ],
+    "user_llm_raw": "{\n  \"constraint_text\": \"Step1：告知骑手今天飞毛腿合同已生效，并询问他们是否可以开始配送。\",\n  \"user_reply\": \"好的，那我现在就去上线跑单，争取今天完成20单！\",\n  \"rationale\": \"骑手确认可以开始配送，自然承接了Step1中'询问是否可以开始配送'的环节，对话流程顺利推进到Step2.1和2.2的说明阶段，需要更多轮才能完成对Step1约束的完整测试。\",\n  \"multi_turn\": \"continue\",\n  \"end\": false\n}",
+    "user_gate": {
+      "result": "pass",
+      "evidence": "用户确认可以开始配送，Agent 需按 Step1 后续的 2.1、2.2 等流程继续推进，用户消息合理触发了约束的后续执行。"
+    },
+    "code_gate_errors": [],
+    "multi_turn": "continue",
+    "segment_id": 1,
+    "is_test_turn": true
+  }
+]

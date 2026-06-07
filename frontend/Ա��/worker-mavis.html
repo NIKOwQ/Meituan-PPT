@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Pixel Art Character</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #F8F8F4; /* Light background */
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        /* Set the base pixel size and character positioning */
+        .pixel-art-container {
+            --p-size: 10px; /* Base size of a single 'pixel' block */
+            position: relative;
+            width: calc(var(--p-size) * 12); /* Based on widest elements */
+            height: calc(var(--p-size) * 16); /* Total height of character */
+            image-rendering: pixelated; /* Ensures sharp edges */
+        }
+
+        /* Common class for all pixel blocks */
+        .px {
+            position: absolute;
+            background-color: transparent;
+            box-sizing: border-box;
+        }
+
+        /* Colors derived from the original image and new additions */
+        .c-skin { background-color: #E6BC8E; }
+        .c-yellow { background-color: #F4D350; }
+        .c-dark-yellow { background-color: #CBA500; }
+        .c-black { background-color: #33332D; }
+        .c-off-white { background-color: #F4F1E1; }
+        .c-ear-pink { background-color: #EAA8C9; } /* For ear interior */
+
+        /* Positioning the blocks using calc and grid coordinates */
+
+        /* Body (original dark grey/black) */
+        .body {
+            left: calc(var(--p-size) * 2);
+            top: calc(var(--p-size) * 12);
+            width: calc(var(--p-size) * 8);
+            height: calc(var(--p-size) * 4);
+        }
+
+        /* Body Stripe (off-white) */
+        .stripe {
+            left: calc(var(--p-size) * 2);
+            top: calc(var(--p-size) * 13);
+            width: calc(var(--p-size) * 3);
+            height: calc(var(--p-size) * 1);
+        }
+
+        /* Face (original skin tone) */
+        .face {
+            left: calc(var(--p-size) * 2);
+            top: calc(var(--p-size) * 9);
+            width: calc(var(--p-size) * 8);
+            height: calc(var(--p-size) * 3);
+        }
+
+        /* Eyes (original black squares) */
+        .eye-l {
+            left: calc(var(--p-size) * 3);
+            top: calc(var(--p-size) * 10);
+            width: calc(var(--p-size) * 1);
+            height: calc(var(--p-size) * 1);
+        }
+        .eye-r {
+            left: calc(var(--p-size) * 8);
+            top: calc(var(--p-size) * 10);
+            width: calc(var(--p-size) * 1);
+            height: calc(var(--p-size) * 1);
+        }
+
+        /* Helmet (incorporating original yellow shapes, now more 'helmet' like) */
+        /* Helmet Top */
+        .helmet-top {
+            left: calc(var(--p-size) * 3);
+            top: calc(var(--p-size) * 6);
+            width: calc(var(--p-size) * 6);
+            height: calc(var(--p-size) * 1);
+        }
+        /* Helmet Upper Layer */
+        .helmet-mid {
+            left: calc(var(--p-size) * 2);
+            top: calc(var(--p-size) * 7);
+            width: calc(var(--p-size) * 8);
+            height: calc(var(--p-size) * 1);
+        }
+        /* Helmet Front Band/Brim (over eyes) */
+        .helmet-front {
+            left: calc(var(--p-size) * 2);
+            top: calc(var(--p-size) * 8);
+            width: calc(var(--p-size) * 8);
+            height: calc(var(--p-size) * 1);
+        }
+        /* Helmet Accent (original darker yellow block) */
+        .helmet-accent {
+            left: calc(var(--p-size) * 4);
+            top: calc(var(--p-size) * 8);
+            width: calc(var(--p-size) * 4);
+            height: calc(var(--p-size) * 1);
+        }
+
+        /* New: Long Bunny Ears */
+        /* Ear base structures (attached to helmet top) */
+        .ear-base-l, .ear-base-r {
+            top: calc(var(--p-size) * 1);
+            width: calc(var(--p-size) * 2);
+            height: calc(var(--p-size) * 5);
+        }
+        .ear-base-l { left: calc(var(--p-size) * 2); }
+        .ear-base-r { left: calc(var(--p-size) * 8); }
+
+        /* Ear interior pink stripe */
+        .ear-inner-l, .ear-inner-r {
+            top: calc(var(--p-size) * 1);
+            width: calc(var(--p-size) * 1);
+            height: calc(var(--p-size) * 4);
+        }
+        .ear-inner-l { left: calc(var(--p-size) * 3); }
+        .ear-inner-r { left: calc(var(--p-size) * 8); } /* Right ear interior on inner side */
+
+        /* Small ear tip block */
+        .ear-tip-l, .ear-tip-r {
+            top: calc(var(--p-size) * 0);
+            width: calc(var(--p-size) * 1);
+            height: calc(var(--p-size) * 1);
+        }
+        .ear-tip-l { left: calc(var(--p-size) * 2); }
+        .ear-tip-r { left: calc(var(--p-size) * 9); }
+
+        /* Description text */
+        .desc {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pixel-art-container">
+        <div class="px c-yellow ear-base-l"></div>
+        <div class="px c-ear-pink ear-inner-l"></div>
+        <div class="px c-yellow ear-tip-l"></div>
+
+        <div class="px c-yellow ear-base-r"></div>
+        <div class="px c-ear-pink ear-inner-r"></div>
+        <div class="px c-yellow ear-tip-r"></div>
+
+        <div class="px c-yellow helmet-top"></div>
+        <div class="px c-yellow helmet-mid"></div>
+        <div class="px c-yellow helmet-front"></div>
+        <div class="px c-dark-yellow helmet-accent"></div>
+
+        <div class="px c-skin face"></div>
+        <div class="px c-black eye-l"></div>
+        <div class="px c-black eye-r"></div>
+
+        <div class="px c-black body"></div>
+        <div class="px c-off-white stripe"></div>
+    </div>
+
+    <div class="desc">A pixel-art figure inspired by the source, <br> now wearing a safety helmet with long bunny ears.</div>
+
+</body>
+</html>

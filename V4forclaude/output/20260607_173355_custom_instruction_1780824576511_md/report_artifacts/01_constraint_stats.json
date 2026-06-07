@@ -1,0 +1,146 @@
+[
+  {
+    "constraint_text": "# Role: Customer Support Specialist for Course Publishing Platform ## Task: 告知机构客户，课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项。当需要实时互动时，鼓励选择低延迟直播。",
+    "count": 1,
+    "covered_chars": 132,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "不能承诺给商家折扣券或优惠券",
+    "count": 3,
+    "covered_chars": 14,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "企业微信添加",
+    "count": 1,
+    "covered_chars": 12,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "保持随意直接",
+    "count": 1,
+    "covered_chars": 6,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "即使任务完成，若商家有疑问，继续简短作答",
+    "count": 2,
+    "covered_chars": 20,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "告知机构客户，课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项",
+    "count": 1,
+    "covered_chars": 36,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "告知机构客户，课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项。当需要实时互动时，鼓励选择低延迟直播。",
+    "count": 1,
+    "covered_chars": 56,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "您之前选的是标准直播，但我们后台其实已为您走低延迟线路以保障质量，您知道吗？",
+    "count": 4,
+    "covered_chars": 38,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "您好，请问您是贵培训机构/校区的负责人吗？",
+    "count": 6,
+    "covered_chars": 21,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "您是贵培训机构/校区的负责人吗",
+    "count": 1,
+    "covered_chars": 15,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "您是通过Web控制台、校务系统A，还是SaaS系统B发课？",
+    "count": 6,
+    "covered_chars": 29,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "我们对直播产品做了升级，新增了独立的\"低延迟直播\"选项。发课时选低延迟直播即可，其他流程不变。",
+    "count": 1,
+    "covered_chars": 47,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "按知识库解答剩余问题",
+    "count": 3,
+    "covered_chars": 10,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "标准直播更便宜",
+    "count": 1,
+    "covered_chars": 7,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "每次回复极简——最多15-20个字",
+    "count": 4,
+    "covered_chars": 17,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "祝其课程顺利、招生满满",
+    "count": 1,
+    "covered_chars": 11,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "给商家发言和提问的机会",
+    "count": 1,
+    "covered_chars": 11,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "若商家说在开车，礼貌说\"那我稍后再打\"后挂断",
+    "count": 7,
+    "covered_chars": 22,
+    "sufficiently_tested": true
+  },
+  {
+    "constraint_text": "若当前号码可添加 → 告知稍后通过企业微信添加，请通过验证",
+    "count": 2,
+    "covered_chars": 29,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "若当前号码可添加 → 告知稍后通过企业微信添加，请通过验证 - 若不可添加 → 请提供可添加的手机号，再发送同样的验证提示",
+    "count": 1,
+    "covered_chars": 61,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "若未显示 → 缓慢引导开通（每步暂停3秒）： 1. 进入【我的】 2. 点击【服务商/直播平台管理】 3. 选择【直播平台】 4. 在【服务产品】下勾选低延迟直播，保存",
+    "count": 2,
+    "covered_chars": 84,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "若老板说忙，说\"就1分钟，保证简短\"后继续简短说明",
+    "count": 1,
+    "covered_chars": 25,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "课程发布页面将新增\"标准直播\"和\"低延迟直播\"两个独立选项",
+    "count": 1,
+    "covered_chars": 29,
+    "sufficiently_tested": false
+  },
+  {
+    "constraint_text": "选择【直播平台】",
+    "count": 1,
+    "covered_chars": 8,
+    "sufficiently_tested": false
+  }
+]

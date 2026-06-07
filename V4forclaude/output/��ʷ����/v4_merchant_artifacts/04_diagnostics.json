@@ -1,0 +1,11 @@
+[
+  "user attempt 1: 代码门控失败: constraint_text 不是清洗后长指令中的精确连续原文",
+  "user attempt 1: LLM 门控失败: 上一轮用户已说在开车，Agent已礼貌挂断，当前对话已结束，用户不可能再打来，此消息与历史对话严重冲突，无法触发约束。",
+  "user attempt 1: 代码门控失败: constraint_text 不是清洗后长指令中的精确连续原文",
+  "user attempt 2: 代码门控失败: constraint_text 不是清洗后长指令中的精确连续原文",
+  "user attempt 3: 代码门控失败: constraint_text 不是清洗后长指令中的精确连续原文",
+  "local_turn=2: 门控重试耗尽",
+  "user attempt 1: LLM 门控失败: 用户消息是对之前已回答内容的追问，未打断对话流程，无法触发'若对话被打断，使用简短过渡语'的约束。",
+  "user attempt 1: LLM 门控失败: 用户消息是复述上一轮assistant的完整回复内容，并非用户真实发言，无法触发或检验agent是否遵守打断过渡语约束。",
+  "segment 6 达到 max_pending_turns=3，自动收束"
+]

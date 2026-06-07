@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>线描极简风 - 美团骑手</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #FAF8F2;
+    color: #2a1a0a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  a.back-link {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    color: #2a1a0a;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1.5px solid #2a1a0a;
+    padding: 4px 12px;
+    border-radius: 3px;
+    transition: background 0.2s, color 0.2s;
+  }
+  a.back-link:hover {
+    background: #2a1a0a;
+    color: #FAF8F2;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    margin-bottom: 6px;
+    color: #2a1a0a;
+  }
+
+  .page-subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    color: #8a7a6a;
+    margin-bottom: 48px;
+    letter-spacing: 1px;
+  }
+
+  .showcase-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: center;
+    max-width: 900px;
+  }
+
+  .state-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .state-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #8a7a6a;
+    text-transform: uppercase;
+  }
+
+  .state-desc {
+    font-size: 11px;
+    color: #b0a090;
+    max-width: 100px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* ========================================
+     LINE WORKER — base structure
+     ======================================== */
+  .line-worker {
+    position: relative;
+    width: 80px;
+    height: 120px;
+    /* transparent background — no fill */
+  }
+
+  /* ---------- Helmet ---------- */
+  .line-helmet {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 22px;
+    background: #FFD333;
+    border: 1.5px solid #E8B800;
+    border-radius: 12px 12px 4px 4px;
+  }
+
+  .line-ear {
+    position: absolute;
+    top: 6px;
+    width: 8px;
+    height: 10px;
+    background: #FFD333;
+    border: 1.5px solid #E8B800;
+  }
+  .line-ear-l {
+    left: -7px;
+    border-radius: 3px 0 0 3px;
+  }
+  .line-ear-r {
+    right: -7px;
+    border-radius: 0 3px 3px 0;
+  }
+
+  /* ---------- Face ---------- */
+  .line-face {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 20px;
+    border: 1.5px solid #2a1a0a;
+    border-radius: 0 0 10px 10px;
+    border-top: none;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    padding-top: 4px;
+  }
+
+  .line-eye {
+    display: block;
+    width: 3px;
+    height: 3px;
+    background: #2a1a0a;
+    border-radius: 50%;
+  }
+
+  .line-mouth {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 5px;
+    border: none;
+    border-bottom: 1.5px solid #2a1a0a;
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* ---------- Body ---------- */
+  .line-body {
+    position: absolute;
+    top: 46px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 30px;
+    border: 1.5px solid #2a1a0a;
+    border-radius: 2px;
+    background: transparent;
+  }
+
+  .line-collar {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 0;
+    border-top: 2px solid #FFD333;
+  }
+
+  .line-badge {
+    position: absolute;
+    top: 10px;
+    left: 6px;
+    width: 6px;
+    height: 6px;
+    background: #FFD333;
+    border: none;
+  }
+
+  /* ---------- Arms ---------- */
+  .line-arm {
+    position: absolute;
+    top: 48px;
+    width: 18px;
+    height: 1.5px;
+    background: #2a1a0a;
+  }
+  .line-arm-l {
+    left: 5px;
+    transform: rotate(15deg);
+  }
+  .line-arm-r {
+    right: 5px;
+    transform: rotate(-15deg);
+  }
+
+  /* ---------- Legs ---------- */
+  .line-leg {
+    position: absolute;
+    top: 76px;
+    width: 1.5px;
+    height: 24px;
+    background: #2a1a0a;
+  }
+  .line-leg-l {
+    left: 50%;
+    margin-left: -8px;
+  }
+  .line-leg-r {
+    left: 50%;
+    margin-left: 5px;
+  }
+
+  /* Feet — small horizontal lines */
+  .line-leg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -3px;
+    width: 10px;
+    height: 1.5px;
+    background: #2a1a0a;
+  }
+
+  /* ========================================
+     STATE: idle
+     ======================================== */
+  .line-worker[data-state="idle"] {
+    /* base styles already applied — static, clean */
+  }
+
+  /* ========================================
+     STATE: calling (通话中)
+     ======================================== */
+  .line-worker[data-state="calling"] .line-phone {
+    display: block;
+  }
+  .line-worker[data-state="calling"] .line-headset {
+    display: block;
+  }
+  .line-worker[data-state="calling"] .line-bubble {
+    display: block;
+  }
+  /* Move right arm up to ear */
+  .line-worker[data-state="calling"] .line-arm-r {
+    top: 30px;
+    right: 10px;
+    width: 14px;
+    transform: rotate(-60deg);
+  }
+
+  .line-headset {
+    display: none;
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 17px;
+    border: 1.5px solid #2a1a0a;
+    border-bottom: none;
+    border-radius: 17px 17px 0 0;
+    background: transparent;
+  }
+
+  .line-phone {
+    display: none;
+    position: absolute;
+    top: 26px;
+    right: 6px;
+    width: 8px;
+    height: 14px;
+    border: 1.5px solid #2a1a0a;
+    border-radius: 2px;
+    background: transparent;
+  }
+
+  .line-bubble {
+    display: none;
+    position: absolute;
+    top: -18px;
+    right: -20px;
+    width: 24px;
+    height: 16px;
+    border: 1.5px solid #2a1a0a;
+    border-radius: 4px;
+    background: transparent;
+    border-style: dashed;
+    animation: dash-flow 1.5s linear infinite;
+  }
+  .line-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 4px;
+    width: 5px;
+    height: 5px;
+    border-right: 1.5px dashed #2a1a0a;
+    border-bottom: 1.5px dashed #2a1a0a;
+    transform: rotate(45deg);
+    background: transparent;
+  }
+
+  @keyframes dash-flow {
+    to { stroke-dashoffset: -20; border-color: #2a1a0a; }
+  }
+  @keyframes dash-border {
+    from { border-color: #2a1a0a; }
+    to { border-color: #2a1a0a; }
+  }
+  .line-worker[data-state="calling"] .line-bubble {
+    animation: dash-anim 1.2s linear infinite;
+  }
+  @keyframes dash-anim {
+    0%   { border-color: #2a1a0a; }
+    50%  { border-color: #8a7a6a; }
+    100% { border-color: #2a1a0a; }
+  }
+
+  /* ========================================
+     STATE: alert (警报)
+     ======================================== */
+  .line-worker[data-state="alert"] .line-face,
+  .line-worker[data-state="alert"] .line-body,
+  .line-worker[data-state="alert"] .line-arm,
+  .line-worker[data-state="alert"] .line-leg {
+    border-color: #d95a4f;
+    background: transparent;
+  }
+  .line-worker[data-state="alert"] .line-arm {
+    background: #d95a4f;
+  }
+  .line-worker[data-state="alert"] .line-leg {
+    background: #d95a4f;
+  }
+  .line-worker[data-state="alert"] .line-leg::after {
+    background: #d95a4f;
+  }
+  .line-worker[data-state="alert"] .line-eye {
+    background: #d95a4f;
+  }
+  .line-worker[data-state="alert"] .line-mouth {
+    border-bottom-color: #d95a4f;
+  }
+  .line-worker[data-state="alert"] .line-alert-dot {
+    display: block;
+  }
+
+  .line-alert-dot {
+    display: none;
+    position: absolute;
+    top: -4px;
+    left: -6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d95a4f;
+    color: #FAF8F2;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 10px;
+    text-align: center;
+  }
+
+  /* ========================================
+     STATE: waiting (等待)
+     ======================================== */
+  .line-worker[data-state="waiting"] .line-face,
+  .line-worker[data-state="waiting"] .line-body {
+    border-style: dashed;
+    opacity: 0.5;
+  }
+  .line-worker[data-state="waiting"] .line-helmet {
+    border-style: dashed;
+    opacity: 0.5;
+  }
+  .line-worker[data-state="waiting"] .line-ear {
+    border-style: dashed;
+    opacity: 0.5;
+  }
+  .line-worker[data-state="waiting"] .line-arm,
+  .line-worker[data-state="waiting"] .line-leg {
+    opacity: 0.5;
+  }
+  .line-worker[data-state="waiting"] .line-collar {
+    border-top-style: dashed;
+    opacity: 0.5;
+  }
+  .line-worker[data-state="waiting"] .line-eye,
+  .line-worker[data-state="waiting"] .line-mouth {
+    opacity: 0.5;
+  }
+  .line-worker[data-state="waiting"] .line-badge {
+    opacity: 0.5;
+  }
+  .line-worker[data-state="waiting"] {
+    animation: wait-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes wait-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.5; }
+  }
+
+  /* ========================================
+     STATE: success (完成)
+     ======================================== */
+  .line-worker[data-state="success"] .line-check {
+    display: block;
+  }
+
+  .line-check {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: -18px;
+    width: 14px;
+    height: 14px;
+  }
+  .line-check::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 1px;
+    width: 5px;
+    height: 1.5px;
+    background: #77b96c;
+    transform: rotate(45deg);
+    transform-origin: left center;
+  }
+  .line-check::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    width: 9px;
+    height: 1.5px;
+    background: #77b96c;
+    transform: rotate(-45deg);
+    transform-origin: left center;
+  }
+
+  /* ========================================
+     Page footer note
+     ======================================== */
+  .footnote {
+    margin-top: 56px;
+    font-size: 11px;
+    color: #b0a090;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="worker-showcase-index.html">&larr; 返回总览</a>
+
+<div class="page-title">线描极简风</div>
+<div class="page-subtitle">仅以 1.5px 描边勾勒，黄色头盔为唯一填色 &mdash; 品牌视觉锚点</div>
+
+<div class="showcase-grid">
+
+  <!-- State 1: idle -->
+  <div class="state-card">
+    <div class="line-worker" data-state="idle">
+      <div class="line-helmet">
+        <div class="line-ear line-ear-l"></div>
+        <div class="line-ear line-ear-r"></div>
+      </div>
+      <div class="line-face">
+        <span class="line-eye"></span>
+        <span class="line-eye"></span>
+        <span class="line-mouth"></span>
+      </div>
+      <div class="line-body">
+        <span class="line-collar"></span>
+        <span class="line-badge"></span>
+      </div>
+      <div class="line-arm line-arm-l"></div>
+      <div class="line-arm line-arm-r"></div>
+      <div class="line-leg line-leg-l"></div>
+      <div class="line-leg line-leg-r"></div>
+    </div>
+    <div class="state-label">空闲</div>
+    <div class="state-desc">静态实线描边，纯净极简</div>
+  </div>
+
+  <!-- State 2: calling -->
+  <div class="state-card">
+    <div class="line-worker" data-state="calling">
+      <div class="line-headset"></div>
+      <div class="line-bubble"></div>
+      <div class="line-helmet">
+        <div class="line-ear line-ear-l"></div>
+        <div class="line-ear line-ear-r"></div>
+      </div>
+      <div class="line-face">
+        <span class="line-eye"></span>
+        <span class="line-eye"></span>
+        <span class="line-mouth"></span>
+      </div>
+      <div class="line-body">
+        <span class="line-collar"></span>
+        <span class="line-badge"></span>
+      </div>
+      <div class="line-arm line-arm-l"></div>
+      <div class="line-arm line-arm-r"></div>
+      <div class="line-phone"></div>
+      <div class="line-leg line-leg-l"></div>
+      <div class="line-leg line-leg-r"></div>
+    </div>
+    <div class="state-label">通话中</div>
+    <div class="state-desc">耳麦弧线 + 虚线气泡流动动画</div>
+  </div>
+
+  <!-- State 3: alert -->
+  <div class="state-card">
+    <div class="line-worker" data-state="alert">
+      <div class="line-alert-dot">!</div>
+      <div class="line-helmet">
+        <div class="line-ear line-ear-l"></div>
+        <div class="line-ear line-ear-r"></div>
+      </div>
+      <div class="line-face">
+        <span class="line-eye"></span>
+        <span class="line-eye"></span>
+        <span class="line-mouth"></span>
+      </div>
+      <div class="line-body">
+        <span class="line-collar"></span>
+        <span class="line-badge"></span>
+      </div>
+      <div class="line-arm line-arm-l"></div>
+      <div class="line-arm line-arm-r"></div>
+      <div class="line-leg line-leg-l"></div>
+      <div class="line-leg line-leg-r"></div>
+    </div>
+    <div class="state-label">警报</div>
+    <div class="state-desc">描边转红 + 感叹号警示点</div>
+  </div>
+
+  <!-- State 4: waiting -->
+  <div class="state-card">
+    <div class="line-worker" data-state="waiting">
+      <div class="line-helmet">
+        <div class="line-ear line-ear-l"></div>
+        <div class="line-ear line-ear-r"></div>
+      </div>
+      <div class="line-face">
+        <span class="line-eye"></span>
+        <span class="line-eye"></span>
+        <span class="line-mouth"></span>
+      </div>
+      <div class="line-body">
+        <span class="line-collar"></span>
+        <span class="line-badge"></span>
+      </div>
+      <div class="line-arm line-arm-l"></div>
+      <div class="line-arm line-arm-r"></div>
+      <div class="line-leg line-leg-l"></div>
+      <div class="line-leg line-leg-r"></div>
+    </div>
+    <div class="state-label">等待</div>
+    <div class="state-desc">虚线描边 + 呼吸透明度脉冲</div>
+  </div>
+
+  <!-- State 5: success -->
+  <div class="state-card">
+    <div class="line-worker" data-state="success">
+      <div class="line-helmet">
+        <div class="line-ear line-ear-l"></div>
+        <div class="line-ear line-ear-r"></div>
+      </div>
+      <div class="line-face">
+        <span class="line-eye"></span>
+        <span class="line-eye"></span>
+        <span class="line-mouth"></span>
+      </div>
+      <div class="line-body">
+        <span class="line-collar"></span>
+        <span class="line-badge"></span>
+      </div>
+      <div class="line-arm line-arm-l"></div>
+      <div class="line-arm line-arm-r"></div>
+      <div class="line-check"></div>
+      <div class="line-leg line-leg-l"></div>
+      <div class="line-leg line-leg-r"></div>
+    </div>
+    <div class="state-label">完成</div>
+    <div class="state-desc">绿色对勾线，描边保持深色</div>
+  </div>
+
+</div>
+
+<div class="footnote">CSS only &middot; no dependencies &middot; 1.5px border art</div>
+
+</body>
+</html>

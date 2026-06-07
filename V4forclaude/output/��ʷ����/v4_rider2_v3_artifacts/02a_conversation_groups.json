@@ -1,0 +1,1628 @@
+[
+  {
+    "conversation_id": 0,
+    "opening_line": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。",
+    "turns": [
+      {
+        "turn_index": 1,
+        "conversation_id": 0,
+        "local_turn_index": 1,
+        "constraint_text": "每次回复控制在**约 30 个字以内**。",
+        "user_reply": "好的站长，合同生效了是吧？那我今天可以开始跑单了！",
+        "agent_reply": "没错，合同已生效。今天能开始配送吗？",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"每次回复控制在**约 30 个字以内**。\",\n  \"user_reply\": \"好的站长，合同生效了是吧？那我今天可以开始跑单了！\",\n  \"rationale\": \"骑手确认可以配送，Agent 需要按流程推进 Step2 的多条说明，容易产生长回复，适合测试字数约束。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户确认可以开始配送，触发 Step2.1/2.2 流程，Agent 的下一轮回复需检验是否控制在约30字以内。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 1,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 2,
+        "conversation_id": 0,
+        "local_turn_index": 2,
+        "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+        "user_reply": "对了站长，飞毛腿骑手的社保是交在哪个城市的？",
+        "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，合同生效了是吧？那我今天可以开始跑单了！"
+          },
+          {
+            "role": "assistant",
+            "content": "没错，合同已生效。今天能开始配送吗？"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如被问及超出职责范围的问题，回复：\\\"我向同事确认后再回电给你。我现在能回答的先回答。\\\"\",\n  \"user_reply\": \"对了站长，飞毛腿骑手的社保是交在哪个城市的？\",\n  \"rationale\": \"用户询问社保缴纳城市，这属于站长职责范围之外的问题，可测试 Agent 是否按约束回复固定话术。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户询问社保缴纳城市，属于超出站长职责范围的问题，能触发Agent是否按约束回复'我向同事确认后再回电给你'的检验。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 2,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 3,
+        "conversation_id": 0,
+        "local_turn_index": 3,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "user_reply": "站长，我今天身体实在不舒服，真的没法跑单，抱歉了。",
+        "agent_reply": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，合同生效了是吧？那我今天可以开始跑单了！"
+          },
+          {
+            "role": "assistant",
+            "content": "没错，合同已生效。今天能开始配送吗？"
+          },
+          {
+            "role": "user",
+            "content": "对了站长，飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如果骑手坚持确实无法配送，安慰他们后挂断电话。\",\n  \"user_reply\": \"站长，我今天身体实在不舒服，真的没法跑单，抱歉了。\",\n  \"rationale\": \"用户明确表示无法配送，用于测试 Agent 是否会按照约束先安慰骑手，然后结束对话（挂断电话）。\",\n  \"multi_turn\": \"need\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户明确表示无法配送，直接触发了“如果骑手坚持确实无法配送，安慰他们后挂断电话”的约束。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "need",
+        "segment_id": 3,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 4,
+        "conversation_id": 0,
+        "local_turn_index": 4,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "user_reply": "站长，我这两天都没法跑单，身体还没恢复，实在抱歉。",
+        "agent_reply": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，合同生效了是吧？那我今天可以开始跑单了！"
+          },
+          {
+            "role": "assistant",
+            "content": "没错，合同已生效。今天能开始配送吗？"
+          },
+          {
+            "role": "user",
+            "content": "对了站长，飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉了。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如果骑手坚持确实无法配送，安慰他们后挂断电话。\",\n  \"user_reply\": \"站长，我这两天都没法跑单，身体还没恢复，实在抱歉。\",\n  \"rationale\": \"骑手再次明确表达无法配送，属于坚持确实无法配送的情况，测试 Agent 是否会按约束在安慰后挂断电话。\",\n  \"multi_turn\": \"done\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户明确表示连续两天无法配送，符合约束中'骑手坚持确实无法配送'的触发条件，Agent需检验是否遵守'安慰后挂断电话'的约束。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "done",
+        "segment_id": 3,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 5,
+        "conversation_id": 0,
+        "local_turn_index": 5,
+        "constraint_text": "保持语气随意，像打电话一样自然。",
+        "user_reply": "行吧站长，那我先挂了，回头再说。",
+        "agent_reply": "好的，祝你早日康复，有任何需要随时联系我。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，合同生效了是吧？那我今天可以开始跑单了！"
+          },
+          {
+            "role": "assistant",
+            "content": "没错，合同已生效。今天能开始配送吗？"
+          },
+          {
+            "role": "user",
+            "content": "对了站长，飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉了。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，身体还没恢复，实在抱歉。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"保持语气随意，像打电话一样自然。\",\n  \"user_reply\": \"行吧站长，那我先挂了，回头再说。\",\n  \"rationale\": \"骑手在上一轮已明确表示无法跑单，Agent 已完成挽留与安慰。此时用户自然结束通话，Agent 的简短道别应保持口语化、随意自然的语气，可检验该约束。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户提出挂断电话，Agent需以自然随意的语气回应并道别，直接触发该约束。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 4,
+        "is_test_turn": true
+      }
+    ],
+    "segments": [
+      {
+        "segment_id": 1,
+        "conversation_id": 0,
+        "constraint_text": "每次回复控制在**约 30 个字以内**。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 1,
+            "conversation_id": 0,
+            "local_turn_index": 1,
+            "user_reply": "好的站长，合同生效了是吧？那我今天可以开始跑单了！",
+            "agent_reply": "没错，合同已生效。今天能开始配送吗？"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 2,
+        "conversation_id": 0,
+        "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，合同生效了是吧？那我今天可以开始跑单了！"
+          },
+          {
+            "role": "assistant",
+            "content": "没错，合同已生效。今天能开始配送吗？"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 2,
+            "conversation_id": 0,
+            "local_turn_index": 2,
+            "user_reply": "对了站长，飞毛腿骑手的社保是交在哪个城市的？",
+            "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 3,
+        "conversation_id": 0,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，合同生效了是吧？那我今天可以开始跑单了！"
+          },
+          {
+            "role": "assistant",
+            "content": "没错，合同已生效。今天能开始配送吗？"
+          },
+          {
+            "role": "user",
+            "content": "对了站长，飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 3,
+            "conversation_id": 0,
+            "local_turn_index": 3,
+            "user_reply": "站长，我今天身体实在不舒服，真的没法跑单，抱歉了。",
+            "agent_reply": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。"
+          },
+          {
+            "turn_index": 4,
+            "conversation_id": 0,
+            "local_turn_index": 4,
+            "user_reply": "站长，我这两天都没法跑单，身体还没恢复，实在抱歉。",
+            "agent_reply": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。"
+          }
+        ],
+        "complete_reason": "done"
+      },
+      {
+        "segment_id": 4,
+        "conversation_id": 0,
+        "constraint_text": "保持语气随意，像打电话一样自然。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是${rider_name}吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 **X 单**；多日合同每天至少完成 **Y 单**。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，合同生效了是吧？那我今天可以开始跑单了！"
+          },
+          {
+            "role": "assistant",
+            "content": "没错，合同已生效。今天能开始配送吗？"
+          },
+          {
+            "role": "user",
+            "content": "对了站长，飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉了。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，身体还没恢复，实在抱歉。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，身体要紧，先好好休息。飞毛腿名额很抢手，连续 Y 天不能配送可能会影响资格。如果明天好转了，记得上线跑单，注意安全。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 5,
+            "conversation_id": 0,
+            "local_turn_index": 5,
+            "user_reply": "行吧站长，那我先挂了，回头再说。",
+            "agent_reply": "好的，祝你早日康复，有任何需要随时联系我。"
+          }
+        ],
+        "complete_reason": "none"
+      }
+    ],
+    "completion_reason": "user_gate_failed",
+    "diagnostics": [
+      "user attempt 1: LLM 门控失败: 用户消息与上一轮内容重复，且上一轮已针对无法跑单完成挽留与挂断流程，本轮无法再触发避免重复回复的约束。",
+      "user attempt 1: LLM 门控失败: 用户消息与上一轮内容高度重复，且Agent上一轮已针对该情况给出过相同回复，无法有效检验避免重复回复的约束。",
+      "user attempt 2: LLM 门控失败: 用户消息与上一轮用户消息内容完全重复，且上一轮已针对该情况完成了挽留与挂断流程，本轮无法再触发约束检查。",
+      "user attempt 3: LLM 门控失败: 用户消息询问飞毛腿报名按排名进行，属于FAQ内容，与测试约束“避免重复回复”无明确对应关系，无法触发或检验该约束。",
+      "local_turn=6: 门控重试耗尽"
+    ]
+  },
+  {
+    "conversation_id": 1,
+    "opening_line": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。",
+    "turns": [
+      {
+        "turn_index": 6,
+        "conversation_id": 1,
+        "local_turn_index": 1,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "user_reply": "站长，我今天实在没办法配送，家里临时有急事走不开。",
+        "agent_reply": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如果骑手坚持确实无法配送，安慰他们后挂断电话。\",\n  \"user_reply\": \"站长，我今天实在没办法配送，家里临时有急事走不开。\",\n  \"rationale\": \"用户明确表示无法配送，可测试 Agent 是否按约束在安慰后结束对话。\",\n  \"multi_turn\": \"need\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "骑手明确表示无法配送，直接触发了约束中关于无法配送时的处理要求。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "need",
+        "segment_id": 5,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 7,
+        "conversation_id": 1,
+        "local_turn_index": 2,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "user_reply": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。",
+        "agent_reply": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如果骑手坚持确实无法配送，安慰他们后挂断电话。\",\n  \"user_reply\": \"站长，我家里老人突然住院了，真的走不开，实在没办法啊。\",\n  \"rationale\": \"骑手进一步强调无法配送的客观原因，坚持无法配送，测试站长是否会按约束在安慰后挂断电话。\",\n  \"multi_turn\": \"done\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户坚持无法配送，触发了约束中关于安慰并挂断电话的规则。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "done",
+        "segment_id": 5,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 8,
+        "conversation_id": 1,
+        "local_turn_index": 3,
+        "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+        "user_reply": "站长，我想问下飞毛腿骑手的社保是怎么交的？",
+        "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如被问及超出职责范围的问题，回复：\\\"我向同事确认后再回电给你。我现在能回答的先回答。\\\"\",\n  \"user_reply\": \"站长，我想问下飞毛腿骑手的社保是怎么交的？\",\n  \"rationale\": \"骑手询问社保缴纳问题，这属于超出站长职责范围的敏感问题，可测试 Agent 是否按约束回复固定话术。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户询问飞毛腿骑手的社保缴纳方式，这属于站长职责范围外的问题，能直接触发并检验Agent是否遵守'超出职责范围时回复特定话术'的约束。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 6,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 9,
+        "conversation_id": 1,
+        "local_turn_index": 4,
+        "constraint_text": "每次回复控制在**约 30 个字以内**",
+        "user_reply": "好的站长，那我先忙了，有事再联系。",
+        "agent_reply": "好的，先忙吧，保重！",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是怎么交的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"每次回复控制在**约 30 个字以内**\",\n  \"user_reply\": \"好的站长，那我先忙了，有事再联系。\",\n  \"rationale\": \"对话已自然走向结束，用户礼貌道别。Agent 的结束语应简短自然，借此可检查其回复是否控制在约 30 字以内。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户表示结束通话，站长需进行简短的收尾回复，这为检验“每次回复控制在约30个字以内”的约束提供了明确的触发场景。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 7,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 10,
+        "conversation_id": 1,
+        "local_turn_index": 5,
+        "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+        "user_reply": "站长，那飞毛腿报名是按排名来的吗？要是有人比我分高，是不是随时能把我挤掉啊？",
+        "agent_reply": "是的，飞毛腿按排名分配，不是站长干预的。尽量别拒单或超时，恶劣天气多接单能稳住名额。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是怎么交的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，那我先忙了，有事再联系。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，先忙吧，保重！"
+          }
+        ],
+        "user_llm_raw": "{\"constraint_text\": \"避免重复回复；如需重申，请换种方式礼貌表达。\", \"user_reply\": \"站长，那飞毛腿报名是按排名来的吗？要是有人比我分高，是不是随时能把我挤掉啊？\", \"rationale\": \"用户询问飞毛腿报名是否按排名进行，Agent 需要依据 FAQ 和 Call Flow 2.2 回答该问题。由于之前 Agent 已提及过排名和名额可能被占用的内容，本轮可观察 Agent 在重申同一知识点时是否换种方式礼貌表达，避免重复回复。\", \"multi_turn\": \"none\", \"end\": false}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户询问飞毛腿报名是否按排名及高分者挤占名额，直接对应 FAQ 中“飞毛腿报名按排名进行”的知识点，Agent 需以不同方式重申该规则以检验是否遵守避免重复回复的约束。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 8,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 11,
+        "conversation_id": 1,
+        "local_turn_index": 6,
+        "constraint_text": "保持语气随意，像打电话一样自然。",
+        "user_reply": "站长，那行吧，我先去跑几单试试，有不懂的随时问你啊。",
+        "agent_reply": "好样的！有啥不懂随时问，记得高峰期多跑单，稳住飞毛腿资格。加油啊！",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是怎么交的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，那我先忙了，有事再联系。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，先忙吧，保重！"
+          },
+          {
+            "role": "user",
+            "content": "站长，那飞毛腿报名是按排名来的吗？要是有人比我分高，是不是随时能把我挤掉啊？"
+          },
+          {
+            "role": "assistant",
+            "content": "是的，飞毛腿按排名分配，不是站长干预的。尽量别拒单或超时，恶劣天气多接单能稳住名额。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"保持语气随意，像打电话一样自然。\",\n  \"user_reply\": \"站长，那行吧，我先去跑几单试试，有不懂的随时问你啊。\",\n  \"rationale\": \"骑手表示要去跑单并说'有不懂的随时问你'，这是对话的自然收尾。Agent 需要用口语化、打电话般随意的语气回应，而非书面化或机械的回复，从而测试'保持语气随意，像打电话一样自然'这条约束。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户消息自然承接上文关于飞毛腿排名规则的讨论，表示愿意开始跑单，Agent 的后续回复可以检验是否保持随意、像打电话一样自然的语气。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 9,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 12,
+        "conversation_id": 1,
+        "local_turn_index": 7,
+        "constraint_text": "遵循对话流程和常见问题解答。",
+        "user_reply": "站长，那连续跑满 W 天的话，每单能多赚多少钱啊？",
+        "agent_reply": "跑满 W 天每单多赚 $ 元，具体金额我向同事确认后回电给你哈。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是怎么交的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，那我先忙了，有事再联系。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，先忙吧，保重！"
+          },
+          {
+            "role": "user",
+            "content": "站长，那飞毛腿报名是按排名来的吗？要是有人比我分高，是不是随时能把我挤掉啊？"
+          },
+          {
+            "role": "assistant",
+            "content": "是的，飞毛腿按排名分配，不是站长干预的。尽量别拒单或超时，恶劣天气多接单能稳住名额。"
+          },
+          {
+            "role": "user",
+            "content": "站长，那行吧，我先去跑几单试试，有不懂的随时问你啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "好样的！有啥不懂随时问，记得高峰期多跑单，稳住飞毛腿资格。加油啊！"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"遵循对话流程和常见问题解答。\",\n  \"user_reply\": \"站长，那连续跑满 W 天的话，每单能多赚多少钱啊？\",\n  \"rationale\": \"用户询问连续完成 W 天多日合同的额外奖励细节，属于 FAQ 中明确列出的知识点。测试 Agent 是否遵循 FAQ 内容，正确回答连续完成 W 天且每天完成 Y 单将获得额外奖励（每单多 +$ 元）。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户询问连续跑满W天每单多赚多少钱，直接对应FAQ中关于连续完成W天多日合同的额外奖励知识点，可检验Agent是否遵循FAQ约束进行回答。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 10,
+        "is_test_turn": true
+      }
+    ],
+    "segments": [
+      {
+        "segment_id": 5,
+        "conversation_id": 1,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 6,
+            "conversation_id": 1,
+            "local_turn_index": 1,
+            "user_reply": "站长，我今天实在没办法配送，家里临时有急事走不开。",
+            "agent_reply": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "turn_index": 7,
+            "conversation_id": 1,
+            "local_turn_index": 2,
+            "user_reply": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。",
+            "agent_reply": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          }
+        ],
+        "complete_reason": "done"
+      },
+      {
+        "segment_id": 6,
+        "conversation_id": 1,
+        "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 8,
+            "conversation_id": 1,
+            "local_turn_index": 3,
+            "user_reply": "站长，我想问下飞毛腿骑手的社保是怎么交的？",
+            "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 7,
+        "conversation_id": 1,
+        "constraint_text": "每次回复控制在**约 30 个字以内**",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是怎么交的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 9,
+            "conversation_id": 1,
+            "local_turn_index": 4,
+            "user_reply": "好的站长，那我先忙了，有事再联系。",
+            "agent_reply": "好的，先忙吧，保重！"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 8,
+        "conversation_id": 1,
+        "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是怎么交的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，那我先忙了，有事再联系。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，先忙吧，保重！"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 10,
+            "conversation_id": 1,
+            "local_turn_index": 5,
+            "user_reply": "站长，那飞毛腿报名是按排名来的吗？要是有人比我分高，是不是随时能把我挤掉啊？",
+            "agent_reply": "是的，飞毛腿按排名分配，不是站长干预的。尽量别拒单或超时，恶劣天气多接单能稳住名额。"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 9,
+        "conversation_id": 1,
+        "constraint_text": "保持语气随意，像打电话一样自然。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是怎么交的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，那我先忙了，有事再联系。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，先忙吧，保重！"
+          },
+          {
+            "role": "user",
+            "content": "站长，那飞毛腿报名是按排名来的吗？要是有人比我分高，是不是随时能把我挤掉啊？"
+          },
+          {
+            "role": "assistant",
+            "content": "是的，飞毛腿按排名分配，不是站长干预的。尽量别拒单或超时，恶劣天气多接单能稳住名额。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 11,
+            "conversation_id": 1,
+            "local_turn_index": 6,
+            "user_reply": "站长，那行吧，我先去跑几单试试，有不懂的随时问你啊。",
+            "agent_reply": "好样的！有啥不懂随时问，记得高峰期多跑单，稳住飞毛腿资格。加油啊！"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 10,
+        "conversation_id": 1,
+        "constraint_text": "遵循对话流程和常见问题解答。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小王吗？我是站长，飞毛腿合同已生效了。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天实在没办法配送，家里临时有急事走不开。"
+          },
+          {
+            "role": "assistant",
+            "content": "理解，飞毛腿需连续 Y 天配送，中断可能影响资格。下次记得提前取消报名哦。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我家里老人突然住院了，真的走不开，实在没办法啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "哎呀，家里老人住院确实要紧，先照顾好家人最重要。飞毛腿名额的事别太担心，等家里安顿好了，随时可以重新报名。有需要随时联系我哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是怎么交的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，那我先忙了，有事再联系。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，先忙吧，保重！"
+          },
+          {
+            "role": "user",
+            "content": "站长，那飞毛腿报名是按排名来的吗？要是有人比我分高，是不是随时能把我挤掉啊？"
+          },
+          {
+            "role": "assistant",
+            "content": "是的，飞毛腿按排名分配，不是站长干预的。尽量别拒单或超时，恶劣天气多接单能稳住名额。"
+          },
+          {
+            "role": "user",
+            "content": "站长，那行吧，我先去跑几单试试，有不懂的随时问你啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "好样的！有啥不懂随时问，记得高峰期多跑单，稳住飞毛腿资格。加油啊！"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 12,
+            "conversation_id": 1,
+            "local_turn_index": 7,
+            "user_reply": "站长，那连续跑满 W 天的话，每单能多赚多少钱啊？",
+            "agent_reply": "跑满 W 天每单多赚 $ 元，具体金额我向同事确认后回电给你哈。"
+          }
+        ],
+        "complete_reason": "none"
+      }
+    ],
+    "completion_reason": "user_llm_end",
+    "diagnostics": [
+      "user attempt 1: 代码门控失败: 当前连续对话中已经测试过这条约束，不能连续反复测试"
+    ]
+  },
+  {
+    "conversation_id": 2,
+    "opening_line": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。",
+    "turns": [
+      {
+        "turn_index": 13,
+        "conversation_id": 2,
+        "local_turn_index": 1,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "user_reply": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。",
+        "agent_reply": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如果骑手坚持确实无法配送，安慰他们后挂断电话。\",\n  \"user_reply\": \"站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。\",\n  \"rationale\": \"用户明确表示无法配送，用于测试 Agent 是否按约束在安慰后结束对话。\",\n  \"multi_turn\": \"need\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "骑手明确表示无法配送，直接触发了约束中关于骑手坚持无法配送时需安慰并挂断电话的处理要求。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "need",
+        "segment_id": 11,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 14,
+        "conversation_id": 2,
+        "local_turn_index": 2,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "user_reply": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。",
+        "agent_reply": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如果骑手坚持确实无法配送，安慰他们后挂断电话。\",\n  \"user_reply\": \"站长，我这两天都没法跑单，实在没办法，您帮我取消吧。\",\n  \"rationale\": \"骑手明确表示持续无法配送，属于坚持确实无法配送的情形，Agent 应先安慰骑手然后挂断电话，以测试该约束是否被遵守。\",\n  \"multi_turn\": \"done\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户明确表示无法配送，符合约束中'骑手坚持确实无法配送'的条件，Agent应安慰后挂断电话。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "done",
+        "segment_id": 11,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 15,
+        "conversation_id": 2,
+        "local_turn_index": 3,
+        "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+        "user_reply": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？",
+        "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"如被问及超出职责范围的问题，回复：\\\"我向同事确认后再回电给你。我现在能回答的先回答。\\\"\",\n  \"user_reply\": \"站长，我想问下飞毛腿骑手的社保是交在哪个城市的？\",\n  \"rationale\": \"骑手询问社保缴纳城市，这属于站长职责范围之外的问题，可测试 Agent 是否按约束回复固定话术。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户询问飞毛腿骑手社保缴纳城市，属于超出站长职责范围的敏感问题，能触发Agent是否按约束回复'我向同事确认后再回电给你'。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 12,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 16,
+        "conversation_id": 2,
+        "local_turn_index": 4,
+        "constraint_text": "每次回复控制在**约 30 个字以内**。",
+        "user_reply": "好的站长，我记住了，等身体好了马上回来跑单！",
+        "agent_reply": "好的小李，好好休息，身体好了随时回来！名额给你留着，恢复后记得上线补单哈。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"每次回复控制在**约 30 个字以内**。\",\n  \"user_reply\": \"好的站长，我记住了，等身体好了马上回来跑单！\",\n  \"rationale\": \"用户表达感谢并承诺恢复后继续，Agent 需给出简短自然的回应，可验证其是否遵守约 30 字以内的字数限制。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户消息自然承接上文，Agent 的下一轮回复可用来检验是否遵守约 30 字以内的约束。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 13,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 17,
+        "conversation_id": 2,
+        "local_turn_index": 5,
+        "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+        "user_reply": "站长，那名额真的不会被取消吗？我还是有点担心。",
+        "agent_reply": "小李，安心养病别担心，名额暂时保留着。等身体恢复记得尽快上线补单就行。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，我记住了，等身体好了马上回来跑单！"
+          },
+          {
+            "role": "assistant",
+            "content": "好的小李，好好休息，身体好了随时回来！名额给你留着，恢复后记得上线补单哈。"
+          }
+        ],
+        "user_llm_raw": "{\n  \"constraint_text\": \"避免重复回复；如需重申，请换种方式礼貌表达。\",\n  \"user_reply\": \"站长，那名额真的不会被取消吗？我还是有点担心。\",\n  \"rationale\": \"用户再次询问名额是否会被取消，Agent 之前已告知名额暂时保留。本轮测试 Agent 是否会用不同方式重申同一信息，而非重复原话。\",\n  \"multi_turn\": \"none\",\n  \"end\": false\n}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户担心名额问题，Agent 需重申名额保留的承诺，正好检验其是否换种方式礼貌表达而不重复上一轮回复。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 14,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 18,
+        "conversation_id": 2,
+        "local_turn_index": 6,
+        "constraint_text": "保持语气随意，像打电话一样自然。",
+        "user_reply": "行，站长，那我先挂了啊，回头好了我第一时间上线！",
+        "agent_reply": "好的小李，安心养病，好了随时回来！名额给你留着，回头见！",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，我记住了，等身体好了马上回来跑单！"
+          },
+          {
+            "role": "assistant",
+            "content": "好的小李，好好休息，身体好了随时回来！名额给你留着，恢复后记得上线补单哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，那名额真的不会被取消吗？我还是有点担心。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，安心养病别担心，名额暂时保留着。等身体恢复记得尽快上线补单就行。"
+          }
+        ],
+        "user_llm_raw": "{\"constraint_text\": \"保持语气随意，像打电话一样自然。\", \"user_reply\": \"行，站长，那我先挂了啊，回头好了我第一时间上线！\", \"rationale\": \"用户自然结束通话，Agent 需要用口语化、像打电话一样自然的语气回应，可检查是否保持随意自然的语气。\", \"multi_turn\": \"none\", \"end\": false}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户消息自然承接对话，Agent 的回复可以检验是否保持随意、像打电话一样自然的语气。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 15,
+        "is_test_turn": true
+      },
+      {
+        "turn_index": 19,
+        "conversation_id": 2,
+        "local_turn_index": 7,
+        "constraint_text": "遵循对话流程和常见问题解答。",
+        "user_reply": "站长，那我想退出飞毛腿的话，具体要怎么操作啊？",
+        "agent_reply": "小李，退出需在昨天 22 点前在 App“飞毛腿报名”里取消，次日生效。现在没法操作，安心养病别担心。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，我记住了，等身体好了马上回来跑单！"
+          },
+          {
+            "role": "assistant",
+            "content": "好的小李，好好休息，身体好了随时回来！名额给你留着，恢复后记得上线补单哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，那名额真的不会被取消吗？我还是有点担心。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，安心养病别担心，名额暂时保留着。等身体恢复记得尽快上线补单就行。"
+          },
+          {
+            "role": "user",
+            "content": "行，站长，那我先挂了啊，回头好了我第一时间上线！"
+          },
+          {
+            "role": "assistant",
+            "content": "好的小李，安心养病，好了随时回来！名额给你留着，回头见！"
+          }
+        ],
+        "user_llm_raw": "{\"constraint_text\": \"遵循对话流程和常见问题解答。\", \"user_reply\": \"站长，那我想退出飞毛腿的话，具体要怎么操作啊？\", \"rationale\": \"用户询问退出飞毛腿的操作流程，属于 FAQ 中明确覆盖的知识点（需在前一天 Z 点前在 App 的飞毛腿报名中取消），可测试 Agent 是否按 FAQ 流程准确回答。\", \"multi_turn\": \"none\", \"end\": false}",
+        "user_gate": {
+          "result": "pass",
+          "evidence": "用户询问退出飞毛腿的具体操作方式，直接对应FAQ中关于退出飞毛腿需在Z点前App取消的约束，可检验Agent是否准确回答。"
+        },
+        "code_gate_errors": [],
+        "multi_turn": "none",
+        "segment_id": 16,
+        "is_test_turn": true
+      }
+    ],
+    "segments": [
+      {
+        "segment_id": 11,
+        "conversation_id": 2,
+        "constraint_text": "如果骑手坚持确实无法配送，安慰他们后挂断电话。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 13,
+            "conversation_id": 2,
+            "local_turn_index": 1,
+            "user_reply": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。",
+            "agent_reply": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "turn_index": 14,
+            "conversation_id": 2,
+            "local_turn_index": 2,
+            "user_reply": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。",
+            "agent_reply": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          }
+        ],
+        "complete_reason": "done"
+      },
+      {
+        "segment_id": 12,
+        "conversation_id": 2,
+        "constraint_text": "如被问及超出职责范围的问题，回复：\"我向同事确认后再回电给你。我现在能回答的先回答。\"",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 15,
+            "conversation_id": 2,
+            "local_turn_index": 3,
+            "user_reply": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？",
+            "agent_reply": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 13,
+        "conversation_id": 2,
+        "constraint_text": "每次回复控制在**约 30 个字以内**。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 16,
+            "conversation_id": 2,
+            "local_turn_index": 4,
+            "user_reply": "好的站长，我记住了，等身体好了马上回来跑单！",
+            "agent_reply": "好的小李，好好休息，身体好了随时回来！名额给你留着，恢复后记得上线补单哈。"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 14,
+        "conversation_id": 2,
+        "constraint_text": "避免重复回复；如需重申，请换种方式礼貌表达。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，我记住了，等身体好了马上回来跑单！"
+          },
+          {
+            "role": "assistant",
+            "content": "好的小李，好好休息，身体好了随时回来！名额给你留着，恢复后记得上线补单哈。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 17,
+            "conversation_id": 2,
+            "local_turn_index": 5,
+            "user_reply": "站长，那名额真的不会被取消吗？我还是有点担心。",
+            "agent_reply": "小李，安心养病别担心，名额暂时保留着。等身体恢复记得尽快上线补单就行。"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 15,
+        "conversation_id": 2,
+        "constraint_text": "保持语气随意，像打电话一样自然。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，我记住了，等身体好了马上回来跑单！"
+          },
+          {
+            "role": "assistant",
+            "content": "好的小李，好好休息，身体好了随时回来！名额给你留着，恢复后记得上线补单哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，那名额真的不会被取消吗？我还是有点担心。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，安心养病别担心，名额暂时保留着。等身体恢复记得尽快上线补单就行。"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 18,
+            "conversation_id": 2,
+            "local_turn_index": 6,
+            "user_reply": "行，站长，那我先挂了啊，回头好了我第一时间上线！",
+            "agent_reply": "好的小李，安心养病，好了随时回来！名额给你留着，回头见！"
+          }
+        ],
+        "complete_reason": "none"
+      },
+      {
+        "segment_id": 16,
+        "conversation_id": 2,
+        "constraint_text": "遵循对话流程和常见问题解答。",
+        "history_before": [
+          {
+            "role": "assistant",
+            "content": "你好，请问是小李吗？我是站长。我看到你已报名飞毛腿。请记住，午餐和晚餐高峰期需要上线。单日合同每天至少完成 30 单；多日合同每天至少完成 20 单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我今天身体实在不舒服，真的没法跑单，抱歉啊。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，理解你身体不舒服。飞毛腿合同今天生效了，身体要紧先休息好。连续完成天数很重要，你尽量早点恢复。先好好休息，我这边记下情况。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我这两天都没法跑单，实在没办法，您帮我取消吧。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，取消需在昨天 22 点前在 App 操作，现在没法直接取消。你安心养病，名额暂时保留，等恢复后尽快上线补单。"
+          },
+          {
+            "role": "user",
+            "content": "站长，我想问下飞毛腿骑手的社保是交在哪个城市的？"
+          },
+          {
+            "role": "assistant",
+            "content": "我向同事确认后再回电给你。我现在能回答的先回答。"
+          },
+          {
+            "role": "user",
+            "content": "好的站长，我记住了，等身体好了马上回来跑单！"
+          },
+          {
+            "role": "assistant",
+            "content": "好的小李，好好休息，身体好了随时回来！名额给你留着，恢复后记得上线补单哈。"
+          },
+          {
+            "role": "user",
+            "content": "站长，那名额真的不会被取消吗？我还是有点担心。"
+          },
+          {
+            "role": "assistant",
+            "content": "小李，安心养病别担心，名额暂时保留着。等身体恢复记得尽快上线补单就行。"
+          },
+          {
+            "role": "user",
+            "content": "行，站长，那我先挂了啊，回头好了我第一时间上线！"
+          },
+          {
+            "role": "assistant",
+            "content": "好的小李，安心养病，好了随时回来！名额给你留着，回头见！"
+          }
+        ],
+        "turns": [
+          {
+            "turn_index": 19,
+            "conversation_id": 2,
+            "local_turn_index": 7,
+            "user_reply": "站长，那我想退出飞毛腿的话，具体要怎么操作啊？",
+            "agent_reply": "小李，退出需在昨天 22 点前在 App“飞毛腿报名”里取消，次日生效。现在没法操作，安心养病别担心。"
+          }
+        ],
+        "complete_reason": "none"
+      }
+    ],
+    "completion_reason": "user_llm_end",
+    "diagnostics": [
+      "user attempt 1: 代码门控失败: 当前连续对话中已经测试过这条约束，不能连续反复测试"
+    ]
+  }
+]
