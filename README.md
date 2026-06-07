@@ -10,8 +10,7 @@ GitHub Pages 发布后访问：
 https://nikowq.github.io/Meituan-PPT/
 ```
 
-根目录 `index.html` 会自动跳转到完整 PPT。
-
+根目录 `index.html` 会自动跳转到完整 PPT。使用方向键翻页。
 ## 本地预览
 
 ```powershell
